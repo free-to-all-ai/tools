@@ -2,6 +2,14 @@
 
 **You can and must understand AI now.**
 
+## Why "Free to All"
+
+Three words are carved over the main entrance of the Boston Public Library: **FREE TO ALL**. Founded in 1848, it was the first large free municipal library in the United States. When its McKim Building opened in 1895, the promise went over the door. Anyone could walk in and use the most powerful information tools of the day, whoever they were and whatever they could pay. ([source](https://bpl.org/news/mckim-building-125th-anniversary))
+
+AI is the most powerful information tool of our day. This project is that promise, rewritten for now.
+
+## Why now
+
 In 1974, Ted Nelson self-published *Computer Lib/Dream Machines* and told regular people that computers were too important to leave to the experts. Now the same is true of AI. The people in power are already using it. Everyone else should get to use it too.
 
 This repo is a shelf of small, free tools for regular people. Each one does one job, gives you a checkable answer, and shows you where that answer comes from.
