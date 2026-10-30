@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Michigan Back Pay Check</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Enter your hours and pay week by week to see the Michigan minimum wage and overtime you were owed, how much you may be short, your filing deadlines, and how to file a free state wage claim. Information, not legal advice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. Rate table, then job questions, then an editable list of work weeks, then the total, a week-by-week table, rights cards with statute chips, and filing steps. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+section { display: grid; gap: 12px; min-width: 0; grid-template-columns: minmax(0, 1fr); }
+.wrap { grid-template-columns: minmax(0, 1fr); }
+section > *, .wrap > * { min-width: 0; }
+.box {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 16px; min-width: 0;
+}
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="date"], input[type="number"] {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px; min-width: 0;
+}
+input[type="number"] { font-variant-numeric: tabular-nums; }
+.opts { display: grid; gap: 6px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.opts input { margin-top: 5px; accent-color: var(--accent); }
+.hint { font-size: 14px; color: var(--muted); }
+button.btn {
+  font: inherit; font-size: 15px; font-weight: 700; cursor: pointer;
+  border-radius: 8px; padding: 9px 14px; border: 1.5px solid var(--accent);
+  background: var(--accent); color: var(--surface);
+}
+button.btn.ghost { background: transparent; color: var(--accent); }
+button.btn:hover { filter: brightness(1.08); }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* Rate table and result tables */
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: 13px; font-weight: 700; color: var(--muted); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+td.n { font-family: var(--f-mono); white-space: nowrap; }
+td.d { white-space: nowrap; }
+tr.upcoming td { color: var(--muted); }
+tr.out td { color: var(--muted); }
+tfoot td { font-weight: 700; border-top: 2px solid var(--line); }
+.mark { color: var(--facts); font-weight: 700; }
+
+/* Week entry list */
+.weeks, .wk-list { display: grid; gap: 8px; }
+.wk, .wk-head {
+  display: grid; gap: 8px; align-items: end;
+  grid-template-columns: minmax(130px, 1.5fr) minmax(70px, 1fr) minmax(80px, 1fr) 40px;
+}
+.weeks.tipped .wk, .weeks.tipped .wk-head {
+  grid-template-columns: minmax(130px, 1.5fr) minmax(70px, 1fr) minmax(80px, 1fr) minmax(70px, 1fr) 40px;
+}
+.weeks:not(.tipped) .tipcell { display: none; }
+.wk-head { font-size: 13px; font-weight: 700; color: var(--muted); }
+.wk input { max-width: none; }
+.wk .mini { display: none; font-size: 13px; font-weight: 700; color: var(--muted); }
+.wk .cell { display: grid; gap: 2px; min-width: 0; }
+.rm {
+  font: inherit; font-size: 18px; line-height: 1; cursor: pointer; width: 40px; height: 42px;
+  border-radius: 8px; border: 1.5px solid var(--line); background: transparent; color: var(--muted);
+}
+.rm:hover { border-color: var(--help); color: var(--help); }
+@media (max-width: 560px) {
+  .wk-head { display: none; }
+  .wk, .weeks.tipped .wk {
+    grid-template-columns: 1fr 1fr 40px;
+    border: 1px solid var(--line); border-radius: 10px; padding: 10px;
+  }
+  .wk .cell.date { grid-column: 1 / 3; grid-row: 1; }
+  .wk .rm { grid-column: 3; grid-row: 1; }
+  .wk .cell.hrs { grid-column: 1; grid-row: 2; }
+  .wk .cell.pay { grid-column: 2; grid-row: 2; }
+  .wk .cell.tipcell { grid-column: 1; grid-row: 3; }
+  .wk .mini { display: block; }
+}
+
+/* Results */
+.total {
+  background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--accent);
+  border-radius: 12px; padding: 18px; display: grid; gap: 10px;
+}
+.big { font-family: var(--f-display); font-weight: 800; font-size: clamp(34px, 8vw, 48px); line-height: 1; font-variant-numeric: tabular-nums; }
+.split { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.split div { display: grid; gap: 2px; }
+.split .k { font-size: 13px; color: var(--muted); }
+.split .v { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-size: 18px; }
+.results { display: grid; gap: 12px; }
+.results-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line);
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.date-big { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-size: 15px; }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.card ul, .steps ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+ol.steps { margin: 0; padding-left: 22px; display: grid; gap: 14px; }
+ol.steps > li { padding-left: 4px; }
+ol.steps > li > strong:first-child { display: block; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.copied { font-size: 14px; color: var(--law); }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+@media print {
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .noprint, .rm, .notice { display: none !important; }
+  .wrap { padding: 0; gap: 16px; }
+  .card, .total, .box, .scroll { break-inside: avoid; border-color: #999; }
+  a { color: #000; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Michigan · workers · free</span>
+    <h1>Michigan Back Pay Check</h1>
+    <p class="lede">Shorted on pay? Enter your hours and what you were paid, week by week. See the minimum wage and overtime Michigan law required, how much you may be owed, your deadlines, and how to file a free claim with the state.</p>
+    <div class="notice">
+      <strong>This is legal information, not legal advice.</strong>
+      <span>The numbers are estimates from what you enter. The state or a court makes the final call. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="rates-h">
+    <h2 id="rates-h">Michigan's minimum wage, by date</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th scope="col">Dates</th><th scope="col" class="n">Minimum wage</th><th scope="col" class="n">Age 16 or 17</th><th scope="col" class="n">Tipped cash wage</th><th scope="col" class="n">Tips must cover</th></tr></thead>
+        <tbody id="rate-rows"></tbody>
+      </table>
+    </div>
+    <p class="hint">All rates are per hour. "Tips must cover" is the gap your tips have to fill for an employer to pay the tipped cash wage. A new worker under 20 can be paid a $4.25 training wage for their first 90 days (<a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-408-934b" target="_blank" rel="noopener">MCL 408.934b</a>). Starting in 2028, the minimum wage goes up with inflation each January unless Michigan's unemployment rate was 8.5% or higher the year before (<a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-408-934" target="_blank" rel="noopener">MCL 408.934</a>). The tipped wage rises to 44% of the minimum in 2028 and keeps climbing to 50% in 2031 (<a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-408-934d" target="_blank" rel="noopener">MCL 408.934d</a>).</p>
+  </section>
+
+  <section aria-labelledby="job-h">
+    <h2 id="job-h">About your job</h2>
+    <form class="box" id="f-job" novalidate>
+      <div class="field">
+        <label for="j-rate">Hourly rate your boss promised, before tips (leave blank if none)</label>
+        <input id="j-rate" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 16.00">
+        <span class="hint">If you were promised more than the minimum wage, the tool also counts what you're owed at that rate.</span>
+      </div>
+      <div class="row2">
+        <div class="field"><span class="lbl" id="l-age">How old were you when you did this work?</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-age">
+            <label><input type="radio" name="j-age" value="adult" checked> 18 or older</label>
+            <label><input type="radio" name="j-age" value="minor"> 16 or 17</label>
+          </div></div>
+        <div class="field"><span class="lbl" id="l-tip">Was it a tipped job, like serving or bartending?</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-tip">
+            <label><input type="radio" name="j-tip" value="no" checked> No</label>
+            <label><input type="radio" name="j-tip" value="yes"> Yes</label>
+          </div></div>
+      </div>
+      <div class="field" id="tip-extra" hidden><span class="lbl" id="l-consent">When you were hired, did your employer explain the tipped wage to you in writing, and did you sign to agree to it?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-consent">
+          <label><input type="radio" name="j-consent" value="yes"> Yes</label>
+          <label><input type="radio" name="j-consent" value="no"> No</label>
+          <label><input type="radio" name="j-consent" value="unsure" checked> Not sure</label>
+        </div></div>
+    </form>
+  </section>
+
+  <section aria-labelledby="weeks-h">
+    <h2 id="weeks-h">Your work weeks</h2>
+    <p class="hint">Overtime is counted one 7-day workweek at a time, so enter each week on its own line. If you're paid every two weeks, split it up: 50 hours one week and 30 the next is still 10 hours of overtime. Use the gross pay on your pay stub (before taxes), or the cash you got.</p>
+
+    <div class="box noprint" id="fill">
+      <h3>Fill in several weeks at once</h3>
+      <p class="sample" id="sample-note">Sample weeks are filled in below so you can see how it works: 48 hours a week for a flat $600. Change them to yours.</p>
+      <div class="row2">
+        <div class="field"><label for="g-start">First day of the first week</label><input id="g-start" type="date"></div>
+        <div class="field"><label for="g-n">How many weeks</label><input id="g-n" type="number" min="1" max="160" step="1" value="4" inputmode="numeric"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="g-hours">Hours worked each week</label><input id="g-hours" type="number" min="0" max="168" step="0.25" value="48" inputmode="decimal"></div>
+        <div class="field"><label for="g-paid">Pay for each week ($)</label><input id="g-paid" type="number" min="0" step="0.01" value="600" inputmode="decimal"></div>
+        <div class="field" id="g-tips-f" hidden><label for="g-tips">Tips each week ($)</label><input id="g-tips" type="number" min="0" step="0.01" value="0" inputmode="decimal"></div>
+      </div>
+      <div class="btns">
+        <button class="btn" type="button" id="g-go">Fill in these weeks</button>
+        <span class="hint">This replaces the weeks listed below. You can change any week after.</span>
+      </div>
+    </div>
+
+    <div class="weeks" id="weeks">
+      <div class="wk-head" aria-hidden="true"><span>Week starting</span><span>Hours</span><span>Paid ($)</span><span class="tipcell">Tips ($)</span><span></span></div>
+      <div id="wk-list" class="wk-list"></div>
+    </div>
+    <div class="btns noprint">
+      <button class="btn ghost" type="button" id="add">Add a week</button>
+      <button class="btn ghost" type="button" id="clear">Clear all weeks</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="res-h">
+    <h2 id="res-h">What you may be owed</h2>
+    <div id="total" aria-live="polite"></div>
+    <div id="week-table"></div>
+    <div class="results" id="cards"></div>
+    <div class="btns noprint" id="out-btns">
+      <button class="btn" type="button" id="copy">Copy a summary for your claim</button>
+      <button class="btn ghost" type="button" id="print">Print or save as PDF</button>
+      <span class="copied" id="copied" role="status"></span>
+    </div>
+  </section>
+
+  <section aria-labelledby="file-h">
+    <h2 id="file-h">How to file a wage claim in Michigan</h2>
+    <div class="box">
+      <ol class="steps">
+        <li><strong>Gather what you have.</strong> Pay stubs, a schedule or time records, texts about hours or pay, and your own notes of the hours you worked. The state asks for pay statements and a record of hours worked (<a href="https://www.michigan.gov/leo/bureaus-agencies/ber/wage-and-hour/min-wage/filing-a-minimum-wage-or-overtime-complaint" target="_blank" rel="noopener">LEO: Filing a Minimum Wage or Overtime Complaint</a>).</li>
+        <li><strong>File with the Wage and Hour Division. It's free.</strong>
+          <ul>
+            <li>Online, the fastest way: <a href="https://www.michigan.gov/wageclaim" target="_blank" rel="noopener">michigan.gov/wageclaim</a></li>
+            <li>Paper: <a href="https://www.michigan.gov/leo/-/media/Project/Websites/leo/Documents/WAGE-HOUR/WHD-94xx--Forms/WHD-9430-Employment-Wage-Complaint/WH43_Employment_Wage_Complaint_Form_R6_29_05.pdf" target="_blank" rel="noopener">form WHD-9430</a>. Mail it to Wage &amp; Hour Division, P.O. Box 30476, Lansing, MI 48909-7976, fax it to <span class="date-big">517-763-0110</span>, or email it to WHCLAIM@MICHIGAN.GOV.</li>
+            <li>In person, by appointment only: 3026 W. Grand Blvd., Suite 2-750, Detroit (Mondays and Wednesdays), or 320 S. Walnut St., Lansing.</li>
+            <li>Questions, or to ask for a form: <span class="date-big">1-855-464-9243</span>. Forms come in English, Spanish, and Arabic.</li>
+          </ul></li>
+        <li><strong>Fill in the amounts.</strong> The form asks for the period of your claim, then minimum wage, overtime, and hourly wages owed, and a total gross amount. The summary above gives you each one. Paste it into the part of the form that asks you to describe your claim.</li>
+        <li><strong>What happens next.</strong> The state investigates and your employer has to hand over its records. The state can't promise you'll get paid. That depends on things like whether the business closed or has money. Tell the division about any payment you get and any change to your phone or address.</li>
+        <li><strong>The federal option.</strong> You can also call the U.S. Department of Labor's Wage and Hour Division at <span class="date-big">1-866-487-9243</span>. It keeps complaints confidential and says it "enforces the law without regard to an employee's immigration status" (<a href="https://www.dol.gov/agencies/whd/faq/workers" target="_blank" rel="noopener">DOL FAQ</a>). Federal claims must be brought within 2 years, or 3 if the violation was willful (<a href="https://www.law.cornell.edu/uscode/text/29/255" target="_blank" rel="noopener">29 U.S.C. 255</a>).</li>
+      </ol>
+      <p class="hint">Sources: <a href="https://www.michigan.gov/leo/bureaus-agencies/ber/wage-and-hour/complaint" target="_blank" rel="noopener">LEO: Online Employment Wage Complaint Form</a>, the WHD-9430 form (revised 2/2025), and <a href="https://www.michigan.gov/leo/bureaus-agencies/ber/wage-and-hour/frequently-asked-questions/wage-and-hour/minimum-wage-and-overtime-faq" target="_blank" rel="noopener">LEO: Minimum Wage and Overtime FAQ</a>.</p>
+    </div>
+  </section>
+
+  <section class="box gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Free help</h2>
+    <ul>
+      <li><a href="https://michiganlegalhelp.org/resources/employment/filing-complaint-michigan-wage-and-hour-program" target="_blank" rel="noopener">Michigan Legal Help: Filing a Complaint with the Michigan Wage and Hour Program</a> walks through the state claim.</li>
+      <li><a href="https://michiganlegalhelp.org/self-help-tools/employment/when-wage-laws-apply" target="_blank" rel="noopener">Michigan Legal Help: When Wage Laws Apply</a> helps if you're not sure the law covers your job.</li>
+      <li><a href="https://michiganlegalhelp.org/guide-to-legal-help" target="_blank" rel="noopener">Michigan Legal Help: Guide to Legal Help</a> finds free legal aid near you, by county and problem.</li>
+      <li><a href="https://www.sugarlaw.org/" target="_blank" rel="noopener">Sugar Law Center for Economic &amp; Social Justice</a> in Detroit takes wage and paycheck cases after a screening. <span class="date-big">(313) 993-4505</span>.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> For each week, the tool looks up the Michigan minimum wage in effect on the first day of that week. It requires at least that much for the first 40 hours, and 1.5 times your regular rate for every hour after 40. Your regular rate is the higher of the minimum wage and any rate you were promised. Then it subtracts what you were paid. For tipped jobs, it counts your tips toward the minimum the way the state's FAQ describes. Green cards are what the law says directly. Amber cards depend on facts the state or a judge decides. Red cards mean act now.</p>
+    <p>Deadlines are counted from the last day of each workweek. Your payday comes later, so your real deadline may be a few days later than shown. Don't wait until the last day.</p>
+    <p>Sources, all checked on October 30, 2026. The Michigan Legislature's site said it was complete through Public Act 114 of 2026.</p>
+    <ul>
+      <li>Rates from February 21, 2025 on: <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-408-934" target="_blank" rel="noopener">MCL 408.934</a>, <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-408-934d" target="_blank" rel="noopener">MCL 408.934d</a>, and the <a href="https://www.michigan.gov/leo/bureaus-agencies/ber/wage-and-hour/frequently-asked-questions/wage-and-hour/minimum-wage-and-overtime-faq" target="_blank" rel="noopener">LEO Minimum Wage and Overtime FAQ</a></li>
+      <li>2025 (January 1 to February 20) and 2024 rates: the state's <a href="https://www.michigan.gov/leo/-/media/Project/Websites/leo/Documents/WAGE-HOUR/WHD-99xx-Information-Sheets/WHD-9904-MW-optional-posting/WHD-9904-Minimum_Wage_Poster.pdf" target="_blank" rel="noopener">minimum wage poster, WHD 9904</a> (revised 12/2023), and <a href="https://www.michigan.gov/leo/news/2023/11/03/michigan-minimum-wage-set-to-increase-on-january-1-2024" target="_blank" rel="noopener">LEO's November 3, 2023 release</a></li>
+      <li>2023 rates: <a href="https://www.michigan.gov/leo/news/2022/12/05/michigan-minimum-wage-set-to-increase-on-january-1-2023" target="_blank" rel="noopener">LEO's December 5, 2022 release</a></li>
+      <li>Overtime: <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-408-934a" target="_blank" rel="noopener">MCL 408.934a</a>. Lawsuits and the 3-year limit: <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-408-939" target="_blank" rel="noopener">MCL 408.939</a>. Promised wages and the 12-month limit: <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-408-481" target="_blank" rel="noopener">MCL 408.481</a> and <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-408-488" target="_blank" rel="noopener">MCL 408.488</a>. Retaliation: <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-408-483" target="_blank" rel="noopener">MCL 408.483</a> and <a href="https://www.law.cornell.edu/uscode/text/29/215" target="_blank" rel="noopener">29 U.S.C. 215(a)(3)</a></li>
+    </ul>
+    <p>This tool doesn't cover salaried pay, commissions, piece rates, earned sick time, or fringe benefits like vacation pay. The state claim form covers those too. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const MCL = s => "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-" + s.replace(/\./g, "-");
+  const LINKS = {
+    "LEO FAQ": "https://www.michigan.gov/leo/bureaus-agencies/ber/wage-and-hour/frequently-asked-questions/wage-and-hour/minimum-wage-and-overtime-faq",
+    "LEO filing page": "https://www.michigan.gov/leo/bureaus-agencies/ber/wage-and-hour/min-wage/filing-a-minimum-wage-or-overtime-complaint",
+    "LEO complaint page": "https://www.michigan.gov/leo/bureaus-agencies/ber/wage-and-hour/complaint",
+    "29 U.S.C. 215(a)(3)": "https://www.law.cornell.edu/uscode/text/29/215",
+    "29 U.S.C. 255": "https://www.law.cornell.edu/uscode/text/29/255",
+    "When Wage Laws Apply": "https://michiganlegalhelp.org/self-help-tools/employment/when-wage-laws-apply"
+  };
+
+  // Michigan minimum wage schedule. Each row runs from its date until the next row starts.
+  // Sources: LEO releases (2023, 2024), WHD 9904 poster (2023 to Jan 2025), MCL 408.934 / 408.934d and LEO FAQ (Feb 21, 2025 on).
+  const RATES = [
+    { from: "2023-01-01", min: 10.10, minor: 8.59,  tipped: 3.84 },
+    { from: "2024-01-01", min: 10.33, minor: 8.78,  tipped: 3.93 },
+    { from: "2025-01-01", min: 10.56, minor: 8.98,  tipped: 4.01 },
+    { from: "2025-02-21", min: 12.48, minor: 10.61, tipped: 4.74 },
+    { from: "2026-01-01", min: 13.73, minor: 11.67, tipped: 5.49 },
+    { from: "2027-01-01", min: 15.00, minor: 12.75, tipped: 6.30 }
+  ];
+  const FIRST = "2023-01-01", LAST = "2027-12-31";
+  const TIP_CONSENT_FROM = "2025-02-21";   // written notice and consent rule in MCL 408.934d(1)(e) as revived
+
+  const DAY = 86400000;
+  const parse = v => { if (!v) return null; const [y, m, d] = v.split("-").map(Number); if (!y || !m || !d) return null; return new Date(y, m - 1, d); };
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const add = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+  const addYears = (d, n) => new Date(d.getFullYear() + n, d.getMonth(), d.getDate());
+  const fmt = d => d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  const fmtLong = d => d.toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" });
+  const slash = d => (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear();
+  const today = (() => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); })();
+  const diff = (a, b) => Math.round((b - a) / DAY);
+  const cents = x => Math.round(x * 100) / 100;
+  const money = n => "$" + Number(n).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const num = v => { const x = parseFloat(v); return isFinite(x) && x >= 0 ? x : 0; };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const val = name => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; };
+  const LABEL = { law: "The law says", facts: "Depends on facts", help: "Act now" };
+
+  function when(d) {
+    const n = diff(today, d);
+    if (n > 0) return `${fmtLong(d)} (${n} day${n === 1 ? "" : "s"} from today)`;
+    if (n === 0) return `${fmtLong(d)} (today)`;
+    return `${fmtLong(d)} (${-n} day${n === -1 ? "" : "s"} ago)`;
+  }
+  function card(level, title, body, cites = [], next = "") {
+    const c = cites.map(s => LINKS[s]
+      ? `<a class="cite" href="${LINKS[s]}" target="_blank" rel="noopener">${esc(s)}</a>`
+      : `<a class="cite" href="${MCL(s.split("(")[0])}" target="_blank" rel="noopener">MCL ${esc(s)}</a>`).join("");
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${LABEL[level]}</span></div>
+      <p>${body}</p>
+      ${next ? `<p class="next"><strong>What you can do:</strong> ${next}</p>` : ""}
+      ${c ? `<div class="cites">${c}</div>` : ""}
+    </article>`;
+  }
+
+  function rateOn(d) {
+    let r = null;
+    for (const row of RATES) if (parse(row.from) <= d) r = row;
+    return r;
+  }
+
+  /* ---------- Rate table ---------- */
+  document.getElementById("rate-rows").innerHTML = RATES.map((r, i) => {
+    const from = parse(r.from);
+    const next = RATES[i + 1];
+    const dates = next ? `${fmt(from)} to ${fmt(add(parse(next.from), -1))}` : `From ${fmt(from)}`;
+    const upcoming = from > today;
+    return `<tr class="${upcoming ? "upcoming" : ""}"><td class="d">${dates}${upcoming ? " (scheduled)" : ""}</td>
+      <td class="n">${money(r.min)}</td><td class="n">${money(r.minor)}</td><td class="n">${money(r.tipped)}</td><td class="n">${money(cents(r.min - r.tipped))}</td></tr>`;
+  }).join("");
+
+  /* ---------- Week list ---------- */
+  const list = document.getElementById("wk-list");
+  const weeksBox = document.getElementById("weeks");
+  let rowId = 0;
+  function addRow(start, hours, paid, tips) {
+    const id = ++rowId;
+    const el = document.createElement("div");
+    el.className = "wk";
+    el.innerHTML = `
+      <div class="cell date"><label class="mini" for="w${id}-s">Week starting</label><input id="w${id}-s" type="date" value="${start ? iso(start) : ""}" aria-label="Week starting"></div>
+      <div class="cell hrs"><label class="mini" for="w${id}-h">Hours</label><input id="w${id}-h" type="number" min="0" max="168" step="0.25" inputmode="decimal" value="${hours ?? ""}" aria-label="Hours worked that week"></div>
+      <div class="cell pay"><label class="mini" for="w${id}-p">Paid ($)</label><input id="w${id}-p" type="number" min="0" step="0.01" inputmode="decimal" value="${paid ?? ""}" aria-label="Pay for that week, in dollars"></div>
+      <div class="cell tipcell"><label class="mini" for="w${id}-t">Tips ($)</label><input id="w${id}-t" type="number" min="0" step="0.01" inputmode="decimal" value="${tips ?? ""}" aria-label="Tips that week, in dollars"></div>
+      <button class="rm" type="button" aria-label="Remove this week">×</button>`;
+    el.querySelector(".rm").addEventListener("click", () => { el.remove(); run(); });
+    list.appendChild(el);
+    return el;
+  }
+  function readRows() {
+    return [...list.querySelectorAll(".wk")].map(el => {
+      const [s, h, p, t] = el.querySelectorAll("input");
+      return { start: parse(s.value), hours: num(h.value), paid: num(p.value), tips: num(t.value), hasHours: h.value !== "" };
+    });
+  }
+  function fill() {
+    const start = parse(document.getElementById("g-start").value);
+    const n = Math.min(160, Math.max(1, Math.round(num(document.getElementById("g-n").value)) || 1));
+    if (!start) { document.getElementById("g-start").focus(); return; }
+    const h = document.getElementById("g-hours").value, p = document.getElementById("g-paid").value, t = document.getElementById("g-tips").value;
+    list.innerHTML = "";
+    for (let i = 0; i < n; i++) addRow(add(start, 7 * i), h, p, t);
+    document.getElementById("sample-note").hidden = true;
+    run();
+  }
+
+  /* ---------- One week's math ---------- */
+  // job: { rate, minor, tipped, creditAllowed(date) }
+  function weekCalc(w, job) {
+    const r = rateOn(w.start);
+    const M = job.minor ? r.minor : r.min;
+    const H = w.hours, S = Math.min(H, 40), O = Math.max(0, H - 40);
+    const R = job.rate;
+    const RR = Math.max(R, M);                 // regular rate for overtime
+    let creditS = 0, creditO = 0;
+    if (job.tipped && job.creditAllowed(w.start)) {
+      const gap = Math.max(0, M - r.tipped);   // per-hour amount tips may cover
+      creditS = Math.min(w.tips, gap * S);
+      creditO = Math.min(w.tips - creditS, gap * O);
+    }
+    const floorS = M * S - creditS;            // minimum wage for the first 40 hours
+    const floor = floorS + 1.5 * RR * O - creditO;
+    const promise = R > 0 ? R * S + 1.5 * R * O : 0;
+    const due = Math.max(floor, promise);
+    const short = cents(Math.max(0, due - w.paid));
+    const lawShort = cents(Math.max(0, floor - w.paid));          // minimum wage + overtime law
+    const mwShort = cents(Math.max(0, floorS - w.paid));
+    const end = add(w.start, 6);
+    const change = RATES.some(x => { const f = parse(x.from); return f > w.start && f <= end; });
+    return {
+      M, RR, H, O, due: cents(due), short, lawShort, mwShort,
+      otShort: cents(lawShort - mwShort), promiseShort: cents(short - lawShort),
+      end, change, lawDeadline: addYears(end, 3), promiseDeadline: addYears(end, 1)
+    };
+  }
+
+  function jobFrom(consentMode) {
+    const tipped = val("j-tip") === "yes";
+    return {
+      rate: num(document.getElementById("j-rate").value),
+      minor: val("j-age") === "minor",
+      tipped,
+      // Weeks before Feb 21, 2025 fell under an older version of the tip rules, so tips still count there.
+      creditAllowed: d => consentMode !== "no" || d < parse(TIP_CONSENT_FROM)
+    };
+  }
+
+  function totals(rows, job) {
+    const t = { short: 0, law: 0, mw: 0, ot: 0, promise: 0, lawPast: 0, promisePast: 0, hours: 0, ot_h: 0, paid: 0, weeks: [] };
+    for (const w of rows) {
+      const c = weekCalc(w, job);
+      t.weeks.push({ w, c });
+      t.short += c.short; t.law += c.lawShort; t.mw += c.mwShort; t.ot += c.otShort; t.promise += c.promiseShort;
+      t.hours += c.H; t.ot_h += c.O; t.paid += w.paid;
+      if (c.lawDeadline < today) t.lawPast += c.lawShort;
+      if (c.promiseDeadline < today) t.promisePast += c.promiseShort;
+    }
+    for (const k of ["short", "law", "mw", "ot", "promise", "lawPast", "promisePast", "paid"]) t[k] = cents(t[k]);
+    return t;
+  }
+
+  /* ---------- Render ---------- */
+  let lastSummary = "";
+  function run() {
+    const tipped = val("j-tip") === "yes";
+    document.getElementById("tip-extra").hidden = !tipped;
+    document.getElementById("g-tips-f").hidden = !tipped;
+    weeksBox.classList.toggle("tipped", tipped);
+    const consent = val("j-consent");
+
+    const all = readRows();
+    const skipped = { before: 0, after: 0, future: 0, blank: 0 };
+    const rows = [];
+    for (const w of all) {
+      if (!w.start || !w.hasHours) { skipped.blank++; continue; }
+      if (w.start < parse(FIRST)) { skipped.before++; continue; }
+      if (w.start > parse(LAST)) { skipped.after++; continue; }
+      if (add(w.start, 6) >= today) { skipped.future++; continue; }
+      rows.push(w);
+    }
+    rows.sort((a, b) => a.start - b.start);
+    let overlap = false;
+    for (let i = 1; i < rows.length; i++) if (diff(rows[i - 1].start, rows[i].start) < 7) overlap = true;
+
+    const job = jobFrom(tipped ? (consent === "no" ? "no" : "yes") : "yes");
+    const T = totals(rows, job);
+
+    const totalEl = document.getElementById("total");
+    const tableEl = document.getElementById("week-table");
+    const cardsEl = document.getElementById("cards");
+    const outBtns = document.getElementById("out-btns");
+
+    if (!rows.length) {
+      totalEl.innerHTML = `<div class="total"><p>Add at least one finished workweek above to see a total.${skipped.before ? " Weeks before January 1, 2023 aren't covered here." : ""}${skipped.future ? " Weeks that haven't ended yet are left out." : ""}</p></div>`;
+      tableEl.innerHTML = ""; cardsEl.innerHTML = ""; outBtns.hidden = true; lastSummary = "";
+      return;
+    }
+    outBtns.hidden = false;
+
+    const first = rows[0].start, lastEnd = add(rows[rows.length - 1].start, 6);
+    const anyPromise = job.rate > 0;
+    totalEl.innerHTML = `<div class="total">
+      <p>Estimated back pay for ${rows.length} week${rows.length === 1 ? "" : "s"}, ${fmt(first)} to ${fmt(lastEnd)}</p>
+      <div class="big">${money(T.short)}</div>
+      <div class="split">
+        <div><span class="k">Minimum wage</span><span class="v">${money(T.mw)}</span></div>
+        <div><span class="k">Overtime</span><span class="v">${money(T.ot)}</span></div>
+        ${anyPromise ? `<div><span class="k">Promised rate, above the minimum</span><span class="v">${money(T.promise)}</span></div>` : ""}
+        <div><span class="k">You were paid</span><span class="v">${money(T.paid)}</span></div>
+      </div>
+      ${T.lawPast + T.promisePast > 0 ? `<p class="hint">${money(cents(T.lawPast + T.promisePast))} of this is past the state's filing deadline. See the red card below.</p>` : ""}
+    </div>`;
+
+    const marks = { change: false, lawPast: false, promisePast: false };
+    const body = T.weeks.map(({ w, c }) => {
+      let m = "";
+      if (c.change) { m += "*"; marks.change = true; }
+      if (c.lawShort > 0 && c.lawDeadline < today) { m += "†"; marks.lawPast = true; }
+      else if (c.promiseShort > 0 && c.promiseDeadline < today) { m += "‡"; marks.promisePast = true; }
+      return `<tr class="${c.lawDeadline < today ? "out" : ""}">
+        <td class="d">${fmt(w.start)}${m ? ` <span class="mark">${m}</span>` : ""}</td>
+        <td class="n">${c.H}</td>
+        <td class="n">${money(c.M)}</td>
+        ${tipped ? `<td class="n">${money(w.tips)}</td>` : ""}
+        <td class="n">${money(w.paid)}</td>
+        <td class="n">${money(Math.max(c.due, w.paid))}</td>
+        <td class="n">${money(c.short)}</td></tr>`;
+    }).join("");
+    const notes = [];
+    if (marks.change) notes.push(`<span class="mark">*</span> The minimum wage went up during this week. The tool uses the lower rate for the whole week, so you may be owed a little more.`);
+    if (marks.lawPast) notes.push(`<span class="mark">†</span> More than 3 years ago, past the state deadline for minimum wage and overtime.`);
+    if (marks.promisePast) notes.push(`<span class="mark">‡</span> The promised-rate part is more than 12 months old, past the state deadline for it.`);
+    tableEl.innerHTML = `<div class="scroll"><table>
+      <thead><tr><th scope="col">Week starting</th><th scope="col" class="n">Hours</th><th scope="col" class="n">Min. wage</th>${tipped ? `<th scope="col" class="n">Tips</th>` : ""}<th scope="col" class="n">Paid</th><th scope="col" class="n">Owed at least</th><th scope="col" class="n">Short</th></tr></thead>
+      <tbody>${body}</tbody>
+      <tfoot><tr><td>Total</td><td class="n">${cents(T.hours)}</td><td></td>${tipped ? "<td></td>" : ""}<td class="n">${money(T.paid)}</td><td></td><td class="n">${money(T.short)}</td></tr></tfoot>
+    </table></div>${notes.length ? `<p class="hint">${notes.join("<br>")}</p>` : ""}`;
+
+    /* ----- Cards ----- */
+    const out = [];
+    // Deadlines for the oldest week that still has a claim inside each window.
+    const openLaw = T.weeks.find(x => x.c.lawShort > 0 && x.c.lawDeadline >= today);
+    const openProm = T.weeks.find(x => x.c.promiseShort > 0 && x.c.promiseDeadline >= today);
+    const lawDL = openLaw ? openLaw.c.lawDeadline : null, promDL = openProm ? openProm.c.promiseDeadline : null;
+    const daysLaw = lawDL ? diff(today, lawDL) : Infinity, daysProm = promDL ? diff(today, promDL) : Infinity;
+
+    if (T.lawPast > 0 || (T.promisePast > 0)) {
+      out.push(card("help", "Some of this is past the state deadline",
+        `${T.lawPast > 0 ? `${money(T.lawPast)} in minimum wage and overtime is from weeks more than 3 years ago. ` : ""}${T.promisePast > 0 ? `${money(T.promisePast)} in promised pay is from weeks more than 12 months ago. ` : ""}The state may dismiss claims filed after the deadline.`,
+        ["408.939", "408.481", "LEO complaint page"],
+        T.short - T.lawPast - T.promisePast > 0
+          ? `File now for the weeks still inside the window. A lawyer can tell you whether any other route reaches the older weeks.`
+          : `A lawyer can tell you whether any other route reaches these weeks. Free help is listed below.`));
+    }
+    if (lawDL && daysLaw <= 60) {
+      out.push(card("help", "Your oldest week's deadline is close",
+        `The 3-year window for your oldest week still inside it runs out on <span class="date-big">${when(lawDL)}</span>.`,
+        ["408.939", "LEO filing page"], `File before then. The online claim is the fastest way.`));
+    } else if (promDL && daysProm <= 60) {
+      out.push(card("help", "Your promised-pay deadline is close",
+        `The 12-month window for the promised-pay part of your oldest week still inside it runs out on <span class="date-big">${when(promDL)}</span>.`,
+        ["408.481", "LEO complaint page"], `File before then. The online claim is the fastest way.`));
+    }
+
+    if (T.short === 0) {
+      out.push(card("law", "Your pay meets the minimum for these weeks",
+        `Based on what you entered, you were paid at least Michigan's minimum wage and overtime for every week. Check that your hours include all the time you worked, like time before clocking in or after clocking out, if your boss required it.`,
+        ["408.934", "408.934a"]));
+    }
+
+    if (lawDL) {
+      out.push(card("law", "You have 3 years to file for minimum wage and overtime",
+        `You can file a claim with the state's Wage and Hour Division, or sue in court, within 3 years of the violation. For your oldest week still inside that window, that's about <span class="date-big">${when(lawDL)}</span>.`,
+        ["408.939", "LEO filing page"],
+        `File online at <a href="https://www.michigan.gov/wageclaim" target="_blank" rel="noopener">michigan.gov/wageclaim</a>. There's no charge.`));
+    }
+
+    if (T.ot_h > 0) {
+      const minRR = Math.min(...T.weeks.filter(x => x.c.O > 0).map(x => x.c.RR));
+      out.push(card("law", "Overtime is 1.5 times your regular rate after 40 hours",
+        `You worked ${cents(T.ot_h)} hours of overtime across these weeks. Michigan law requires at least 1.5 times your regular rate for every hour over 40 in a workweek, so your overtime rate was at least <span class="date-big">${money(cents(1.5 * minRR))}</span> an hour. Being paid a flat amount for the week doesn't cancel overtime. If you were on a weekly salary, the math can work differently, and the state can check it.`,
+        ["408.934a(1)", "LEO FAQ"]));
+    }
+
+    if (T.promise > 0) {
+      out.push(card("law", "Promised pay has a 12-month deadline",
+        `Your boss promised ${money(job.rate)} an hour. The part you're owed above the minimum wage, ${money(T.promise)}, falls under Michigan's Payment of Wages and Fringe Benefits Act. You must file a written complaint within 12 months.${promDL ? ` For your oldest week still inside that window, that's about <span class="date-big">${when(promDL)}</span>.` : ""} If the state finds a violation, it must order the wages paid plus a 10% yearly penalty, and it can add up to twice the amount if the violation was flagrant or repeated.`,
+        ["408.481", "408.488", "LEO complaint page"]));
+    }
+
+    if (T.law - T.lawPast > 0) {
+      out.push(card("facts", "In court, you can ask for double",
+        `If you sue instead of using the state claim, the law lets you recover the unpaid minimum wage and overtime plus an equal amount as liquidated damages, along with costs and attorney fees the court allows. On your numbers that's up to <span class="date-big">${money(cents(2 * (T.law - T.lawPast)))}</span>. A judge decides.`,
+        ["408.939"],
+        `Talk to a lawyer before you sue. Free help is listed below.`));
+    }
+
+    if (tipped) {
+      let extra = "";
+      if (consent !== "yes") {
+        const alt = totals(rows, jobFrom("no"));
+        const more = cents(alt.short - T.short);
+        if (consent === "no") {
+          extra = ` You said you didn't sign a written agreement, so for weeks from February 21, 2025 on, the tool doesn't count your tips toward the minimum. Weeks before that fell under an older version of the rules, so your tips still count there.`;
+        } else if (more > 0) {
+          extra = ` You weren't sure about the written agreement, so the total above counts your tips. If you never got and signed one, you may be owed about <span class="date-big">${money(more)}</span> more for weeks from February 21, 2025 on.`;
+        }
+      }
+      out.push(card("facts", "Tipped jobs: the tips have to cover the gap",
+        `Your employer can pay the lower tipped cash wage only if all of these are true: you got tips, the tips covered the gap up to the full minimum wage, they were reported, you kept them (or chose to share them with non-managers), and, starting February 21, 2025, you were told in writing at hire and gave written consent. Tips belong to the worker who gets them.${extra} The state's FAQ says that when tips fall short, the employer must make up the difference. The law's wording may mean the full minimum wage is owed for those weeks instead. The state or a judge decides which.`,
+        ["408.934d", "LEO FAQ"]));
+    }
+
+    const minorBits = job.minor ? ` Workers who are 16 or 17 can be paid 85% of the minimum wage, and that's the rate used here.` : "";
+    out.push(card("facts", "Does the law cover your job?",
+      `Michigan's minimum wage law covers workers 16 and older at businesses with 2 or more employees. Some jobs are left out of overtime, like managers, administrators, and professionals who meet the legal tests and are paid a salary of at least $684 a week, farm work, and seasonal amusement or recreation businesses open 7 months a year or less. A new worker under 20 can be paid a $4.25 training wage for the first 90 days.${minorBits} If your boss calls you an independent contractor, read When Wage Laws Apply.`,
+      ["408.934a(4)", "408.934b", "LEO FAQ", "When Wage Laws Apply"]));
+
+    out.push(card("help", "Fired or punished for complaining?",
+      `It's illegal for your employer to fire you or treat you worse for filing a wage complaint. Under Michigan's Payment of Wages Act, you have only <strong>30 days</strong> after the retaliation to file a complaint with the state. If it finds a violation, it must order you rehired with back pay. Federal law also bans retaliation.`,
+      ["408.483", "29 U.S.C. 215(a)(3)"],
+      `File right away and keep any texts, emails, or schedules that show what changed.`));
+
+    if (overlap) out.unshift(card("facts", "Two of your weeks overlap",
+      `Some weeks start less than 7 days apart. Overtime is counted per 7-day workweek, so overlapping weeks can make the total wrong. Check the start dates.`, ["408.934a(1)"]));
+    const skippedBits = [];
+    if (skipped.before) skippedBits.push(`${skipped.before} week${skipped.before === 1 ? "" : "s"} before January 1, 2023 (past the state's 3-year window, and older rates aren't loaded here)`);
+    if (skipped.after) skippedBits.push(`${skipped.after} week${skipped.after === 1 ? "" : "s"} after 2027, when rates aren't set yet`);
+    if (skipped.future) skippedBits.push(`${skipped.future} week${skipped.future === 1 ? "" : "s"} that haven't ended yet`);
+    if (skipped.blank) skippedBits.push(`${skipped.blank} line${skipped.blank === 1 ? "" : "s"} missing a date or hours`);
+    if (skippedBits.length) out.unshift(card("facts", "Some weeks were left out", `Not counted: ${skippedBits.join("; ")}.`, []));
+
+    cardsEl.innerHTML = `<div class="results-head"><h2>What applies to you</h2>
+      <div class="legend"><span class="tag law">The law says</span><span class="tag facts">Depends on facts</span><span class="tag help">Act now</span></div></div>` + out.join("");
+
+    /* ----- Plain-text summary for the claim form ----- */
+    const lines = [
+      `Wage claim worksheet (made ${slash(today)} with Michigan Back Pay Check, free-to-all-ai.github.io/tools/back-pay/)`,
+      `Period of claim: ${slash(first)} to ${slash(lastEnd)}`,
+      `Weeks: ${rows.length}. Hours: ${cents(T.hours)}, including ${cents(T.ot_h)} overtime hours over 40 in a workweek.`,
+      `Paid: ${money(T.paid)}${tipped ? ` (tips reported: ${money(cents(rows.reduce((s, w) => s + w.tips, 0)))})` : ""}`,
+      `Minimum wage owed: ${money(T.mw)}`,
+      `Overtime owed: ${money(T.ot)}`
+    ];
+    if (anyPromise) lines.push(`Hourly wages owed at the promised rate of ${money(job.rate)}/hour, above the minimum: ${money(T.promise)}`);
+    lines.push(`Total gross amount: ${money(T.short)}`, ``, `Week by week (week starting, hours, Michigan minimum wage, paid, owed at least, short):`);
+    for (const { w, c } of T.weeks) lines.push(`${slash(w.start)}: ${c.H} hours, ${money(c.M)}/hr, paid ${money(w.paid)}${tipped ? ` plus ${money(w.tips)} tips` : ""}, owed at least ${money(Math.max(c.due, w.paid))}, short ${money(c.short)}`);
+    lines.push(``, `Rates: Michigan minimum wage (MCL 408.934${tipped ? ", 408.934d for tipped wages" : ""}), overtime at 1.5 times the regular rate after 40 hours in a workweek (MCL 408.934a). These are estimates from my own records.`);
+    lastSummary = lines.join("\n");
+  }
+
+  /* ---------- Wire up ---------- */
+  // Sample: four finished weeks of 48 hours for a flat $600, starting on Sundays.
+  const lastSunday = add(today, -today.getDay());
+  const sampleStart = add(lastSunday, -35);
+  document.getElementById("g-start").value = iso(sampleStart);
+  for (let i = 0; i < 4; i++) addRow(add(sampleStart, 7 * i), 48, 600, 0);
+
+  document.getElementById("f-job").addEventListener("input", run);
+  document.getElementById("f-job").addEventListener("change", run);
+  document.getElementById("f-job").addEventListener("submit", e => e.preventDefault());
+  list.addEventListener("input", run);
+  list.addEventListener("change", run);
+  document.getElementById("g-go").addEventListener("click", fill);
+  document.getElementById("add").addEventListener("click", () => {
+    const rows = readRows().filter(r => r.start);
+    const lastStart = rows.length ? rows.reduce((a, b) => (b.start > a.start ? b : a)).start : null;
+    const el = addRow(lastStart ? add(lastStart, 7) : add(lastSunday, -7), "", "", "");
+    el.querySelector('input[type="number"]').focus();
+    run();
+  });
+  document.getElementById("clear").addEventListener("click", () => { list.innerHTML = ""; run(); });
+  document.getElementById("print").addEventListener("click", () => window.print());
+  document.getElementById("copy").addEventListener("click", async () => {
+    const status = document.getElementById("copied");
+    try {
+      await navigator.clipboard.writeText(lastSummary);
+      status.textContent = "Copied. Paste it into the claim form.";
+    } catch (e) {
+      const ta = document.createElement("textarea");
+      ta.value = lastSummary; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      let ok = false; try { ok = document.execCommand("copy"); } catch (e2) {}
+      ta.remove();
+      status.textContent = ok ? "Copied. Paste it into the claim form." : "Couldn't copy. Use Print or save as PDF instead.";
+    }
+    setTimeout(() => { status.textContent = ""; }, 5000);
+  });
+  run();
+})();
+</script>
+</body>
+</html>
