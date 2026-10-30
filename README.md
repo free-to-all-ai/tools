@@ -21,6 +21,7 @@ This repo is a shelf of small, free tools for regular people. Each one does one 
 | [Michigan Renter Rights Check](renter-rights/) | Covers security deposits, eviction notices, repairs, lockouts, retaliation, and illegal lease clauses. Works out your deadlines from your dates. | Michigan Compiled Laws, checked on legislature.mi.gov on Oct 28, 2026 |
 | [Insurance Denial Appeal Helper](appeal-helper/) | Works out your appeal deadlines and writes an appeal letter you can edit and send | 29 CFR 2560.503-1, 45 CFR 147.136, and Michigan's Patient's Right to Independent Review Act |
 | [Detroit Medical Bill Check](bill-checker/) | Takes the codes on an itemized bill and shows what Medicare pays for each in the Detroit area. Flags duplicates and drafts a letter. | CMS 2026 Physician Fee Schedule and Clinical Lab Fee Schedule |
+| [Gig Driver True Pay Calculator](gig-pay/) | Takes the pay, hours, and miles from your rideshare or delivery app and shows what you really made per hour after car costs. Shows unpaid miles and hours, a tax set-aside, and whether an offer is worth taking. | IRS standard mileage rates (Notice 2026-10 and Announcement 2026-11), IRS self-employment tax rules, and Michigan's minimum wage law, checked Oct 30, 2026 |
 
 ## How they work
 
@@ -31,7 +32,7 @@ This repo is a shelf of small, free tools for regular people. Each one does one 
 
 ## Keeping them current
 
-Laws and rates change. Every tool lists the date its sources were checked. The bill checker's rates come from CMS and change every January. To rebuild it, see `bill-checker/make.py`.
+Laws and rates change. Every tool lists the date its sources were checked. The bill checker's rates come from CMS and change every January. To rebuild it, see `bill-checker/make.py`. The gig pay calculator's IRS mileage rates live in a short table near the top of its script. The IRS usually sets next year's rate in December.
 
 ## Add your own
 

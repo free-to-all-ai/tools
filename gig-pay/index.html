@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gig Driver True Pay Calculator</title>
+<meta name="description" content="Enter the pay, hours, and miles from your rideshare or delivery app and see what you really made per hour after car costs. Information, not advice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. Your numbers on top, then the true-pay tiles, the math, and cards with sources. An offer checker sits below. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.panel { display: grid; gap: 18px; }
+form.q {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 18px;
+}
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.group { display: grid; gap: 10px; }
+.group-h { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; }
+.field { display: grid; gap: 6px; min-width: 0; align-content: start; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+input[type="date"], input[type="text"] {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px;
+  font-variant-numeric: tabular-nums;
+}
+input[aria-invalid="true"] { border-color: var(--help); }
+.money { position: relative; max-width: 320px; }
+.money::before { content: "$"; position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.money input { padding-left: 24px; }
+.opts { display: grid; gap: 8px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.opts input[type="radio"] { margin-top: 5px; accent-color: var(--accent); }
+.own { display: grid; gap: 6px; padding-left: 26px; }
+.hint { font-size: 14px; color: var(--muted); }
+.err { font-size: 14px; color: var(--help); }
+.results { display: grid; gap: 12px; }
+.results-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.stat {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 14px 16px; display: grid; gap: 2px; align-content: start;
+}
+.stat.main { border: 2px solid var(--accent); background: var(--accent-soft); }
+.stat .k { font-size: 14px; font-weight: 700; }
+.stat .v { font-family: var(--f-display); font-size: 36px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat.main .v { color: var(--accent); }
+.stat .v.neg { color: var(--help); }
+.stat .s { font-size: 13px; color: var(--muted); }
+.math { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 6px 18px; }
+.math table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.math td { padding: 8px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.math tr:first-child td { border-top: 0; }
+.math td.n { text-align: right; font-family: var(--f-mono); font-size: 15px; white-space: nowrap; padding-left: 12px; }
+.math tr.tot td { font-weight: 700; border-top: 2px solid var(--fg); }
+.math .sub { display: block; font-size: 13px; color: var(--muted); }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line);
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.empty { background: var(--surface); border: 1px dashed var(--line); border-radius: 12px; padding: 16px 18px; color: var(--muted); }
+.verdict { font-weight: 700; padding: 12px 16px; border-radius: 10px; }
+.verdict.ok { background: var(--law-bg); color: var(--law); }
+.verdict.low { background: var(--help-bg); color: var(--help); }
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: flex-end; }
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 10px 16px;
+  background: var(--accent); color: var(--bg); border: 0;
+}
+.btn:hover { filter: brightness(1.08); }
+.copied { font-size: 14px; color: var(--law); }
+.gethelp { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+[hidden] { display: none !important; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Rideshare · delivery · free</span>
+    <h1>Gig Driver True Pay Calculator</h1>
+    <p class="lede">Your app shows what it paid you. It doesn't show what the driving cost you. Enter the numbers from your app screens and your odometer to see what you really made per hour after car costs. Works for Uber, Lyft, DoorDash, Instacart, Spark, and any other app that pays you to drive.</p>
+    <div class="notice">
+      <strong>This is information, not tax or financial advice.</strong>
+      <span>The math is exact. The car cost is an estimate unless you enter your own. Nothing you type leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section class="panel" aria-labelledby="h-pay">
+    <h2 id="h-pay">1. What you really made</h2>
+    <form class="q" id="f-pay" novalidate>
+      <p class="sample">Sample answers are filled in so you can see how it works. Change them to yours. Use one day, one week, or any stretch, as long as every number covers the same stretch.</p>
+
+      <div class="field"><label for="d-date">Date you drove (for a week, use the last day)</label>
+        <input id="d-date" type="date">
+        <span class="hint">Picks the right IRS mileage rate for that date.</span></div>
+
+      <div class="group">
+        <span class="group-h">Pay</span>
+        <div class="row2">
+          <div class="field"><label for="pay">Pay from the app</label>
+            <div class="money"><input id="pay" type="text" inputmode="decimal" value="585.20" aria-describedby="pay-h"></div>
+            <span class="hint" id="pay-h">Fares or delivery pay, plus bonuses and promotions. Driving for more than one app? Type them with a plus sign, like 312.50 + 187.20.</span></div>
+          <div class="field"><label for="tips">Tips</label>
+            <div class="money"><input id="tips" type="text" inputmode="decimal" value="164.75" aria-describedby="tips-h"></div>
+            <span class="hint" id="tips-h">If the app's total already includes tips, put that total under pay and leave this at 0.</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <span class="group-h">Time</span>
+        <div class="row2">
+          <div class="field"><label for="hrs">All the hours you were working</label>
+            <input id="hrs" type="text" inputmode="decimal" value="34.5" aria-describedby="hrs-h">
+            <span class="hint" id="hrs-h">From when you went online to when you went offline, including waiting and driving to pickups. 34.5 and 34:30 both work.</span></div>
+          <div class="field"><label for="apphrs">Hours the app counts (optional)</label>
+            <input id="apphrs" type="text" inputmode="decimal" value="24" aria-describedby="apphrs-h">
+            <span class="hint" id="apphrs-h">Some apps count only the time you were on a trip. If yours shows an hourly rate, check which hours it uses.</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <span class="group-h">Miles</span>
+        <div class="row2">
+          <div class="field"><label for="mi">All the miles you drove for work</label>
+            <input id="mi" type="text" inputmode="decimal" value="612" aria-describedby="mi-h">
+            <span class="hint" id="mi-h">Best source: your odometer when you start and stop each shift, or a mileage tracker app.</span></div>
+          <div class="field"><label for="appmi">Miles the app shows (optional)</label>
+            <input id="appmi" type="text" inputmode="decimal" value="431" aria-describedby="appmi-h">
+            <span class="hint" id="appmi-h">If this is lower than your odometer, the gap is miles you paid for that the app didn't count.</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <span class="group-h">Car costs</span>
+        <div class="field"><span class="lbl" id="l-rate">Cost per mile to run your car</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-rate">
+            <label><input type="radio" name="rate" value="irs" checked> <span id="irs-label">IRS standard mileage rate for that date</span></label>
+            <label><input type="radio" name="rate" value="own"> My own cost per mile</label>
+          </div>
+          <div class="own" id="own-wrap" hidden>
+            <label for="own" class="hint">Your cost per mile, in dollars (0.45 means 45 cents)</label>
+            <div class="money"><input id="own" type="text" inputmode="decimal" value="0.45"></div>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="gas">Gas price per gallon (optional)</label>
+            <div class="money"><input id="gas" type="text" inputmode="decimal" value="3.10"></div></div>
+          <div class="field"><label for="mpg">Your car's miles per gallon (optional)</label>
+            <input id="mpg" type="text" inputmode="decimal" value="28"></div>
+        </div>
+        <span class="hint">These two fill in a gas-only number, the cash that leaves your pocket right away. Electric car? Leave them blank and use your own cost per mile.</span>
+        <div class="field"><label for="other">Other work costs (optional)</label>
+          <div class="money"><input id="other" type="text" inputmode="decimal" value="15" aria-describedby="other-h"></div>
+          <span class="hint" id="other-h">Your phone plan's work share, tolls, parking, car washes, delivery bags. Tolls and parking are not part of the IRS rate.</span></div>
+      </div>
+    </form>
+
+    <div class="results" id="r-pay" aria-live="polite"></div>
+    <div class="bar" id="copy-bar"><span class="copied" id="copied" role="status"></span><button class="btn" type="button" id="copy">Copy my numbers</button></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-offer">
+    <h2 id="h-offer">2. Check an offer before you take it</h2>
+    <form class="q" id="f-offer" novalidate>
+      <p class="hint">Uses the car cost per mile from section 1.</p>
+      <div class="row2">
+        <div class="field"><label for="o-pay">What the offer pays, including any tip shown</label>
+          <div class="money"><input id="o-pay" type="text" inputmode="decimal" value="9.50"></div></div>
+        <div class="field"><label for="o-target">The least you'll take per hour, after car costs</label>
+          <div class="money"><input id="o-target" type="text" inputmode="decimal" value="20"></div></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="o-mi">Total miles</label>
+          <input id="o-mi" type="text" inputmode="decimal" value="7.8" aria-describedby="o-mi-h">
+          <span class="hint" id="o-mi-h">The drive to the pickup, plus the trip, plus any drive back to a busy area.</span></div>
+        <div class="field"><label for="o-min">Total minutes</label>
+          <input id="o-min" type="text" inputmode="decimal" value="24" aria-describedby="o-min-h">
+          <span class="hint" id="o-min-h">Same stretch: to the pickup, any wait, the trip, and the drive back.</span></div>
+      </div>
+    </form>
+    <div class="results" id="r-offer" aria-live="polite"></div>
+  </section>
+
+  <section class="gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Free help with gig taxes</h2>
+    <ul>
+      <li><a href="https://www.irs.gov/businesses/gig-economy-tax-center" target="_blank" rel="noopener">IRS Gig Economy Tax Center</a> covers the forms, records, and deductions for app-based work.</li>
+      <li><a href="https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers" target="_blank" rel="noopener">IRS free tax prep (VITA)</a> does basic returns for free, mainly for people who generally make about $70,244 or less. <a href="https://www.irs.gov/individuals/find-a-location-for-free-tax-prep" target="_blank" rel="noopener">Find a site near you.</a></li>
+      <li><a href="https://www.irs.gov/businesses/small-businesses-self-employed/estimated-taxes" target="_blank" rel="noopener">IRS: Estimated taxes</a> explains who has to pay during the year and how.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> True pay per hour is your pay and tips, minus car costs (miles times cost per mile) and other work costs, divided by every hour you worked. Green cards are math from your own numbers. Amber cards are estimates or depend on your situation. Red cards are money you may owe or may be losing.</p>
+    <p><strong>Sources, checked October 30, 2026.</strong> IRS standard mileage rates: 67 cents a mile for 2024, 70 cents for 2025, 72.5 cents from January 1 to June 30, 2026 (<a href="https://www.irs.gov/pub/irs-drop/n-26-10.pdf" target="_blank" rel="noopener">Notice 2026-10</a>), and 76 cents from July 1, 2026 (<a href="https://www.irs.gov/irb/2026-29_irb#ANN-2026-11" target="_blank" rel="noopener">Announcement 2026-11</a>), per the <a href="https://www.irs.gov/tax-professionals/standard-mileage-rates" target="_blank" rel="noopener">IRS rate table</a>. Self-employment tax: 15.3% of 92.35% of net profit, from the <a href="https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax-social-security-and-medicare-taxes" target="_blank" rel="noopener">IRS self-employment tax page</a> and <a href="https://www.irs.gov/pub/irs-pdf/f1040sse.pdf" target="_blank" rel="noopener">Schedule SE</a>. Michigan minimum wage: <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-408-934" target="_blank" rel="noopener">MCL 408.934</a>.</p>
+    <p>The IRS usually announces next year's mileage rate in December. For dates after 2026, this page uses the latest rate until it's updated. The tax numbers are a rough set-aside for Social Security and Medicare only. They leave out income tax, credits, and anything else on your return.</p>
+    <p>Free and open source. Nothing you enter is sent anywhere or stored.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const today = new Date();
+  const usd = n => (n < 0 ? "−" : "") + Math.abs(n).toLocaleString("en-US", { style: "currency", currency: "USD" });
+  const cents = c => (Math.round(c * 10) / 10).toLocaleString("en-US") + "¢";
+  const num = n => n.toLocaleString("en-US", { maximumFractionDigits: 2 });
+  const pct = (a, b) => Math.round(a / b * 100) + "%";
+  const fmtDate = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }); };
+
+  // Numbers can be summed with "+", so a driver on two apps can type 312.50 + 187.20.
+  // Returns null when blank, NaN when it can't be read.
+  function amount(v) {
+    v = v.replace(/[$,\s]/g, "");
+    if (!v) return null;
+    let total = 0;
+    for (const part of v.split("+")) {
+      if (!/^\d*\.?\d+$/.test(part)) return NaN;
+      total += parseFloat(part);
+    }
+    return total;
+  }
+  // Hours also accept h:mm, like 34:30.
+  function hours(v) {
+    v = v.replace(/\s/g, "");
+    if (!v) return null;
+    let total = 0;
+    for (const part of v.split("+")) {
+      const hm = part.match(/^(\d+):([0-5]?\d)$/);
+      if (hm) total += +hm[1] + +hm[2] / 60;
+      else if (/^\d*\.?\d+$/.test(part)) total += parseFloat(part);
+      else return NaN;
+    }
+    return total;
+  }
+
+  // IRS business standard mileage rates, cents per mile, by start date.
+  const IRS = [
+    { from: "2024-01-01", c: 67, src: "IRS rate table" },
+    { from: "2025-01-01", c: 70, src: "IRS rate table" },
+    { from: "2026-01-01", c: 72.5, src: "Notice 2026-10" },
+    { from: "2026-07-01", c: 76, src: "Announcement 2026-11" }
+  ];
+  const IRS_LAST_KNOWN = "2026-12-31";
+  // Michigan minimum wage, MCL 408.934(1). From 2028 it adjusts for inflation each year, so later dates get no comparison.
+  const MW = [
+    { from: "2025-02-21", r: 12.48 },
+    { from: "2026-01-01", r: 13.73 },
+    { from: "2027-01-01", r: 15.00 }
+  ];
+  const MW_LAST_KNOWN = "2027-12-31";
+  const pick = (table, d) => { let hit = null; for (const row of table) if (d >= row.from) hit = row; return hit; };
+
+  const SRC = {
+    "Notice 2026-10": "https://www.irs.gov/pub/irs-drop/n-26-10.pdf",
+    "Announcement 2026-11": "https://www.irs.gov/irb/2026-29_irb#ANN-2026-11",
+    "IRS rate table": "https://www.irs.gov/tax-professionals/standard-mileage-rates",
+    "IRS Topic 510": "https://www.irs.gov/taxtopics/tc510",
+    "IRS self-employment tax": "https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax-social-security-and-medicare-taxes",
+    "Schedule SE": "https://www.irs.gov/pub/irs-pdf/f1040sse.pdf",
+    "IRS estimated taxes": "https://www.irs.gov/businesses/small-businesses-self-employed/estimated-taxes",
+    "IRS Topic 751": "https://www.irs.gov/taxtopics/tc751",
+    "MCL 408.934": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-408-934"
+  };
+  const LABEL = { law: "From your numbers", facts: "Estimate", help: "Heads up" };
+  function card(level, title, body, cites = [], next = "") {
+    const c = cites.map(k => `<a class="cite" href="${SRC[k]}" target="_blank" rel="noopener">${esc(k)}</a>`).join("");
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${LABEL[level]}</span></div>
+      <p>${body}</p>
+      ${next ? `<p class="next"><strong>What you can do:</strong> ${next}</p>` : ""}
+      ${c ? `<div class="cites">${c}</div>` : ""}
+    </article>`;
+  }
+  const stat = (k, v, s, cls = "") => `<div class="stat ${cls}"><span class="k">${k}</span><span class="v${v.startsWith("−") ? " neg" : ""}">${v}</span><span class="s">${s}</span></div>`;
+
+  $("d-date").value = iso(today);
+
+  const fp = $("f-pay");
+  let bad = [];
+  const read = (id, fn = amount) => {
+    const el = $(id), v = fn(el.value);
+    el.setAttribute("aria-invalid", Number.isNaN(v) ? "true" : "false");
+    if (Number.isNaN(v)) bad.push(document.querySelector(`label[for="${id}"]`).textContent.replace(/ \(optional\)$/, "").toLowerCase());
+    return Number.isNaN(v) ? null : v;
+  };
+  let summary = "", perMile = null;
+
+  // Works out the car cost per mile in cents, and which source it came from.
+  function rate() {
+    const d = $("d-date").value || iso(today);
+    const row = pick(IRS, d);
+    const irs = row ? row.c : null;
+    $("irs-label").textContent = irs != null
+      ? `IRS standard mileage rate for that date: ${cents(irs)} a mile`
+      : "IRS standard mileage rate (this page has rates from 2024 on)";
+    const useOwn = fp.querySelector('input[name="rate"]:checked').value === "own";
+    $("own-wrap").hidden = !useOwn;
+    const own = read("own");
+    return { d, irs, row, useOwn, c: useOwn ? (own == null ? null : own * 100) : irs };
+  }
+
+  function calc() {
+    bad = [];
+    const r = rate();
+    const pay = read("pay"), tips = read("tips"), hrs = read("hrs", hours), apphrs = read("apphrs", hours);
+    const mi = read("mi"), appmi = read("appmi"), gas = read("gas"), mpg = read("mpg"), other = read("other");
+    const out = $("r-pay");
+    perMile = r.c;
+
+    const missing = [];
+    if (pay == null && tips == null) missing.push("your pay");
+    if (!hrs) missing.push("the hours you worked");
+    if (mi == null) missing.push("the miles you drove");
+    if (r.c == null) missing.push(r.useOwn ? "your cost per mile" : "a cost per mile (the IRS rates here start in 2024, so pick your own)");
+    if (bad.length) {
+      out.innerHTML = `<p class="empty">The calculator can't read what's in: ${esc(bad.join("; "))}. Use plain numbers like 585.20, or 34:30 for hours.</p>`;
+      $("copy-bar").hidden = true; summary = ""; perMile = null; offer(); return;
+    }
+    if (missing.length) {
+      out.innerHTML = `<p class="empty">Fill in ${missing.join(", ")} to see your true pay.</p>`;
+      $("copy-bar").hidden = true; summary = ""; offer(); return;
+    }
+    $("copy-bar").hidden = false;
+
+    const gross = (pay || 0) + (tips || 0);
+    const carCost = mi * r.c / 100;
+    const otherCost = other || 0;
+    const net = gross - carCost - otherCost;
+    const trueHr = net / hrs;
+    const appHr = apphrs ? gross / apphrs : gross / hrs;
+    const gasOnly = gas != null && mpg ? mi / mpg * gas : null;
+    const gasHr = gasOnly != null ? (gross - gasOnly - otherCost) / hrs : null;
+
+    let html = `<div class="results-head"><h2>Your true pay</h2></div><div class="stats">`;
+    html += stat("True pay per hour", usd(trueHr), `after car costs at ${cents(r.c)} a mile`, "main");
+    html += stat("Before any costs", usd(appHr), apphrs ? `pay ÷ the ${num(apphrs)} hours the app counts` : `pay ÷ your ${num(hrs)} hours`);
+    if (gasHr != null) html += stat("After gas only", usd(gasHr), "after gas and other costs, before wear and tear");
+    html += `</div>`;
+
+    html += `<div class="math"><table>
+      <tr><td>Pay and tips</td><td class="n">${usd(gross)}</td></tr>
+      <tr><td>Car cost<span class="sub">${num(mi)} miles × ${cents(r.c)} ${r.useOwn ? "(your own cost)" : "(IRS rate)"}</span></td><td class="n">${usd(-carCost)}</td></tr>
+      ${otherCost ? `<tr><td>Other work costs</td><td class="n">${usd(-otherCost)}</td></tr>` : ""}
+      <tr class="tot"><td>Left after costs</td><td class="n">${usd(net)}</td></tr>
+      <tr><td>Per hour<span class="sub">÷ ${num(hrs)} hours worked</span></td><td class="n">${usd(trueHr)}</td></tr>
+      ${mi ? `<tr><td>Per mile<span class="sub">÷ ${num(mi)} miles. Pay per mile was ${usd(gross / mi)}.</span></td><td class="n">${usd(net / mi)}</td></tr>` : ""}
+    </table></div>`;
+
+    const c = [];
+    if (net < 0) c.push(card("help", "You lost money on this stretch",
+      `At ${cents(r.c)} a mile, your car and work costs came to ${usd(carCost + otherCost)} and you were paid ${usd(gross)}. Some of that loss shows up later, as repairs and a car that's worth less, so it's easy to miss week to week.`,
+      [], "Check whether short, low-paying trips or long unpaid drives are pulling your numbers down. The offer checker below can help you spot them."));
+
+    if (apphrs != null && apphrs < hrs) c.push(card("law", "Hours the app didn't count",
+      `You worked ${num(hrs)} hours, and the app counts ${num(apphrs)}. That's ${num(hrs - apphrs)} hours (${pct(hrs - apphrs, hrs)} of your time) spent waiting and driving that the app's hourly number leaves out. Counting every hour, you made ${usd(gross / hrs)} an hour before costs, not ${usd(gross / apphrs)}.`));
+    else if (apphrs != null && apphrs > hrs) c.push(card("facts", "Check your hours",
+      `The app counts ${num(apphrs)} hours, more than the ${num(hrs)} you entered as your total. Your total should include every hour the app counts, plus waiting time.`));
+
+    if (appmi != null && appmi < mi) {
+      const gap = mi - appmi;
+      c.push(card("law", "Miles the app didn't count",
+        `You drove ${num(mi)} miles, and the app shows ${num(appmi)}. The other ${num(gap)} miles (${pct(gap, mi)}) went to pickups, between trips, and back home or to busy areas. They still cost you about ${usd(gap * r.c / 100)} at ${cents(r.c)} a mile.`));
+    } else if (appmi != null && appmi > mi) c.push(card("facts", "Check your miles",
+      `The app shows ${num(appmi)} miles, more than the ${num(mi)} you entered as your total. Your total should include every mile the app counts, plus the ones it doesn't.`));
+
+    if (r.useOwn) {
+      c.push(card("facts", "You're using your own cost per mile",
+        r.irs != null
+          ? `You entered ${cents(r.c)} a mile. The IRS rate for this date is ${cents(r.irs)}, which would put your true pay at ${usd((gross - mi * r.irs / 100 - otherCost) / hrs)} an hour. A good own-cost number counts gas, oil, repairs, tires, insurance, registration, and the value your car loses as the miles pile up.`
+          : `You entered ${cents(r.c)} a mile. A good own-cost number counts gas, oil, repairs, tires, insurance, registration, and the value your car loses as the miles pile up.`,
+        ["IRS Topic 510"]));
+    } else {
+      const future = r.d > IRS_LAST_KNOWN;
+      c.push(card("facts", `About the IRS rate of ${cents(r.irs)} a mile`,
+        `The IRS sets this rate from a yearly study of the fixed and variable costs of running a car: gas, oil, repairs, tires, insurance, registration, and the value it loses. It's an average. If your car is older and paid off, your real cost may be lower. If it's newer or financed, it may be higher. ${gasOnly != null ? `Gas alone came to ${usd(gasOnly)} for these miles. The rest of the cost comes due later, at the repair shop and when you sell or replace the car.` : ""}${r.row && r.row.c === 76 ? " The IRS raised the rate from 72.5 to 76 cents on July 1, 2026 because of higher fuel prices." : ""}${future ? " The IRS hasn't announced a rate for this date yet, so this uses the latest one." : ""}`,
+        r.row && r.row.src !== "IRS rate table" ? [r.row.src, "IRS rate table", "IRS Topic 510"] : ["IRS rate table", "IRS Topic 510"],
+        "If you know your own costs, pick \"My own cost per mile\" above."));
+    }
+
+    const mw = r.d <= MW_LAST_KNOWN ? pick(MW, r.d) : null;
+    if (mw) {
+      const d = trueHr - mw.r;
+      c.push(card("facts", `Compared with Michigan's minimum wage of ${usd(mw.r)}`,
+        `Your true pay is ${usd(Math.abs(d))} an hour ${d < 0 ? "below" : "above"} Michigan's minimum wage for this date. Apps usually treat drivers as independent contractors, not employees, so the minimum wage law usually doesn't cover this pay. It's here as a yardstick.`,
+        ["MCL 408.934"]));
+    }
+
+    if (net > 0) {
+      const se = net * 0.9235 * 0.153;
+      c.push(card("help", `Set aside about ${usd(se)} for Social Security and Medicare`,
+        `Employees split these taxes with their employer, 7.65% each. As a contractor you pay both halves as self-employment tax: 15.3% of 92.35% of your profit. On ${usd(net)} of profit, that's about ${usd(se)}, which leaves ${usd((net - se) / hrs)} an hour. Income tax comes on top of that, depending on the rest of your year. You owe self-employment tax if your net earnings from self-employment for the year are $400 or more, and if you expect to owe $1,000 or more when you file, you generally have to make estimated tax payments during the year, not just at tax time.`,
+        ["IRS self-employment tax", "Schedule SE", "IRS Topic 751", "IRS estimated taxes"],
+        "Move the set-aside to a separate account each week. The free tax help below can work out your full picture."));
+    }
+
+    c.push(card("facts", "Keep a mileage log",
+      `Your miles can be a big tax deduction, and the law requires records to back it up. Writing down the date and your odometer at the start and end of every shift is a simple start. Tolls and parking for work can be deducted on top of the mileage rate.`,
+      ["IRS Topic 510"]));
+
+    html += `<div class="results-head"><h2>What this means</h2>
+      <div class="legend"><span class="tag law">From your numbers</span><span class="tag facts">Estimate</span><span class="tag help">Heads up</span></div></div>` + c.join("");
+    out.innerHTML = html;
+
+    summary = [
+      `Gig driver true pay${$("d-date").value ? " (" + fmtDate($("d-date").value) + ")" : ""}`,
+      `Pay and tips: ${usd(gross)}`,
+      `Hours worked: ${num(hrs)}${apphrs != null ? ` (app counts ${num(apphrs)})` : ""}`,
+      `Miles driven: ${num(mi)}${appmi != null ? ` (app shows ${num(appmi)})` : ""}`,
+      `Car cost at ${cents(r.c)} a mile (${r.useOwn ? "my own cost" : "IRS rate"}): ${usd(carCost)}`,
+      otherCost ? `Other work costs: ${usd(otherCost)}` : null,
+      `Left after costs: ${usd(net)}`,
+      `True pay per hour: ${usd(trueHr)}`,
+      `Before any costs: ${usd(appHr)} an hour`,
+      gasHr != null ? `After gas only: ${usd(gasHr)} an hour` : null,
+      "",
+      "Made with the free Gig Driver True Pay Calculator: https://free-to-all-ai.github.io/tools/gig-pay/"
+    ].filter(x => x != null).join("\n");
+    offer();
+  }
+
+  function offer() {
+    const out = $("r-offer");
+    bad = [];
+    const p = read("o-pay"), m = read("o-mi"), min = read("o-min", hours), target = read("o-target");
+    if (bad.length) {
+      out.innerHTML = `<p class="empty">The calculator can't read what's in: ${esc(bad.join("; "))}. Use plain numbers like 9.50.</p>`;
+      return;
+    }
+    if (perMile == null || p == null || m == null || !min) {
+      out.innerHTML = `<p class="empty">Fill in the offer's pay, miles, and minutes${perMile == null ? ", and finish section 1 so it has a cost per mile," : ""} to check it.</p>`;
+      return;
+    }
+    const cost = m * perMile / 100, left = p - cost, perHr = left / (min / 60);
+    let html = `<div class="stats">
+      ${stat("Per hour, after car costs", usd(perHr), `${usd(left)} left after ${usd(cost)} of car cost`, "main")}
+      ${stat("Pay per mile", m ? usd(p / m) : "n/a", `car cost is ${cents(perMile)} a mile`)}`;
+    if (target != null) {
+      const need = target * min / 60 + cost;
+      html += stat("Pay needed for your target", usd(need), `${usd(target)} an hour for ${num(min)} minutes, plus car cost`);
+      html += `</div><p class="verdict ${perHr >= target ? "ok" : "low"}">${perHr >= target
+        ? `This offer meets your ${usd(target)} an hour, with ${usd(p - need)} to spare.`
+        : `This offer is ${usd(need - p)} short of your ${usd(target)} an hour.`}</p>`;
+    } else html += `</div>`;
+    out.innerHTML = html;
+  }
+
+  [fp, $("f-offer")].forEach(f => {
+    f.addEventListener("input", calc);
+    f.addEventListener("change", calc);
+    f.addEventListener("submit", e => e.preventDefault());
+  });
+  calc();
+
+  $("copy").addEventListener("click", () => {
+    const msg = $("copied");
+    if (!summary) return;
+    const fallback = () => {
+      const ta = document.createElement("textarea");
+      ta.value = summary; document.body.appendChild(ta); ta.select();
+      let ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+      ta.remove();
+      msg.textContent = ok ? "Copied" : "Couldn't copy. Select the numbers above and copy them by hand.";
+    };
+    try { navigator.clipboard.writeText(summary).then(() => { msg.textContent = "Copied"; }, fallback); }
+    catch (e) { fallback(); }
+  });
+})();
+</script>
+</body>
+</html>
