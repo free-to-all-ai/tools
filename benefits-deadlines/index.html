@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Benefits Cut Letter Deadlines</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Got a Michigan letter denying, cutting, or closing SNAP, Medicaid, cash, or child care help? See your deadline to ask for a hearing and to keep your benefits while you wait. Information, not advice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. The letter questions on top, then a stack of deadline cards, each with its manual or regulation chip, then the hearing request builder. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.panel { display: grid; gap: 18px; }
+form.q {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 16px;
+}
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="date"], input[type="number"], select {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px;
+}
+input[type="text"], textarea {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%;
+}
+textarea { min-height: 96px; resize: vertical; }
+.opts { display: grid; gap: 6px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.opts input { margin-top: 5px; accent-color: var(--accent); }
+.hint { font-size: 14px; color: var(--muted); }
+.results { display: grid; gap: 12px; }
+.results-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line);
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.date-big { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-size: 15px; }
+.small { font-size: 15px; color: var(--muted); }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.gethelp { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.letter {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px;
+  font-family: var(--f-body); white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; font-size: 16px;
+}
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 10px 16px;
+  background: var(--accent); color: var(--bg); border: 0;
+}
+.btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.btn:hover { filter: brightness(1.08); }
+.copied { font-size: 14px; color: var(--law); }
+.fill { background: var(--facts-bg); color: var(--facts); border-radius: 4px; padding: 0 3px; }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+@media print {
+  body.printing .wrap > :not(#s-letter), body.printing #s-letter > :not(.letter) { display: none !important; }
+  body.printing { background: #fff; color: #000; }
+  body.printing .letter { border: 0; padding: 0; color: #000; background: #fff; }
+  body.printing .fill { background: none; color: #000; }
+}
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Michigan · SNAP, Medicaid, cash, child care · free</span>
+    <h1>Benefits Cut Letter Deadlines</h1>
+    <p class="lede">MDHHS sent you a letter that denies, lowers, or stops your benefits. You have the right to ask for a hearing. Enter the date printed on the letter to see two deadlines: the one to keep your benefits coming while you wait, and the last day to ask for a hearing at all.</p>
+    <div class="notice">
+      <strong>This is information, not legal advice.</strong>
+      <span>Your notice lists your hearing rights. If it shows an earlier date than this page, go by your notice. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section class="panel" aria-labelledby="h-letter-q">
+    <h2 id="h-letter-q">1. Your letter</h2>
+    <form class="q" id="f-plan" novalidate>
+      <p class="sample">Sample answers are filled in so you can see how it works. Change them to yours.</p>
+      <div class="field"><span class="lbl" id="l-prog">Which benefit is the letter about?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-prog">
+          <label><input type="radio" name="prog" value="fap" checked> Food Assistance (SNAP, called FAP in Michigan)</label>
+          <label><input type="radio" name="prog" value="ma"> Medicaid or Healthy Michigan Plan</label>
+          <label><input type="radio" name="prog" value="cash"> Cash assistance (FIP or SDA)</label>
+          <label><input type="radio" name="prog" value="cdc"> Child care help (CDC)</label>
+        </div>
+        <span class="hint">If one letter covers more than one benefit, check each one. The deadlines are the same, but some details differ.</span></div>
+      <div class="field"><span class="lbl" id="l-act">What does the letter do?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-act">
+          <label><input type="radio" name="act" value="reduce" checked> Lowers my benefits</label>
+          <label><input type="radio" name="act" value="close"> Stops or closes my benefits</label>
+          <label><input type="radio" name="act" value="renew"> Ends my benefits after a renewal (also called a redetermination)</label>
+          <label><input type="radio" name="act" value="deny"> Denies my application</label>
+        </div></div>
+      <div class="row2">
+        <div class="field"><label for="n-date">Date printed on the notice</label><input id="n-date" type="date">
+          <span class="hint">Use the date on the letter, not the day it arrived. The clock starts on the notice date.</span></div>
+        <div class="field"><label for="e-date">Date the change takes effect (optional)</label><input id="e-date" type="date">
+          <span class="hint">Leave blank if you can't find it.</span></div>
+      </div>
+    </form>
+    <div class="results" id="r-plan" aria-live="polite"></div>
+    <div class="btns"><button class="btn ghost" type="button" id="ics">Save deadlines to my calendar</button><span class="hint">Downloads a calendar file. Nothing is sent anywhere.</span></div>
+  </section>
+
+  <section class="panel" id="s-letter" aria-labelledby="h-letter">
+    <h2 id="h-letter">2. Your hearing request</h2>
+    <form class="q" id="f-letter" novalidate>
+      <div class="row2">
+        <div class="field"><label for="a-name">Your name</label><input id="a-name" type="text" value="Jordan Example" autocomplete="off"></div>
+        <div class="field"><label for="a-case">Case number on the notice</label><input id="a-case" type="text" value="000000000" autocomplete="off"></div>
+      </div>
+      <div class="field"><label for="a-county">Your county</label><input id="a-county" type="text" value="Wayne" autocomplete="off">
+        <span class="hint">Send it to the MDHHS office that sent the notice. Its address is on the letter.</span></div>
+      <div class="field"><label for="a-why">In your own words, why MDHHS got it wrong</label>
+        <textarea id="a-why">My hours at work went down in September. The notice still counts my old pay. I turned in my new pay stubs on October 2.</textarea>
+        <span class="hint">Facts help most: what changed, what you sent and when, and what the notice got wrong. It's fine to keep it short.</span></div>
+      <div class="field" id="keep-wrap"><span class="lbl" id="l-keep">Keep your benefits while you wait?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-keep">
+          <label><input type="radio" name="a-keep" value="yes" checked> Yes, keep them at the current level until the decision</label>
+          <label><input type="radio" name="a-keep" value="no"> No, I don't want them continued (avoids paying them back if I lose)</label>
+        </div></div>
+    </form>
+    <div class="bar">
+      <h3>Your request</h3>
+      <span class="btns"><span class="copied" id="copied" role="status"></span><button class="btn ghost" type="button" id="print">Print</button><button class="btn" type="button" id="copy">Copy request</button></span>
+    </div>
+    <div class="letter" id="letter" tabindex="0" aria-label="Hearing request"></div>
+    <p class="hint">Fill in anything highlighted, then sign it. A request without a signature gets turned down. Keep a copy and proof of the date MDHHS got it.</p>
+  </section>
+
+  <section class="gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Help with a hearing</h2>
+    <ul>
+      <li><a href="https://michiganlegalhelp.org/resources/public-assistance/do-it-yourself-mdhhs-hearing-request" target="_blank" rel="noopener">Michigan Legal Help: Do-It-Yourself MDHHS Hearing Request</a> walks you through the state's form for free.</li>
+      <li><a href="https://michiganlegalhelp.org/guide-to-legal-help" target="_blank" rel="noopener">Michigan Legal Help: Guide to Legal Help</a> and the <a href="https://www.michbar.org/public_resources/legalaid" target="_blank" rel="noopener">State Bar of Michigan legal aid directory</a> find free legal aid near you. Look for "public benefits."</li>
+      <li><a href="https://www.michigan.gov/lara/bureau-list/moahr/benefit-services/pages/public-assistance" target="_blank" rel="noopener">Michigan Office of Administrative Hearings and Rules (MOAHR)</a> has the state's hearing request forms.</li>
+      <li><a href="https://www.michigan.gov/mdhhs/inside-mdhhs/county-offices" target="_blank" rel="noopener">Find your MDHHS county office</a> for its address, phone, and fax.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> Deadlines come from the Michigan Department of Health and Human Services (MDHHS) Bridges Administrative Manual: BAM 600, Hearings (version dated May 1, 2026), BAM 220, Case Actions (August 1, 2026), and BAM 210, Redetermination (October 1, 2026). Federal rules back them up: 7 CFR 273.15 for SNAP and 42 CFR 431.221 to 431.231 for Medicaid. All were checked against the official sources on October 30, 2026.</p>
+    <p>Days are calendar days, counted starting the day after the date on your notice. When the 90th day lands on a weekend or a State of Michigan holiday, the deadline moves to the next business day. Holidays follow Michigan Civil Service Regulation 5.08. Green cards are what the rule says directly. Amber cards depend on your facts. Red cards mean act now.</p>
+    <p>This page doesn't cover overpayment notices, fraud (intentional program violation) cases, or Social Security disability decisions, which have their own rules. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const DAY = 86400000;
+  const parse = v => { if (!v) return null; const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); };
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const add = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+  const fmt = d => d.toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" });
+  const plain = d => d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  const weekday = d => d.toLocaleDateString("en-US", { weekday: "long" });
+  const today = (() => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); })();
+  const diff = (a, b) => Math.round((b - a) / DAY);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const val = (form, name) => { const el = form.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; };
+  const LABEL = { law: "The rule says", facts: "Depends on your facts", help: "Act now" };
+  const BAM = n => `https://mdhhs-pres-prod.michigan.gov/olmweb/ex/BP/Public/BAM/${n}.pdf`;
+  const SRC = {
+    "BAM 600": BAM(600), "BAM 220": BAM(220), "BAM 210": BAM(210),
+    "7 CFR 273.15": "https://www.ecfr.gov/current/title-7/section-273.15",
+    "42 CFR 431.221": "https://www.ecfr.gov/current/title-42/section-431.221",
+    "42 CFR 431.230": "https://www.ecfr.gov/current/title-42/section-431.230",
+    "42 CFR 438.402": "https://www.ecfr.gov/current/title-42/section-438.402",
+    "42 CFR 438.408": "https://www.ecfr.gov/current/title-42/section-438.408",
+    "MOAHR": "https://www.michigan.gov/lara/bureau-list/moahr/benefit-services/pages/public-assistance",
+    "MOAHR FAQ": "https://www.michigan.gov/lara/bureau-list/moahr/administrative-hearings-frequently-asked-questions"
+  };
+  const PROG = {
+    fap: { name: "Food Assistance Program (FAP/SNAP)", short: "food assistance", letter: "Food Assistance Program (FAP) benefits" },
+    ma: { name: "Medicaid", short: "Medicaid", letter: "Medicaid coverage" },
+    cash: { name: "Cash assistance (FIP or SDA)", short: "cash assistance", letter: "cash assistance" },
+    cdc: { name: "Child Development and Care (CDC)", short: "child care help", letter: "Child Development and Care (CDC) benefits" }
+  };
+
+  // State of Michigan holidays, per Civil Service Regulation 5.08 (SPDOC 26-07, effective June 12, 2026).
+  // Saturday holidays are observed Friday and Sunday holidays Monday, except Christmas Eve and
+  // New Year's Eve, which move to Thursday when on a Friday and to Friday when on a Sunday.
+  const nthDow = (y, m, dow, n) => { const f = new Date(y, m, 1); return new Date(y, m, 1 + (dow - f.getDay() + 7) % 7 + 7 * (n - 1)); };
+  const lastDow = (y, m, dow) => { const l = new Date(y, m + 1, 0); return add(l, -((l.getDay() - dow + 7) % 7)); };
+  function observed(d, eve) {
+    const w = d.getDay();
+    if (eve && w === 5) return add(d, -1);
+    if (eve && w === 0) return add(d, -2);
+    if (w === 6) return add(d, -1);
+    if (w === 0) return add(d, 1);
+    return d;
+  }
+  function holidaysIn(y) {
+    const thanks = nthDow(y, 10, 4, 4);
+    const h = [
+      observed(new Date(y, 0, 1)), nthDow(y, 0, 1, 3), nthDow(y, 1, 1, 3), lastDow(y, 4, 1),
+      observed(new Date(y, 5, 19)), observed(new Date(y, 6, 4)), nthDow(y, 8, 1, 1),
+      observed(new Date(y, 10, 11)), thanks, add(thanks, 1),
+      observed(new Date(y, 11, 24), true), observed(new Date(y, 11, 25)), observed(new Date(y, 11, 31), true)
+    ];
+    if (y % 2 === 0) h.push(add(nthDow(y, 10, 1, 1), 1)); // general election day, even years only
+    return h;
+  }
+  const HOL = new Map();
+  function isHoliday(d) {
+    const y = d.getFullYear();
+    for (const yy of [y - 1, y, y + 1]) {
+      if (!HOL.has(yy)) HOL.set(yy, new Set(holidaysIn(yy).map(iso)));
+      if (HOL.get(yy).has(iso(d))) return true;
+    }
+    return false;
+  }
+  const isWork = d => d.getDay() !== 0 && d.getDay() !== 6 && !isHoliday(d);
+  const nextWork = d => { let x = d; while (!isWork(x)) x = add(x, 1); return x; };
+  const offDay = d => isHoliday(d) ? (d.getDay() === 0 || d.getDay() === 6 ? `a ${weekday(d)} and a state holiday` : "a state holiday") : `a ${weekday(d)}`;
+
+  function when(d) {
+    const n = diff(today, d);
+    if (n > 0) return `${fmt(d)} (${n} day${n === 1 ? "" : "s"} from today)`;
+    if (n === 0) return `${fmt(d)} (today)`;
+    return `${fmt(d)} (${-n} day${n === -1 ? "" : "s"} ago)`;
+  }
+  function card(level, title, paras, cites = [], next = "") {
+    const c = cites.map(([k, p, page]) => `<a class="cite" href="${SRC[k]}${page ? "#page=" + page : ""}" target="_blank" rel="noopener">${esc(k + (p ? " " + p : ""))}</a>`).join("");
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${LABEL[level]}</span></div>
+      ${[].concat(paras).filter(Boolean).map((t, i) => `<p${i ? ' class="small"' : ""}>${t}</p>`).join("")}
+      ${next ? `<p class="next"><strong>What you can do:</strong> ${next}</p>` : ""}
+      ${c ? `<div class="cites">${c}</div>` : ""}
+    </article>`;
+  }
+
+  const fp = document.getElementById("f-plan");
+  const nIn = document.getElementById("n-date"), eIn = document.getElementById("e-date");
+  nIn.value = iso(add(today, -4));
+
+  let state = {};
+  function plan() {
+    const prog = val(fp, "prog"), act = val(fp, "act"), P = PROG[prog];
+    const N = parse(nIn.value), E = parse(eIn.value);
+    const c = [];
+    state = { prog, act, N, keep: false };
+    if (!N) {
+      show([card("facts", "Enter the date on your notice", "Every deadline here counts from the date printed on the notice. Look near the top of the letter.")]);
+      return;
+    }
+    if (diff(today, N) > 0) c.push(card("facts", "That date is in the future", "Check the date printed on your notice. The deadlines below count from it."));
+
+    const keep = act === "reduce" || act === "close" || (act === "renew" && prog !== "fap");
+    state.keep = keep;
+
+    // Keeping benefits while you wait
+    if (keep) {
+      const K = add(N, 10), Kroll = nextWork(K);
+      const Elast = E && diff(N, E) > 0 ? add(E, -1) : null;   // BAM 220: the day before the change takes effect
+      const T = Elast && Elast < K ? Elast : K;                   // safest target
+      const latest = Elast && Elast > Kroll ? Elast : Kroll;      // latest date any rule supports
+      state.T = T; state.latest = latest;
+      const cites = [["BAM 600", "p. 26", 26], ["BAM 220", "p. 13", 13]];
+      if (prog === "fap") cites.push(["7 CFR 273.15", "(k)"]);
+      if (prog === "ma") cites.push(["42 CFR 431.230", ""]);
+      const exception = "One exception: if the cut came from a statewide change that a law required, benefits aren't restored unless you're saying your own amount was figured wrong.";
+      if (diff(today, T) >= 0) {
+        c.push(card("help", `Keep your ${P.short}: get your request in by ${plain(T)}`, [
+          `If MDHHS receives your hearing request ${T === K ? "within 10 days of the date on your notice" : "before the change takes effect"}, your ${P.short} continues as before until the hearing decision. For you, that means by ${when(T)}.`,
+          !isWork(T) && T === K ? `That's ${offDay(T)}. The manual says a request that arrives the next workday, ${plain(Kroll)}, still counts${prog === "ma" ? ", but for Medicaid the rule is before the change takes effect, so don't wait" : ""}. Faxing it sooner is safest.` : "",
+          Elast && Elast > K ? `Your change takes effect ${plain(E)}. The manual also counts a request that arrives by the day before, ${plain(Elast)}${prog === "ma" ? ", which is the Medicaid rule" : ""}. Aim for the earlier date anyway.` : "",
+          `Your notice should list this date too. If it shows an earlier one, use that. ${exception}`
+        ], cites, "Say in your request that you want your benefits to continue. The request below does that for you."));
+      } else if (diff(today, latest) >= 0) {
+        c.push(card("help", "You may still be in time to keep your benefits", [
+          `The safest date, ${plain(T)}, has passed. The manual still counts a request that MDHHS receives by ${when(latest)}. Get it in today: fax it or take it to the office.${isWork(latest) ? "" : " Offices are closed that day, so a fax is the way to make it."}`,
+          exception
+        ], cites));
+      } else {
+        c.push(card("facts", "The window to keep your benefits has passed", [
+          `It closed on ${plain(latest)}. You can still ask for a hearing (see the 90-day deadline below), but your ${P.short} will stay at the new level while you wait.`,
+          prog === "fap" ? "For food assistance, MDHHS has to restore the old amount if you had a good reason for filing late, such as being in the hospital. Explain the reason in your request." : ""
+        ], [["BAM 600", "p. 27", 27]].concat(prog === "fap" ? [["7 CFR 273.15", "(k)"]] : [])));
+      }
+      if (diff(today, latest) >= 0) c.push(card("facts", "If you lose, you may have to pay it back", [
+        "Benefits you get while waiting can be counted as an overpayment and collected back if the hearing decision agrees with MDHHS, or if you withdraw or miss the hearing.",
+        "If you'd rather not take that risk, you can say in writing that you don't want benefits continued. You still get your hearing."
+      ], [["BAM 600", "p. 28", 28]].concat(prog === "fap" ? [["7 CFR 273.15", "(k)"]] : prog === "ma" ? [["42 CFR 431.230", "(b)"]] : [])));
+    } else if (act === "deny") {
+      c.push(card("facts", "Benefits don't start while you appeal a denied application", [
+        "Since the application was turned down, there is nothing to keep going during the hearing. You can still ask for a hearing if you think MDHHS got it wrong, and you can apply again at any time."
+      ], [["BAM 600", "p. 26", 26]]));
+    } else {
+      c.push(card("facts", "Food assistance stops when your benefit period ends", [
+        "Asking for a hearing doesn't keep food assistance going after a renewal is denied.",
+        "If you turned in your renewal form but missed a step, like the interview or papers they asked for, finish that step within 30 days after your benefit period ends. MDHHS then picks your renewal back up from the date you finish, without a new application, and pays benefits from that date."
+      ], [["BAM 600", "p. 26", 26], ["BAM 210", "p. 22", 22]], "Call your caseworker and ask exactly what's missing."));
+    }
+
+    // 90-day hearing deadline
+    const H = add(N, 90), Hroll = nextWork(H);
+    state.H = Hroll;
+    const hcites = [["BAM 600", "p. 6-7", 6]];
+    if (prog === "fap") hcites.push(["7 CFR 273.15", "(g)"]);
+    if (prog === "ma") hcites.push(["42 CFR 431.221", "(d)"]);
+    const fapAny = prog === "fap" ? "For food assistance, you can also ask for a hearing about your current benefit amount at any time during your benefit period." : "";
+    if (diff(today, Hroll) >= 0) {
+      const left = diff(today, Hroll);
+      c.push(card(left <= 14 ? "help" : "law", `Last day to ask for a hearing: ${plain(Hroll)}`, [
+        `You have 90 days from the date printed on your notice, not the day you got it. MDHHS has to receive your request by the end of the business day on ${when(Hroll)}.`,
+        H.getTime() !== Hroll.getTime() ? `Day 90 is ${plain(H)}, which is ${offDay(H)}, so the deadline moves to the next business day.` : "",
+        keep && diff(today, state.T) >= 0 ? `Waiting past ${plain(state.T)} means your ${P.short} changes while you wait for the hearing.` : "",
+        fapAny
+      ], hcites));
+    } else {
+      c.push(card("facts", "The 90-day deadline has passed", [
+        `It was ${plain(Hroll)}. MDHHS sends late requests to the hearings office (MOAHR), which can turn them down.${act === "reduce" ? "" : " You can apply again at any time."}`,
+        fapAny
+      ], hcites, "Talk to legal aid if the notice was wrong or never reached you."));
+    }
+
+    // How to ask
+    c.push(card("law", "How to ask for a hearing", [
+      `Put it in writing and sign it, or have someone you named as your representative sign it. Deliver, mail, or fax it to your local MDHHS office, marked "Attention: Hearings Coordinator." Faxed and copied signatures count. You can use the state's hearing request form or a signed letter like the one below.`,
+      prog === "fap" ? "For food assistance, you can also ask out loud at your local MDHHS office. A written request is still your best proof." : "",
+      "The deadline counts the day MDHHS gets it, not the day you mail it. If you mail it, send it early."
+    ], [["BAM 600", "p. 2", 2], ["BAM 600", "p. 6", 6], ["MOAHR", ""]],
+      `Keep a copy and get proof of the date it arrived, like a fax confirmation page or a date-stamped copy from the front desk. <a href="https://www.michigan.gov/mdhhs/inside-mdhhs/county-offices" target="_blank" rel="noopener">Find your county office</a>.`));
+
+    // What happens next
+    c.push(card("law", "What happens after you ask", [
+      "MDHHS must set up a meeting with you, called a prehearing conference, within 11 days to try to fix the problem. You don't have to go to it to get your hearing.",
+      "A judge from the Michigan Office of Administrative Hearings and Rules (MOAHR) holds the hearing. Your Notice of Hearing says whether it's by phone. MDHHS must send you its hearing packet. You can have anyone you choose help you or speak for you, and you can ask MOAHR for an interpreter at least 7 days before the hearing.",
+      `MDHHS must finish the whole case, including carrying out the decision, within ${prog === "fap" ? "60 days" : "90 days"} of getting your request.`
+    ], [["BAM 600", "p. 18", 18], ["BAM 600", "p. 9", 9], ["MOAHR FAQ", ""]]));
+
+    if (prog === "ma") c.push(card("facts", "Is your letter from a Medicaid health plan?", [
+      "This page covers letters from MDHHS about whether you get Medicaid. If your Medicaid health plan denied or cut a service, appeal to the plan first, within 60 days of the plan's notice. If the plan still says no, its decision letter tells you how long you have to ask the state for a hearing. Federal rules allow 90 to 120 days."
+    ], [["42 CFR 438.402", "(c)"], ["42 CFR 438.408", "(f)"], ["MOAHR", ""]]));
+
+    show(c);
+  }
+  function show(c) {
+    document.getElementById("r-plan").innerHTML =
+      `<div class="results-head"><h2>Your deadlines</h2>
+        <div class="legend"><span class="tag law">The rule says</span><span class="tag facts">Depends on your facts</span><span class="tag help">Act now</span></div></div>` + c.join("");
+    letter();
+  }
+
+  // Hearing request letter
+  const fl = document.getElementById("f-letter");
+  const g = id => document.getElementById(id).value.trim();
+  const F = (v, ph) => v ? esc(v) : `<span class="fill">[${ph}]</span>`;
+  const DOES = { reduce: "lowers my", close: "closes my", renew: "ends my", deny: "denies my application for" };
+  function letter() {
+    const P = PROG[state.prog] || PROG.fap, N = state.N;
+    document.getElementById("keep-wrap").hidden = !state.keep;
+    const keep = state.keep && val(fl, "a-keep") === "yes";
+    const county = g("a-county"), name = g("a-name"), why = g("a-why");
+    const L = [];
+    L.push(plain(today), "");
+    L.push(`To: MDHHS, ${county ? esc(county) + " County office" : F("", "County")}`, "Attention: Hearings Coordinator", F("", "Office address or fax number from your notice"), "");
+    L.push("Re: Request for a hearing");
+    L.push(`Name: ${F(name, "Your name")}`, `Case number: ${F(g("a-case"), "Case number")}`, `Program: ${P.name}`, `Date of notice: ${N ? plain(N) : F("", "Date of notice")}`, "");
+    L.push(`I am asking for a hearing about the notice of case action dated ${N ? plain(N) : F("", "date")}, which ${DOES[state.act] || "changes my"} ${P.letter}${state.act === "renew" ? " after my renewal" : ""}.`, "");
+    L.push(`I disagree with this decision because: ${why ? esc(why) : F("", "Why the decision is wrong")}`, "");
+    if (state.keep) L.push(keep ? "I want my benefits to continue at the current level until the hearing decision." : "I do not want my benefits continued while I wait for the hearing decision.", "");
+    L.push("Please send me a copy of the hearing packet and any documents MDHHS will use at the hearing.", "");
+    L.push("Signature: ______________________________   Date: ______________", "", F(name, "Your name"), F("", "Phone number"), F("", "Mailing address"));
+    document.getElementById("letter").innerHTML = L.join("\n");
+  }
+
+  [fp, fl].forEach(f => { f.addEventListener("input", plan); f.addEventListener("change", plan); f.addEventListener("submit", e => e.preventDefault()); });
+  plan();
+
+  document.getElementById("copy").addEventListener("click", () => {
+    const el = document.getElementById("letter"), text = el.innerText, msg = document.getElementById("copied");
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = "Selected. Press Ctrl+C or Cmd+C to copy."; };
+    try {
+      navigator.clipboard.writeText(text).then(() => { msg.textContent = "Copied"; }, fallback);
+    } catch (e) { fallback(); }
+  });
+  document.getElementById("print").addEventListener("click", () => {
+    document.body.classList.add("printing");
+    window.print();
+    setTimeout(() => document.body.classList.remove("printing"), 500);
+  });
+
+  // Calendar file with the deadlines, built on this device
+  document.getElementById("ics").addEventListener("click", () => {
+    if (!state.N) return;
+    const P = PROG[state.prog];
+    const ev = [];
+    const d8 = d => iso(d).replace(/-/g, "");
+    const stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d+Z$/, "Z");
+    const push = (d, title, desc) => ev.push(["BEGIN:VEVENT", `UID:${d8(d)}-${ev.length}-benefits-deadlines`, `DTSTAMP:${stamp}`,
+      `DTSTART;VALUE=DATE:${d8(d)}`, `DTEND;VALUE=DATE:${d8(add(d, 1))}`, `SUMMARY:${title}`, `DESCRIPTION:${desc}`,
+      "BEGIN:VALARM", "TRIGGER:-P2D", "ACTION:DISPLAY", `DESCRIPTION:${title}`, "END:VALARM", "END:VEVENT"].join("\r\n"));
+    const note = `For the MDHHS notice dated ${plain(state.N)}. MDHHS must receive the request by this date. Check your notice. Information\\, not legal advice.`;
+    if (state.keep && diff(today, state.latest) >= 0) push(state.T, `Ask for MDHHS hearing to keep ${P.short}`, note);
+    if (diff(today, state.H) >= 0) push(state.H, "Last day to ask for MDHHS hearing", note);
+    if (!ev.length) return;
+    const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Free to All AI//Benefits Deadlines//EN", ...ev, "END:VCALENDAR", ""].join("\r\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
+    a.download = "benefits-deadlines.ics";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+})();
+</script>
+</body>
+</html>

@@ -22,6 +22,7 @@ This repo is a shelf of small, free tools for regular people. Each one does one 
 | [Insurance Denial Appeal Helper](appeal-helper/) | Works out your appeal deadlines and writes an appeal letter you can edit and send | 29 CFR 2560.503-1, 45 CFR 147.136, and Michigan's Patient's Right to Independent Review Act |
 | [Detroit Medical Bill Check](bill-checker/) | Takes the codes on an itemized bill and shows what Medicare pays for each in the Detroit area. Flags duplicates and drafts a letter. | CMS 2026 Physician Fee Schedule and Clinical Lab Fee Schedule |
 | [Gig Driver True Pay Calculator](gig-pay/) | Takes the pay, hours, and miles from your rideshare or delivery app and shows what you really made per hour after car costs. Shows unpaid miles and hours, a tax set-aside, and whether an offer is worth taking. | IRS standard mileage rates (Notice 2026-10 and Announcement 2026-11), IRS self-employment tax rules, and Michigan's minimum wage law, checked Oct 30, 2026 |
+| [Benefits Cut Letter Deadlines](benefits-deadlines/) | For a Michigan letter that denies, lowers, or stops food assistance (SNAP), Medicaid, cash, or child care help. Works out the last day to ask for a hearing and keep your benefits while you wait, and the last day to ask at all. Drafts the hearing request. | MDHHS Bridges Administrative Manual (BAM 600, 220, and 210), 7 CFR 273.15, and 42 CFR 431, checked Oct 30, 2026 |
 
 ## How they work
 
