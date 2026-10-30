@@ -1,0 +1,446 @@
+<title>Detroit Medical Bill Check</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Type the codes from an itemized medical bill and compare each line to the 2026 Medicare rate for the Detroit area. Flags duplicate lines and drafts a letter. Information, not advice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column. Bill lines entered as an editable ledger, then a per-line comparison, then duplicate flags and a letter draft. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;
+  --accent-soft: #e2eef6;
+  --ok: #1b6b3a;  --ok-bg: #e3f2e8;
+  --warn: #8a5a00; --warn-bg: #fbf0d9;
+  --bad: #a32222; --bad-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --ok: #7fd39c; --ok-bg: #173323; --warn: #f0c063; --warn-bg: #3a2e14; --bad: #f19a9a; --bad-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --ok: #7fd39c; --ok-bg: #173323; --warn: #f0c063; --warn-bg: #3a2e14; --bad: #f19a9a; --bad-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 17px; line-height: 1.55; }
+.wrap {
+  max-width: 820px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+header { display: grid; gap: 12px; }
+.lede { color: var(--muted); max-width: 62ch; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice { background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px; display: grid; gap: 4px; }
+section { display: grid; gap: 14px; }
+.box { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 14px; min-width: 0; }
+.hint { font-size: 14px; color: var(--muted); }
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.setting { display: flex; flex-wrap: wrap; gap: 8px; }
+.seg {
+  font: inherit; font-size: 15px; cursor: pointer; background: var(--surface); color: var(--fg);
+  border: 1.5px solid var(--line); border-radius: 10px; padding: 9px 14px; text-align: left;
+}
+.seg:hover { border-color: var(--accent); }
+.seg[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); font-weight: 700; }
+.ledger { display: grid; gap: 8px; }
+.lrow { display: grid; grid-template-columns: 1.3fr 0.7fr 0.6fr 1.1fr 1.2fr auto; gap: 8px; align-items: end; }
+.lrow.head { font-size: 13px; color: var(--muted); font-weight: 700; align-items: end; }
+.lrow input {
+  font: inherit; font-size: 16px; padding: 8px 9px; border-radius: 8px; width: 100%; min-width: 0;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg);
+}
+.lrow input.code, .lrow input.mod { font-family: var(--f-mono); text-transform: uppercase; }
+.lrow input.num { font-variant-numeric: tabular-nums; }
+.del { font: inherit; background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 8px; padding: 8px 10px; cursor: pointer; }
+.del:hover { color: var(--bad); border-color: var(--bad); }
+.lab { display: none; font-size: 12px; color: var(--muted); }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { font: inherit; font-size: 15px; cursor: pointer; border-radius: 9px; padding: 9px 14px; border: 1.5px solid var(--accent); background: var(--accent); color: var(--surface); font-weight: 700; }
+.btn.ghost { background: transparent; color: var(--accent); }
+textarea {
+  font-family: var(--f-mono); font-size: 14px; width: 100%; min-height: 90px; padding: 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); resize: vertical;
+}
+details summary { cursor: pointer; font-weight: 700; }
+details[open] summary { margin-bottom: 10px; }
+.summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; gap: 2px; }
+.stat .k { font-size: 13px; color: var(--muted); }
+.stat .v { font-family: var(--f-mono); font-size: 22px; font-variant-numeric: tabular-nums; }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; min-width: 640px; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 13px; color: var(--muted); font-weight: 700; background: var(--bg); }
+tr:last-child td { border-bottom: none; }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--f-mono); font-size: 14px; white-space: nowrap; }
+td.c { font-family: var(--f-mono); white-space: nowrap; }
+.dim { color: var(--muted); }
+.pill { display: inline-block; font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.03em; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.pill.ok { color: var(--ok); background: var(--ok-bg); }
+.pill.warn { color: var(--warn); background: var(--warn-bg); }
+.pill.bad { color: var(--bad); background: var(--bad-bg); }
+.pill.na { color: var(--muted); background: var(--bg); border: 1px solid var(--line); }
+.note { font-size: 13px; color: var(--muted); margin-top: 3px; }
+.flags { display: grid; gap: 8px; }
+.flag { border-left: 5px solid var(--warn); background: var(--surface); border-radius: 10px; padding: 12px 14px; border-top: 1px solid var(--line); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.flag.none { border-left-color: var(--ok); }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.field { display: grid; gap: 5px; min-width: 0; }
+.field label { font-weight: 700; font-size: 15px; }
+.field input, .field select { font: inherit; font-size: 16px; padding: 8px 10px; border-radius: 8px; border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; }
+#letter { font-family: var(--f-body); font-size: 15px; min-height: 360px; line-height: 1.5; }
+.copied { font-size: 14px; color: var(--ok); align-self: center; }
+ul.know { margin: 0; padding-left: 20px; display: grid; gap: 10px; }
+.cite { font-family: var(--f-mono); font-size: 13px; text-decoration: none; border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; color: var(--accent); white-space: nowrap; }
+.cite:hover { border-color: var(--accent); }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+@media (max-width: 620px) {
+  .lrow.head { display: none; }
+  .lrow { grid-template-columns: 1fr 1fr; padding: 10px; border: 1px solid var(--line); border-radius: 10px; }
+  .lab { display: block; }
+  .lrow .del { grid-column: 1 / -1; }
+}
+</style>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Detroit area · 2026 · free</span>
+    <h1>Detroit Medical Bill Check</h1>
+    <p class="lede">Got an itemized bill with codes on it? Type each line below and see what Medicare pays a doctor for the same service in Wayne, Oakland, Macomb, or Washtenaw County this year. It's a yardstick for spotting charges worth asking about, and it flags lines that look billed twice.</p>
+    <div class="notice">
+      <strong>This is information, not medical, legal, or financial advice.</strong>
+      <span>Medicare's rate isn't what you owe. Your insurer's contract or the hospital's own policy decides that. Use these numbers to ask better questions. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="h-lines">
+    <h2 id="h-lines">1. Your bill lines</h2>
+    <div class="box">
+      <p class="sample">Sample lines are filled in so you can see how it works. Replace them with the lines from your bill.</p>
+      <div class="hint">Codes are usually 5 characters, like <span class="c">99214</span> or <span class="c">G0439</span>, in a column called CPT, HCPCS, or Code. If your bill has no codes, ask for an itemized bill first. The letter at the bottom can do that.</div>
+      <div class="ledger" id="ledger">
+        <div class="lrow head" aria-hidden="true"><span>Code</span><span>Modifier</span><span>Units</span><span>Date of service</span><span>Amount billed ($)</span><span></span></div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost" type="button" id="add">Add a line</button>
+        <button class="btn ghost" type="button" id="clear">Clear all lines</button>
+      </div>
+      <details>
+        <summary>Paste many lines at once</summary>
+        <div class="field">
+          <label for="paste">One line per bill row: code, then the amount. Modifier, units, and date are optional.</label>
+          <textarea id="paste" placeholder="99214 325.00&#10;85025 2 x 48.00&#10;71046-26 03/14/2026 95.00"></textarea>
+          <div class="actions"><button class="btn" type="button" id="doPaste">Add these lines</button></div>
+        </div>
+      </details>
+    </div>
+    <div class="field">
+      <span class="hint" id="l-set">Where was the care given? Medicare pays doctors less when the hospital or surgery center also bills for the room and staff.</span>
+      <div class="setting" role="group" aria-labelledby="l-set">
+        <button class="seg" type="button" data-set="non" aria-pressed="true">Doctor's office or clinic</button>
+        <button class="seg" type="button" data-set="fac" aria-pressed="false">Hospital, ER, or surgery center</button>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-res">
+    <h2 id="h-res">2. How each line compares</h2>
+    <div class="summary" id="summary"></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Code</th><th>Date</th><th class="n">Billed</th><th class="n">Medicare rate</th><th class="n">Billed vs Medicare</th><th>What this means</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p class="hint">Medicare rate = 2026 Medicare Physician Fee Schedule amount for Michigan locality 01 (Detroit) times units, or the 2026 Clinical Lab Fee Schedule for lab tests. Many private insurers pay more than Medicare, often 1.5 to 2.5 times. A line at 5 times Medicare or more is worth asking about. A hospital's separate facility fee (rows with 4-digit revenue codes and no CPT code) is paid differently and isn't checked here.</p>
+  </section>
+
+  <section aria-labelledby="h-dup">
+    <h2 id="h-dup">3. Possible duplicates</h2>
+    <div class="flags" id="flags"></div>
+  </section>
+
+  <section aria-labelledby="h-letter">
+    <h2 id="h-letter">4. Draft a letter to the billing office</h2>
+    <div class="box">
+      <div class="row2">
+        <div class="field"><label for="lt-type">What do you want?</label>
+          <select id="lt-type">
+            <option value="review">A billing review of specific lines</option>
+            <option value="itemized">A fully itemized bill with codes</option>
+          </select></div>
+        <div class="field"><label for="lt-name">Your name</label><input id="lt-name" type="text" placeholder="Your full name"></div>
+        <div class="field"><label for="lt-acct">Account or invoice number</label><input id="lt-acct" type="text" placeholder="From the top of your bill"></div>
+        <div class="field"><label for="lt-prov">Who sent the bill</label><input id="lt-prov" type="text" placeholder="Hospital or practice name"></div>
+      </div>
+      <p class="hint">The draft fills in from your lines above. Read it, change anything you want, then copy it. Send it yourself by mail or the patient portal and keep a copy. Calling first is fine, but put the request in writing too.</p>
+      <textarea id="letter" aria-label="Letter draft"></textarea>
+      <div class="actions"><button class="btn" type="button" id="copy">Copy letter</button><span class="copied" id="copied" aria-live="polite"></span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-know">
+    <h2 id="h-know">Other things worth knowing</h2>
+    <div class="box">
+      <ul class="know">
+        <li><strong>Nonprofit hospitals must have a financial assistance policy.</strong> Most large Detroit-area hospitals are nonprofits. Federal tax law requires them to have a written financial assistance policy and limits what they can charge people who qualify for it to the amounts generally billed to insured patients. Ask the billing office for the policy and an application. <a class="cite" href="https://www.law.cornell.edu/uscode/text/26/501" target="_blank" rel="noopener">26 U.S.C. 501(r)</a> <a class="cite" href="https://www.irs.gov/charities-non-profits/charitable-organizations/requirements-for-501c3-hospitals-under-the-affordable-care-act-section-501r" target="_blank" rel="noopener">IRS</a></li>
+        <li><strong>Paid without insurance and got a Good Faith Estimate?</strong> If a provider charged you at least $400 more than its estimate, you can dispute the bill through CMS within 120 calendar days of the bill date. There is a $25 fee. <a class="cite" href="https://www.cms.gov/medical-bill-rights/help/dispute-a-bill" target="_blank" rel="noopener">CMS: dispute a bill</a></li>
+        <li><strong>Surprise bills from out-of-network doctors</strong> at an in-network hospital or in an emergency are limited by the No Surprises Act. <a class="cite" href="https://www.cms.gov/medical-bill-rights" target="_blank" rel="noopener">CMS medical bill rights</a></li>
+        <li><strong>Check any rate yourself</strong> in CMS's own lookup tool. Pick "Pricing information," year 2026, and locality "Detroit." <a class="cite" href="https://www.cms.gov/medicare/physician-fee-schedule/search" target="_blank" rel="noopener">CMS fee schedule lookup</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <strong>Where the numbers come from</strong>
+    <ul>
+      <li>2026 Medicare Physician Fee Schedule, October release (RVU26D, updated 08/26/2026), non-QPP conversion factor $33.4009. <a href="https://www.cms.gov/medicare/payment/fee-schedules/physician/pfs-relative-value-files/rvu26d" target="_blank" rel="noopener">CMS RVU26D</a></li>
+      <li>2026 geographic adjustments for Michigan locality 01, Detroit (work 1.000, practice expense 0.965, malpractice 1.686), from the GPCI file in the same release. Imaging technical components use the lower OPPS cap where CMS lists one.</li>
+      <li>2026 Clinical Laboratory Fee Schedule, fourth quarter (26CLABQ4). <a href="https://www.cms.gov/medicare/payment/fee-schedules/clinical-laboratory-fee-schedule-clfs/files/26clabq4" target="_blank" rel="noopener">CMS 26CLABQ4</a></li>
+      <li>Formula: (work RVU × work GPCI + practice expense RVU × PE GPCI + malpractice RVU × MP GPCI) × conversion factor. Clinicians in qualifying alternative payment models get a slightly higher factor ($33.5675), about half a percent more.</li>
+      <li>Not covered: drugs and supplies (most J and A codes), anesthesia time, hospital facility fees, ambulance, and dental. Code descriptions aren't shown because the American Medical Association owns them. Your bill lists what each code means.</li>
+      <li>Data pulled from cms.gov on 2026-10-28. Rates change each January.</li>
+    </ul>
+  </footer>
+</div>
+<script id="feedata" type="application/json">__DATA__</script>
+<script>
+(function () {
+  const DATA = JSON.parse(document.getElementById('feedata').textContent);
+  const PFS = DATA.pfs, CLFS = DATA.clfs;
+  const STATUS = {
+    B: 'Medicare bundles this into another service and pays nothing extra for it. A separate charge is worth asking about.',
+    C: 'Medicare lets the local contractor set this price case by case, so there is no fixed rate to compare.',
+    D: 'This code was deleted. Ask why it was used.',
+    E: 'Not paid on the physician schedule. Often a drug, supply, or service paid another way.',
+    I: 'Medicare does not use this code and pays with a different one. That alone isn\'t an error for non-Medicare plans.',
+    J: 'Anesthesia is paid by time units, which this tool doesn\'t calculate.',
+    M: 'A quality-reporting code. These should normally be $0.',
+    N: 'Medicare doesn\'t cover this service, so there is no Medicare rate to compare.',
+    P: 'Medicare bundles this or doesn\'t pay it separately.',
+    X: 'Paid under a different Medicare schedule (lab, ambulance, or similar) that this tool doesn\'t include.',
+    G: 'Not valid for Medicare, which uses another code instead.',
+    F: 'Deleted or discontinued code. Ask why it was used.',
+    H: 'Deleted modifier for this code. Ask why it was used.'
+  };
+  const SAMPLE = [
+    { code: '99214', mod: '', units: 1, date: '2026-09-15', billed: 410 },
+    { code: '36415', mod: '', units: 1, date: '2026-09-15', billed: 38 },
+    { code: '80053', mod: '', units: 1, date: '2026-09-15', billed: 189 },
+    { code: '85025', mod: '', units: 1, date: '2026-09-15', billed: 96 },
+    { code: '85025', mod: '', units: 1, date: '2026-09-15', billed: 96 },
+    { code: '71046', mod: '', units: 1, date: '2026-09-15', billed: 285 }
+  ];
+  let setting = 'non';
+  let n = 0;
+  const ledger = document.getElementById('ledger');
+  const money = v => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  function addRow(r) {
+    r = r || { code: '', mod: '', units: 1, date: '', billed: '' };
+    n++;
+    const d = document.createElement('div');
+    d.className = 'lrow';
+    d.innerHTML =
+      '<label><span class="lab">Code</span><input class="code" id="c' + n + '" maxlength="5" autocomplete="off" aria-label="Code" value="' + esc(r.code) + '"></label>' +
+      '<label><span class="lab">Modifier</span><input class="mod" id="m' + n + '" maxlength="2" autocomplete="off" aria-label="Modifier" value="' + esc(r.mod) + '"></label>' +
+      '<label><span class="lab">Units</span><input class="num units" id="u' + n + '" type="number" min="1" step="1" aria-label="Units" value="' + esc(r.units || 1) + '"></label>' +
+      '<label><span class="lab">Date of service</span><input class="date" id="d' + n + '" type="date" aria-label="Date of service" value="' + esc(r.date) + '"></label>' +
+      '<label><span class="lab">Amount billed ($)</span><input class="num billed" id="b' + n + '" type="number" min="0" step="0.01" aria-label="Amount billed" value="' + esc(r.billed) + '"></label>' +
+      '<button class="del" type="button" aria-label="Remove line">Remove</button>';
+    d.querySelector('.del').addEventListener('click', () => { d.remove(); render(); });
+    ledger.appendChild(d);
+  }
+
+  function readRows() {
+    return [...ledger.querySelectorAll('.lrow:not(.head)')].map((d, i) => ({
+      i: i + 1,
+      code: d.querySelector('.code').value.trim().toUpperCase(),
+      mod: d.querySelector('.mod').value.trim().toUpperCase(),
+      units: Math.max(1, parseInt(d.querySelector('.units').value, 10) || 1),
+      date: d.querySelector('.date').value,
+      billed: parseFloat(d.querySelector('.billed').value)
+    })).filter(r => r.code);
+  }
+
+  // Returns {rate, kind, label, cls, note}
+  function lookup(r) {
+    const key = r.code + (r.mod ? '-' + r.mod : '');
+    let e = PFS[key], usedMod = !!r.mod;
+    let note = '';
+    if (!e && r.mod) { e = PFS[r.code]; usedMod = false; if (e) note = 'Modifier ' + r.mod + ' doesn\'t change the rate in the CMS file, so the base rate is shown. '; }
+    if (CLFS[r.code] !== undefined && (!e || e[0] === 'X' || e[0] === 'I' || e[0] === 'E')) {
+      return { rate: CLFS[r.code] * r.units, kind: 'Lab fee schedule', note: note + 'Lab test rate is the same everywhere in the U.S.' };
+    }
+    if (!e) return { rate: null, kind: 'Not found', note: 'This code isn\'t in the 2026 Medicare files. Check that you typed it right. If your bill uses a 4-digit revenue code, that\'s a hospital facility line this tool can\'t check.' };
+    if (e.length === 1) return { rate: null, kind: 'Status ' + e[0], note: note + (STATUS[e[0]] || 'No Medicare rate on this schedule.') };
+    const fac = e[1], non = e[2];
+    let rate = setting === 'fac' ? fac : non;
+    if (rate === null || rate === undefined) {
+      rate = setting === 'fac' ? non : fac;
+      note += setting === 'fac' ? 'CMS lists only an office rate for this code, so that is shown. ' : 'CMS lists this as a hospital-only service, so the facility rate is shown. ';
+    }
+    if (e[0] === 'R') note += 'Medicare covers this only in limited cases. ';
+    if (e[0] === 'T') note += 'Paid only when no other service is billed the same day. ';
+    return { rate: rate * r.units, kind: 'Physician fee schedule', note: note };
+  }
+
+  function ratioPill(billed, rate) {
+    if (rate === null || !isFinite(billed) || rate <= 0) return '<span class="pill na">no compare</span>';
+    const x = billed / rate;
+    const cls = x >= 5 ? 'bad' : x >= 2.5 ? 'warn' : 'ok';
+    return '<span class="pill ' + cls + '">' + x.toFixed(1) + '×</span>';
+  }
+
+  function dupes(rows) {
+    const groups = {};
+    rows.forEach(r => {
+      const k = r.code + '|' + r.mod + '|' + (r.date || 'nodate');
+      (groups[k] = groups[k] || []).push(r);
+    });
+    return Object.values(groups).filter(g => g.length > 1);
+  }
+
+  let lastLines = [], lastDupes = [];
+  function render() {
+    const rows = readRows();
+    const tb = document.getElementById('rows');
+    let tBilled = 0, tRate = 0, tBilledCompared = 0, high = 0;
+    lastLines = [];
+    tb.innerHTML = rows.map(r => {
+      const L = lookup(r);
+      const b = isFinite(r.billed) ? r.billed : null;
+      if (b !== null) tBilled += b;
+      if (L.rate !== null && b !== null) { tRate += L.rate; tBilledCompared += b; if (b / L.rate >= 5) high++; }
+      lastLines.push({ r, L, b });
+      const code = esc(r.code) + (r.mod ? '-' + esc(r.mod) : '') + (r.units > 1 ? ' <span class="dim">×' + r.units + '</span>' : '');
+      return '<tr><td class="c">' + code + '</td><td class="dim">' + (r.date ? esc(r.date) : '') + '</td>' +
+        '<td class="n">' + (b !== null ? money(b) : '<span class="dim">blank</span>') + '</td>' +
+        '<td class="n">' + (L.rate !== null ? money(L.rate) : '<span class="dim">none</span>') + '</td>' +
+        '<td class="n">' + ratioPill(b, L.rate) + '</td>' +
+        '<td><span class="dim">' + esc(L.kind) + '</span>' + (L.note ? '<div class="note">' + esc(L.note) + '</div>' : '') + '</td></tr>';
+    }).join('') || '<tr><td colspan="6" class="dim">Add a line above to see the comparison.</td></tr>';
+
+    const s = document.getElementById('summary');
+    const ratio = tRate > 0 ? (tBilledCompared / tRate) : null;
+    s.innerHTML =
+      stat('Total billed', money(tBilled)) +
+      stat('Medicare rate, lines with a rate', money(tRate)) +
+      stat('Billed vs Medicare, same lines', ratio ? ratio.toFixed(1) + '×' : 'n/a') +
+      stat('Lines at 5× Medicare or more', String(high));
+
+    lastDupes = dupes(rows);
+    const f = document.getElementById('flags');
+    f.innerHTML = lastDupes.length ? lastDupes.map(g => {
+      const r = g[0];
+      return '<div class="flag"><strong>Code ' + esc(r.code) + (r.mod ? '-' + esc(r.mod) : '') + ' appears ' + g.length + ' times' + (r.date ? ' on ' + esc(r.date) : ' with no date entered') + '</strong> (lines ' + g.map(x => x.i).join(', ') + '). ' +
+        'Sometimes that\'s correct, like a test repeated later the same day. Often it\'s a double charge. Ask the billing office to confirm each one was a separate service.</div>';
+    }).join('') : '<div class="flag none">No line uses the same code, modifier, and date as another line.</div>';
+    buildLetter();
+  }
+  function stat(k, v) { return '<div class="stat"><span class="k">' + esc(k) + '</span><span class="v">' + esc(v) + '</span></div>'; }
+
+  let letterEdited = false;
+  function buildLetter() {
+    if (letterEdited) return;
+    const type = document.getElementById('lt-type').value;
+    const name = document.getElementById('lt-name').value.trim() || '[Your name]';
+    const acct = document.getElementById('lt-acct').value.trim() || '[Account number]';
+    const prov = document.getElementById('lt-prov').value.trim() || '[Hospital or practice]';
+    const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    let t = today + '\n\n' + prov + '\nBilling Department\n\nRe: Account ' + acct + ', patient ' + name + '\n\nTo the billing office,\n\n';
+    if (type === 'itemized') {
+      t += 'Please send me a fully itemized bill for this account. For each charge, please list the date of service, the CPT or HCPCS code and any modifier, the number of units, the amount charged, and any payments or adjustments. If any charge was billed under a revenue code, please include that code too.\n\n' +
+        'Please hold this account from collections while I review the itemized bill.\n\n' +
+        'Please also send me a copy of your financial assistance policy and application.\n\n';
+    } else {
+      t += 'I am asking for a review of the charges on this account before I pay. I have questions about these lines:\n\n';
+      const asks = [];
+      lastDupes.forEach(g => {
+        const r = g[0];
+        asks.push('- Code ' + r.code + (r.mod ? '-' + r.mod : '') + ' is listed ' + g.length + ' times' + (r.date ? ' on ' + r.date : '') + '. Please confirm each was a separate service, or remove the duplicate charge.');
+      });
+      lastLines.forEach(({ r, L, b }) => {
+        if (L.rate && b && b / L.rate >= 2.5) {
+          asks.push('- Code ' + r.code + (r.mod ? '-' + r.mod : '') + (r.date ? ' (' + r.date + ')' : '') + ' was billed at ' + money(b) + '. The 2026 Medicare rate for this code in the Detroit area is ' + money(L.rate) + ', so this charge is ' + (b / L.rate).toFixed(1) + ' times that amount. Please explain how this charge was set.');
+        }
+        if (L.kind === 'Status B' || L.kind === 'Status P') {
+          asks.push('- Code ' + r.code + ' is listed by Medicare as bundled into other services. Please explain why it was charged separately.');
+        }
+      });
+      if (!asks.length) asks.push('- [List the lines you have questions about]');
+      t += asks.join('\n') + '\n\n';
+      t += 'Please send me a written response and a corrected bill if any charge changes. Please hold this account from collections while the review is open.\n\n' +
+        'Please also send me a copy of your financial assistance policy and application, and tell me if a self-pay or prompt-pay discount is available.\n\n';
+    }
+    t += 'Thank you,\n\n' + name + '\n[Phone or email]';
+    document.getElementById('letter').value = t;
+  }
+
+  function parsePaste(text) {
+    text.split(/\n+/).forEach(line => {
+      line = line.trim(); if (!line) return;
+      const m = line.match(/\b([A-Z0-9]\d{3}[A-Z0-9])(?:[-\s]([A-Z0-9]{2})(?=\s|$))?/i);
+      if (!m) return;
+      let rest = line.replace(m[0], ' ');
+      let date = '';
+      const dm = rest.match(/(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
+      if (dm) { const y = dm[3].length === 2 ? '20' + dm[3] : dm[3]; date = y + '-' + dm[1].padStart(2, '0') + '-' + dm[2].padStart(2, '0'); rest = rest.replace(dm[0], ' '); }
+      let units = 1;
+      const um = rest.match(/\b(\d{1,3})\s*[x×]\s*/i);
+      if (um) { units = parseInt(um[1], 10); rest = rest.replace(um[0], ' '); }
+      const amts = rest.match(/\$?\d[\d,]*\.?\d*/g) || [];
+      const billed = amts.length ? parseFloat(amts[amts.length - 1].replace(/[$,]/g, '')) : '';
+      let mod = m[2] || '';
+      if (/^\d{2}$/.test(mod) && amts.length === 0) mod = '';
+      addRow({ code: m[1].toUpperCase(), mod: mod.toUpperCase(), units, date, billed: isFinite(billed) ? billed : '' });
+    });
+  }
+
+  document.getElementById('add').addEventListener('click', () => { addRow(); render(); ledger.querySelector('.lrow:last-child .code').focus(); });
+  document.getElementById('clear').addEventListener('click', () => { ledger.querySelectorAll('.lrow:not(.head)').forEach(d => d.remove()); addRow(); render(); });
+  document.getElementById('doPaste').addEventListener('click', () => { const ta = document.getElementById('paste'); ledger.querySelectorAll('.lrow:not(.head)').forEach(d => { if (!d.querySelector('.code').value.trim()) d.remove(); }); parsePaste(ta.value); ta.value = ''; render(); });
+  ledger.addEventListener('input', render);
+  document.querySelectorAll('.seg').forEach(b => b.addEventListener('click', () => {
+    setting = b.dataset.set;
+    document.querySelectorAll('.seg').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    render();
+  }));
+  ['lt-type', 'lt-name', 'lt-acct', 'lt-prov'].forEach(id => document.getElementById(id).addEventListener('input', () => { letterEdited = false; buildLetter(); }));
+  document.getElementById('letter').addEventListener('input', () => { letterEdited = true; });
+  document.getElementById('copy').addEventListener('click', () => {
+    const ta = document.getElementById('letter'), msg = document.getElementById('copied');
+    const done = () => { msg.textContent = 'Copied'; setTimeout(() => msg.textContent = '', 2500); };
+    const fallback = () => { ta.focus(); ta.select(); msg.textContent = 'Selected. Press Ctrl+C or Cmd+C to copy.'; };
+    try { navigator.clipboard.writeText(ta.value).then(done, fallback); } catch (e) { fallback(); }
+  });
+
+  SAMPLE.forEach(addRow);
+  render();
+})();
+</script>

@@ -1,0 +1,392 @@
+<title>Insurance Denial Appeal Helper</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="See your health insurance appeal deadlines and build an appeal letter. Information, not advice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. Situation picker on top, the questions, then a stack of rights cards, each with its statute chip. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.picker { display: grid; gap: 10px; }
+.chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+.chip {
+  font: inherit; font-size: 16px; text-align: left; cursor: pointer;
+  background: var(--surface); color: var(--fg);
+  border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px;
+}
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); font-weight: 700; }
+.panel { display: grid; gap: 18px; }
+form.q {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 16px;
+}
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="date"], input[type="number"], select {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px;
+}
+.opts { display: grid; gap: 6px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.opts input { margin-top: 5px; accent-color: var(--accent); }
+.hint { font-size: 14px; color: var(--muted); }
+.results { display: grid; gap: 12px; }
+.results-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line);
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.date-big { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-size: 15px; }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.gethelp { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+</style>
+<style>[hidden]{display:none!important}</style>
+<style>
+input[type="text"], textarea {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%;
+}
+textarea { min-height: 96px; resize: vertical; }
+.letter {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px;
+  font-family: var(--f-body); white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; font-size: 16px;
+}
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 10px 16px;
+  background: var(--accent); color: var(--bg); border: 0;
+}
+.btn:hover { filter: brightness(1.08); }
+.copied { font-size: 14px; color: var(--law); }
+.fill { background: var(--facts-bg); color: var(--facts); border-radius: 4px; padding: 0 3px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Health insurance · appeals · free</span>
+    <h1>Insurance Denial Appeal Helper</h1>
+    <p class="lede">Your insurer said no. You have the right to ask them to look again, and in many cases to have an independent reviewer decide. Answer a few questions to see your deadlines and get an appeal letter you can edit and send.</p>
+    <div class="notice">
+      <strong>This is information, not legal or medical advice.</strong>
+      <span>Your denial letter and plan documents control your exact deadlines. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section class="panel" aria-labelledby="h-plan">
+    <h2 id="h-plan">1. Your plan and your deadlines</h2>
+    <form class="q" id="f-plan" novalidate>
+      <p class="sample">Sample answers are filled in so you can see how it works. Change them to yours.</p>
+      <div class="field"><span class="lbl" id="l-type">Where does your insurance come from?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-type">
+          <label><input type="radio" name="p-type" value="job" checked> A job (mine or a family member's)</label>
+          <label><input type="radio" name="p-type" value="indiv"> I bought it myself, including through HealthCare.gov</label>
+          <label><input type="radio" name="p-type" value="medicare"> Medicare or a Medicare Advantage plan</label>
+          <label><input type="radio" name="p-type" value="medicaid"> Medicaid or Healthy Michigan Plan</label>
+        </div></div>
+      <div class="field" id="job-extra"><span class="lbl" id="l-funding">Is your job-based plan "self-funded"? Your plan booklet or HR can tell you.</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-funding">
+          <label><input type="radio" name="p-fund" value="insured" checked> No, an insurance company carries the risk</label>
+          <label><input type="radio" name="p-fund" value="self"> Yes, it's self-funded (the insurer only runs it)</label>
+          <label><input type="radio" name="p-fund" value="unsure"> Not sure</label>
+        </div></div>
+      <div class="row2">
+        <div class="field"><label for="p-date">Date you got the denial</label><input id="p-date" type="date"></div>
+        <div class="field"><span class="lbl" id="l-stage">Which denial is this?</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-stage">
+            <label><input type="radio" name="p-stage" value="first" checked> The first denial</label>
+            <label><input type="radio" name="p-stage" value="final"> The final answer after my appeal</label>
+          </div></div>
+      </div>
+      <div class="field"><span class="lbl" id="l-when">Is this care you still need, or care you already got?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-when">
+          <label><input type="radio" name="p-when" value="pre" checked> Care I still need</label>
+          <label><input type="radio" name="p-when" value="post"> Care I already got (a bill or claim)</label>
+          <label><input type="radio" name="p-when" value="urgent"> Urgent: waiting could seriously harm my health</label>
+        </div></div>
+    </form>
+    <div class="results" id="r-plan" aria-live="polite"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-letter">
+    <h2 id="h-letter">2. Your appeal letter</h2>
+    <form class="q" id="f-letter" novalidate>
+      <div class="row2">
+        <div class="field"><label for="a-name">Patient name</label><input id="a-name" type="text" value="Jordan Example"></div>
+        <div class="field"><label for="a-insurer">Insurance company or plan</label><input id="a-insurer" type="text" value="Example Health Plan"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="a-member">Member ID</label><input id="a-member" type="text" value="XYZ123456789"></div>
+        <div class="field"><label for="a-claim">Claim or reference number on the denial</label><input id="a-claim" type="text" value="CLM-2026-000000"></div>
+      </div>
+      <div class="field"><label for="a-service">What was denied</label><input id="a-service" type="text" value="MRI of the lower back ordered by Dr. Rivera"></div>
+      <div class="field"><label for="a-reason">The insurer's reason</label>
+        <select id="a-reason">
+          <option value="necessity" selected>Not medically necessary</option>
+          <option value="experimental">Experimental or investigational</option>
+          <option value="network">Out of network</option>
+          <option value="priorauth">No prior authorization</option>
+          <option value="coding">Billing or coding problem</option>
+          <option value="excluded">Not a covered benefit</option>
+        </select></div>
+      <div class="field"><label for="a-why">In your own words, why it should be covered</label>
+        <textarea id="a-why">I have had lower back pain with numbness down my left leg for 10 weeks. Six weeks of physical therapy and medication did not help. My doctor needs the MRI to decide on next steps.</textarea>
+        <span class="hint">Facts help most: how long, what you've already tried, what your doctor said.</span></div>
+      <div class="field"><span class="lbl" id="l-doc">Will your doctor send a letter supporting you?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-doc">
+          <label><input type="radio" name="a-doc" value="yes" checked> Yes, or I'll ask</label>
+          <label><input type="radio" name="a-doc" value="no"> No</label>
+        </div></div>
+    </form>
+    <div class="bar">
+      <h3>Your letter</h3>
+      <span><span class="copied" id="copied" role="status"></span> <button class="btn" type="button" id="copy">Copy letter</button></span>
+    </div>
+    <div class="letter" id="letter" tabindex="0" aria-label="Appeal letter"></div>
+    <p class="hint">Fill in anything highlighted. Send it the way your denial letter says (mail, fax, or the insurer's website), keep a copy, and write down the date you sent it.</p>
+  </section>
+
+  <section class="gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Help with appeals</h2>
+    <ul>
+      <li><strong>Michigan Department of Insurance and Financial Services (DIFS):</strong> <span class="date-big">877-999-6442</span>, Monday to Friday, 8 to 5. <a href="https://www.michigan.gov/difs/consumers/insurance/health-insurance/individual/appealing" target="_blank" rel="noopener">How to appeal</a> · <a href="https://difs.state.mi.us/Complaints/ExternalReview.aspx" target="_blank" rel="noopener">External review request form</a></li>
+      <li><a href="https://michiganlegalhelp.org/guide-to-legal-help" target="_blank" rel="noopener">Michigan Legal Help: Guide to Legal Help</a> finds free legal aid near you.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> Deadlines come from federal rules (29 CFR 2560.503-1 and 45 CFR 147.136) and Michigan's Patient's Right to Independent Review Act. They were checked against official sources on October 28, 2026. Green cards are what the rule says directly. Amber cards depend on your plan. Red cards mean act now.</p>
+    <p>Some older "grandfathered" plans don't have to follow every rule here. Deadlines are counted in calendar days from the date you enter. Your denial letter must list your own deadlines, and if it gives you more time, use that.</p>
+    <p>Free and open source. Nothing you enter is sent anywhere or stored.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const DAY = 86400000;
+  const parse = v => { if (!v) return null; const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); };
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const add = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+  const addMonths = (d, n) => new Date(d.getFullYear(), d.getMonth() + n, d.getDate());
+  const fmt = d => d.toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" });
+  const today = (() => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); })();
+  const diff = (a, b) => Math.round((b - a) / DAY);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const val = (form, name) => { const el = form.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; };
+  const LABEL = { law: "The rule says", facts: "Depends on your plan", help: "Act now" };
+  const SRC = {
+    "29 CFR 2560.503-1": "https://www.law.cornell.edu/cfr/text/29/2560.503-1",
+    "45 CFR 147.136": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-B/part-147/section-147.136",
+    "MCL 550.1911": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-550-1911",
+    "MCL 550.1913": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-550-1913",
+    "DIFS": "https://www.michigan.gov/difs/consumers/insurance/health-insurance/individual/appealing"
+  };
+  function when(d) {
+    const n = diff(today, d);
+    if (n > 0) return `${fmt(d)} (${n} day${n === 1 ? "" : "s"} from today)`;
+    if (n === 0) return `${fmt(d)} (today)`;
+    return `${fmt(d)} (${-n} day${n === -1 ? "" : "s"} ago)`;
+  }
+  function card(level, title, body, cites = [], next = "") {
+    const c = cites.map(([k, p]) => `<a class="cite" href="${SRC[k]}" target="_blank" rel="noopener">${esc(k === "DIFS" ? "DIFS guidance" : k + (p || ""))}</a>`).join("");
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${LABEL[level]}</span></div>
+      <p>${body}</p>
+      ${next ? `<p class="next"><strong>What you can do:</strong> ${next}</p>` : ""}
+      ${c ? `<div class="cites">${c}</div>` : ""}
+    </article>`;
+  }
+
+  document.getElementById("p-date").value = iso(add(today, -12));
+
+  const fp = document.getElementById("f-plan");
+  function plan() {
+    const type = val(fp, "p-type"), fund = val(fp, "p-fund"), stage = val(fp, "p-stage"), w = val(fp, "p-when");
+    const d = parse(document.getElementById("p-date").value);
+    document.getElementById("job-extra").hidden = type !== "job";
+    const c = [];
+    if (type === "medicare" || type === "medicaid") {
+      c.push(card("facts", type === "medicare" ? "Medicare has its own appeal process" : "Medicaid has its own appeal process",
+        "The deadlines and steps on this page are for private insurance and don't apply to you. Your denial notice lists your appeal rights and deadline. Follow those, and appeal quickly.",
+        [], "Call the member services number on your insurance card and ask how to appeal. You can still use the letter below as a starting point."));
+      show(c); return;
+    }
+    const urgent = w === "urgent";
+    if (urgent) c.push(card("help", "Ask for an urgent (expedited) appeal",
+      "If waiting could seriously harm your health, your doctor can ask for an urgent appeal. The plan must decide within 72 hours, and it has to defer to your doctor on whether it's urgent.",
+      [["29 CFR 2560.503-1", "(i)(2)(i)"], ["45 CFR 147.136", "(b)(2)(ii)(B)"]], "Have your doctor's office call the insurer today and say the request is urgent."));
+
+    if (stage === "first") {
+      if (d) c.push(card(type === "job" ? "law" : "facts", "Your deadline to file an appeal",
+        type === "job"
+          ? `Job-based plans must give you at least 180 days. Counting from your denial, that's ${when(add(d, 180))}. Don't wait that long if you need the care soon.`
+          : `Your denial letter must state your deadline. Plans that follow the federal rules use at least 180 days, which from your denial would be ${when(add(d, 180))}. Check your letter.`,
+        [["29 CFR 2560.503-1", "(h)(3)(i)"], ["45 CFR 147.136", "(b)"]]));
+      c.push(card("law", "How fast they must decide your appeal",
+        urgent ? "Urgent care: within 72 hours." :
+        w === "pre" ? "Care you still need: within 30 days if your plan has one appeal level, or 15 days for each level if it has two." :
+        "Care you already got: within 60 days if your plan has one appeal level, or 30 days for each level if it has two.",
+        [["29 CFR 2560.503-1", "(i)(2)"]]));
+      c.push(card("law", "You can get your file for free",
+        "You can ask for free copies of every document the insurer used, and send in your own records, letters, and comments. The insurer has to consider everything you send. If they rely on new evidence or a new reason, they must send it to you in time for you to respond.",
+        [["29 CFR 2560.503-1", "(h)(2)(ii)-(iv)"], ["45 CFR 147.136", "(b)(2)(ii)(C)"]], "The letter below asks for your file."));
+    }
+
+    // External review
+    const state = type === "indiv" || (type === "job" && fund === "insured");
+    if (stage === "final" || urgent) {
+      if (state) {
+        if (d && stage === "final") c.push(card("law", "Ask Michigan for an independent review",
+          `If the insurer says no again, DIFS can have an independent reviewer decide. The law gives you 120 days after the final denial, which is ${when(add(d, 120))}. DIFS's own guidance says 127 days, but filing by the 120-day date is safest. It's free.`,
+          [["MCL 550.1911", ""], ["DIFS", ""]], `File online with the <a href="https://difs.state.mi.us/Complaints/ExternalReview.aspx" target="_blank" rel="noopener">DIFS external review form</a> and attach the final denial.`));
+        if (urgent) c.push(card("help", "Expedited review with Michigan",
+          "For care you still need, if waiting would seriously harm your health and your doctor backs that up, you can ask DIFS for an expedited review within 10 days. You must have asked the insurer for an urgent appeal first. DIFS says it decides these within 72 hours.",
+          [["MCL 550.1913", ""], ["DIFS", ""]], "Call DIFS at 877-999-6442."));
+      } else if (type === "job") {
+        if (d && stage === "final") c.push(card("facts", "Independent review for your plan",
+          fund === "self"
+            ? `Self-funded job plans usually use the federal independent review process. You get about 4 months from the final denial, so until about ${when(addMonths(d, 4))}. Your final denial letter must explain how to ask.`
+            : `Which review applies depends on whether your plan is self-funded. Fully insured plans in Michigan go through DIFS, which gives you 120 days. Self-funded plans usually use the federal process, which gives you about 4 months. To be safe, file by ${when(add(d, 120))}.`,
+          [["45 CFR 147.136", "(c)-(d)"], ["MCL 550.1911", ""]], "Ask HR or the insurer whether your plan is self-funded. You can also call DIFS at 877-999-6442 to ask."));
+        if (urgent) c.push(card("law", "Expedited independent review",
+          "If waiting would seriously harm your health, or you got emergency care and haven't been discharged, an independent reviewer must decide within 72 hours.",
+          [["45 CFR 147.136", "(d)(3)"]]));
+      }
+    } else {
+      c.push(card("facts", "If they say no again",
+        "After the insurer's final answer, you can usually ask for an independent review by someone outside the insurance company. Come back and choose \"The final answer after my appeal\" to see that deadline.",
+        [["45 CFR 147.136", "(c)-(d)"]]));
+    }
+    show(c);
+  }
+  function show(c) {
+    document.getElementById("r-plan").innerHTML =
+      `<div class="results-head"><h2>What applies to you</h2>
+        <div class="legend"><span class="tag law">The rule says</span><span class="tag facts">Depends on your plan</span><span class="tag help">Act now</span></div></div>` + c.join("");
+    letter();
+  }
+
+  const REASON = {
+    necessity: "The plan says this care is not medically necessary. My treating doctor disagrees, and my medical records show why it is needed.",
+    experimental: "The plan says this care is experimental or investigational. It is an accepted treatment for my condition, and my doctor can provide the medical evidence supporting it.",
+    network: "The plan denied this because the provider is out of network. I am asking the plan to cover it at the in-network level because an in-network provider was not reasonably available for this care, or I did not choose the out-of-network provider.",
+    priorauth: "The plan denied this because prior authorization was not obtained. I am asking the plan to review the claim on its medical merits, since the care was needed and would have been approved.",
+    coding: "The denial appears to be caused by a billing or coding error. I have asked my provider to review and correct the claim, and I ask the plan to reprocess it.",
+    excluded: "The plan says this is not a covered benefit. I ask the plan to identify the exact plan language it relied on, because I believe this care is covered under my plan."
+  };
+  const fl = document.getElementById("f-letter");
+  const g = id => document.getElementById(id).value.trim();
+  const F = (v, ph) => v ? esc(v) : `<span class="fill">[${ph}]</span>`;
+  function letter() {
+    const urgent = val(fp, "p-when") === "urgent", final = val(fp, "p-stage") === "final";
+    const d = parse(document.getElementById("p-date").value);
+    const doc = val(fl, "a-doc") === "yes";
+    const name = g("a-name"), ins = g("a-insurer"), why = g("a-why");
+    const lines = [];
+    lines.push(`${fmt(today).replace(/^\w+, /, "")}`, "");
+    lines.push(`To: ${F(ins, "Insurance company")}, Appeals Department`, `${F("", "Appeals address or fax from your denial letter")}`, "");
+    lines.push(`Re: ${urgent ? "URGENT (expedited) appeal" : final ? "Request for review" : "Appeal of denied claim"}`);
+    lines.push(`Patient: ${F(name, "Patient name")}`, `Member ID: ${F(g("a-member"), "Member ID")}`, `Claim or reference number: ${F(g("a-claim"), "Claim number")}`);
+    lines.push(`Date of denial: ${d ? fmt(d).replace(/^\w+, /, "") : F("", "Date of denial")}`, "");
+    lines.push("To whom it may concern:", "");
+    lines.push(`I am appealing your decision to deny coverage for ${F(g("a-service"), "the care that was denied")}. Please review this decision.`, "");
+    if (urgent) lines.push("This is an urgent appeal. My doctor has determined that waiting the standard time for a decision could seriously jeopardize my life, health, or ability to regain maximum function. Please decide within 72 hours as required for urgent care claims.", "");
+    lines.push(esc(REASON[document.getElementById("a-reason").value]), "");
+    if (why) lines.push(esc(why), "");
+    if (doc) lines.push("A letter from my treating doctor supporting this appeal is enclosed or will be sent separately. Please consider it and my medical records as part of this review.", "");
+    lines.push("Please also send me, free of charge, copies of all documents, records, and other information relevant to my claim. This includes the plan language, medical criteria, or guidelines you relied on, the diagnosis and treatment codes and their meanings, and any new evidence or reasoning you consider before deciding my appeal, in time for me to respond.", "");
+    lines.push("Please confirm in writing that you received this appeal, and send me your decision in writing.", "");
+    lines.push("Sincerely,", "", F(name, "Your name"), F("", "Phone number"), F("", "Mailing address"), "");
+    lines.push(`Enclosures: copy of denial letter${doc ? ", letter from my doctor" : ""}, ${F("", "medical records or other documents")}`);
+    document.getElementById("letter").innerHTML = lines.join("\n");
+  }
+  [fp, fl].forEach(f => { f.addEventListener("input", plan); f.addEventListener("change", plan); f.addEventListener("submit", e => e.preventDefault()); });
+  plan();
+
+  document.getElementById("copy").addEventListener("click", () => {
+    const el = document.getElementById("letter"), text = el.innerText, msg = document.getElementById("copied");
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = "Selected. Press Ctrl+C or Cmd+C to copy."; };
+    try {
+      navigator.clipboard.writeText(text).then(() => { msg.textContent = "Copied"; }, fallback);
+    } catch (e) { fallback(); }
+  });
+})();
+</script>

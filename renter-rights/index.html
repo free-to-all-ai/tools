@@ -1,0 +1,609 @@
+<title>Michigan Renter Rights Check</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Answer a few questions and see the Michigan renter rights that apply, each linked to the law it comes from. Information, not legal advice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. Situation picker on top, the questions, then a stack of rights cards, each with its statute chip. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.picker { display: grid; gap: 10px; }
+.chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+.chip {
+  font: inherit; font-size: 16px; text-align: left; cursor: pointer;
+  background: var(--surface); color: var(--fg);
+  border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px;
+}
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); font-weight: 700; }
+.panel { display: grid; gap: 18px; }
+form.q {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 16px;
+}
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="date"], input[type="number"], select {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px;
+}
+.opts { display: grid; gap: 6px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.opts input { margin-top: 5px; accent-color: var(--accent); }
+.hint { font-size: 14px; color: var(--muted); }
+.results { display: grid; gap: 12px; }
+.results-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line);
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.date-big { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-size: 15px; }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.gethelp { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Michigan · renters · free</span>
+    <h1>Michigan Renter Rights Check</h1>
+    <p class="lede">Pick what's going on, answer a few questions, and see the rights that apply to you. Every answer links to the Michigan law it comes from, so you can read it yourself or show it to your landlord.</p>
+    <div class="notice">
+      <strong>This is legal information, not legal advice.</strong>
+      <span>It can't know every fact of your case. If you have court papers or a deadline coming up, talk to a lawyer. Free help is listed at the bottom. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section class="picker" aria-labelledby="pick-h">
+    <h2 id="pick-h">What's going on?</h2>
+    <div class="chips" role="group" aria-label="Situations">
+      <button class="chip" type="button" data-panel="deposit" aria-pressed="true">Getting my security deposit back</button>
+      <button class="chip" type="button" data-panel="notice" aria-pressed="false">I got a notice to leave or court papers</button>
+      <button class="chip" type="button" data-panel="repairs" aria-pressed="false">Repairs aren't getting done</button>
+      <button class="chip" type="button" data-panel="lockout" aria-pressed="false">Locked out or utilities shut off</button>
+      <button class="chip" type="button" data-panel="retaliation" aria-pressed="false">I complained and now I'm being pushed out</button>
+      <button class="chip" type="button" data-panel="lease" aria-pressed="false">Is this lease clause legal?</button>
+    </div>
+  </section>
+
+  <!-- DEPOSIT -->
+  <section class="panel" id="p-deposit" aria-labelledby="h-deposit">
+    <h2 id="h-deposit">Security deposit</h2>
+    <form class="q" id="f-deposit" novalidate>
+      <p class="sample">Sample answers are filled in so you can see how it works. Change them to yours.</p>
+      <div class="row2">
+        <div class="field"><label for="d-rent">Monthly rent ($)</label><input id="d-rent" type="number" min="0" step="1" value="1200"></div>
+        <div class="field"><label for="d-amt">Deposit you paid ($)</label><input id="d-amt" type="number" min="0" step="1" value="1500"></div>
+      </div>
+      <div class="field"><label for="d-out">Date you moved out</label><input id="d-out" type="date"></div>
+      <div class="field"><span class="lbl" id="l-notice14">When you moved in, did the landlord give you a written notice with their name and address and the bank holding your deposit?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-notice14">
+          <label><input type="radio" name="d-notice14" value="yes" checked> Yes</label>
+          <label><input type="radio" name="d-notice14" value="no"> No</label>
+          <label><input type="radio" name="d-notice14" value="unsure"> Not sure</label>
+        </div></div>
+      <div class="field"><span class="lbl" id="l-fwd">Did you give the landlord your new address in writing within 4 days of moving out?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-fwd">
+          <label><input type="radio" name="d-fwd" value="yes" checked> Yes</label>
+          <label><input type="radio" name="d-fwd" value="no"> No</label>
+        </div></div>
+      <div class="field"><span class="lbl" id="l-list">Did you get an itemized list of damages from the landlord?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-list">
+          <label><input type="radio" name="d-list" value="no" checked> No</label>
+          <label><input type="radio" name="d-list" value="yes"> Yes</label>
+        </div></div>
+      <div class="field" id="d-list-extra" hidden>
+        <div class="row2">
+          <div class="field"><label for="d-listdate">Date the landlord mailed the list (postmark)</label><input id="d-listdate" type="date"></div>
+          <div class="field"><span class="lbl" id="l-resp">Did you answer it by mail within 7 days?</span>
+            <div class="opts" role="radiogroup" aria-labelledby="l-resp">
+              <label><input type="radio" name="d-resp" value="yes" checked> Yes</label>
+              <label><input type="radio" name="d-resp" value="no"> No</label>
+            </div></div>
+        </div>
+      </div>
+      <div class="field"><label for="d-back">Amount you've gotten back so far ($)</label><input id="d-back" type="number" min="0" step="1" value="0"></div>
+    </form>
+    <div class="results" id="r-deposit" aria-live="polite"></div>
+  </section>
+
+  <!-- NOTICE -->
+  <section class="panel" id="p-notice" aria-labelledby="h-notice" hidden>
+    <h2 id="h-notice">Notice to leave or court papers</h2>
+    <form class="q" id="f-notice" novalidate>
+      <div class="field"><span class="lbl" id="l-ntype">What did you get?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-ntype">
+          <label><input type="radio" name="n-type" value="rent7" checked> A written notice saying I owe rent and have 7 days</label>
+          <label><input type="radio" name="n-type" value="end30"> A notice ending my month-to-month rental</label>
+          <label><input type="radio" name="n-type" value="drug24"> A 24-hour notice about drugs</label>
+          <label><input type="radio" name="n-type" value="court"> Court papers (a summons or complaint) or a judgment</label>
+        </div></div>
+      <div class="field"><label for="n-date">Date you got it</label><input id="n-date" type="date"></div>
+      <div class="field"><span class="lbl" id="l-ndet">Do you live in Detroit?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-ndet">
+          <label><input type="radio" name="n-detroit" value="no" checked> No</label>
+          <label><input type="radio" name="n-detroit" value="yes"> Yes</label>
+        </div></div>
+    </form>
+    <div class="results" id="r-notice" aria-live="polite"></div>
+  </section>
+
+  <!-- REPAIRS -->
+  <section class="panel" id="p-repairs" aria-labelledby="h-repairs" hidden>
+    <h2 id="h-repairs">Repairs</h2>
+    <form class="q" id="f-repairs" novalidate>
+      <div class="field"><span class="lbl" id="l-rcause">Was the damage caused by you or your guests?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-rcause">
+          <label><input type="radio" name="r-cause" value="no" checked> No, it broke or wore out on its own</label>
+          <label><input type="radio" name="r-cause" value="yes"> Yes, we caused it</label>
+          <label><input type="radio" name="r-cause" value="unsure"> Not sure</label>
+        </div></div>
+      <div class="field"><span class="lbl" id="l-rterm">How long is your lease?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-rterm">
+          <label><input type="radio" name="r-term" value="short" checked> Less than 1 year, or month-to-month</label>
+          <label><input type="radio" name="r-term" value="year"> 1 year or longer</label>
+        </div></div>
+      <div class="field"><span class="lbl" id="l-rdet">Do you live in Detroit?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-rdet">
+          <label><input type="radio" name="r-detroit" value="no" checked> No</label>
+          <label><input type="radio" name="r-detroit" value="yes"> Yes</label>
+        </div></div>
+    </form>
+    <div class="results" id="r-repairs" aria-live="polite"></div>
+  </section>
+
+  <!-- LOCKOUT -->
+  <section class="panel" id="p-lockout" aria-labelledby="h-lockout" hidden>
+    <h2 id="h-lockout">Lockouts and shutoffs</h2>
+    <form class="q" id="f-lockout" novalidate>
+      <div class="field"><span class="lbl" id="l-lwhat">What did the landlord do? Check all that apply.</span>
+        <div class="opts" role="group" aria-labelledby="l-lwhat">
+          <label><input type="checkbox" name="l-act" value="locks" checked> Changed or added locks and didn't give me a key</label>
+          <label><input type="checkbox" name="l-act" value="utility"> Shut off heat, water, hot water, electric, or gas</label>
+          <label><input type="checkbox" name="l-act" value="property"> Removed, kept, or destroyed my belongings</label>
+          <label><input type="checkbox" name="l-act" value="board"> Boarded up the place or took off doors, windows, or locks</label>
+          <label><input type="checkbox" name="l-act" value="force"> Used or threatened force</label>
+          <label><input type="checkbox" name="l-act" value="nuisance"> Made noise, smells, or another nuisance to drive me out</label>
+        </div></div>
+      <div class="field"><span class="lbl" id="l-lorder">Did a court order your eviction, and did a court officer carry it out?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-lorder">
+          <label><input type="radio" name="l-order" value="no" checked> No</label>
+          <label><input type="radio" name="l-order" value="yes"> Yes</label>
+          <label><input type="radio" name="l-order" value="unsure"> Not sure</label>
+        </div></div>
+      <div class="field"><label for="l-date">When did it happen?</label><input id="l-date" type="date"></div>
+    </form>
+    <div class="results" id="r-lockout" aria-live="polite"></div>
+  </section>
+
+  <!-- RETALIATION -->
+  <section class="panel" id="p-retaliation" aria-labelledby="h-retaliation" hidden>
+    <h2 id="h-retaliation">Retaliation</h2>
+    <form class="q" id="f-retaliation" novalidate>
+      <div class="field"><span class="lbl" id="l-twhat">What did you do before the landlord moved to push you out?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-twhat">
+          <label><input type="radio" name="t-what" value="gov" checked> Complained to a city, county, or state agency about a health or safety problem</label>
+          <label><input type="radio" name="t-what" value="rights"> Asked for repairs or tried to enforce my lease or legal rights</label>
+          <label><input type="radio" name="t-what" value="org"> Joined or took part in a tenant group</label>
+        </div></div>
+      <div class="row2">
+        <div class="field"><label for="t-comp">Date you complained or acted</label><input id="t-comp" type="date"></div>
+        <div class="field"><label for="t-case">Date the eviction case was filed in court</label><input id="t-case" type="date"><span class="hint">Leave blank if there's no court case yet.</span></div>
+      </div>
+      <div class="field"><span class="lbl" id="l-tofficial">Was your complaint made through a court or a government agency?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-tofficial">
+          <label><input type="radio" name="t-official" value="yes" checked> Yes</label>
+          <label><input type="radio" name="t-official" value="no"> No, only to the landlord</label>
+        </div></div>
+    </form>
+    <div class="results" id="r-retaliation" aria-live="polite"></div>
+  </section>
+
+  <!-- LEASE -->
+  <section class="panel" id="p-lease" aria-labelledby="h-lease" hidden>
+    <h2 id="h-lease">Lease clauses</h2>
+    <form class="q" id="f-lease" novalidate>
+      <div class="field"><span class="lbl" id="l-cl">Does your lease say any of these? Check all that apply.</span>
+        <div class="opts" role="group" aria-labelledby="l-cl" id="lease-opts"></div></div>
+    </form>
+    <div class="results" id="r-lease" aria-live="polite"></div>
+  </section>
+
+  <section class="gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Free legal help</h2>
+    <ul>
+      <li><a href="https://michiganlegalhelp.org/guide-to-legal-help" target="_blank" rel="noopener">Michigan Legal Help: Guide to Legal Help</a> finds free legal aid near you, by county and problem.</li>
+      <li><a href="https://michiganlegalhelp.org/resources/housing/your-security-deposit-what-it-and-how-get-it-back" target="_blank" rel="noopener">Michigan Legal Help: Your Security Deposit</a> has free forms and letters for getting a deposit back.</li>
+      <li><strong>Detroit tenants with an eviction case:</strong> households earning up to twice the federal poverty level can get a free lawyer. At your 36th District Court hearing, tell the judge you want to talk to a free lawyer. <a href="https://detroitmi.gov/departments/law-department/office-eviction-defense-right-counsel" target="_blank" rel="noopener">City of Detroit, Office of Eviction Defense</a>. Detroit Housing Resource helpline: <span class="date-big">(866) 313-2520</span>.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> Each answer comes from Michigan statutes, which were checked against the Michigan Legislature's official site on October 28, 2026 (the site says it's current through Public Act 114 of 2026). Green cards are what the law says directly. Amber cards depend on facts a judge decides. Red cards mean get a lawyer now.</p>
+    <p>Local ordinances, federal rules for public or subsidized housing, and your own lease can add more rights. Deadlines here are counted in calendar days from the dates you enter. Courts can count differently, so don't wait until the last day.</p>
+    <p>Free and open source. Nothing you enter is sent anywhere or stored.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const MCL = s => "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-" + s.replace(/\./g, "-");
+  const DAY = 86400000;
+  const parse = v => { if (!v) return null; const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); };
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const add = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+  const fmt = d => d.toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" });
+  const today = (() => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); })();
+  const diff = (a, b) => Math.round((b - a) / DAY);
+  const money = n => "$" + Number(n).toLocaleString("en-US", { maximumFractionDigits: 2 });
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const val = (form, name) => { const el = form.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; };
+  const LABEL = { law: "The law says", facts: "Depends on facts", help: "Get help now" };
+
+  function when(d) {
+    const n = diff(today, d);
+    if (n > 0) return `${fmt(d)} (${n} day${n === 1 ? "" : "s"} from today)`;
+    if (n === 0) return `${fmt(d)} (today)`;
+    return `${fmt(d)} (${-n} day${n === -1 ? "" : "s"} ago)`;
+  }
+  function card(level, title, body, cites = [], next = "") {
+    const c = cites.map(s => `<a class="cite" href="${MCL(s.split("(")[0])}" target="_blank" rel="noopener">MCL ${esc(s)}</a>`).join("");
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${LABEL[level]}</span></div>
+      <p>${body}</p>
+      ${next ? `<p class="next"><strong>What you can do:</strong> ${next}</p>` : ""}
+      ${c ? `<div class="cites">${c}</div>` : ""}
+    </article>`;
+  }
+  function show(id, cards) {
+    document.getElementById(id).innerHTML =
+      `<div class="results-head"><h2>What applies to you</h2>
+        <div class="legend"><span class="tag law">The law says</span><span class="tag facts">Depends on facts</span><span class="tag help">Get help now</span></div></div>` +
+      cards.join("");
+  }
+
+  // Sample dates relative to today so the sample always reads sensibly.
+  document.getElementById("d-out").value = iso(add(today, -35));
+  document.getElementById("d-listdate").value = iso(add(today, -10));
+  document.getElementById("n-date").value = iso(add(today, -2));
+  document.getElementById("l-date").value = iso(today);
+  document.getElementById("t-comp").value = iso(add(today, -40));
+
+  /* ---------- Deposit ---------- */
+  function deposit() {
+    const f = document.getElementById("f-deposit");
+    const rent = parseFloat(document.getElementById("d-rent").value);
+    const amt = parseFloat(document.getElementById("d-amt").value);
+    const back = parseFloat(document.getElementById("d-back").value) || 0;
+    const out = parse(document.getElementById("d-out").value);
+    const n14 = val(f, "d-notice14"), fwd = val(f, "d-fwd"), list = val(f, "d-list"), resp = val(f, "d-resp");
+    document.getElementById("d-list-extra").hidden = list !== "yes";
+    const listDate = parse(document.getElementById("d-listdate").value);
+    const kept = !isNaN(amt) ? Math.max(0, amt - back) : null;
+    const out_ = [];
+
+    if (!isNaN(rent) && !isNaN(amt) && rent > 0) {
+      const cap = rent * 1.5;
+      if (amt > cap) out_.push(card("law", "Your deposit was more than the legal limit",
+        `A Michigan security deposit can't be more than 1½ months' rent. On ${money(rent)} rent that's ${money(cap)}. You paid ${money(amt)}, which is ${money(amt - cap)} over.`,
+        ["554.602"], "Ask for the overage back in writing, and mention MCL 554.602."));
+      else out_.push(card("law", "Your deposit was within the legal limit",
+        `The limit is 1½ months' rent, ${money(cap)} on your rent. You paid ${money(amt)}.`, ["554.602"]));
+    }
+
+    if (!out) { show("r-deposit", out_.concat(card("facts", "Enter your move-out date", "The deadlines all count from the day you moved out."))); return; }
+
+    const relieved = n14 === "no";
+    const addrOK = fwd === "yes" || relieved;
+    out_.push(card("law", "Your forwarding address deadline",
+      `You had to give the landlord your new address in writing by ${when(add(out, 4))}, 4 days after moving out.` +
+      (relieved ? " But the landlord never gave you the required move-in notice, so the law says you didn't have to." : "") +
+      (fwd === "no" && !relieved ? " Since you didn't, the landlord doesn't have to send you a damage list. You can still claim your deposit." : ""),
+      relieved ? ["554.611", "554.603"] : ["554.611"],
+      fwd === "no" && !relieved ? "Send your address in writing now anyway, and keep a copy." : ""));
+
+    const d30 = add(out, 30), d45 = add(out, 45);
+    if (list === "no") {
+      if (addrOK && today > d30) {
+        out_.push(card("law", "The landlord missed the 30-day deadline",
+          `The landlord had until ${when(d30)} to mail you an itemized damage list. If no list came, the law treats that as the landlord agreeing nothing is owed, and the full deposit${kept !== null ? ` (${money(kept)} still held)` : ""} must be returned right away.`,
+          ["554.609", "554.610"], "Send a written demand for the full deposit, citing MCL 554.610. Keep a copy and proof of mailing."));
+      } else if (addrOK) {
+        out_.push(card("law", "The landlord still has time to send a damage list",
+          `The landlord must mail your deposit or an itemized damage list by ${when(d30)}. If nothing comes by then, the full deposit has to be returned.`,
+          ["554.609", "554.610"], "Watch your mail. Check this page again after that date."));
+      }
+    } else if (list === "yes") {
+      if (listDate && listDate > d30) {
+        out_.push(card("law", "The damage list came too late",
+          `It was mailed ${fmt(listDate)}, after the ${fmt(d30)} deadline. A landlord who misses the 30 days is treated as agreeing no damages are owed and has to return the full deposit.`,
+          ["554.609", "554.610"], "Send a written demand for the full deposit, citing MCL 554.610."));
+      } else {
+        out_.push(card("law", "The damage list must be itemized",
+          "It has to list each damage, with estimated repair costs and the basis for each charge, and come with a check for any amount not claimed. It must also warn you, in large bold type, that you have 7 days to respond by mail.",
+          ["554.609"], "If the list doesn't have those things, point that out in your response."));
+      }
+      if (resp === "yes") {
+        if (today > d45) {
+          out_.push(card("facts", "The landlord may owe you double",
+            `You disputed the list in time. The landlord then had until ${when(d45)} to either return the money or sue you for it. If the landlord did neither, the law says they give up the damages they claimed and owe double the amount they kept${kept !== null ? `, which would be ${money(kept * 2)}` : ""}. A judge decides whether every condition was met.`,
+            ["554.613"], "You can file in small claims court in your district court. Michigan Legal Help has the forms."));
+        } else {
+          out_.push(card("law", "The landlord has to sue or pay by day 45",
+            `You disputed the list in time. By ${when(d45)} the landlord must return the money or file a lawsuit to keep it. If neither happens, they can owe you double what they kept.`,
+            ["554.613"], "Check back after that date."));
+        }
+      } else {
+        out_.push(card("facts", "Not answering within 7 days can cost you",
+          "If you don't respond by mail within 7 days of getting the list, you may lose the right to dispute the damages it claims. If you're past 7 days, a lawyer can tell you whether anything can still be done.",
+          ["554.609"]));
+      }
+    }
+    show("r-deposit", out_);
+  }
+
+  /* ---------- Notice ---------- */
+  function notice() {
+    const f = document.getElementById("f-notice");
+    const t = val(f, "n-type"), d = parse(document.getElementById("n-date").value), det = val(f, "n-detroit") === "yes";
+    const c = [];
+    const notEvict = card("law", "A notice is not an eviction",
+      "Only a court can evict you. Until a judge orders it and a court officer carries it out, the landlord can't lock you out, take your things, or shut off your utilities.",
+      ["600.2918"], "Stay in your home and watch for court papers.");
+    if (t === "rent7") {
+      if (d) c.push(card("law", "When the 7 days run out",
+        `A notice for unpaid rent has to be in writing and give you 7 days. Counting from the day you got it, that's ${when(add(d, 7))}. After that, the landlord can file an eviction case in court.`,
+        ["554.134(2)"]));
+      c.push(notEvict);
+      c.push(card("law", "Paying can stop a rent eviction even after you lose in court",
+        "If the court rules against you only for unpaid rent, the eviction order can't issue for 10 days. If you pay the amount in the judgment plus court costs in that time, the eviction is stopped.",
+        ["600.5744(5)", "600.5744(7)"]));
+      c.push(card("facts", "You may have a defense",
+        "A judge can't evict you for unpaid rent if the landlord broke the lease in a way that excuses rent, like failing to make serious repairs, or if you paid the rent into a court-approved escrow account.",
+        ["600.5720(1)(f)", "600.5720(1)(g)"], "Talk to a lawyer before you stop paying rent for any reason."));
+    } else if (t === "end30") {
+      c.push(card("law", "How much notice you get",
+        "To end a month-to-month rental, the landlord has to give you at least one rental period of notice, usually one month. A notice that names an odd end date isn't automatically void.",
+        ["554.134(1)"]));
+      c.push(notEvict);
+      c.push(card("facts", "When ending your rental is not allowed",
+        "A judge can't evict you if the main reason is that you complained to a government agency, asked for repairs, or joined a tenant group. If you live in housing run by a city, village, or township, they need a reason. Public and subsidized housing often have more protections under federal rules.",
+        ["600.5720(1)(a)", "600.5720(1)(b)", "600.5720(1)(c)", "600.5720(1)(d)"]));
+    } else if (t === "drug24") {
+      c.push(card("facts", "A 24-hour notice has strict conditions",
+        "It's only allowed if your lease has a clause about controlled substances and a formal police report was filed. Without both, the landlord has to use the regular notice periods.",
+        ["554.134(4)"], "Ask the landlord for a copy of the police report."));
+      c.push(notEvict);
+    } else {
+      c.push(card("help", "Go to your court hearing",
+        "If you don't show up, you can lose automatically. The papers list the court, date, and time. Bring your lease, rent receipts, photos, and any letters.",
+        [], "Contact free legal aid today. The links are below."));
+      if (det) c.push(card("help", "Detroit: you may qualify for a free lawyer",
+        "Detroit tenant households earning up to twice the federal poverty level can get a free lawyer. At your 36th District Court hearing, tell the judge you want to talk to one. For in-person hearings, go to room 417.",
+        [], `<a href="https://detroitmi.gov/departments/law-department/office-eviction-defense-right-counsel" target="_blank" rel="noopener">City of Detroit, Office of Eviction Defense</a>`));
+      c.push(card("law", "Paying can stop a rent eviction even after you lose in court",
+        "If the judgment is only for unpaid rent, the eviction order can't issue for 10 days. Paying the judgment amount plus court costs in that time stops it.",
+        ["600.5744(5)", "600.5744(7)"]));
+      c.push(notEvict);
+    }
+    show("r-notice", c);
+  }
+
+  /* ---------- Repairs ---------- */
+  function repairs() {
+    const f = document.getElementById("f-repairs");
+    const cause = val(f, "r-cause"), term = val(f, "r-term"), det = val(f, "r-detroit") === "yes";
+    const c = [];
+    c.push(card(cause === "no" ? "law" : "facts", "Your landlord has to keep the place fit and in repair",
+      "Every Michigan residential lease includes two promises from the landlord: the home and common areas are fit to live in, and the landlord keeps them in reasonable repair and follows health and safety codes." +
+      (cause === "yes" ? " The repair duty doesn't cover damage caused by your own willful or careless conduct." : cause === "unsure" ? " The repair duty doesn't cover damage caused by a tenant's willful or careless conduct, so who caused it matters." : ""),
+      ["554.139(1)"],
+      "Ask for the repair in writing, keep a copy, and take dated photos."));
+    c.push(card(term === "year" ? "facts" : "law", "Can your lease change this?",
+      term === "year"
+        ? "Because your lease is 1 year or longer, the landlord and you are allowed to modify these duties in the lease. Read the repair section of your lease closely."
+        : "Because your lease is shorter than 1 year, these duties can't be changed by the lease. A lease also can't waive your remedies when a home isn't fit to live in.",
+      term === "year" ? ["554.139(2)"] : ["554.139(2)", "554.633(1)(a)"]));
+    c.push(card("law", "You're protected if you report it",
+      "A judge can't evict you if the main reason is that you reported a health or safety code violation to a government agency.",
+      ["600.5720(1)(b)"],
+      det ? "In Detroit, call BSEED at <span class=\"date-big\">(313) 628-2451</span> to report property conditions." : "Call your city or township's code enforcement or building department."));
+    c.push(card("facts", "Holding back rent is risky",
+      "In an eviction for unpaid rent, a judge can rule for you if the landlord's breach excuses rent or if you paid rent into a court-approved escrow. Holding rent without the right steps can still get you evicted.",
+      ["600.5720(1)(f)", "600.5720(1)(g)"], "Talk to legal aid before you hold back any rent."));
+    show("r-repairs", c);
+  }
+
+  /* ---------- Lockout ---------- */
+  function lockout() {
+    const f = document.getElementById("f-lockout");
+    const acts = [...f.querySelectorAll('input[name="l-act"]:checked')].map(i => i.value);
+    const order = val(f, "l-order"), d = parse(document.getElementById("l-date").value);
+    const c = [];
+    if (order === "yes") {
+      c.push(card("facts", "A court-ordered eviction is different",
+        "When a court orders an eviction and a court officer carries it out, it's lawful. If you think the order was wrong or you weren't notified, you may be able to act fast.",
+        ["600.2918(3)"], "Call legal aid right away."));
+      show("r-lockout", c); return;
+    }
+    const names = { locks: "changing locks without giving you a key", utility: "shutting off heat, water, hot water, electric, or gas", property: "removing, keeping, or destroying your belongings", board: "boarding up or removing doors, windows, or locks", force: "using or threatening force", nuisance: "creating noise, smells, or another nuisance" };
+    if (acts.length) c.push(card(order === "unsure" ? "facts" : "law", "This is an illegal lockout",
+      `Without a court order, a landlord can't push you out by ${acts.map(a => names[a]).join("; ")}. Michigan law bans each of these.` +
+      (order === "unsure" ? " If there really was no court order, this applies to you." : ""),
+      ["600.2918(2)"]));
+    if (acts.includes("utility")) c.push(card("facts", "Utility shutoffs",
+      "A shutoff counts when it's service you pay for or the landlord has to provide, and it's serious enough to force you out.", ["600.2918(2)(f)"]));
+    c.push(card("law", "What the landlord can owe you",
+      "For each illegal act, you can get your actual damages or $200, whichever is more, and you can get back in. If you were forcibly put out, it's three times your actual damages or $200, whichever is more. A lease can't take these rights away.",
+      ["600.2918(1)", "600.2918(2)", "600.2918(7)"]));
+    if (d) c.push(card("law", "Deadlines to act",
+      `You have 90 days to ask a court to put you back in, until ${when(add(d, 90))}, and 1 year to sue for damages. These count from when it happened or when you found out.`,
+      ["600.2918(6)", "600.2918(8)"], "Ask district court for an order to get back in, or ask circuit court for an emergency order. Legal aid can help."));
+    c.push(card("facts", "Exceptions the landlord may claim",
+      "The landlord may act without a court only for temporary repairs or inspections allowed by law, or if they believe in good faith, after looking into it, that you abandoned the place and rent is unpaid.",
+      ["600.2918(3)"]));
+    show("r-lockout", c);
+  }
+
+  /* ---------- Retaliation ---------- */
+  function retaliation() {
+    const f = document.getElementById("f-retaliation");
+    const what = val(f, "t-what"), official = val(f, "t-official") === "yes";
+    const comp = parse(document.getElementById("t-comp").value), filed = parse(document.getElementById("t-case").value);
+    const c = [];
+    const sub = { gov: "600.5720(1)(b)", rights: "600.5720(1)(a)", org: "600.5720(1)(c)" }[what];
+    const desc = { gov: "complaining to a government agency about a health or safety code violation", rights: "trying to get repairs or enforce your rights under the lease or the law", org: "joining or taking part in a tenant group" }[what];
+    c.push(card("law", "Retaliation is a defense to eviction",
+      `A judge can't evict you if the main reason is to punish you for ${desc}. The same goes for raising your rent or adding new lease terms to punish you, if that's why you fell behind.`,
+      [sub, "600.5720(1)(e)"]));
+    if (comp) {
+      const end = filed || today;
+      const n = diff(comp, end);
+      const ref = filed ? "before the case was filed" : "ago";
+      if (official && n >= 0 && n <= 90) c.push(card("law", "The 90-day rule helps you",
+        `Your complaint was ${n} days ${ref}. When you acted through a court or agency within 90 days before the eviction case, and it wasn't dismissed or denied, the law presumes retaliation. The landlord then has to prove it wasn't.` +
+        (filed ? "" : ` If a case is filed by ${fmt(add(comp, 90))}, this presumption applies.`),
+        ["600.5720(2)"]));
+      else if (official && n > 90) c.push(card("facts", "You're past the 90-day window",
+        `Your complaint was ${n} days ${ref}. The law then presumes it wasn't retaliation, so you'd have to prove it was. That's still possible with good evidence, like dated letters or texts.`,
+        ["600.5720(2)"]));
+      else if (!official) c.push(card("facts", "You'll need to show the reason",
+        "The 90-day presumption only covers complaints made through a court or government agency. You can still raise retaliation, but you'd need evidence that it was the main reason.",
+        ["600.5720(2)"], "Save texts, emails, and letters with dates. Filing a code complaint with your city now creates an official record."));
+    }
+    show("r-retaliation", c);
+  }
+
+  /* ---------- Lease ---------- */
+  const CLAUSES = [
+    ["a", "I give up my right to repairs or to a home that's fit to live in"],
+    ["b", "I give up my security deposit rights"],
+    ["d", "I agree to a \"confession of judgment\" (letting the landlord win in court automatically)"],
+    ["e", "The landlord isn't responsible for failing to do their legal duties"],
+    ["f", "I give up a jury trial, or notice the court would normally require"],
+    ["g", "I pay the landlord's lawyer fees beyond what the law allows"],
+    ["h", "The landlord can take my belongings if I owe rent"],
+    ["k", "The landlord doesn't have to try to re-rent the place if I leave early"],
+    ["l", "The landlord can change the lease after it starts without my written OK"],
+    ["n", "I give the landlord power of attorney"],
+    ["o", "Every way I'm allowed to pay rent comes with a fee"]
+  ];
+  document.getElementById("lease-opts").innerHTML = CLAUSES.map(([k, t], i) =>
+    `<label><input type="checkbox" name="cl" value="${k}" ${i === 7 ? "checked" : ""}> ${esc(t)}</label>`).join("");
+  function lease() {
+    const picked = [...document.querySelectorAll('#f-lease input[name="cl"]:checked')].map(i => i.value);
+    const c = [];
+    if (!picked.length) c.push(card("facts", "Check any clause that sounds like yours", "Michigan's Truth in Renting Act bans a list of lease terms. Pick one above to see the rule."));
+    picked.forEach(k => {
+      const t = CLAUSES.find(x => x[0] === k)[1];
+      let extra = "";
+      if (k === "e") extra = " There's a narrow exception for some fire or casualty insurance waivers.";
+      if (k === "l") extra = " Some adjustments are allowed with at least 30 days' written notice.";
+      if (k === "o") extra = " If the lease allows more than one way to pay, at least one has to be free.";
+      if (k === "g") extra = " Fees the law itself allows are still possible.";
+      c.push(card(k === "e" || k === "l" || k === "g" ? "facts" : "law", "Not allowed in a Michigan lease",
+        `A lease can't include a clause saying "${esc(t.toLowerCase())}."${extra}`,
+        [`554.633(1)(${k})`], "Point to this law if the landlord tries to enforce it."));
+    });
+    show("r-lease", c);
+  }
+
+  /* ---------- Wiring ---------- */
+  const runners = { deposit, notice, repairs, lockout, retaliation, lease };
+  Object.entries(runners).forEach(([k, fn]) => {
+    const form = document.getElementById("f-" + k);
+    form.addEventListener("input", fn); form.addEventListener("change", fn);
+    form.addEventListener("submit", e => e.preventDefault());
+    fn();
+  });
+  const chips = [...document.querySelectorAll(".chip")];
+  function pick(name) {
+    if (!runners[name]) name = "deposit";
+    chips.forEach(ch => ch.setAttribute("aria-pressed", String(ch.dataset.panel === name)));
+    Object.keys(runners).forEach(k => document.getElementById("p-" + k).hidden = k !== name);
+  }
+  chips.forEach(ch => ch.addEventListener("click", () => {
+    pick(ch.dataset.panel);
+    try { history.replaceState(null, "", "#" + ch.dataset.panel); } catch (e) {}
+  }));
+  pick(location.hash.slice(1));
+  window.addEventListener("hashchange", () => pick(location.hash.slice(1)));
+})();
+</script>
