@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Michigan Medicare Savings Program Check (QMB, SLMB, QI) 2026 Income Limits</title>
+<meta name="description" content="Can Michigan pay your Medicare Part B premium ($202.90 a month in 2026)? Check the 2026 Medicare Savings Program income and asset limits for QMB, SLMB, QI, and QDWI. Free.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/medicare-savings/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Michigan Medicare Savings Program Check (QMB, SLMB, QI)">
+<meta property="og:description" content="Can Michigan pay your Medicare Part B premium ($202.90 a month in 2026)? Check the 2026 Medicare Savings Program income and asset limits for QMB, SLMB, QI, and QDWI. Free.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/medicare-savings/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/medicare-savings.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. Medicare and income questions, then the program your income fits and what it pays, then one card per program, the limits table, how to apply, rules that protect you, a QMB billing letter, free help, and sources. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --none: #5d6b77; --none-bg: #e9edf0;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    --none: #a3b2bf; --none-bg: #24313c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  --none: #a3b2bf; --none-bg: #24313c;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr);
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+section { display: grid; gap: 12px; min-width: 0; grid-template-columns: minmax(0, 1fr); }
+section > *, .wrap > * { min-width: 0; }
+.box {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 18px; min-width: 0;
+}
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="number"], textarea {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px; min-width: 0;
+}
+textarea { max-width: none; font-size: 15px; line-height: 1.5; min-height: 300px; resize: vertical; }
+input[type="number"] { font-variant-numeric: tabular-nums; }
+.money { display: flex; align-items: center; gap: 6px; }
+.money span { font-weight: 700; color: var(--muted); }
+.money input { max-width: 220px; }
+.opts { display: grid; gap: 6px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.opts input { margin-top: 5px; accent-color: var(--accent); }
+.hint { font-size: 14px; color: var(--muted); }
+.subhead { font-family: var(--f-display); font-weight: 600; font-size: 17px; border-top: 1px solid var(--line); padding-top: 14px; }
+details.more > summary { cursor: pointer; font-weight: 700; color: var(--accent); }
+details.more[open] > summary { margin-bottom: 12px; }
+button.btn {
+  font: inherit; font-size: 15px; font-weight: 700; cursor: pointer;
+  border-radius: 8px; padding: 9px 14px; border: 1.5px solid var(--accent);
+  background: var(--accent); color: var(--surface);
+}
+button.btn.ghost { background: transparent; color: var(--accent); }
+button.btn:hover { filter: brightness(1.08); }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* Tables */
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: 13px; font-weight: 700; color: var(--muted); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+td.n { font-family: var(--f-mono); white-space: nowrap; }
+tr.me td { background: var(--accent-soft); }
+
+/* Summary */
+.total {
+  background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--accent);
+  border-radius: 12px; padding: 18px; display: grid; gap: 10px;
+}
+.total.law { border-left-color: var(--law); }
+.total.facts { border-left-color: var(--facts); }
+.total.none { border-left-color: var(--none); }
+.big { font-family: var(--f-display); font-weight: 800; font-size: clamp(30px, 7vw, 44px); line-height: 1.05; }
+.prompt { color: var(--muted); }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+.fig { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 2px; }
+.fig b { font-family: var(--f-mono); font-size: 20px; font-variant-numeric: tabular-nums; }
+.fig span { font-size: 14px; color: var(--muted); }
+ol.math { margin: 0; padding-left: 22px; font-size: 15px; display: grid; gap: 2px; }
+ol.math .n { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Cards */
+.results { display: grid; gap: 12px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 10px; border-left: 5px solid var(--line);
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card.none { border-left-color: var(--none); }
+.card.mine { box-shadow: 0 0 0 2px var(--accent); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.card .sub { font-size: 14px; color: var(--muted); }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.tag.none { color: var(--none); background: var(--none-bg); }
+.verdict { font-weight: 700; }
+.pays { font-size: 15px; }
+.conds { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 15px; }
+.conds li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 6px; }
+.conds .ic { font-weight: 700; text-align: center; }
+.conds .ok .ic { color: var(--law); }
+.conds .warn .ic { color: var(--facts); }
+.conds .no .ic { color: var(--none); }
+.conds .info .ic { color: var(--muted); }
+.checked { font-size: 13px; color: var(--muted); }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.phone { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+ol.steps { margin: 0; padding-left: 22px; display: grid; gap: 14px; }
+ol.steps > li { padding-left: 4px; }
+ol.steps > li > strong:first-child { display: block; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.copied { font-size: 14px; color: var(--law); }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+@media print {
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .noprint, .notice { display: none !important; }
+  .wrap { padding: 0; gap: 16px; }
+  .card, .total, .box, .scroll { break-inside: avoid; border-color: #999; }
+  a { color: #000; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Michigan · Medicare · free</span>
+    <h1>Michigan Medicare Savings Program Check</h1>
+    <p class="lede">Michigan's Medicare Savings Programs pay the Medicare Part B premium, which is $202.90 a month in 2026, for people with lower incomes. The fullest one, QMB, also pays your Medicare deductibles and copays. Answer a few questions to see which program your income fits under Michigan's 2026 limits, what it would pay, and how to apply.</p>
+    <div class="notice">
+      <strong>This is information, not legal or financial advice.</strong>
+      <span>Only the Michigan Department of Health and Human Services (MDHHS) can approve you, after you apply. Limits come from MDHHS's own policy manuals, checked on October 31, 2026. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="you-h">
+    <h2 id="you-h">About you</h2>
+    <form class="box" id="f" novalidate>
+      <div class="field"><span class="lbl" id="l-mar">Are you married and living with your spouse?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-mar">
+          <label><input type="radio" name="mar" value="1" checked> No, just me</label>
+          <label><input type="radio" name="mar" value="2"> Yes, we live together</label>
+        </div>
+        <span class="hint">If you live with your spouse, Michigan counts both of your incomes and savings, even if your spouse doesn't have Medicare. If your spouse lives in a nursing home, choose "just me."</span>
+      </div>
+
+      <div class="row2">
+        <div class="field"><span class="lbl" id="l-age">Your age</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-age">
+            <label><input type="radio" name="age" value="65" checked> 65 or older</label>
+            <label><input type="radio" name="age" value="under"> Under 65 (Medicare from a disability, ALS, or kidney failure)</label>
+          </div>
+        </div>
+        <div class="field"><span class="lbl" id="l-a">Your Medicare Part A (hospital insurance)</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-a">
+            <label><input type="radio" name="parta" value="free" checked> I get it free (most people)</label>
+            <label><input type="radio" name="parta" value="paid"> I pay a monthly premium for it</label>
+            <label><input type="radio" name="parta" value="none"> I don't have Part A or Medicare yet</label>
+          </div>
+          <span class="hint">Not sure? Look at your Medicare card or your Social Security letter. Part A is free if you or your spouse worked about 10 years, or after 24 months on Social Security disability.</span>
+        </div>
+      </div>
+
+      <div class="field"><span class="lbl" id="l-ma">Do you have Michigan Medicaid now?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-ma">
+          <label><input type="radio" name="mcaid" value="no" checked> No</label>
+          <label><input type="radio" name="mcaid" value="full"> Yes, full Medicaid (I have a mihealth card and no monthly deductible)</label>
+          <label><input type="radio" name="mcaid" value="deduct"> Yes, but with a monthly deductible (a "spend-down")</label>
+          <label><input type="radio" name="mcaid" value="unsure"> I'm not sure</label>
+        </div>
+      </div>
+
+      <p class="subhead">Monthly income before taxes<span id="inc-who"></span></p>
+      <div class="row2">
+        <div class="field">
+          <label for="ss">Social Security, before anything is taken out</label>
+          <div class="money"><span aria-hidden="true">$</span><input id="ss" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 1250" aria-describedby="ss-hint"></div>
+          <span class="hint" id="ss-hint">Use the amount before the Medicare premium comes out. Your yearly Social Security letter shows it. If you only know what lands in your bank, add the $202.90 Part B premium that's taken out first.</span>
+        </div>
+        <div class="field">
+          <label for="other">Pensions and other money you don't work for</label>
+          <div class="money"><span aria-hidden="true">$</span><input id="other" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 300" aria-describedby="other-hint"></div>
+          <span class="hint" id="other-hint">Pensions, annuities, railroad retirement, VA benefits, unemployment, alimony, and rent you collect. Count them before taxes.</span>
+        </div>
+        <div class="field">
+          <label for="work">Pay from a job, before taxes</label>
+          <div class="money"><span aria-hidden="true">$</span><input id="work" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 0" aria-describedby="work-hint"></div>
+          <span class="hint" id="work-hint">If you're self-employed, use what's left after business costs. Michigan counts less than half of what you earn from work.</span>
+        </div>
+      </div>
+      <details class="more" id="more-kids">
+        <summary>Raising your own children under 18 at home? (optional)</summary>
+        <div class="field">
+          <label for="kids">Your children or stepchildren under 18 who live with you</label>
+          <input id="kids" type="number" min="0" max="12" step="1" inputmode="numeric" value="0" aria-describedby="kids-hint">
+          <span class="hint" id="kids-hint">Michigan sets aside up to $498 a month of a parent's income for each child under 18 who lives at home and isn't on SSI or cash assistance. This tool assumes the children have no income of their own. Grandchildren don't count here.</span>
+        </div>
+      </details>
+
+      <p class="subhead">Savings</p>
+      <div class="field">
+        <label for="assets">Savings and other things that count<span id="assets-who"></span></label>
+        <div class="money"><span aria-hidden="true">$</span><input id="assets" type="number" min="0" step="1" inputmode="decimal" placeholder="e.g. 3000" aria-describedby="assets-hint"></div>
+        <span class="hint" id="assets-hint">Count cash, checking and savings, CDs, stocks, bonds, a second car, and land or a house you don't live in. Count IRAs and 401(k)s at what you could take out today, minus any early withdrawal penalty. Don't count the home you live in, one car, your furniture and belongings, burial plots, up to $1,500 each set aside for burial, or life insurance with a total face value of $1,500 or less.</span>
+      </div>
+    </form>
+  </section>
+
+  <section aria-labelledby="res-h">
+    <h2 id="res-h">What Michigan would likely pay</h2>
+    <div id="total" aria-live="polite"></div>
+    <div class="results" id="extra"></div>
+    <div class="results" id="cards"></div>
+    <div class="btns noprint" id="out-btns" hidden>
+      <button class="btn ghost" type="button" id="print">Print or save as PDF</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="glance-h">
+    <h2 id="glance-h">Michigan's 2026 limits at a glance</h2>
+    <p class="hint">Monthly income limits in effect since April 1, 2026, from MDHHS Reference Table 242. They already include Michigan's $20 income deduction, so if all your income is Social Security or a pension, compare your total before taxes and premiums to these numbers. Pay from work counts less.<span id="glance-me" hidden> The shaded row is the program your income fits.</span></p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th scope="col">Program and what it pays</th><th scope="col" class="n">1 person</th><th scope="col" class="n">Married couple</th><th scope="col" class="n">Savings limit (1 / couple)</th></tr></thead>
+        <tbody id="glance-rows"></tbody>
+      </table>
+    </div>
+    <p class="hint">QMB, SLMB, and QI require income at or under the amount shown. The QDWI figure is the most a person could earn from a job and still fit, from Medicare.gov. Michigan sets QDWI at 200% of the federal poverty guideline on countable income.</p>
+  </section>
+
+  <section aria-labelledby="apply-h">
+    <h2 id="apply-h">How to apply</h2>
+    <div class="box">
+      <ol class="steps">
+        <li><strong>Apply online at MI Bridges, in person, or on paper.</strong> <a href="https://newmibridges.michigan.gov/" target="_blank" rel="noopener">MI Bridges</a> is the fastest way and gives you proof of the date you applied. You can also apply at your local MDHHS office, which has to give you a paper application if you ask. There's no separate form for these programs. Michigan uses its regular health coverage application: the MDHHS-1171 Assistance Application with its health care coverage supplement, or the DCH-1426.</li>
+        <li><strong>Turning 65 soon? You can ask now.</strong> MDHHS will look at whether Medicaid would pay your Medicare premiums before you enroll in Medicare, even in the three months before your 65th birthday.</li>
+        <li><strong>Gather proof.</strong> Have your Medicare card, your Social Security benefit letter, pension or annuity statements, recent pay stubs if you work, recent bank statements, and any life insurance policies. MDHHS tells you in writing if it needs anything else.</li>
+        <li><strong>Watch for the decision.</strong> MDHHS's standard is to decide health coverage applications within 45 days, or 90 days when it has to decide whether you're disabled. MDHHS puts you in the program your income fits. You can't pick a different one.</li>
+        <li><strong>Expect the premium to stop coming out of your check, plus a refund.</strong> After you're approved, it usually takes Social Security about 120 days to stop taking the Part B premium out of your benefit. You get a refund for the premiums taken out while that was in process.</li>
+        <li><strong>If you're denied, you can ask for a hearing.</strong> You have 90 days from the date of the notice. The <a href="../benefits-deadlines/">Benefits Cut Letter Deadlines</a> tool works out your exact date and drafts the request.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section aria-labelledby="rights-h">
+    <h2 id="rights-h">Rules that protect you</h2>
+    <div class="results" id="rights"></div>
+  </section>
+
+  <section aria-labelledby="letter-h">
+    <h2 id="letter-h">Have QMB and still got a bill?</h2>
+    <p class="hint">Doctors, hospitals, pharmacies, and labs can't bill people with QMB for Medicare deductibles, coinsurance, or copays. If one does, edit this letter, fill in the parts in [brackets], and send it to the billing office with a copy of your QMB or Medicaid card.</p>
+    <textarea id="letter" aria-labelledby="letter-h" spellcheck="true"></textarea>
+    <div class="btns noprint">
+      <button class="btn" type="button" id="copy">Copy the letter</button>
+      <span class="copied" id="copied" role="status"></span>
+    </div>
+  </section>
+
+  <section class="box gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Free help</h2>
+    <ul>
+      <li><strong>MMAP (Michigan Medicare/Medicaid Assistance Program):</strong> free, unbiased one-on-one Medicare counseling from trained counselors. They can help you apply. Call <span class="phone">1-800-803-7174</span>.</li>
+      <li><strong>MDHHS Beneficiary Help Line:</strong> questions about Michigan Medicaid and the Medicare buy-in. Call <span class="phone">1-800-642-3195</span>.</li>
+      <li><a href="https://michiganlegalhelp.org/node/11555" target="_blank" rel="noopener">Michigan Legal Help: Medicare Savings Programs</a> explains each program in plain language.</li>
+      <li><a href="https://www.medicare.gov/medicare-savings-programs" target="_blank" rel="noopener">Medicare.gov: Medicare Savings Programs</a> has the federal limits and what each program covers.</li>
+      <li><a href="https://secure.ssa.gov/i1020/start" target="_blank" rel="noopener">Apply for Extra Help with drug costs</a> on Social Security's site if you don't fit a program here. Extra Help has its own limits.</li>
+      <li><a href="../hospital-aid/">Detroit Hospital Financial Assistance Check</a> if you already owe a hospital bill.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> The tool adds up your monthly income the way Michigan's manual says to for these programs. It takes $20 off money you don't work for (or off your pay, if that's all you have). From pay for work it takes $65 and then half of the rest. If you're raising your own children under 18 at home, it first sets aside up to $498 a month for each one. The result is your countable income. Michigan's published limits already add that $20 back, so the tool compares your countable income to each limit minus $20. Savings are compared to the asset limit in MDHHS's Bridges Eligibility Manual (BEM 400).</p>
+    <p>In January, February, and March, MDHHS ignores the cost-of-living raise in your Social Security check and uses the December limits. Michigan updates the income limits each April 1 and the savings limits each January 1. Close to a limit? Apply anyway. MDHHS decides from your proof, and what it counts can differ from what you entered here.</p>
+    <p>Sources, all checked on October 31, 2026, on the official site unless noted.</p>
+    <ul id="srcs"></ul>
+    <p>Not covered: Medicaid for nursing home care, home and community waivers, and PACE, which have their own rules. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  /* ---------- Michigan Medicare Savings Program numbers ---------- */
+  // Yearly update: MDHHS posts new income limits in RFT 242 each April 1 and new asset limits in BEM 400 each January 1.
+  // CMS posts the next year's Part A and Part B amounts each fall. Change only this block.
+  const D = {
+    checked: "Oct 31, 2026",
+    limitsFrom: "April 1, 2026",
+    // RFT 242 (RFB 2026-004, effective 4-1-2026): monthly limits for [1 person, married couple]. They include the $20 disregard.
+    qmb: [1350, 1824], slmb: [1616, 2184], almb: [1816, 2455],
+    // QDWI: 200% of the poverty guideline (RFT 246) on countable income. HHS 2026 guideline: $15,960 plus $5,680 per added person.
+    fplYear: 2026, fplBase: 15960, fplStep: 5680, qdwiPct: 200,
+    // BEM 400 (BPB 2026-007): countable asset limits from Jan 1, 2026.
+    assets: [9950, 14910], qdwiAssets: [4000, 6000],
+    // BEM 541 (BPB 2026-002): allocation for each child under 18 with no income of their own, 2026.
+    childAlloc: 498,
+    // CMS fact sheet, 2026 Medicare Parts A and B premiums and deductibles (Nov 14, 2025).
+    partB: 202.90, partBDed: 283, partADed: 1736, partAPrem: [311, 565],
+    // Medicare.gov: the most you pay for each covered drug with Extra Help in 2026.
+    extraHelp: 12.65
+  };
+  const net = (prog, n) => D[prog][n - 1] - 20;            // BEM 163: net limit = RFT 242 limit minus $20
+  const qdwiNet = n => Math.ceil(D.qdwiPct / 100 * (D.fplBase + D.fplStep * (n - 1)) / 12);
+  const qdwiGrossWork = n => 2 * qdwiNet(n) + 85;           // all pay from work: ($20 + $65) off, then half
+
+  const money = (x, cents) => "$" + (cents ? x.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : Math.round(x).toLocaleString("en-US"));
+  const m2 = x => money(x, true);
+  const mAuto = x => (Math.round(x * 100) % 100 ? m2(x) : money(x));
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const $ = id => document.getElementById(id);
+  const radio = name => (document.querySelector(`input[name="${name}"]:checked`) || {}).value;
+  const numOrNull = v => { if (v === "" || v == null) return null; const x = parseFloat(v); return isFinite(x) && x >= 0 ? x : null; };
+
+  const PDF = "https://mdhhs-pres-prod.michigan.gov/olmweb/ex/";
+  const SRC = {
+    rft242: ["RFT 242", PDF + "RF/Public/RFT/242.pdf?v=2026"],
+    rft246: ["RFT 246", PDF + "RF/Public/RFT/246.pdf"],
+    bem163: ["BEM 163", PDF + "BP/Public/BEM/163.pdf"],
+    bem165: ["BEM 165", PDF + "BP/Public/BEM/165.pdf"],
+    bem169: ["BEM 169", PDF + "BP/Public/BEM/169.pdf"],
+    bem211: ["BEM 211", PDF + "BP/Public/BEM/211.pdf"],
+    bem400: ["BEM 400", PDF + "BP/Public/BEM/400.pdf"],
+    bem503: ["BEM 503", PDF + "BP/Public/BEM/503.pdf"],
+    bem541: ["BEM 541", PDF + "BP/Public/BEM/541.pdf"],
+    bam115: ["BAM 115", PDF + "BP/Public/BAM/115.pdf"],
+    bam600: ["BAM 600", PDF + "BP/Public/BAM/600.pdf"],
+    bam810: ["BAM 810", PDF + "BP/Public/BAM/810.pdf"],
+    cms: ["CMS 2026 premiums", "https://www.cms.gov/newsroom/fact-sheets/2026-medicare-parts-b-premiums-deductibles"],
+    mgov: ["Medicare.gov", "https://www.medicare.gov/medicare-savings-programs"],
+    xhelp: ["Medicare.gov: Extra Help", "https://www.medicare.gov/basics/forms-publications-mailings/mailings/help-with-costs/extra-help-automatically-qualify-automatically-enroll"],
+    qmbBill: ["CMS: QMB billing", "https://www.cms.gov/files/document/mln7936176-prohibition-billing-qualified-medicare-beneficiaries.pdf"],
+    usc1396a: ["42 U.S.C. 1396a(n)(3)", "https://www.law.cornell.edu/uscode/text/42/1396a"],
+    usc1396p: ["42 U.S.C. 1396p(b)", "https://www.law.cornell.edu/uscode/text/42/1396p"],
+    mlh: ["Michigan Legal Help", "https://michiganlegalhelp.org/node/11555"],
+    deadlines: ["Benefits Cut Letter Deadlines", "../benefits-deadlines/"]
+  };
+  const cite = ([t, u]) => `<a class="cite" href="${u}"${u.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>${esc(t)}</a>`;
+
+  /* ---------- Read the form ---------- */
+  function read() {
+    const ss = numOrNull($("ss").value), other = numOrNull($("other").value), work = numOrNull($("work").value);
+    const kids = Math.min(12, Math.max(0, Math.floor(numOrNull($("kids").value) || 0)));
+    return {
+      n: +radio("mar") || 1, age: radio("age"), parta: radio("parta"), mcaid: radio("mcaid"),
+      ss, other, work, kids, assets: numOrNull($("assets").value),
+      any: ss != null || other != null || work != null
+    };
+  }
+
+  /* ---------- Countable income (BEM 541 order) ---------- */
+  function countable(u) {
+    const steps = [];
+    let un = (u.ss || 0) + (u.other || 0), ea = u.work || 0;
+    steps.push([`Money you don't work for${u.n === 2 ? " (both of you)" : ""}`, un]);
+    if (ea) steps.push(["Pay from work", ea]);
+    let alloc = D.childAlloc * u.kids;
+    if (alloc) {
+      const a1 = Math.min(alloc, un); un -= a1;
+      const a2 = Math.min(alloc - a1, ea); ea -= a2;
+      steps.push([`Set aside for ${u.kids} ${u.kids === 1 ? "child" : "children"} at home ($${D.childAlloc} each)`, -(a1 + a2)]);
+    }
+    if (un > 0) { const d = Math.min(20, un); un -= d; steps.push(["$20 deduction", -d]); }
+    else if (ea > 0) { const d = Math.min(20, ea); ea -= d; steps.push(["$20 deduction (from pay, since there's no other income)", -d]); }
+    if (ea > 0) {
+      const d65 = Math.min(65, ea); const rest = ea - d65; const half = rest / 2;
+      steps.push(["$65 off pay from work", -d65]);
+      if (rest > 0) steps.push(["Half of the rest of your pay", -half]);
+      ea = half;
+    }
+    const total = Math.max(0, un) + Math.max(0, ea);
+    return { total, steps };
+  }
+
+  /* ---------- Program checks ---------- */
+  // Each returns { lvl: law|facts|none, tag, line, conds: [{s: ok|warn|no|info, t}], fit: bool }
+  function evaluate(u, c) {
+    const n = u.n, inc = c.total;
+    const qL = net("qmb", n), sL = net("slmb", n), aL = net("almb", n), dL = qdwiNet(n);
+    const assetLim = D.assets[n - 1], qdAssetLim = D.qdwiAssets[n - 1];
+    const assetCond = lim => u.assets == null
+      ? { s: "warn", t: `Your countable savings must be ${money(lim)} or less${n === 2 ? " for the two of you" : ""}. Enter your savings above to check.` }
+      : u.assets <= lim
+        ? { s: "ok", t: `Savings of ${money(u.assets)} are under the ${money(lim)} limit.` }
+        : { s: "no", t: `Savings of ${money(u.assets)} are over the ${money(lim)} limit. Check the list of what doesn't count before you rule this out.` };
+    const buying1818A = u.age === "under" && u.parta === "paid";
+    const noMedicareUnder65 = u.age === "under" && u.parta === "none";
+    const out = {};
+
+    // QMB
+    {
+      const conds = []; let lvl, tag, line, fit = false;
+      if (buying1818A) {
+        lvl = "none"; tag = "Not for you";
+        line = "Under 65 and paying for Part A usually means you're buying Part A after going back to work. Michigan's rules send that to QDWI below, not QMB.";
+      } else if (noMedicareUnder65) {
+        lvl = "none"; tag = "Need Medicare first";
+        line = "These programs are for people who have Medicare or can get it. Under 65, most people get Medicare after 24 months of Social Security disability benefits.";
+      } else if (inc <= qL) {
+        const a = assetCond(assetLim); conds.push(a);
+        fit = a.s !== "no";
+        lvl = a.s === "ok" ? "law" : a.s === "warn" ? "facts" : "none";
+        tag = a.s === "ok" ? "Likely fits you" : a.s === "warn" ? "Income fits" : "Savings too high";
+        line = `Your countable income of ${mAuto(inc)} is at or under QMB's ${money(qL)} limit${n === 2 ? " for a couple" : ""}.`;
+        if (u.parta === "paid") conds.push({ s: "info", t: `QMB would also pay your Part A premium (${money(D.partAPrem[0])} or ${money(D.partAPrem[1])} a month in 2026).` });
+        if (u.parta === "none") conds.push({ s: "info", t: "You don't have Part A yet. With QMB, Michigan's Part A buy-in can enroll you in Part A and pay its premium, without waiting for Medicare's enrollment period." });
+      } else {
+        lvl = "none"; tag = "Over the limit";
+        line = `Your countable income of ${mAuto(inc)} is over QMB's ${money(qL)} limit${n === 2 ? " for a couple" : ""}.`;
+      }
+      conds.push({ s: "info", t: "Starts the month after MDHHS approves you. QMB doesn't cover earlier months." });
+      out.qmb = { lvl, tag, line, conds, fit };
+    }
+
+    // SLMB and QI share the free Part A rule
+    const tier = (key, lo, hi, name) => {
+      const conds = []; let lvl, tag, line, fit = false;
+      if (buying1818A || noMedicareUnder65) {
+        lvl = "none"; tag = "Not for you";
+        line = `${name} is for people who get Part A free.`;
+      } else if (inc <= lo) {
+        lvl = "none"; tag = inc <= qL ? "QMB instead" : "SLMB instead";
+        line = `Your income is under ${name}'s range, so ${inc <= qL ? "QMB" : "SLMB"} applies instead. MDHHS puts you in the program your income fits.`;
+      } else if (inc > hi) {
+        lvl = "none"; tag = "Over the limit";
+        line = `Your countable income of ${mAuto(inc)} is over ${name}'s ${money(hi)} limit${n === 2 ? " for a couple" : ""}.`;
+      } else if (u.parta !== "free") {
+        lvl = "none"; tag = "Needs free Part A";
+        line = `Your income fits ${name}, but ${name} only covers people who get Part A free. ${u.parta === "none" ? "If you'll get Part A free when you enroll, answer as if you have it." : "Ask MDHHS or MMAP whether you can get premium-free Part A."}`;
+      } else if (key === "almb" && u.mcaid === "full") {
+        lvl = "none"; tag = "Full Medicaid instead";
+        line = "Your income fits QI, but QI is only for people who aren't getting full Medicaid. With full Medicaid, Michigan should already pay your Part B premium.";
+      } else {
+        const a = assetCond(assetLim); conds.push(a);
+        fit = a.s !== "no";
+        lvl = a.s === "ok" ? "law" : a.s === "warn" ? "facts" : "none";
+        tag = a.s === "ok" ? "Likely fits you" : a.s === "warn" ? "Income fits" : "Savings too high";
+        line = `Your countable income of ${mAuto(inc)} is between ${money(lo)} and ${money(hi)}, ${name}'s range${n === 2 ? " for a couple" : ""}.`;
+      }
+      return { lvl, tag, line, conds, fit };
+    };
+    out.slmb = tier("slmb", qL, sL, "SLMB");
+    out.slmb.conds.push({ s: "info", t: "Can cover up to 3 months before the month you apply, for months your income fit." });
+    out.almb = tier("almb", sL, aL, "QI");
+    out.almb.conds.push(
+      { s: "info", t: "Paid only while federal money for QI lasts that year. MDHHS decides whether funding is available." },
+      { s: "info", t: "Can cover earlier months, but never a month in a past year, even if you applied then. Renew every year. MDHHS may contact you as early as September." }
+    );
+
+    // QDWI
+    {
+      const conds = []; let lvl, tag, line, fit = false;
+      if (!buying1818A) {
+        lvl = "none"; tag = "Not for you";
+        line = "QDWI is only for people under 65 with a disability who lost free Part A because they went back to work, and now pay for Part A.";
+      } else if (u.mcaid === "full") {
+        lvl = "none"; tag = "Full Medicaid instead";
+        line = "QDWI is only for people who can't get Medicaid any other way.";
+      } else if (inc <= dL) {
+        const a = assetCond(qdAssetLim); conds.push(a);
+        fit = a.s !== "no";
+        lvl = a.s === "ok" ? "law" : a.s === "warn" ? "facts" : "none";
+        tag = a.s === "ok" ? "Likely fits you" : a.s === "warn" ? "Income fits" : "Savings too high";
+        line = `Your countable income of ${mAuto(inc)} is at or under QDWI's ${money(dL)} limit (200% of the poverty guideline${n === 2 ? " for 2" : ""}).`;
+        conds.push({ s: "info", t: "You must not be able to get Medicaid in any other category." });
+      } else {
+        lvl = "none"; tag = "Over the limit";
+        line = `Your countable income of ${mAuto(inc)} is over QDWI's ${money(dL)} limit.`;
+      }
+      out.qdwi = { lvl, tag, line, conds, fit };
+    }
+    return out;
+  }
+
+  const PROGRAMS = [
+    { id: "qmb", name: "QMB (Qualified Medicare Beneficiary)", short: "QMB",
+      pays: () => `Pays your Part B premium (${m2(D.partB)} a month), your Part A premium if you pay one, and Medicare's deductibles, coinsurance, and copays, such as the ${money(D.partBDed)} Part B deductible, the 20% you usually owe for doctor visits, and the ${money(D.partADed)} Part A hospital deductible. Doctors and hospitals can't bill you for those amounts.`,
+      cites: ["bem165", "rft242", "bam810", "cms"] },
+    { id: "slmb", name: "SLMB (Specified Low-Income Medicare Beneficiary)", short: "SLMB",
+      pays: () => `Pays your Part B premium: ${m2(D.partB)} a month, or ${m2(D.partB * 12)} a year. It doesn't pay deductibles or copays.`,
+      cites: ["bem165", "rft242", "bam810"] },
+    { id: "almb", name: "QI (Qualifying Individual), called ALMB in Michigan", short: "QI",
+      pays: () => `Pays your Part B premium: ${m2(D.partB)} a month, or ${m2(D.partB * 12)} a year. It doesn't pay deductibles or copays.`,
+      cites: ["bem165", "rft242", "bam810"] },
+    { id: "qdwi", name: "QDWI (Qualified Disabled Working Individual)", short: "QDWI",
+      pays: () => `Pays only your Part A premium (${money(D.partAPrem[0])} or ${money(D.partAPrem[1])} a month in 2026, depending on your work record).`,
+      cites: ["bem169", "rft246", "bem400"] }
+  ];
+  const ICON = { ok: "✓", warn: "!", no: "✕", info: "•" };
+
+  function progCard(p, r, mine) {
+    const conds = r.conds.map(c => `<li class="${c.s}"><span class="ic" aria-hidden="true">${ICON[c.s]}</span><span>${c.s === "warn" ? "<strong>Check:</strong> " : ""}${c.t}</span></li>`).join("");
+    return `<article class="card ${r.lvl}${mine ? " mine" : ""}" id="card-${p.id}">
+      <div class="top"><h3>${esc(p.name)}</h3><span class="tag ${r.lvl}">${esc(r.tag)}</span></div>
+      <p class="verdict">${r.line}</p>
+      <p class="pays"><strong>What it pays:</strong> ${p.pays()}</p>
+      ${conds ? `<ul class="conds">${conds}</ul>` : ""}
+      <div class="cites">${p.cites.map(k => cite(SRC[k])).join("")}</div>
+    </article>`;
+  }
+
+  function lawCard(level, tag, title, body, cites) {
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${tag}</span></div>
+      <p>${body}</p>
+      ${cites && cites.length ? `<div class="cites">${cites.map(k => cite(SRC[k])).join("")}</div>` : ""}
+    </article>`;
+  }
+
+  /* ---------- Render ---------- */
+  function run() {
+    const u = read();
+    $("inc-who").textContent = u.n === 2 ? ", for you and your spouse together" : "";
+    $("assets-who").textContent = u.n === 2 ? ", for you and your spouse together" : "";
+    if (!u.any) {
+      $("total").innerHTML = `<div class="total"><p class="prompt">Enter your monthly income above to see which program fits. The table below shows Michigan's 2026 limits.</p></div>`;
+      $("extra").innerHTML = ""; $("cards").innerHTML = ""; $("out-btns").hidden = true;
+      renderGlance(null, u.n);
+      return;
+    }
+    const c = countable(u);
+    const R = evaluate(u, c);
+    const order = ["qmb", "slmb", "almb", "qdwi"];
+    const best = order.find(k => R[k].fit && R[k].lvl === "law") || order.find(k => R[k].fit);
+    const bestP = PROGRAMS.find(p => p.id === best);
+    const n = u.n, inc = c.total;
+    const aL = net("almb", n);
+
+    const math = `<details class="more"><summary>How your countable income was figured</summary><ol class="math">${c.steps.map(([t, v]) => `<li>${esc(t)}: <span class="n">${v < 0 ? "minus " + mAuto(-v) : mAuto(v)}</span></li>`).join("")}<li><strong>Countable income: <span class="n">${mAuto(inc)}</span> a month</strong></li></ol></details>`;
+
+    let head, cls, body;
+    if (best) {
+      const sure = R[best].lvl === "law";
+      cls = sure ? "law" : "facts";
+      head = sure ? `Likely ${bestP.short}` : `${bestP.short}, if your savings fit`;
+      const what = best === "qmb"
+        ? `Michigan would likely pay your Part B premium (${m2(D.partB)} a month, ${m2(D.partB * 12)} a year) and your Medicare deductibles, coinsurance, and copays.`
+        : best === "qdwi"
+          ? `Michigan would likely pay your Part A premium.`
+          : `Michigan would likely pay your Part B premium: ${m2(D.partB)} a month, or ${m2(D.partB * 12)} a year${best === "almb" ? ", as long as federal funding for QI lasts" : ""}.`;
+      body = `<p>${what}${best !== "qdwi" ? " You'd also get Extra Help with prescription drug costs automatically." : ""}</p>${sure ? "" : `<p>Your income fits. Your countable savings also have to be ${money((best === "qdwi" ? D.qdwiAssets : D.assets)[n - 1])} or less.</p>`}`;
+    } else if (u.mcaid === "full") {
+      cls = "law";
+      head = "Full Medicaid should already pay Part B";
+      body = `<p>No Medicare Savings Program fits these answers, but people with full Medicaid usually have their Part B premium paid by Michigan's buy-in anyway. See the first card below.</p>`;
+    } else {
+      cls = "none";
+      const savingsOnly = order.some(k => R[k].tag === "Savings too high");
+      head = savingsOnly ? "Income fits, savings too high" : "No program fits these answers";
+      body = savingsOnly
+        ? `<p>Your income fits a program, but your savings are over the limit. Check the list of what doesn't count. Your home, one car, belongings, burial plots, and up to $1,500 each for burial are left out.</p>`
+        : (u.age === "under" && u.parta === "none")
+          ? `<p>These programs are for people who have Medicare. Check back once you're enrolled.</p>`
+          : `<p>The cards below explain why. ${inc > aL && inc - aL <= 50 ? `You're only ${mAuto(inc - aL)} a month over QI's limit, so apply anyway. MDHHS decides from your proof.` : "Extra Help with drug costs has higher limits, so it may still help."}</p>`;
+    }
+    $("total").innerHTML = `<div class="total ${cls}">
+      <div class="big">${esc(head)}</div>
+      ${body}
+      <div class="figs">
+        <div class="fig"><b>${mAuto(inc)}</b><span>your countable income a month</span></div>
+        ${u.age === "under" && u.parta === "paid"
+          ? `<div class="fig"><b>${money(qdwiNet(n))}</b><span>QDWI limit on countable income</span></div>`
+          : `<div class="fig"><b>${money(net("qmb", n))}</b><span>QMB limit on countable income</span></div>
+        <div class="fig"><b>${money(aL)}</b><span>top of the QI range</span></div>`}
+      </div>
+      ${math}
+    </div>`;
+
+    // Extra cards about Medicaid, Extra Help, and close calls
+    const extra = [];
+    if (u.mcaid === "full") extra.push(lawCard("law", "Michigan's rule", "You have full Medicaid, so Michigan should already pay Part B",
+      "Michigan's Part B buy-in pays the premium for most people with full Medicaid, even when their income is over these limits (Michigan calls this NMB). MDHHS also checks people on full Medicaid for QMB and SLMB without a new application. If Social Security still takes the Part B premium out of your check, call the MDHHS Beneficiary Help Line at 1-800-642-3195 or your caseworker.", ["bem165", "bam810"]));
+    if (u.mcaid === "deduct") extra.push(lawCard("facts", "Depends on facts", "With a Medicaid deductible (spend-down)",
+      "MDHHS has to check people on Medicaid with a deductible for these programs without a new application. While you're in deductible status, you can still get QI, and if MDHHS finds you QI-eligible when you report meeting your deductible, you stay QI-eligible.", ["bem165"]));
+    if (best && best !== "qdwi" && u.mcaid !== "full") extra.push(lawCard("law", "Federal rule", "Extra Help with drug costs comes with it",
+      `People in QMB, SLMB, or QI automatically qualify for Extra Help with Medicare drug coverage and don't need to apply for it. In 2026 you'd pay no more than ${m2(D.extraHelp)} for each covered drug. You still need a Medicare drug plan, and Medicare may enroll you in one.`, ["xhelp", "mgov"]));
+    if (R.qmb.fit && u.mcaid !== "full" && !(u.age === "under" && u.parta === "none")) extra.push(lawCard("facts", "Depends on facts", "You may also qualify for full Medicaid",
+      `Michigan's AD-Care Medicaid for people who are 65 or older or disabled uses the same income limit as QMB, and the same ${money(D.assets[n - 1])} savings limit. Full Medicaid can cover care Medicare doesn't. Ask MDHHS to check you for all Medicaid programs when you apply.`, ["bem163", "bem400"]));
+    if (!best && inc > aL && inc - aL <= 50 && !(u.age === "under" && u.parta !== "free")) extra.push(lawCard("facts", "Depends on facts", "Just over the limit? Apply anyway",
+      "Small differences in what counts, like a pension amount or how pay from work is figured, can change the answer. MDHHS decides from your proof, not from this page.", ["bem165", "bem541"]));
+    $("extra").innerHTML = extra.join("");
+
+    $("cards").innerHTML = PROGRAMS.map(p => progCard(p, R[p.id], p.id === best)).join("");
+    $("out-btns").hidden = false;
+    renderGlance(best, n);
+  }
+
+  function renderGlance(best, n) {
+    $("glance-me").hidden = !best;
+    const rows = [
+      ["qmb", "QMB", "Part B and Part A premiums, deductibles, and copays", D.qmb, D.assets],
+      ["slmb", "SLMB", "Part B premium", D.slmb, D.assets],
+      ["almb", "QI (ALMB)", "Part B premium, while funding lasts", D.almb, D.assets],
+      ["qdwi", "QDWI", "Part A premium only", [qdwiGrossWork(1), qdwiGrossWork(2)], D.qdwiAssets]
+    ];
+    $("glance-rows").innerHTML = rows.map(([id, name, pays, lim, as]) =>
+      `<tr${id === best ? ' class="me"' : ""}><td><a href="#card-${id}">${name}</a><br><span class="hint">${pays}</span></td><td class="n">${money(lim[0])}</td><td class="n">${money(lim[1])}</td><td class="n">${money(as[0])}<br>${money(as[1])}</td></tr>`).join("");
+  }
+
+  /* ---------- Rights ---------- */
+  $("rights").innerHTML = [
+    lawCard("law", "Federal law", "With QMB, providers can't bill you for Medicare cost sharing",
+      "Doctors, hospitals, pharmacies, and other providers that take Medicare can't bill people with QMB for Medicare deductibles, coinsurance, or copays. That covers Original Medicare and Medicare Advantage, and providers who don't take Medicaid. You can't agree to pay those amounts even if you want to, and providers have to take back bills and refund what QMB members paid. You may still owe a small Medicaid copay. Show your Medicare card and your Medicaid or QMB card at every visit.", ["qmbBill", "usc1396a", "mgov"]),
+    lawCard("law", "Federal law", "No estate recovery for these benefits",
+      "After someone dies, Michigan can try to recover some Medicaid costs from their estate. Federal law leaves out Medicaid's payments for Medicare premiums, deductibles, and copays under these programs.", ["usc1396p"]),
+    lawCard("law", "Michigan's rule", "You get back premiums taken out while your case was processed",
+      "Social Security takes about 120 days to stop deducting the Part B premium after Michigan starts paying it. You get a refund for the months in between, and MDHHS doesn't count that refund as income or savings.", ["bam810", "bem503"]),
+    lawCard("law", "Michigan's rule", "No waiting for Medicare's enrollment period",
+      "If you're in one of these programs and don't have Part B (or, with QMB, Part A), Michigan's buy-in can enroll you. Medicare's January to March general enrollment period doesn't apply to people in the buy-in.", ["bam810"]),
+    lawCard("law", "Michigan's rule", "90 days to ask for a hearing if you're denied",
+      "You can ask for a hearing within 90 days of the date on a notice that denies, lowers, or stops your benefits. MDHHS has to receive the request by then.", ["bam600", "deadlines"])
+  ].join("");
+
+  /* ---------- QMB billing letter ---------- */
+  $("letter").value = [
+    "[Today's date]", "",
+    "To: Billing Office, [Provider's name]",
+    "Re: Bill dated [date], account number [number]", "",
+    "Patient: [Your name]",
+    "Medicare number: [Number on your red, white, and blue Medicare card]",
+    "Michigan Medicaid ID: [Number on your mihealth card]", "",
+    "I am enrolled in the Qualified Medicare Beneficiary (QMB) program through Michigan Medicaid, and I was enrolled on the dates of service on this bill. A copy of my card is enclosed.", "",
+    "Federal law does not allow providers to bill people in the QMB program for Medicare deductibles, coinsurance, or copayments (Social Security Act sections 1902(n)(3)(B) and 1866(a)(1)(A)). This applies whether or not you take Medicaid, and to both Original Medicare and Medicare Advantage. CMS explains this in its fact sheet \"Prohibition on Billing Qualified Medicare Beneficiaries\" (MLN7936176).", "",
+    "Please:",
+    "1. Take back this bill and any amount sent to collections.",
+    "2. Refund any Medicare cost sharing I have already paid.",
+    "3. Bill Michigan Medicaid for the Medicare cost sharing instead, and update my account to show my QMB status.", "",
+    "Please confirm in writing that this is done.", "",
+    "Thank you,", "[Your name]", "[Phone]", "[Mailing address]"
+  ].join("\n");
+  $("copy").addEventListener("click", async () => {
+    const status = $("copied"), text = $("letter").value;
+    try { await navigator.clipboard.writeText(text); status.textContent = "Copied."; }
+    catch (e) {
+      $("letter").select();
+      let ok = false; try { ok = document.execCommand("copy"); } catch (e2) {}
+      status.textContent = ok ? "Copied." : "Couldn't copy. Select the text and copy it yourself.";
+    }
+    setTimeout(() => { status.textContent = ""; }, 5000);
+  });
+
+  /* ---------- Sources ---------- */
+  const a = k => `<a href="${SRC[k][1]}" target="_blank" rel="noopener">${esc(SRC[k][0])}</a>`;
+  $("srcs").innerHTML = [
+    `Income limits: MDHHS Reference Tables Manual ${a("rft242")}, AD-Care and Medicare Savings Program Income Limits (RFB 2026-004, effective April 1, 2026). QDWI at 200% of poverty: ${a("rft246")}.`,
+    `Program rules: Bridges Eligibility Manual ${a("bem165")}, Medicare Savings Programs (July 1, 2024), ${a("bem169")}, Qualified Disabled Working Individuals, and ${a("bem163")}, AD-Care.`,
+    `Savings: ${a("bem400")}, Assets (April 1, 2026), which sets ${money(D.assets[0])} for one person and ${money(D.assets[1])} for two from January 1, 2026, and ${money(D.qdwiAssets[0])} and ${money(D.qdwiAssets[1])} for QDWI.`,
+    `Counting income: ${a("bem541")}, SSI-related income deductions (January 1, 2026), ${a("bem503")}, Unearned Income (October 1, 2026), and ${a("bem211")}, Group Composition (May 1, 2026).`,
+    `Medicare buy-in, start dates, refunds, and hearings: ${a("bam810")} (June 1, 2024), ${a("bam115")} (October 1, 2026), and ${a("bam600")} (May 1, 2026).`,
+    `2026 premiums and deductibles: ${a("cms")} fact sheet (November 14, 2025). Federal limits and Extra Help: ${a("mgov")} and ${a("xhelp")}.`,
+    `QMB billing protection: ${a("qmbBill")} fact sheet MLN7936176 (September 2025) and ${a("usc1396a")}. Estate recovery: ${a("usc1396p")}(1)(B)(ii).`,
+    `Plain-language summary: ${a("mlh")}. MMAP phone number and free counseling from the State of Michigan's MMAP page and AgeWays (ageways.org).`
+  ].map(x => `<li>${x}</li>`).join("");
+
+  /* ---------- Wire up ---------- */
+  $("f").addEventListener("input", run);
+  $("f").addEventListener("change", run);
+  $("f").addEventListener("submit", e => e.preventDefault());
+  $("print").addEventListener("click", () => window.print());
+  run();
+})();
+</script>
+</body>
+</html>
