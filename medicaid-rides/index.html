@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Michigan Medicaid Free Rides: Transportation Phone Number for Each Plan</title>
+<meta name="description" content="Free rides to doctor visits with Michigan Medicaid. The ride phone number for Meridian, Molina, McLaren, Blue Cross Complete, HAP CareSource, Priority, UHC, Aetna, and UPHP.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/medicaid-rides/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Michigan Medicaid Free Rides: Transportation Phone Number for Each Plan">
+<meta property="og:description" content="Free rides to doctor visits with Michigan Medicaid. The ride phone number for Meridian, Molina, McLaren, Blue Cross Complete, HAP CareSource, Priority, UHC, Aetna, and UPHP.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/medicaid-rides/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/medicaid-rides.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. Pick your plan, see who to call and when, get a call script, then the rules every plan has to follow, what to do if a ride doesn't come, every plan at a glance, and sources. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --none: #5d6b77; --none-bg: #e9edf0;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    --none: #a3b2bf; --none-bg: #24313c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  --none: #a3b2bf; --none-bg: #24313c;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr);
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.emerg { border-left: 5px solid var(--help); background: var(--help-bg); border-radius: 10px; padding: 12px 16px; font-size: 15px; }
+section { display: grid; gap: 12px; min-width: 0; grid-template-columns: minmax(0, 1fr); }
+section > *, .wrap > * { min-width: 0; }
+.box {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 18px; min-width: 0;
+}
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="date"], input[type="time"], select, textarea {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px; min-width: 0;
+}
+textarea { max-width: none; font-size: 15px; line-height: 1.5; min-height: 300px; resize: vertical; }
+.hint { font-size: 14px; color: var(--muted); }
+.plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 8px; }
+.plans label {
+  display: flex; gap: 10px; align-items: flex-start; font-weight: 400; cursor: pointer;
+  border: 1.5px solid var(--line); border-radius: 10px; padding: 10px 12px; background: var(--bg);
+}
+.plans label:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.plans input, .opts input { margin-top: 5px; accent-color: var(--accent); flex: 0 0 auto; }
+.plans .other { grid-column: 1 / -1; }
+.plans small { display: block; color: var(--muted); font-size: 13px; }
+.opts { display: grid; gap: 6px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+details.more > summary { cursor: pointer; font-weight: 700; color: var(--accent); }
+details.more[open] > summary { margin-bottom: 12px; }
+button.btn {
+  font: inherit; font-size: 15px; font-weight: 700; cursor: pointer;
+  border-radius: 8px; padding: 9px 14px; border: 1.5px solid var(--accent);
+  background: var(--accent); color: var(--surface);
+}
+button.btn.ghost { background: transparent; color: var(--accent); }
+button.btn:hover { filter: brightness(1.08); }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* Result */
+.result {
+  background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--accent);
+  border-radius: 12px; padding: 18px; display: grid; gap: 14px;
+}
+.result .who { display: grid; gap: 4px; }
+.result .who .sub { color: var(--muted); font-size: 15px; }
+.callbox { display: grid; gap: 6px; }
+.bigtel {
+  display: inline-block; justify-self: start;
+  font-family: var(--f-display); font-weight: 800; font-size: clamp(30px, 8vw, 42px); line-height: 1.05;
+  font-variant-numeric: tabular-nums; text-decoration: none; color: var(--accent);
+}
+.bigtel:hover { text-decoration: underline; }
+.when {
+  background: var(--accent-soft); border-radius: 10px; padding: 12px 14px; display: grid; gap: 4px;
+}
+.when.late { background: var(--facts-bg); }
+.when .d { font-weight: 700; font-size: 19px; }
+.others { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 15px; }
+.others li { display: grid; gap: 2px; }
+.tel { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 500; }
+.checked { font-size: 13px; color: var(--muted); }
+dl.facts { margin: 0; display: grid; gap: 10px; font-size: 15px; }
+dl.facts > div { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr); gap: 4px 14px; border-top: 1px solid var(--line); padding-top: 10px; }
+dl.facts dt { font-weight: 700; }
+dl.facts dd { margin: 0; }
+@media (max-width: 520px) { dl.facts > div { grid-template-columns: minmax(0, 1fr); } }
+.src { font-size: 12px; font-family: var(--f-mono); color: var(--muted); white-space: nowrap; }
+
+/* Tables */
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: 13px; font-weight: 700; color: var(--muted); }
+tr.me td { background: var(--accent-soft); }
+
+/* Cards */
+.results { display: grid; gap: 12px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 10px; border-left: 5px solid var(--line);
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.card ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.tag.you { color: var(--accent); background: var(--accent-soft); }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+ol.steps { margin: 0; padding-left: 22px; display: grid; gap: 14px; }
+ol.steps > li { padding-left: 4px; }
+ol.steps > li > strong:first-child { display: block; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.copied { font-size: 14px; color: var(--law); }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+@media (prefers-reduced-motion: no-preference) {
+  .result, .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+@media print {
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .noprint, .notice, .emerg { display: none !important; }
+  .wrap { padding: 0; gap: 16px; }
+  .card, .result, .box, .scroll { break-inside: avoid; border-color: #999; }
+  a { color: #000; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Michigan · Medicaid · free rides</span>
+    <h1>Michigan Medicaid Free Rides Finder</h1>
+    <p class="lede">Michigan Medicaid and the Healthy Michigan Plan give free rides to the doctor, dentist, pharmacy, lab, therapy, dialysis, and mental health or recovery visits. If you have a car or a friend can drive you, your plan can pay you back for the miles instead. Pick the plan on your card to see the number to call, how far ahead to book, and the call-by date for your appointment.</p>
+    <div class="notice">
+      <strong>This is information, not legal or medical advice.</strong>
+      <span>Every phone number and booking rule here was checked on each plan's own website and the state's list on October 31, 2026. Plans change ride companies, so if a number doesn't work, call the member services number on your card. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+    <p class="emerg"><strong>Emergency? Call 911.</strong> These rides are for appointments, not emergencies.</p>
+  </header>
+
+  <section aria-labelledby="you-h">
+    <h2 id="you-h">Your plan and your appointment</h2>
+    <form class="box" id="f" novalidate>
+      <div class="field">
+        <span class="lbl" id="l-plan">Which health plan is on your card?</span>
+        <span class="hint">Look at the cards you show the doctor. Plan members get a card with the plan's name and logo. Everyone also gets the state's mihealth card, so if that's the only card you have, you likely have no plan.</span>
+        <div class="plans" id="plans" role="radiogroup" aria-labelledby="l-plan"></div>
+      </div>
+
+      <div class="field" id="county-f" hidden>
+        <span class="lbl" id="l-county">Where do you live?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-county">
+          <label><input type="radio" name="county" value="wom"> Wayne, Oakland, or Macomb County (including Detroit)</label>
+          <label><input type="radio" name="county" value="other"> Another Michigan county</label>
+        </div>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label for="adate">Appointment date (optional)</label>
+          <input id="adate" type="date">
+          <span class="hint">We'll work out the last day to call for your ride.</span>
+        </div>
+        <div class="field">
+          <label for="atime">Appointment time (optional)</label>
+          <input id="atime" type="time">
+        </div>
+      </div>
+
+      <details class="more">
+        <summary>Anything special about this ride? (optional, for your call script)</summary>
+        <div class="opts">
+          <label><input type="checkbox" name="need" value="wheel"> I use a wheelchair, walker, or oxygen, or need help getting in and out</label>
+          <label><input type="checkbox" name="need" value="rider"> An adult needs to come with me</label>
+          <label><input type="checkbox" name="need" value="kids"> Children are riding (the patient or kids with me)</label>
+          <label><input type="checkbox" name="need" value="urgent"> It's urgent, for today or tomorrow</label>
+          <label><input type="checkbox" name="need" value="miles"> I'll drive myself or a friend or family member will drive me</label>
+          <label><input type="checkbox" name="need" value="standing"> It repeats, like dialysis, chemo, or therapy</label>
+        </div>
+      </details>
+    </form>
+  </section>
+
+  <section aria-labelledby="res-h">
+    <h2 id="res-h">Who to call</h2>
+    <div id="result" aria-live="polite"></div>
+  </section>
+
+  <section aria-labelledby="script-h" id="script-sec">
+    <h2 id="script-h">What to say when you call</h2>
+    <p class="hint">It fills in from your answers above. Have your card in front of you, and fill in the parts in [brackets] before you call. Write down the trip number they give you.</p>
+    <textarea id="script" aria-labelledby="script-h" spellcheck="true"></textarea>
+    <div class="btns noprint">
+      <button class="btn" type="button" id="copy">Copy the script</button>
+      <button class="btn ghost" type="button" id="reset">Start over from my answers</button>
+      <button class="btn ghost" type="button" id="print">Print or save as PDF</button>
+      <span class="copied" id="copied" role="status"></span>
+    </div>
+  </section>
+
+  <section aria-labelledby="rules-h">
+    <h2 id="rules-h">What every Michigan Medicaid plan has to do</h2>
+    <p class="hint">From the state's 2026 contract with the health plans and the Medicaid Provider Manual. Green cards are what the rules say. Amber cards depend on your situation.</p>
+    <div class="results" id="rules"></div>
+  </section>
+
+  <section aria-labelledby="late-h">
+    <h2 id="late-h">If your ride is late or doesn't come</h2>
+    <div class="box">
+      <ol class="steps">
+        <li><strong>Call the ride line right away.</strong> Use the number you booked with and give your trip number. Most ride companies have a "Where's my ride" option. Plans must tell you about delays and find you another ride when one falls through.</li>
+        <li><strong>Call your doctor's office.</strong> Tell them you're on your way or that the ride didn't come, so they can hold or move your visit.</li>
+        <li><strong>Call your plan's member services and ask to file a complaint.</strong> Every plan has to have a complaint process for rides. Write down the date, the time, who you talked to, and what they said. If you missed your visit, ask them to set up a ride for the new date.</li>
+        <li><strong>Still stuck? Call the state.</strong> The MDHHS Beneficiary Help Line is <a class="tel" href="tel:+18006423195">(800) 642-3195</a>, Monday to Friday, 8 AM to 7 PM.</li>
+        <li><strong>Got a letter denying a ride?</strong> You have a right to a hearing. Plan members first appeal to the plan. See <a href="../benefits-deadlines/">Benefits Cut Letter Deadlines</a> for the deadlines, and keep the letter.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section aria-labelledby="glance-h">
+    <h2 id="glance-h">Every plan at a glance</h2>
+    <p class="hint">Plans in A to Z order by name. "Business days" means Monday to Friday. Plans may not count holidays either, so call a day early around a holiday.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th scope="col">Plan</th><th scope="col">Call for a ride</th><th scope="col">Book at least</th><th scope="col">Ride company</th><th scope="col">Checked</th></tr></thead>
+        <tbody id="glance-rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="box gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Other help</h2>
+    <ul>
+      <li>Don't know your plan, or want to change plans? Call <strong>MI Enrolls</strong> at <a class="tel" href="tel:+18009757630">(800) 975-7630</a> (TTY <a class="tel" href="tel:+18882635897">(888) 263-5897</a>), Monday to Friday, 8 AM to 7 PM. You can also see your plan in your <a href="https://newmibridges.michigan.gov/" target="_blank" rel="noopener">MI Bridges</a> account.</li>
+      <li>Kids' dental visits under Healthy Kids Dental: the ride comes from your Medicaid health plan's ride line. With no plan, it comes from ModivCare or your local office, same as above.</li>
+      <li>Rides to some community mental health services may come from your local Community Mental Health agency instead. Ask your case manager.</li>
+      <li>No plan and not in Wayne, Oakland, or Macomb? Find your county's MDHHS office on the <a href="https://www.michigan.gov/mdhhs/inside-mdhhs/county-offices" target="_blank" rel="noopener">state's county office map</a>.</li>
+      <li>On Medicare too? The <a href="../medicare-savings/">Michigan Medicare Savings Program Check</a> shows if the state can pay your Part B premium and Medicare copays.</li>
+      <li>A medical bill after a ride or an ambulance? The <a href="../bill-checker/">Detroit Medical Bill Check</a> shows what Medicare pays for each code.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> Each plan's ride number, ride company, and booking notice come from the plan's own member page or member handbook, checked against the Michigan Department of Health and Human Services list of health plan ride contacts (revised October 1, 2026). Where the two differ, we show the plan's own words first and say what the state's list adds. The call-by date counts back from your appointment: business days skip Saturdays and Sundays, and "72 hours" counts back three calendar days.</p>
+    <p>Not covered by these rides: people with Emergency Services Only Medicaid or Plan First, people who haven't met a spend-down yet, and nursing home residents, whose home arranges routine rides. Trips that aren't for a covered service, like the grocery store, aren't covered either, though HAP CareSource adds some food pantry trips.</p>
+    <p>Sources, all checked on October 31, 2026:</p>
+    <ul id="srcs"></ul>
+    <p>Free and open source. Nothing you enter is sent anywhere or stored.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const CHECKED = "Oct 31, 2026";
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const telHref = d => "tel:+1" + d.replace(/\D/g, "").replace(/^1/, "");
+  const tel = d => `<a class="tel" href="${telHref(d)}">${esc(d)}</a>`;
+  const fmt = d => d.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+  const short = d => d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+
+  /* ---------- Sources ---------- */
+  const STATE_LIST = "https://www.michigan.gov/mdhhs/-/media/Project/Websites/mdhhs/Assistance-Programs/Medicaid-BPHASA/Other-Prov-Specific-Page-Docs/MHP-NEMT-Contact-and-Process.pdf?rev=8bf598eb188d4048b0dc7491adcc47d9&hash=5E1B763687DF540BF7E29EB2995EA93E";
+  const SRC = {
+    state: ["State's plan ride list (PDF, rev. Oct 1, 2026)", STATE_LIST],
+    contract: ["State contract with plans, sec. 1.1.VI.H (PDF)", "https://www.michigan.gov/mdhhs/-/media/Project/Websites/mdhhs/Assistance-Programs/Medicaid-BPHASA/Other-Prov-Specific-Page-Docs/FY26-CHCP-Clean-Contract-Final.pdf?rev=46379112d28e427cb5825ac7b0104663&hash=282362D1FF0DF4B3E70D8E109C3599F6"],
+    mpm: ["Medicaid Provider Manual, NEMT chapter (large PDF)", "https://www.mdch.state.mi.us/dch-medicaid/manuals/MedicaidProviderManual.pdf"],
+    cfr431: ["42 CFR 431.53", "https://www.law.cornell.edu/cfr/text/42/431.53"],
+    handbook: ["State's model member handbook (Word)", "https://www.michigan.gov/mdhhs/-/media/Project/Websites/mdhhs/Assistance-Programs/Medicaid-BPHASA/Other-Prov-Specific-Page-Docs/FY26-CHCP--Model-Enrollee-Handbook-Clean.docx?rev=8fbb53a754a14e3ab89e14b4e9a12d77&hash=0DCA0E467844724614820B18FC9D3D09"],
+    modivMI: ["ModivCare Michigan page", "https://www.modivcare.com/facilities/mi"],
+    offices: ["MDHHS county offices", "https://www.michigan.gov/mdhhs/inside-mdhhs/county-offices"],
+    deltaRides: ["Healthy Kids Dental ride page", "https://www.deltadentalmi.com/transportation-services-non-emergency"],
+    deadlines: ["Benefits Cut Letter Deadlines", "../benefits-deadlines/"]
+  };
+  const cite = ([t, u]) => `<a class="cite" href="${u}"${u.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>${esc(t)}</a>`;
+
+  /* ---------- Plans ---------- */
+  // lead.unit: "biz" counts back Monday to Friday days, "cal" counts back calendar days, "none" means call as soon as you know.
+  // Each line in rows is [label, text, sourceLabel]. sourceLabel says where that line came from.
+  const PLANS = [
+    {
+      id: "aetna", name: "Aetna Better Health of Michigan", company: "MTM",
+      ride: { n: "(844) 610-7437", label: "MTM, Aetna's ride company", note: "TTY 711. Rides run 24 hours a day, every day.", src: "Aetna's ride page" },
+      alt: [{ n: "(866) 316-3784", label: "Aetna Member Services", note: "TTY 711. Monday to Friday, 8 AM to 5 PM. Questions about rides.", src: "Aetna's ride page" }],
+      lead: { n: 3, unit: "biz", text: "3 business days" },
+      rows: [
+        ["Shorter notice", "OK for a pickup after a hospital stay, a pharmacy trip for medicine or approved supplies, or an urgent problem that needs care within 24 hours.", "Aetna"],
+        ["Someone with you", "One adult can ride with you as an attendant.", "Aetna"],
+        ["Kids", "Children 15 and younger ride with a parent, guardian, or other approved adult, unless the visit is confidential.", "Aetna"],
+        ["Long trips", "More than 60 miles to an in-network provider needs prior approval and 3 business days' notice.", "Aetna"],
+        ["Be ready", "Be ready 30 minutes before the driver is due. Cancel before the scheduled trip if your visit changes.", "Aetna"],
+        ["Mileage pay", "Not described on Aetna's page. Ask MTM. The state contract requires plans to offer it.", "State contract"]
+      ],
+      srcs: [["Aetna's ride page", "https://www.aetnabetterhealth.com/michigan/transportation-services.html"], SRC.state]
+    },
+    {
+      id: "bcc", name: "Blue Cross Complete of Michigan", company: "MTM Health",
+      ride: { n: "(888) 803-4947", label: "MTM Health, Blue Cross Complete's ride company", note: "TTY 711. 24 hours a day, 7 days a week. Also for late rides and will-call pickups.", src: "Blue Cross Complete's ride page" },
+      alt: [{ n: "(800) 228-8554", label: "Blue Cross Complete Customer Service", note: "24 hours a day, 7 days a week. Feedback or problems with a ride.", src: "Blue Cross Complete's ride page" }],
+      lead: { n: 2, unit: "biz", text: "2 business days", extra: "1 business day for Children's Special Health Care Services members (state's list)." },
+      rows: [
+        ["Shorter notice", "Call (don't book online) if you can't give 2 business days. Urgent visits include sick visits, visits when you're pregnant, and follow-ups within 24 hours of leaving the hospital. A will-call ride home can take up to 60 minutes to arrive.", "Blue Cross Complete"],
+        ["Pickup", "About one hour before your appointment.", "Blue Cross Complete"],
+        ["Someone with you", "You and one other passenger. A caregiver can bring up to four children under 18 if you say so when you book.", "Blue Cross Complete"],
+        ["Car seats and equipment", "Bring your own car seat or booster, wheelchair, and oxygen. Riders without them won't be taken.", "Blue Cross Complete"],
+        ["Cancel", "At least 4 hours before your appointment.", "Blue Cross Complete"],
+        ["Mileage pay", "Call before your appointment (the same day is OK) to get a trip number. Your doctor signs the trip log, or use the MTM Link app. Send it within 12 months.", "Blue Cross Complete"],
+        ["Book online", "MTM Link Member app or web portal, with 2 days' notice.", "Blue Cross Complete"]
+      ],
+      srcs: [["Blue Cross Complete's ride page", "https://www.bcbsm.com/content/microsites/blue-cross-complete/en/member-benefits/transportation/"], SRC.state]
+    },
+    {
+      id: "hapcs", name: "HAP CareSource", company: "MTM",
+      ride: { n: "(833) 230-2053", label: "HAP CareSource Member Services, ride option", note: "TTY 711. 24 hours a day, 7 days a week. Rides and mileage pay.", src: "HAP CareSource's ride page and 2026 handbook" },
+      alt: [],
+      lead: { n: 3, unit: "biz", text: "2 to 3 days", extra: "The handbook says 2 to 3 days, so we count 3 business days to be safe." },
+      rows: [
+        ["Shorter notice", "You can ask for a same-day ride for an urgent visit that isn't an emergency.", "HAP CareSource handbook"],
+        ["Cancel", "At least 24 hours ahead.", "HAP CareSource handbook"],
+        ["Someone with you", "One adult, or any number of children.", "State's list"],
+        ["Extra trips", "Up to 5 round trips a month to food banks, food pantries, or grocery pickup within 25 miles.", "HAP CareSource"],
+        ["Mileage pay", "Ask on the same number.", "HAP CareSource"],
+        ["Book online", "Through MTM's website, linked from HAP CareSource's ride page.", "HAP CareSource"]
+      ],
+      srcs: [["HAP CareSource's ride page", "https://www.caresource.com/mi/plans/medicaid/benefits-services/additional-services/transportation/"], ["HAP CareSource 2026 handbook (PDF)", "https://www.caresource.com/documents/mi-med-m-3210741-2026-mi-medicaid-member-handbook_508.pdf"], SRC.state]
+    },
+    {
+      id: "mclaren", name: "McLaren Health Plan", company: "ModivCare",
+      ride: { n: "(888) 327-0671", label: "McLaren Customer Service, rides", note: "TTY 711. Rides 24 hours a day, 7 days a week.", src: "McLaren's member handbook (Oct 2026)" },
+      alt: [{ n: "(855) 251-7100", label: "ModivCare's McLaren Medicaid line", note: "Direct line to the ride company.", src: "ModivCare's Michigan page and the state's list" }],
+      lead: { n: 3, unit: "biz", text: "2 to 3 days", extra: "The handbook says 2 to 3 days, so we count 3 business days to be safe. The state's list says a next-day ride can work if you call by 3 PM." },
+      rows: [
+        ["Shorter notice", "Same-day rides for an urgent visit that isn't an emergency, and same-day hospital discharges.", "McLaren handbook, state's list"],
+        ["Someone with you", "Tell them when you book. Bring your own car seat.", "McLaren handbook, state's list"],
+        ["Outside your county", "Trips outside the county you live in go through a review.", "McLaren handbook"],
+        ["Mileage pay", "Available. The state's list says to get it approved through the member portal 5 days before the ride.", "McLaren handbook, state's list"],
+        ["Meals and lodging", "Must be approved ahead by ModivCare.", "McLaren handbook"],
+        ["Problems", "Call Customer Service or email MHPappeals@mclaren.org.", "McLaren handbook"]
+      ],
+      srcs: [["McLaren member handbook (PDF)", "https://www.mclarenhealthplan.org/Uploads/Public/Documents/HealthPlan/documents/MHP/Member-Handbook.pdf"], ["McLaren benefits page", "https://www.mclarenhealthplan.org/mclaren-health-plan/benefits-documents-and-information"], SRC.modivMI, SRC.state]
+    },
+    {
+      id: "meridian", name: "Meridian Health Plan of Michigan", company: "SafeRide Health",
+      ride: { n: "(877) 841-1356", label: "SafeRide Health, Meridian's ride company", note: "24 hours a day, 7 days a week. Also the number to call if your ride is late.", src: "Meridian's ride page (updated Jul 2, 2026) and the state's list" },
+      alt: [{ n: "(888) 437-0606", label: "Meridian Member Services, press 3 for rides", note: "TTY 711. Help with same-day or next-day trips.", src: "Meridian's page and the state's list" }],
+      lead: { n: 3, unit: "cal", text: "72 hours" },
+      rows: [
+        ["Shorter notice", "Same-day rides for an urgent visit that isn't an emergency. If you often need urgent trips and live on a bus line, Meridian may give a monthly bus pass.", "Meridian, state's list"],
+        ["Someone with you", "One extra rider for an adult who needs help, or an adult riding with a child.", "State's list"],
+        ["Kids 12 to 17 alone", "A parent or guardian fills out the Michigan Medicaid minor consent form.", "SafeRide's Meridian page"],
+        ["Mileage pay", "You and your driver sign up at saferidehealth.com/meridian at least 5 business days before asking for a ride, and the trip must be booked with SafeRide first.", "Meridian, SafeRide"],
+        ["Meals and lodging", "Book with SafeRide at least 72 hours ahead, or it won't be paid back.", "SafeRide's Meridian page"]
+      ],
+      srcs: [["Meridian's ride page", "https://www.mimeridian.com/members/medicaid/find-a-provider/nemt-info.html"], ["SafeRide's Meridian page", "https://www.saferidehealth.com/meridian"], SRC.state]
+    },
+    {
+      id: "molina", name: "Molina Healthcare of Michigan", company: "SafeRide Health (since Oct 1, 2026)",
+      ride: { n: "(888) 616-4842", label: "SafeRide Health, Molina's ride company", note: "TTY 711. Molina moved its rides to SafeRide on October 1, 2026.", src: "the state's list and SafeRide's Molina page" },
+      alt: [{ n: "(888) 898-7969", label: "Molina Member Services", note: "TTY 711. Monday to Friday, 8 AM to 5 PM. Molina's own page still sends ride calls here, and it handles urgent trips.", src: "Molina's ride page and the state's list" }],
+      lead: { n: 3, unit: "biz", text: "3 business days", extra: "Waived for pregnant members, foster care members, and Children's Special Health Care Services members (state's list)." },
+      rows: [
+        ["Shorter notice", "Call Member Services for a same-day or next-day ride for an urgent visit. A same-day trip within 2 to 4 hours can sometimes be set up.", "State's list"],
+        ["Someone with you", "Family members can ride along.", "State's list"],
+        ["Mileage pay", "Register your driver with SafeRide first (saferidehealth.com/molina-mi). After that no advance notice is needed, but book the ride with SafeRide before the trip.", "SafeRide's Molina page"],
+        ["Book online", "MySafeRide app.", "SafeRide's Molina page"]
+      ],
+      srcs: [["Molina's ride page", "https://molinahealthcare.com/members/mi/mem/medicaid/overvw/coverd/services/transport"], ["SafeRide's Molina Michigan page", "https://www.saferidehealth.com/member-health-plan/molina-healthcare-of-michigan"], ["SafeRide's Molina mileage page", "https://www.saferidehealth.com/molina-mi"], SRC.state]
+    },
+    {
+      id: "priority", name: "Priority Health Choice (Priority Health Medicaid)", company: "SafeRide Health",
+      ride: { n: "(833) 944-0535", label: "SafeRide Health, Priority Health's ride company", note: "24 hours a day, 7 days a week. Also to cancel or reschedule.", src: "Priority Health's ride page" },
+      alt: [{ n: "(888) 975-8102", label: "Priority Health Customer Service", note: "TTY 711. Urgent rides, mileage questions, and rescheduling if a ride never came.", src: "Priority Health's page and the state's list" }],
+      lead: { n: 3, unit: "biz", text: "3 business days", earliest: 14, extra: "Priority's page says rides can be booked up to two weeks ahead, but the state contract says plans must let you book at least 30 days ahead." },
+      rows: [
+        ["Shorter notice", "Call Customer Service or SafeRide for urgent care. Priority tries for same-day or within 24 hours if drivers are available.", "State's list"],
+        ["Be ready", "At the address you gave, at least one hour before your pickup time.", "Priority Health"],
+        ["Someone with you", "Tell Priority Health when you book so they can plan for it.", "State's list"],
+        ["Mileage pay", "Send the form through the member portal, email (reimbursement@priorityhealth.com), mail, or fax (616) 464-8905.", "Priority Health"]
+      ],
+      srcs: [["Priority Health's ride page", "https://priorityhealth.com/michigan-medicaid/member/plan/transportation-services"], SRC.state]
+    },
+    {
+      id: "uhc", name: "UnitedHealthcare Community Plan", company: "MTM Health",
+      ride: { n: "(888) 777-4065", label: "MTM Health, UnitedHealthcare's ride company", note: "Book, change, and ask about late rides here. UnitedHealthcare says not to call any other number about a late ride.", src: "UnitedHealthcare's handbook ride update" },
+      alt: [{ n: "(800) 903-5253", label: "UnitedHealthcare Member Services", note: "TTY 711. 8:30 AM to 5:30 PM, 7 days a week.", src: "UnitedHealthcare's Michigan plan page" }],
+      lead: { n: 3, unit: "cal", text: "72 hours" },
+      rows: [
+        ["Shorter notice", "You can ask for a same-day ride for an urgent visit that isn't an emergency.", "UnitedHealthcare"],
+        ["Someone with you", "The member only, unless the member is a child or an adult who needs help.", "State's list"],
+        ["Mileage pay", "Yes. The form is under Transportation at UHCCommunityPlan.com/Michigan, and the MTM Health app can book mileage trips.", "UnitedHealthcare"],
+        ["Book online", "MTM Health app or mtm-inc.net, any time.", "UnitedHealthcare"]
+      ],
+      srcs: [["UnitedHealthcare handbook ride update (PDF)", "https://www.uhc.com/communityplan/assets/plandocuments/handbook/en/MI-Handbook-Addendum-Transportation-EN.pdf"], ["UnitedHealthcare Michigan plan page", "https://www.uhc.com/communityplan/michigan/plans/medicaid/community-plan1"], SRC.state]
+    },
+    {
+      id: "uphp", name: "Upper Peninsula Health Plan (UPHP)", company: "UPHP itself", byLine: "UPHP arranges rides itself, with volunteer drivers, buses, cabs, and wheelchair vans.",
+      ride: { n: "(800) 835-2556", label: "UPHP Transportation Department", note: "TTY 711. Monday to Friday, 8 AM to 5 PM Eastern. You can leave a message any time.", src: "UPHP's ride page and 2026 handbook" },
+      alt: [],
+      lead: { n: 5, unit: "biz", text: "5 business days" },
+      rows: [
+        ["Shorter notice", "With less than 5 business days, UPHP can only send a cab or bus where there is one. It will pay mileage to a family member or friend who drives you to an urgent visit if you tell UPHP within 90 days.", "State's list"],
+        ["Someone with you", "One adult with a child under 18. A caregiver can come when it's medically needed and approved ahead. Car seats aren't provided.", "State's list"],
+        ["Cancel", "Call before the day of the appointment.", "UPHP handbook"],
+        ["Mileage pay", "Fill out UPHP's mileage form with proof of the visit (signed form or office note) and original toll or parking receipts. Send within 12 months.", "UPHP handbook"],
+        ["Meals and lodging", "Help for appointments more than 200 miles one way.", "UPHP handbook"]
+      ],
+      srcs: [["UPHP's ride page", "https://www.uphp.com/transportation/"], ["UPHP 2026 handbook (PDF)", "https://www.uphp.com/wp-content/uploads/medicaid/2026MemberHandbook.pdf"], SRC.state]
+    }
+  ];
+
+  const FFS_WOM = {
+    id: "ffs-wom", name: "Medicaid with no health plan, Wayne, Oakland, or Macomb County", company: "ModivCare", byLine: "ModivCare arranges rides under a contract with the state.",
+    ride: { n: "(866) 569-1902", label: "ModivCare, the state's ride company for Wayne, Oakland, and Macomb", note: "Urgent same-day trips can be booked 24 hours a day.", src: "the Medicaid Provider Manual directory (Oct 1, 2026) and ModivCare's Michigan page" },
+    alt: [],
+    lead: { n: 2, unit: "biz", text: "2 business days", extra: "ModivCare's example: call Monday for a Wednesday appointment." },
+    rows: [
+      ["Shorter notice", "Same-day rides are for true urgent visits, and ModivCare checks with the doctor's office. If you just called late, they may ask you to move the appointment.", "ModivCare"],
+      ["Ride home", "If you don't know when you'll be done, call when you're ready. The driver has 60 minutes to pick you up.", "ModivCare"],
+      ["Wheelchair van or helper", "Your doctor fills out a medical form (DHS-5330) once a year. You can get the ride first if the form comes in within 10 business days.", "Medicaid Provider Manual"],
+      ["Mileage pay", "Turn in a Medical Transportation Statement (MSA-4674) with receipts within 12 months.", "Medicaid Provider Manual"]
+    ],
+    srcs: [SRC.modivMI, SRC.mpm, SRC.deltaRides]
+  };
+  const FFS_OTHER = {
+    id: "ffs-other", name: "Medicaid with no health plan, outside Wayne, Oakland, and Macomb", company: "Local MDHHS office", byLine: "Your local MDHHS office arranges and pays for rides.",
+    ride: null,
+    alt: [],
+    lead: { unit: "none", text: "As soon as you know" },
+    rows: [
+      ["Who to call", "Your county's MDHHS office arranges and pays for rides. Find the phone number on the state's county office map.", "Medicaid Provider Manual"],
+      ["When", "As soon as you know your appointment date and time.", "Medicaid Provider Manual"],
+      ["Wheelchair van or helper", "Your doctor fills out a medical form (DHS-5330) once a year. You can get the ride first if the form comes in within 10 business days.", "Medicaid Provider Manual"],
+      ["Mileage pay", "Turn in a Medical Transportation Statement (MSA-4674) with receipts within 12 months. Get the ride approved before you go.", "Medicaid Provider Manual"],
+      ["If they say no", "They have to mail you a written notice (DHS-301) within one business day, and you can ask for a hearing.", "Medicaid Provider Manual"]
+    ],
+    srcs: [SRC.offices, SRC.mpm, SRC.deltaRides]
+  };
+  const MICH = {
+    id: "mich", name: "MI Coordinated Health plan (Medicare and Medicaid together)", company: "",
+    ride: null, alt: [], lead: { unit: "none", text: "Ask your plan" },
+    rows: [
+      ["Who to call", "The member services number on your plan card. Ask for transportation.", "Medicaid Provider Manual"],
+      ["What's covered", "Your plan has to give rides to both Medicare and Medicaid services.", "Medicaid Provider Manual"]
+    ],
+    srcs: [SRC.mpm]
+  };
+  const UNKNOWN = {
+    id: "unknown", name: "I don't know my plan", company: "",
+    ride: { n: "(800) 975-7630", label: "MI Enrolls, the state's health plan enrollment line", note: "TTY (888) 263-5897. Monday to Friday, 8 AM to 7 PM. They can tell you which plan you're in.", src: "the Medicaid Provider Manual directory (number revised Oct 1, 2026) and Blue Cross Complete's site" },
+    alt: [{ n: "(800) 642-3195", label: "MDHHS Beneficiary Help Line", note: "Monday to Friday, 8 AM to 7 PM. Questions about your mihealth card.", src: "the Medicaid Provider Manual directory" }],
+    lead: { unit: "none", text: "" },
+    rows: [
+      ["Check your cards", "Plan members get a plan card with the plan's name, and plans must print the ride number on it. Everyone also gets the state's mihealth card. If you only have the mihealth card, you likely have no plan.", "State contract"],
+      ["Check MI Bridges", "Your plan shows in your MI Bridges account.", ""]
+    ],
+    srcs: [SRC.mpm, SRC.contract]
+  };
+  const ALL = [...PLANS, FFS_WOM, FFS_OTHER, MICH, UNKNOWN];
+  const byId = id => ALL.find(p => p.id === id);
+
+  /* ---------- Plan picker ---------- */
+  $("plans").innerHTML = [
+    ...PLANS.map(p => `<label><input type="radio" name="plan" value="${p.id}"><span>${esc(p.name)}</span></label>`),
+    `<label class="other"><input type="radio" name="plan" value="ffs"><span>No health plan, just the mihealth card<small>Called fee-for-service Medicaid</small></span></label>`,
+    `<label class="other"><input type="radio" name="plan" value="mich"><span>MI Coordinated Health plan<small>One plan for both Medicare and Medicaid</small></span></label>`,
+    `<label class="other"><input type="radio" name="plan" value="unknown"><span>I don't know</span></label>`
+  ].join("");
+
+  /* ---------- Dates ---------- */
+  function parseDate(v) { if (!v) return null; const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); }
+  function back(date, lead) {
+    const x = new Date(date);
+    if (lead.unit === "cal") { x.setDate(x.getDate() - lead.n); return x; }
+    let k = lead.n;
+    while (k > 0) { x.setDate(x.getDate() - 1); const w = x.getDay(); if (w !== 0 && w !== 6) k--; }
+    return x;
+  }
+  function today() { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); }
+  const dayDiff = (a, b) => Math.round((b - a) / 86400000);
+  function timeTxt(v) {
+    if (!v) return "";
+    const [h, m] = v.split(":").map(Number);
+    return new Date(2000, 0, 1, h, m).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  }
+
+  /* ---------- Read the form ---------- */
+  function read() {
+    const plan = (document.querySelector('input[name="plan"]:checked') || {}).value || "";
+    const county = (document.querySelector('input[name="county"]:checked') || {}).value || "";
+    const needs = [...document.querySelectorAll('input[name="need"]:checked')].map(x => x.value);
+    let id = plan;
+    if (plan === "ffs") id = county === "wom" ? "ffs-wom" : county === "other" ? "ffs-other" : "";
+    return { plan, county, id, p: id ? byId(id) : null, date: parseDate($("adate").value), time: $("atime").value, needs };
+  }
+
+  /* ---------- Result ---------- */
+  function whenBox(u) {
+    const p = u.p, L = p.lead;
+    if (L.unit === "none") return L.text ? `<div class="when"><span class="d">Call ${esc(L.text.toLowerCase())}.</span></div>` : "";
+    const rule = `<span>Book at least <strong>${esc(L.text)}</strong> ahead.${L.extra ? " " + esc(L.extra) : ""}</span>`;
+    if (!u.date) return `<div class="when">${rule}<span class="hint">Add your appointment date above to get the last day to call.</span></div>`;
+    const by = back(u.date, L), t = today(), left = dayDiff(t, by);
+    const head = L.unit === "cal"
+      ? `Call by ${fmt(by)}, at least 72 hours before your pickup time.`
+      : `Call by ${fmt(by)}.`;
+    let status;
+    if (dayDiff(t, u.date) < 0) status = `That appointment date has already passed.`;
+    else if (left < 0) status = `That's less than ${esc(L.text)} away, so call now. Plans have to try for urgent rides on the same day or the next day. If the visit isn't urgent, they may ask you to move it.`;
+    else if (left === 0) status = `That's today.`;
+    else status = `That's ${left} day${left === 1 ? "" : "s"} from today.${L.unit === "cal" ? " Pickup is often an hour or more before the visit, so calling a day early gives you room." : ""}`;
+    let early = "";
+    if (L.earliest && dayDiff(t, u.date) > L.earliest) {
+      const from = new Date(u.date); from.setDate(from.getDate() - L.earliest);
+      early = `<span class="hint">Two weeks before your appointment is ${fmt(from)}. If they say it's too early, point to the 30-day rule below.</span>`;
+    }
+    const late = left < 0 && dayDiff(t, u.date) >= 0;
+    return `<div class="when${late ? " late" : ""}"><span class="d">${head}</span><span>${status}</span>${rule}${early}<span class="hint">Around a holiday, call one more business day early.</span></div>`;
+  }
+
+  function phoneLine(ph) {
+    return `<li><span><strong>${esc(ph.label)}:</strong> ${tel(ph.n)}</span><span>${esc(ph.note)}</span><span class="checked">Checked ${CHECKED} on ${esc(ph.src)}.</span></li>`;
+  }
+
+  function renderResult(u) {
+    const box = $("result");
+    if (!u.plan) { box.innerHTML = `<p class="hint">Pick a plan above to see who to call. Or scroll down to <a href="#glance-h">every plan at a glance</a>.</p>`; return; }
+    if (!u.p) { box.innerHTML = `<p class="hint">Do you live in Wayne, Oakland, or Macomb County? It changes who arranges the ride.</p>`; return; }
+    const p = u.p;
+    const main = p.ride
+      ? `<div class="callbox"><span>${esc(p.ride.label)}</span><a class="bigtel" href="${telHref(p.ride.n)}">${esc(p.ride.n)}</a><span>${esc(p.ride.note)}</span><span class="checked">Checked ${CHECKED} on ${esc(p.ride.src)}.</span></div>`
+      : p.id === "ffs-other"
+        ? `<div class="callbox"><span>Your county's MDHHS office</span><a class="bigtel" style="font-size:clamp(24px,6vw,32px)" href="${SRC.offices[1]}" target="_blank" rel="noopener">Find your county office</a><span>Ask for medical transportation.</span></div>`
+        : `<div class="callbox"><span>Call the member services number on your plan card and ask for transportation.</span></div>`;
+    const alts = p.alt.length ? `<ul class="others">${p.alt.map(phoneLine).join("")}</ul>` : "";
+    const rows = p.rows.map(([k, v, s]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}${s ? ` <span class="src">(${esc(s)})</span>` : ""}</dd></div>`).join("");
+    box.innerHTML = `<article class="result">
+      <div class="who"><span class="tag you" style="justify-self:start">You picked</span><h3>${esc(p.name)}</h3>${p.byLine || p.company ? `<span class="sub">${esc(p.byLine || "Ride company: " + p.company)}</span>` : ""}</div>
+      ${main}
+      ${whenBox(u)}
+      ${alts}
+      <dl class="facts">${rows}</dl>
+      <div class="cites">${p.srcs.map(cite).join("")}</div>
+    </article>`;
+  }
+
+  /* ---------- Call script ---------- */
+  let scriptEdited = false;
+  function scriptText(u) {
+    const p = u.p, has = v => u.needs.includes(v);
+    const plan = p && PLANS.includes(p) ? p.name : p && p.id.startsWith("ffs") ? "Michigan Medicaid (no health plan)" : "[my health plan]";
+    const when = u.date ? `${fmt(u.date)}${u.time ? " at " + timeTxt(u.time) : " at [time]"}` : "[date] at [time]";
+    const lines = [
+      `Hi. I'm calling to set up a ride to a medical appointment. I'm a member of ${plan}.`,
+      "",
+      "My name: [your name]",
+      "Medicaid ID number: [number on your card]",
+      "Date of birth: [date of birth]",
+      "My phone number: [phone]",
+      "",
+      `Appointment: ${when}`,
+      "Going to: [doctor or clinic name, address, and phone number]",
+      "Pick me up at: [your address, with ZIP code]",
+      "Kind of visit: [for example, doctor, dentist, pharmacy, lab, therapy]"
+    ];
+    const extras = [];
+    if (has("wheel")) extras.push("I need [a wheelchair van / help getting in and out / room for my walker or oxygen]. What do you need from my doctor for that?");
+    if (has("rider")) extras.push("An adult needs to ride with me: [name], because [reason].");
+    if (has("kids")) extras.push("Children riding: [number and ages]. I will bring car seats or boosters for them.");
+    if (has("standing")) extras.push("This visit repeats [days and times] through [end date]. Can you set up standing rides for all of them?");
+    if (has("urgent")) extras.push("This is urgent. My doctor needs to see me [today / tomorrow]. You can call the office at [phone] to confirm.");
+    if (extras.length) lines.push("", ...extras);
+    lines.push("", u.time
+      ? "Please schedule my ride home too. If you can't set a time, how do I call for a ride when I'm done?"
+      : "Please schedule my ride home too, or tell me how to call for a ride when I'm done.");
+    if (has("miles")) lines.push("", "I [will drive myself / have a friend or family member who will drive me]. Please give me a trip number for mileage pay, and tell me how to send in the form.");
+    lines.push("", "Before I hang up: what is my trip or confirmation number, what time will the driver come, and what number do I call if the driver is late?",
+      "", "Write it down:", "Trip number: ______  Pickup time: ______  Late ride number: ______");
+    return lines.join("\n");
+  }
+  function renderScript(u) { if (!scriptEdited) $("script").value = scriptText(u); }
+  $("script").addEventListener("input", () => { scriptEdited = true; });
+  $("reset").addEventListener("click", () => { scriptEdited = false; renderScript(read()); });
+  $("copy").addEventListener("click", async () => {
+    const status = $("copied"), text = $("script").value;
+    try { await navigator.clipboard.writeText(text); status.textContent = "Copied."; }
+    catch (e) {
+      $("script").select();
+      let ok = false; try { ok = document.execCommand("copy"); } catch (e2) {}
+      status.textContent = ok ? "Copied." : "Couldn't copy. Select the text and copy it yourself.";
+    }
+    setTimeout(() => { status.textContent = ""; }, 5000);
+  });
+  $("print").addEventListener("click", () => window.print());
+
+  /* ---------- Rules every plan follows ---------- */
+  function ruleCard(level, tag, title, body, cites) {
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${tag}</span></div>
+      ${body}
+      ${cites && cites.length ? `<div class="cites">${cites.map(cite).join("")}</div>` : ""}
+    </article>`;
+  }
+  $("rules").innerHTML = [
+    ruleCard("law", "The rules say", "Rides are free for any Medicaid-covered visit",
+      `<p>Federal rules require Medicaid to make sure you can get to and from your care. In Michigan that covers Medicaid, the Healthy Michigan Plan, MIChild, and children's special health care with Medicaid. Rides go to doctors, dentists, pharmacies, labs, medical equipment stores, mental health and substance use treatment, therapy, dialysis, and chemo, including services the state pays for outside your plan, like Healthy Kids Dental. Pregnant members in a home-visiting program also get rides to WIC, childbirth and parenting classes, and to visit their baby in the hospital.</p>`,
+      [SRC.cfr431, SRC.mpm, SRC.contract]),
+    ruleCard("law", "The rules say", "Your plan has to take ride requests any time",
+      `<p>Plans must offer rides 24 hours a day, 7 days a week, every day of the year, through a toll-free ride line printed on your card. You must be able to book at least 30 days ahead, and plans must handle repeat rides for things like dialysis, chemo, and therapy.</p>`,
+      [SRC.contract]),
+    ruleCard("law", "The rules say", "Routine rides can need 2 to 3 days' notice. Urgent rides can't.",
+      `<p>A plan may ask for reasonable notice for regular visits, about 48 to 72 hours. It must still be able to give a ride for an urgent visit on the same day you ask or the next day.</p>`,
+      [SRC.contract]),
+    ruleCard("law", "The rules say", "Pickup and wait-time limits",
+      `<ul>
+        <li>The driver can't be more than 15 minutes late for a set pickup time.</li>
+        <li>The driver has to let you know they're there and wait at least 15 minutes.</li>
+        <li>You can't be made to arrive more than 1 hour before your appointment, or before the office opens unless you ask.</li>
+        <li>With no set time for your ride home, you have to be picked up within 1 hour of calling.</li>
+        <li>You can't be left waiting more than 15 minutes after the office closes.</li>
+        <li>Your ride can't take more than 30 minutes longer than a direct trip because of other stops.</li>
+        <li>They should call to remind you 24 hours before, and tell you right away about any delay and find another ride.</li>
+      </ul>`,
+      [SRC.contract]),
+    ruleCard("law", "The rules say", "Tell them what you need when you book",
+      `<p>Plans have to ask about special needs at booking and pick the right kind of ride: a wheelchair lift van, a door-to-door van, a medical attendant, car seats, room for kids, a pickup spot that works if you don't have stable housing, or keeping a visit private. Some needs take a form from your doctor.</p>`,
+      [SRC.contract, SRC.mpm]),
+    ruleCard("law", "The rules say", "A friend or family member can drive you and get paid for miles",
+      `<p>If you drive yourself, or a family member, caregiver, friend, or neighbor drives you, the plan pays back the miles. Parking and tolls can be paid back with receipts. Meals and a place to stay can be covered for long trips, with approval. Most plans want the trip set up before you go, so call first.</p>`,
+      [SRC.contract, SRC.mpm]),
+    ruleCard("facts", "Depends on your facts", "Kids riding without a parent",
+      `<p>State policy: children under 12 must ride with a parent, foster parent, caregiver, or guardian. From 12 to 17, they need a consent letter signed by one of them to ride alone. No letter is needed for teens who are emancipated, or for care they can get on their own, like pregnancy care, STI or HIV care, substance use treatment, or outpatient community mental health. Aetna's page sets its own limit at 15 and younger.</p>`,
+      [SRC.mpm, SRC.contract]),
+    ruleCard("facts", "Depends on your facts", "When rides aren't covered",
+      `<p>No rides with Emergency Services Only Medicaid or Plan First, or before a spend-down is met. No rides to things Medicaid doesn't cover, like the grocery store. Nursing home residents get routine rides from the home. Plans may want approval for trips far from home when the same care is close by.</p>`,
+      [SRC.mpm]),
+    ruleCard("help", "Get help", "Turned down? You can appeal",
+      `<p>Without a plan, a local office or ModivCare that says no must mail you a written notice (DHS-301), and you can ask for a hearing with the Michigan Office of Administrative Hearings and Rules. With a plan, file a complaint or appeal with your plan first. There are deadlines, so act soon.</p>`,
+      [SRC.mpm, SRC.deadlines])
+  ].join("");
+
+  /* ---------- At a glance ---------- */
+  function glance(u) {
+    const rows = [...PLANS].sort((a, b) => a.name.localeCompare(b.name)).map(p =>
+      `<tr${u.id === p.id ? ' class="me"' : ""}><td>${esc(p.name)}</td><td>${tel(p.ride.n)}${p.alt.length ? `<br><span class="hint">or ${p.alt.map(a => tel(a.n)).join(", ")}</span>` : ""}</td><td>${esc(p.lead.text)}</td><td>${esc(p.company)}</td><td><span class="checked">${CHECKED}</span></td></tr>`);
+    rows.push(`<tr${u.id === "ffs-wom" ? ' class="me"' : ""}><td>No plan, Wayne, Oakland, or Macomb</td><td>${tel(FFS_WOM.ride.n)}</td><td>${esc(FFS_WOM.lead.text)}</td><td>ModivCare</td><td><span class="checked">${CHECKED}</span></td></tr>`);
+    rows.push(`<tr${u.id === "ffs-other" ? ' class="me"' : ""}><td>No plan, any other county</td><td><a href="${SRC.offices[1]}" target="_blank" rel="noopener">Your county MDHHS office</a></td><td>As soon as you know</td><td>Local office</td><td><span class="checked">${CHECKED}</span></td></tr>`);
+    $("glance-rows").innerHTML = rows.join("");
+  }
+
+  /* ---------- Sources ---------- */
+  const srcItems = [
+    `Federal rule: <a href="${SRC.cfr431[1]}" target="_blank" rel="noopener">42 CFR 431.53</a>, which requires state Medicaid programs to make sure people can get to and from their care.`,
+    `State rules: <a href="${SRC.contract[1]}" target="_blank" rel="noopener">Comprehensive Health Care Program contract, FY26 amendment</a>, section 1.1.VI.H (pages 74 to 79), and the <a href="${SRC.mpm[1]}" target="_blank" rel="noopener">Medicaid Provider Manual</a> (version October 1, 2026): Non-Emergency Medical Transportation chapter, MI Coordinated Health chapter section 2.12, and the Directory Appendix. The <a href="${SRC.handbook[1]}" target="_blank" rel="noopener">state's model member handbook</a> says plans cover rides for prescription pickup and dental visits.`,
+    `State list of each plan's ride company, numbers, and notice: <a href="${STATE_LIST}" target="_blank" rel="noopener">Medicaid Health Plan Non-Emergency Medical Transportation contact and process sheet</a>, revised October 1, 2026, from the state's <a href="https://www.michigan.gov/mdhhs/doing-business/providers/providers/managedcare/medicaidhealthplans/medicaid-health-plans" target="_blank" rel="noopener">Medicaid Health Plans page</a>.`,
+    ...PLANS.map(p => `${esc(p.name)}: ${p.srcs.filter(s => s !== SRC.state).map(s => `<a href="${s[1]}" target="_blank" rel="noopener">${esc(s[0])}</a>`).join(", ")}.`),
+    `No-plan rides: <a href="${SRC.modivMI[1]}" target="_blank" rel="noopener">ModivCare's Michigan page</a> and FAQ, the Provider Manual directory, and <a href="${SRC.deltaRides[1]}" target="_blank" rel="noopener">Delta Dental's Healthy Kids Dental ride page</a>, which gives the same numbers.`
+  ];
+  $("srcs").innerHTML = srcItems.map(x => `<li>${x}</li>`).join("");
+
+  /* ---------- Wire up ---------- */
+  function run() {
+    const u = read();
+    $("county-f").hidden = u.plan !== "ffs";
+    renderResult(u);
+    renderScript(u);
+    glance(u);
+  }
+  $("f").addEventListener("input", run);
+  $("f").addEventListener("change", run);
+  $("f").addEventListener("submit", e => e.preventDefault());
+  run();
+})();
+</script>
+</body>
+</html>
