@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Michigan Expungement Eligibility Check (Clean Slate)</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="See if your Michigan record can be set aside (expunged) under Clean Slate: which convictions qualify, the waiting periods, and what clears automatically. Free and private.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/clean-slate/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Michigan Expungement Eligibility Check (Clean Slate)">
+<meta property="og:description" content="See if your Michigan record can be set aside (expunged) under Clean Slate: which convictions qualify, the waiting periods, and what clears automatically. Free and private.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/clean-slate/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/clean-slate.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. Your convictions on top (one box each), a few questions about your record, then result cards with their law chips, then a plain-text summary to bring to free legal help. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr);
+}
+.wrap > *, section > * { min-width: 0; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); overflow-wrap: anywhere; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.panel { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
+form.q {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 16px; min-width: 0;
+}
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="date"], select {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px;
+}
+select.wide { max-width: none; }
+input[type="text"] {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%;
+}
+.opts { display: grid; gap: 6px; }
+.opts.inline { display: flex; flex-wrap: wrap; gap: 6px 20px; }
+.opts label, label.check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.opts input, label.check input { margin-top: 5px; accent-color: var(--accent); }
+.hint { font-size: 14px; color: var(--muted); }
+.convs { display: grid; gap: 14px; }
+fieldset.conv {
+  margin: 0; min-width: 0; border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px 16px;
+  display: grid; gap: 14px; background: var(--bg);
+}
+fieldset.conv input[type="date"], fieldset.conv select, fieldset.conv input[type="text"] { background: var(--surface); }
+.conv-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.conv-head h3 { font-size: 17px; }
+.rm { font: inherit; font-size: 14px; cursor: pointer; background: none; border: 0; color: var(--help); text-decoration: underline; padding: 4px; }
+details.more { font-size: 15px; }
+details.more summary { cursor: pointer; color: var(--accent); font-weight: 700; }
+details.more ul { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 4px; }
+.results { display: grid; gap: 12px; }
+.results-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line); min-width: 0;
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.card ul, .card ol { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.small { font-size: 15px; color: var(--muted); }
+.route { display: grid; gap: 2px; }
+.route b { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.glance { display: grid; gap: 10px; }
+.glance h3 { font-size: 16px; }
+.glance ul { margin: 0; padding-left: 22px; display: grid; gap: 4px; }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.gethelp { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.letter {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px;
+  font-family: var(--f-body); white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; font-size: 16px;
+}
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 10px 16px;
+  background: var(--accent); color: var(--bg); border: 0;
+}
+.btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.btn:hover { filter: brightness(1.08); }
+.copied { font-size: 14px; color: var(--law); }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+@media print {
+  body.printing .wrap > :not(#s-sum), body.printing #s-sum > :not(.letter) { display: none !important; }
+  body.printing { background: #fff; color: #000; }
+  body.printing .letter { border: 0; padding: 0; color: #000; background: #fff; }
+}
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Michigan · clearing a criminal record · free</span>
+    <h1>Michigan Clean Slate Expungement Check</h1>
+    <p class="lede">Michigan can expunge many old convictions. The law calls it a "set aside." Under the Clean Slate law, some convictions clear automatically after 7 or 10 years. Others clear if you apply to the court that convicted you. List your convictions and dates below to see whether each one may be eligible for expungement, which route fits, and when.</p>
+    <div class="notice">
+      <strong>This is information, not legal advice.</strong>
+      <span>It can only tell you what you may qualify for. A judge decides every application, and the State Police run the automatic clearing. Free legal help is listed at the bottom. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section class="panel" aria-labelledby="h-convs">
+    <h2 id="h-convs">1. Your convictions</h2>
+    <form class="q" id="f-convs" novalidate>
+      <p class="sample">Two sample convictions are filled in so you can see how it works. Change them to yours, or remove them.</p>
+      <p class="hint">List every adult conviction you've had in Michigan, including any that were already cleared. Your public record is on <a href="https://apps.michigan.gov/" target="_blank" rel="noopener">ICHAT</a> ($10 per name search). Juvenile cases don't show there and use different rules.</p>
+      <div class="convs" id="convs"></div>
+      <div class="btns"><button class="btn ghost" type="button" id="add">Add another conviction</button></div>
+      <details class="more">
+        <summary>Which crimes count as "assaultive" or "serious misdemeanors"?</summary>
+        <p class="small" style="margin-top:8px">These two groups matter because they can't clear automatically, they have a longer wait when you apply, and only 2 assaultive convictions can ever be cleared.</p>
+        <ul>
+          <li><strong>Assaultive crimes</strong> include assault or battery, domestic violence, aggravated assault, resisting or obstructing police, home invasion, unarmed robbery, kidnapping, unlawful imprisonment, stalking, child abuse, criminal sexual conduct, and other violent felonies. (MCL 780.621(4)(a) and 770.9a)</li>
+          <li><strong>Serious misdemeanors</strong> also include breaking and entering or illegal entry, indecent exposure, aiming or firing a gun at someone, contributing to the delinquency of a minor, leaving the scene of an injury crash, drunk driving that caused a crash with damage or injury, selling alcohol to a minor who then got hurt, and a charge that started as one of these and was pleaded down. (MCL 780.811)</li>
+        </ul>
+      </details>
+    </form>
+  </section>
+
+  <section class="panel" aria-labelledby="h-rec">
+    <h2 id="h-rec">2. The rest of your record</h2>
+    <form class="q" id="f-rec" novalidate>
+      <div class="field"><span class="lbl" id="l-pend">Do you have any criminal charges open right now, in any court?</span>
+        <div class="opts inline" role="radiogroup" aria-labelledby="l-pend">
+          <label><input type="radio" name="pend" value="no" checked> No</label>
+          <label><input type="radio" name="pend" value="yes"> Yes</label>
+          <label><input type="radio" name="pend" value="unk"> Not sure</label>
+        </div></div>
+      <div class="field"><span class="lbl" id="l-oos">Any convictions from another state or a federal court?</span>
+        <div class="opts inline" role="radiogroup" aria-labelledby="l-oos">
+          <label><input type="radio" name="oos" value="no" checked> No</label>
+          <label><input type="radio" name="oos" value="yes"> Yes</label>
+        </div></div>
+      <div class="field"><span class="lbl" id="l-den">Has a court ever turned down an application to set aside one of these?</span>
+        <div class="opts inline" role="radiogroup" aria-labelledby="l-den">
+          <label><input type="radio" name="den" value="no" checked> No</label>
+          <label><input type="radio" name="den" value="yes"> Yes</label>
+        </div></div>
+      <div class="field" id="den-wrap" hidden><label for="den-date">Date the court turned it down</label><input id="den-date" type="date"></div>
+    </form>
+    <div class="results" id="results" aria-live="polite"></div>
+  </section>
+
+  <section class="panel" id="s-sum" aria-labelledby="h-sum">
+    <div class="bar">
+      <h2 id="h-sum">3. Your summary for legal help</h2>
+      <span class="btns"><span class="copied" id="copied" role="status"></span><button class="btn ghost" type="button" id="print">Print</button><button class="btn" type="button" id="copy">Copy summary</button></span>
+    </div>
+    <p class="hint">Bring this to a free legal aid office or an expungement fair, or paste it into an intake form. It lists what you entered and what this page found.</p>
+    <div class="letter" id="summary" tabindex="0" aria-label="Summary of your results"></div>
+  </section>
+
+  <section class="gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Free help clearing your record</h2>
+    <ul>
+      <li><a href="https://michiganlegalhelp.org/resources/crime-and-traffic/do-it-yourself-expungement-adult-conviction" target="_blank" rel="noopener">Michigan Legal Help: Do-It-Yourself Expungement</a> asks you questions and fills out the court forms for free.</li>
+      <li><a href="https://safeandjustmi.org/clean-slate/" target="_blank" rel="noopener">Safe &amp; Just Michigan</a> has a free <a href="https://safeandjustmi.org/self-assessment/" target="_blank" rel="noopener">self-assessment</a> and runs free expungement fairs around the state, where volunteer lawyers help you apply.</li>
+      <li><a href="https://www.michigan.gov/ag/initiatives/expungement-assistance" target="_blank" rel="noopener">Michigan Attorney General: Expungement Assistance</a> lists upcoming expungement fairs and answers common questions. Phone 517-335-7622.</li>
+      <li>Detroit residents can get free help from the city's <a href="https://detroitmi.gov/government/mayors-office/mayors-initiatives-and-programs/project-clean-slate" target="_blank" rel="noopener">Project Clean Slate</a>.</li>
+      <li><a href="https://michiganlegalhelp.org/guide-to-legal-help" target="_blank" rel="noopener">Michigan Legal Help: Guide to Legal Help</a> and the <a href="https://www.michbar.org/public_resources/legalaid" target="_blank" rel="noopener">State Bar of Michigan legal aid directory</a> find free legal aid near you.</li>
+      <li>If something should have cleared automatically but still shows, email the State Police at <a href="mailto:MSP-CRD-CSAAUTOMATIC@michigan.gov">MSP-CRD-CSAAUTOMATIC@michigan.gov</a> or call their criminal history line at 517-241-0606. If a court moves to bring back a cleared conviction, Michigan Legal Help points people to the Counsel &amp; Advocacy Law Line at 1-888-783-8190.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> The rules come from Michigan's set aside law, 1965 PA 213 (MCL 780.621 to 780.624), including the 2020 Clean Slate amendments and the first-OWI amendments that took effect in 2022. The text was checked on legislature.mi.gov, which shows the law complete through 2026 PA 114, on October 31, 2026. Definitions come from MCL 780.811 (serious misdemeanor) and MCL 770.9a and 791.236 (assaultive and violent crimes). Steps, fees, and contacts come from the Michigan State Police, the Attorney General, court form MC 227 (revised March 2025), and Michigan Legal Help, all checked the same day.</p>
+    <p>Waiting periods are counted in whole years from the dates you enter. For new convictions, this page uses the sentencing date, which usually comes a few weeks after the conviction. Green cards are what the law says directly. Amber cards depend on facts this page can't check, or on a part of the law that people read in different ways. Red cards mean get free legal help before you go further.</p>
+    <p>This page doesn't cover juvenile records, convictions from other states or federal court, pardons, or arrests and charges that never led to a conviction. A case dismissed under a deferral program like HYTA or MCL 333.7411 isn't a conviction, but it counts as a misdemeanor when a court checks whether you can apply, and it must be listed on your application. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const DAY = 86400000;
+  const parse = v => { if (!v) return null; const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); };
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const addY = (d, n) => new Date(d.getFullYear() + n, d.getMonth(), d.getDate());
+  const plain = d => d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  const today = (() => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); })();
+  const diff = (a, b) => Math.round((b - a) / DAY);
+  const latest = (...ds) => ds.filter(Boolean).reduce((a, b) => (b > a ? b : a), null);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const radio = (form, name) => { const el = form.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; };
+  const AUTO_START = new Date(2023, 3, 11);   // first automatic run, April 11, 2023
+  const CSC4_CUTOFF = new Date(2015, 0, 12);  // MCL 780.621c(1)(c)
+  const LABEL = { law: "The law says", facts: "Depends on your facts", help: "Get help now" };
+  const MCL = s => `https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-${s}`;
+  const SRC = {
+    "MCL 780.621": MCL("780-621"), "MCL 780.621b": MCL("780-621b"), "MCL 780.621c": MCL("780-621c"),
+    "MCL 780.621d": MCL("780-621d"), "MCL 780.621e": MCL("780-621e"), "MCL 780.621g": MCL("780-621g"),
+    "MCL 780.621h": MCL("780-621h"), "MCL 780.622": MCL("780-622"), "MCL 780.623": MCL("780-623"),
+    "MCL 780.811": MCL("780-811"),
+    "MC 227": "https://www.courts.michigan.gov/siteassets/forms/scao-approved/mc227.pdf",
+    "MC 227a": "https://www.courts.michigan.gov/siteassets/forms/scao-approved/mc227a.pdf",
+    "MC 227b": "https://www.courts.michigan.gov/siteassets/forms/scao-approved/mc227b.pdf",
+    "MSP set aside": "https://www.michigan.gov/msp/services/chr/conviction-set-aside-public-information",
+    "MSP Clean Slate": "https://www.michigan.gov/msp/services/chr/conviction-set-aside-public-information/michigan-clean-slate",
+    "MSP record check": "https://www.michigan.gov/msp/services/chr/conviction-set-aside-public-information/michigan-clean-slate/record",
+    "AG FAQ": "https://www.michigan.gov/ag/initiatives/expungement-assistance/questions",
+    "AG Expungement": "https://www.michigan.gov/ag/initiatives/expungement-assistance",
+    "MLH: what can be set aside": "https://michiganlegalhelp.org/resources/crime-and-traffic/what-convictions-can-you-expunge-set-aside-application",
+    "MLH: automatic": "https://michiganlegalhelp.org/resources/crime-and-traffic/automatic-expungement-set-aside-of-adult-convictions"
+  };
+
+  // What the conviction was for. Each kind maps to how MCL 780.621 to 780.621g treat it.
+  const KINDS = [
+    ["gen", "Something else, like theft, retail fraud, drug possession, or disorderly conduct"],
+    ["traffic", "A traffic crime that isn't drunk driving, like driving on a suspended license"],
+    ["owi1", "Drunk or drugged driving (OWI), my first one ever"],
+    ["owi2", "Drunk or drugged driving (OWI), not my first"],
+    ["trinj", "A traffic crime that hurt or killed someone, or one done while driving a commercial vehicle with a CDL"],
+    ["mj", "Marijuana possession, use, or paraphernalia (a misdemeanor)"],
+    ["assault", "Assault or battery, domestic violence, resisting or obstructing police, home invasion, robbery, stalking, or another violent crime"],
+    ["serious", "Another serious misdemeanor, like breaking and entering, illegal entry, or indecent exposure (see the list below)"],
+    ["dishon", "Felony embezzlement, forgery, uttering and publishing, counterfeiting, racketeering, or a computer crime"],
+    ["vuln", "Another crime against a child or vulnerable adult, or one that caused an injury or death"],
+    ["dvfel", "Felony domestic violence, after an earlier domestic violence misdemeanor"],
+    ["csc4", "Fourth-degree criminal sexual conduct (CSC 4th)"],
+    ["csc", "Criminal sexual conduct 1st, 2nd, or 3rd degree, assault with intent to commit CSC, or child abuse 1st or 2nd degree"],
+    ["csam", "Child sexually abusive material or activity, or using a computer or the internet to commit a crime against a minor"],
+    ["traf", "Human trafficking, forced labor, debt bondage, or terrorism"],
+    ["tvp", "Prostitution or a related charge that happened because I was being trafficked"]
+  ];
+  const KIND_SHORT = {
+    gen: "", traffic: "traffic crime", owi1: "first OWI", owi2: "repeat OWI", trinj: "traffic crime with injury, death, or CDL",
+    mj: "marijuana misdemeanor", assault: "assaultive crime", serious: "serious misdemeanor", dishon: "crime of dishonesty",
+    vuln: "crime involving a child, vulnerable adult, injury, or death", dvfel: "felony domestic violence after a prior",
+    csc4: "CSC 4th degree", csc: "criminal sexual conduct or child abuse", csam: "child sexually abusive material or computer crime against a minor",
+    traf: "human trafficking or terrorism", tvp: "prostitution while being trafficked"
+  };
+  const MAXM = [["ge93", "93 days up to 1 year"], ["le92", "92 days or less"], ["high", "More than 1 year (a \"high misdemeanor\")"], ["unk", "Not sure"]];
+  const MAXF = [["lt10", "Less than 10 years"], ["eq10", "Exactly 10 years"], ["gt10", "More than 10 years, but not life"], ["life", "Life in prison"], ["unk", "Not sure"]];
+  const MAXM_SHORT = { ge93: "most allowed 93 days to 1 year", le92: "most allowed 92 days or less", high: "high misdemeanor, most allowed over 1 year", unk: "most allowed jail time not known" };
+  const MAXF_SHORT = { lt10: "most allowed under 10 years", eq10: "most allowed 10 years", gt10: "most allowed over 10 years", life: "most allowed life", unk: "most allowed prison time not known" };
+  const opts = (list, sel) => list.map(([v, t]) => `<option value="${v}"${v === sel ? " selected" : ""}>${esc(t)}</option>`).join("");
+
+  function when(d) {
+    const n = diff(today, d);
+    if (n === 0) return `${plain(d)} (today)`;
+    if (n > 0 && n < 60) return `${plain(d)} (${n} day${n === 1 ? "" : "s"} from today)`;
+    if (n >= 60) {
+      const mo = Math.round(n / 30.44);
+      return `${plain(d)} (about ${mo < 24 ? mo + " months" : Math.round(mo / 12) + " years"} from today)`;
+    }
+    return plain(d);
+  }
+  function card(level, title, paras, cites = [], next = "") {
+    const c = cites.map(([k, p]) => `<a class="cite" href="${SRC[k]}" target="_blank" rel="noopener">${esc(k + (p ? " " + p : ""))}</a>`).join("");
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${LABEL[level]}</span></div>
+      ${[].concat(paras).filter(Boolean).map(t => t.startsWith("<") ? t : `<p>${t}</p>`).join("")}
+      ${next ? `<p class="next"><strong>What you can do:</strong> ${next}</p>` : ""}
+      ${c ? `<div class="cites">${c}</div>` : ""}
+    </article>`;
+  }
+
+  // ---------- Conviction editor ----------
+  const list = document.getElementById("convs");
+  let nextId = 1;
+  function addConv(v = {}) {
+    const id = nextId++;
+    const el = document.createElement("fieldset");
+    el.className = "conv"; el.dataset.id = id;
+    el.innerHTML = `
+      <div class="conv-head"><h3 class="c-title">Conviction</h3><button class="rm" type="button">Remove</button></div>
+      <div class="field"><label for="c-name-${id}">What it was for (optional)</label>
+        <input id="c-name-${id}" class="c-name" type="text" autocomplete="off" placeholder="Like: Retail fraud, 3rd degree" value="${esc(v.name || "")}">
+        <span class="hint">Use the name on your record. It labels your results, and two felonies with the same name are checked against each other.</span></div>
+      <div class="field"><span class="lbl" id="c-lvl-l-${id}">Felony or misdemeanor?</span>
+        <div class="opts inline" role="radiogroup" aria-labelledby="c-lvl-l-${id}">
+          <label><input type="radio" name="lvl-${id}" value="m"${v.level !== "f" ? " checked" : ""}> Misdemeanor</label>
+          <label><input type="radio" name="lvl-${id}" value="f"${v.level === "f" ? " checked" : ""}> Felony</label>
+        </div>
+        <span class="hint">Your record or court papers say which. Pick misdemeanor for a "high misdemeanor" too.</span></div>
+      <div class="field"><label for="c-kind-${id}">What kind of crime?</label>
+        <select id="c-kind-${id}" class="c-kind wide">${opts(KINDS, v.kind || "gen")}</select></div>
+      <div class="field m-only"><label for="c-maxm-${id}">Most jail time the law allows for it</label>
+        <select id="c-maxm-${id}" class="c-maxm">${opts(MAXM, v.maxm || "ge93")}</select>
+        <span class="hint">This is the most the law allows, not the sentence you got. Many Michigan misdemeanors allow up to 93 days. The law number (MCL) on your record tells you, or pick Not sure.</span></div>
+      <div class="field f-only"><label for="c-maxf-${id}">Most prison time the law allows for it</label>
+        <select id="c-maxf-${id}" class="c-maxf">${opts(MAXF, v.maxf || "lt10")}</select>
+        <span class="hint">Again, the most allowed, not your sentence. If you're not sure, pick Not sure.</span></div>
+      <div class="row2">
+        <div class="field"><label for="c-sent-${id}">Date you were sentenced</label><input id="c-sent-${id}" class="c-sent" type="date" value="${v.sent || ""}"></div>
+        <div class="field"><label for="c-prob-${id}">Date probation ended (if any)</label><input id="c-prob-${id}" class="c-prob" type="date" value="${v.prob || ""}"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="c-lock-${id}">Jail or prison time for it</label>
+          <select id="c-lock-${id}" class="c-lock">${opts([["none", "None"], ["jail", "County or city jail"], ["prison", "State prison"]], v.lock || "none")}</select></div>
+        <div class="field lock-only"><label for="c-lockend-${id}">Date you got out</label><input id="c-lockend-${id}" class="c-lockend" type="date" value="${v.lockEnd || ""}"></div>
+      </div>
+      <div class="field parole-only"><label for="c-parole-${id}">Date parole ended (if any)</label><input id="c-parole-${id}" class="c-parole" type="date" value="${v.parole || ""}"></div>
+      <div class="field same-only"><label for="c-same-${id}">Same incident as another conviction on this list?</label>
+        <select id="c-same-${id}" class="c-same wide"></select>
+        <span class="hint">Only if it all happened within 24 hours, as part of one set of events.</span></div>
+      <label class="check weapon-only"><input type="checkbox" class="c-weapon"${v.weapon ? " checked" : ""}> A gun, knife, or other dangerous weapon was part of it</label>`;
+    el.querySelector(".rm").addEventListener("click", () => { el.remove(); relabel(); run(); });
+    list.appendChild(el);
+    relabel();
+    return el;
+  }
+  function relabel() {
+    const els = [...list.querySelectorAll("fieldset.conv")];
+    const pos = new Map(els.map((e, i) => [e.dataset.id, i + 1]));
+    els.forEach((el, i) => {
+      el.querySelector(".c-title").textContent = `Conviction ${i + 1}`;
+      el.querySelector(".rm").hidden = els.length === 1;
+      const s = el.querySelector(".c-same"), cur = s.value;
+      s.innerHTML = `<option value="0">No, a separate incident</option>` +
+        els.filter(o => o !== el).map(o => `<option value="${o.dataset.id}">Yes, same incident as conviction ${pos.get(o.dataset.id)}</option>`).join("");
+      s.value = [...s.options].some(o => o.value === cur) ? cur : "0";
+      if (el.dataset.same) { s.value = [...s.options].some(o => o.value === el.dataset.same) ? el.dataset.same : "0"; delete el.dataset.same; }
+      el.querySelector(".same-only").hidden = els.length === 1;
+    });
+    toggles();
+  }
+  function toggles() {
+    list.querySelectorAll("fieldset.conv").forEach(el => {
+      const f = radio(el, `lvl-${el.dataset.id}`) === "f";
+      const lock = el.querySelector(".c-lock").value;
+      el.querySelector(".m-only").hidden = f;
+      el.querySelector(".f-only").hidden = !f;
+      el.querySelector(".lock-only").hidden = lock === "none";
+      el.querySelector(".parole-only").hidden = !(f && lock === "prison");
+      el.querySelector(".weapon-only").hidden = el.querySelector(".c-same").value === "0" || el.querySelector(".same-only").hidden;
+    });
+  }
+  function readConvs() {
+    return [...list.querySelectorAll("fieldset.conv")].map((el, i) => {
+      const id = el.dataset.id, q = c => el.querySelector(c);
+      const level = radio(el, `lvl-${id}`) === "f" ? "f" : "m";
+      const lock = q(".c-lock").value;
+      return {
+        id, n: i + 1, name: q(".c-name").value.trim(), level, isF: level === "f", kind: q(".c-kind").value,
+        maxm: q(".c-maxm").value, maxf: q(".c-maxf").value,
+        sent: parse(q(".c-sent").value), prob: parse(q(".c-prob").value),
+        lock, lockEnd: lock === "none" ? null : parse(q(".c-lockend").value),
+        parole: level === "f" && lock === "prison" ? parse(q(".c-parole").value) : null,
+        same: q(".c-same").value, weapon: !q(".weapon-only").hidden && q(".c-weapon").checked
+      };
+    });
+  }
+
+  // ---------- The rules ----------
+  function analyze(rows, G) {
+    const notes = [];   // per-row notes about how an answer was read
+    rows.forEach(r => {
+      r.note = [];
+      if (r.kind === "mj" && r.isF) { r.kind = "gen"; r.note.push("The quick marijuana route only covers misdemeanors, so this felony follows the regular rules."); }
+      if (r.kind === "dvfel" && !r.isF) { r.kind = "assault"; r.note.push("You marked this as a misdemeanor, so it's treated as an assaultive misdemeanor."); }
+      if (r.kind === "serious" && r.isF) { r.kind = "gen"; r.note.push("The serious misdemeanor rules cover misdemeanors only, so this felony follows the felony rules."); }
+      if (r.kind === "tvp" && r.isF) { r.note.push("The trafficking-victim route covers prostitution-related convictions under MCL 750.448 to 750.450 and matching local laws."); }
+      r.assaultive = ["assault", "csc4", "dvfel", "csc"].includes(r.kind);
+      r.tenPlus = r.isF && ["eq10", "gt10", "life"].includes(r.maxf);
+      r.tenUnk = r.isF && r.maxf === "unk";
+      r.gt10 = r.isF && ["gt10", "life"].includes(r.maxf);
+      r.bar = null;
+      if (r.isF && r.maxf === "life") r.bar = ["It's a felony that can carry life in prison. Those can never be set aside, even if your sentence was shorter.", ["MCL 780.621c", "(1)(a)"]];
+      else if (r.kind === "owi2") r.bar = ["Only a first OWI can be set aside. A second or later OWI can't.", ["MCL 780.621c", "(1)(d)(i)"]];
+      else if (r.kind === "trinj") r.bar = ["Traffic crimes that caused an injury or death, and traffic crimes by a CDL holder in a commercial vehicle, can't be set aside.", ["MCL 780.621c", "(1)(d)"]];
+      else if (r.kind === "dvfel") r.bar = ["A felony domestic violence conviction can't be set aside if you had an earlier domestic violence misdemeanor.", ["MCL 780.621c", "(1)(e)"]];
+      else if (r.kind === "csc") r.bar = ["Criminal sexual conduct in the 1st, 2nd, or 3rd degree, assault with intent to commit CSC, and 1st or 2nd degree child abuse can't be set aside.", ["MCL 780.621c", "(1)(a)-(b)"]];
+      else if (r.kind === "csam") r.bar = ["Child sexually abusive material or activity (MCL 750.145c) and using a computer to commit a crime against a minor (MCL 750.145d) can't be set aside.", ["MCL 780.621c", "(1)(b)"]];
+      else if (r.kind === "traf") r.bar = ["Human trafficking, forced labor, debt bondage, and terrorism convictions can't be set aside.", ["MCL 780.621c", "(1)(f)"]];
+      else if (r.kind === "csc4" && r.sent && r.sent >= CSC4_CUTOFF) r.bar = ["Fourth-degree CSC can't be set aside if the conviction was on or after January 12, 2015.", ["MCL 780.621c", "(1)(c)"]];
+      r.lastApp = latest(r.sent, r.prob, r.lockEnd, r.parole);
+      r.autoStart = r.isF ? latest(r.sent, r.lock === "prison" ? r.lockEnd : null) : r.sent;
+      r.mlhStart = latest(r.sent, r.prob, r.lockEnd, r.parole);
+    });
+    const ok = rows.filter(r => r.sent);
+
+    // One-incident rule (MCL 780.621b): link rows into groups.
+    const parent = new Map(rows.map(r => [r.id, r.id]));
+    const find = x => parent.get(x) === x ? x : find(parent.get(x));
+    rows.forEach(r => { if (r.same !== "0" && parent.has(r.same)) parent.set(find(r.id), find(r.same)); });
+    const groups = new Map();
+    rows.forEach(r => { const g = find(r.id); if (!groups.has(g)) groups.set(g, []); groups.get(g).push(r); });
+    const G24 = { used: [], blocked: [], unsure: [] };
+    const countFel = set => {
+      let n = 0;
+      for (const g of groups.values()) {
+        const fel = g.filter(r => r.isF && set.includes(r));
+        if (!fel.length) continue;
+        const qualifies = g.length > 1 && g.every(r => !r.assaultive && !r.weapon && !r.tenPlus && !r.tenUnk);
+        n += qualifies ? 1 : fel.length;
+      }
+      return n;
+    };
+    for (const g of groups.values()) {
+      if (g.length < 2) continue;
+      const why = [];
+      if (g.some(r => r.assaultive)) why.push("one is an assaultive crime");
+      if (g.some(r => r.weapon)) why.push("a dangerous weapon was part of it");
+      if (g.some(r => r.tenPlus)) why.push("one carries 10 or more years");
+      if (why.length) G24.blocked.push([g, why]);
+      else if (g.some(r => r.tenUnk)) G24.unsure.push(g);
+      else if (g.filter(r => r.isF).length > 1) G24.used.push(g);
+    }
+    const felCount = countFel(rows);
+    const appFelRows = rows.filter(r => r.isF && !r.bar);
+    const appFelCount = countFel(appFelRows);
+    const assaultTotal = rows.filter(r => r.assaultive).length;
+    const fiveYear = r => ["serious", "assault", "owi1", "csc4"].includes(r.kind);
+    const waitFor = r => r.isF ? (appFelCount > 1 ? 7 : 5) : (fiveYear(r) ? 5 : 3);
+    const felStart = latest(...appFelRows.map(r => r.lastApp));
+
+    // ----- Applying to the court (MCL 780.621, 621c, 621d, 621e) -----
+    ok.forEach(r => {
+      const a = r.app = { st: "yes", any: false, why: [], cites: [["MCL 780.621d", ""]], pushed: [] };
+      if (r.bar) { a.st = "no"; a.why.push(r.bar[0]); a.cites = [r.bar[1]]; return; }
+      if (r.kind === "mj" && !r.isF) { a.any = true; a.form = "MC 227a"; a.cites = [["MCL 780.621e", ""], ["MC 227a", ""]]; return; }
+      if (r.kind === "tvp") { a.any = true; a.form = "MC 227b"; a.cites = [["MCL 780.621", "(3)"], ["MCL 780.621d", "(6)"], ["MC 227b", ""]]; return; }
+      if (felCount > 3) { a.st = "no"; a.why.push(`You have more than 3 felony convictions (${felCount} as counted here), so you can't apply to set aside this one.`); a.cites = [["MCL 780.621", "(1)(a)"]]; return; }
+      a.wait = waitFor(r);
+      a.start = r.isF && appFelCount > 1 ? felStart : r.lastApp;
+      a.B = addY(a.start, a.wait);
+      a.form = "MC 227";
+    });
+    const genericB = r => r.app && r.app.B ? r.app.B : addY(r.lastApp, waitFor(r));
+    // A conviction during a waiting period: the Attorney General says you can't apply until the new waiting period ends.
+    for (let pass = 0; pass <= ok.length + 1; pass++) {
+      let changed = false;
+      ok.forEach(r => {
+        const a = r.app;
+        if (!a.B) return;
+        ok.forEach(j => {
+          if (j === r || !(j.sent > a.start && j.sent <= a.B)) return;
+          const jb = genericB(j);
+          if (jb > a.B) { a.B = jb; changed = true; }
+          if (!a.pushed.includes(j)) a.pushed.push(j);
+        });
+      });
+      if (!changed) break;
+    }
+    const denB = G.den ? addY(G.den, 3) : null;
+    const assaultApp = ok.filter(r => r.assaultive && r.app.st !== "no");
+    const gt10Fel = ok.filter(r => r.gt10 && !r.bar);
+    const owi1 = ok.filter(r => r.kind === "owi1");
+    ok.forEach(r => {
+      const a = r.app;
+      if (a.st === "no") return;
+      if (denB && a.B && denB > a.B) { a.B = denB; a.den = true; }
+      if (denB && a.any && denB > today) { a.anyAfter = denB; a.den = true; }
+      if (r.kind === "csc4") {
+        a.st = rows.length - 1 > 2 ? "no" : "maybe";
+        a.why.push(rows.length - 1 > 2
+          ? "Fourth-degree CSC from before January 12, 2015 can be set aside only if your only other convictions are up to 2 minor offenses. You listed more than that."
+          : "Fourth-degree CSC from before January 12, 2015 can be set aside only if you have no other convictions, except up to 2 minor offenses. A minor offense is a misdemeanor or ordinance violation that allows 90 days or less and a $1,000 fine or less, done when you were 21 or younger.");
+        a.cites.push(["MCL 780.621", "(1)(d)"]);
+      }
+      if (r.assaultive && assaultApp.length > 2) { a.st = "maybe"; a.why.push(`Only 2 assaultive convictions can be set aside in your lifetime. You listed ${assaultApp.length}.`); a.cites.push(["MCL 780.621", "(1)(b)"]); }
+      if (r.gt10 && gt10Fel.length > 1) {
+        const key = r.name.toLowerCase();
+        const dup = gt10Fel.filter(o => o !== r && (!key || !o.name || o.name.toLowerCase() === key));
+        if (dup.length) { a.st = "maybe"; a.why.push(key && dup.every(o => o.name.toLowerCase() === key)
+          ? "Only one felony conviction for the same offense can be set aside if that offense allows more than 10 years. You listed more than one with this name."
+          : "If any of your felonies that allow more than 10 years are for the same offense, only one of them can be set aside. Add the names to check."); a.cites.push(["MCL 780.621", "(1)(c)"]); }
+      }
+      if (r.kind === "owi1") {
+        a.cites.push(["MCL 780.621c", "(3)-(4)"]);
+        if (owi1.length > 1) { a.st = "maybe"; a.why.push("You can only ever set aside one first OWI, and only one OWI can be someone's first. Check how these are listed on your record."); }
+      }
+      if (a.pushed.length && a.st === "yes") a.st = "maybe";
+      if (G.pend === "yes") a.hold = true;
+    });
+
+    // ----- Automatic clearing (MCL 780.621g, and 621c(2)-(3)) -----
+    const autoNo = (r, t, c) => { r.auto = { st: "no", why: [t], cites: [c] }; };
+    const assault2 = assaultTotal > 1;
+    ok.forEach(r => {
+      if (r.bar) return autoNo(r, "Convictions that can't be set aside by application are never cleared automatically either.", ["MCL 780.621c", "(2)"]);
+      if (r.kind === "owi1") return autoNo(r, "A first OWI never clears automatically. You have to apply.", ["MCL 780.621c", "(3)"]);
+      if (r.assaultive) return autoNo(r, "Assaultive crimes don't clear automatically.", ["MCL 780.621g", "(10)(a)"]);
+      if (r.kind === "serious") return autoNo(r, "Serious misdemeanors don't clear automatically.", ["MCL 780.621g", "(10)(b)"]);
+      if (r.kind === "dishon") return autoNo(r, "Crimes the law calls crimes of dishonesty, like felony embezzlement, forgery, and computer crimes, don't clear automatically.", ["MCL 780.621g", "(10)(c), (15)"]);
+      if (r.kind === "vuln") return autoNo(r, "Crimes whose elements involve a minor, a vulnerable adult, an injury, or a death don't clear automatically.", ["MCL 780.621g", "(10)(e)"]);
+      if (r.tenPlus) return autoNo(r, "Felonies that allow 10 or more years in prison don't clear automatically.", ["MCL 780.621g", "(10)(d)"]);
+      if (r.isF && felCount > 3) return autoNo(r, "A felony clears automatically only if it could also be set aside by application, and with more than 3 felonies it can't.", ["MCL 780.621g", "(2)(b)"]);
+      const u = r.auto = { st: "yes", why: [], cites: [["MCL 780.621g", ""]] };
+      u.small = !r.isF && r.maxm === "le92";
+      u.D = addY(r.autoStart, r.isF ? 10 : 7);
+      if (r.isF) { const m = addY(r.mlhStart, 10); if (m > u.D) u.mlh = m; }
+      if (r.kind === "tvp") { u.st = "maybe"; u.why.push("The automatic rule skips any violation related to human trafficking, which may include this one. Applying has no wait for you."); u.cites.push(["MCL 780.621g", "(10)(f)"]); }
+      if (r.tenUnk) { u.st = "maybe"; u.why.push("If the most prison time allowed is 10 years or more, it won't clear automatically."); u.cites.push(["MCL 780.621g", "(10)(d)"]); }
+      if (!r.isF && r.maxm === "unk") { u.st = "maybe"; u.why.push("If the most jail time allowed is 92 days or less, the limits and conditions below don't apply to it."); }
+      if (u.small) return;
+      if (assault2) { u.st = "no"; u.why.push("You have more than one assaultive conviction, so this kind of conviction isn't cleared automatically."); u.cites.push(["MCL 780.621g", "(7)"]); return; }
+      const during = ok.filter(j => j !== r && j.sent > r.autoStart && j.sent <= u.D);
+      if (during.length) { u.st = "maybe"; u.during = during; u.why.push(`Conviction ${during.map(j => j.n).join(" and ")} came during its ${r.isF ? 10 : 7}-year wait, so the automatic rule may not clear it.`); u.cites.push(["MCL 780.621g", "(6)(c)"]); }
+      if (G.pend === "yes") { u.hold = true; u.cites.push(["MCL 780.621g", "(6)(b)"]); }
+    });
+    const autoF = ok.filter(r => r.isF && r.auto && r.auto.st !== "no");
+    const autoM = ok.filter(r => !r.isF && r.auto && r.auto.st !== "no" && !r.auto.small);
+    if (autoF.length > 2) autoF.forEach(r => { r.auto.st = "maybe"; r.auto.why.push(`At most 2 felonies can clear automatically in a lifetime. ${autoF.length} of yours might qualify.`); r.auto.cites.push(["MCL 780.621g", "(5)"]); });
+    if (autoM.length > 4) autoM.forEach(r => { r.auto.st = "maybe"; r.auto.why.push(`At most 4 misdemeanors that allow 93 days or more can clear automatically. ${autoM.length} of yours might qualify.`); r.auto.cites.push(["MCL 780.621g", "(5)"]); });
+
+    return { rows, ok, felCount, appFelCount, assaultTotal, G24, denB };
+  }
+
+  // ---------- Words for each result ----------
+  const label = r => `${r.n}. ${r.name ? esc(r.name) : (r.isF ? "Felony" : "Misdemeanor")}`;
+  function autoText(r) {
+    const u = r.auto;
+    if (u.st === "no") return u.why.join(" ");
+    const yrs = r.isF ? 10 : 7;
+    let t;
+    if (u.during) {
+      t = `Its ${yrs}-year wait ${u.D <= today ? "ended" : "ends"} ${plain(u.D)}, but conviction ${u.during.map(j => j.n).join(" and ")} came during that wait. The automatic rule clears a conviction only if there's no new conviction during its wait, so this one may not clear on its own.${u.D <= today ? " Check ICHAT to see if it still shows." : ""}`;
+      u.why = u.why.filter(w => !w.includes("came during its"));
+    } else if (u.D <= today) {
+      t = `It may already be cleared. Its ${yrs}-year wait ended ${plain(u.D)}.`;
+      if (u.D < AUTO_START) t += " The State Police started clearing records on April 11, 2023.";
+      t += " Check ICHAT to see if it still shows.";
+    } else {
+      t = `It may clear on its own on or after ${when(u.D)}. You don't have to apply.`;
+      if (!u.small) t += " That's only if you have no new convictions and no open charges before then.";
+    }
+    t += r.isF ? " For felonies the wait runs 10 years from sentencing or the end of state prison, whichever is later." : " For misdemeanors the wait runs 7 years from sentencing.";
+    if (u.hold) t += " Open charges stop this for now.";
+    return [t].concat(u.why).join(" ");
+  }
+  function appText(r) {
+    const a = r.app;
+    if (a.st === "no") return a.why.join(" ");
+    let t;
+    if (a.any) {
+      t = a.anyAfter ? `You may be able to apply again on or after ${when(a.anyAfter)}, 3 years after your denial, unless the court's order said sooner.` : "You may be able to apply at any time. There's no waiting period.";
+      t += r.kind === "mj" ? " The law presumes your conduct is legal now, and the prosecutor has to prove otherwise." : " You'll need to show it happened because you were being trafficked.";
+      t += ` Use form ${a.form}.`;
+    } else {
+      const what = r.isF ? (a.wait === 7 ? "more than one felony" : "one felony") : (r.kind === "owi1" ? "a first OWI" : fiveText(r) ? "this kind of misdemeanor" : "most misdemeanors");
+      const ev = r.isF ? "sentencing, probation, jail or prison, and parole" : "sentencing, probation, and jail";
+      const lead = a.st === "maybe" ? "You may be able to apply" : "You may be able to apply";
+      t = a.B <= today ? `${lead} now.` : `${lead} on or after ${when(a.B)}.`;
+      t += ` The wait for ${what} is ${a.wait} years after the last of ${ev}${r.isF && a.wait === 7 ? ", counting all the felonies you apply for together" : ""}.`;
+      if (a.pushed.length) t += ` Conviction ${a.pushed.map(j => j.n).join(" and ")} came during that wait. The Attorney General's office says a new conviction keeps you from applying until the new waiting period ends, so the earliest date moves out to ${plain(a.B)}. Ask legal aid how this applies to you.`;
+      if (a.den) t += " It also waits 3 years after your denial, unless the court's order said sooner.";
+    }
+    if (a.hold) t += " A court can't grant it while charges are open against you.";
+    return [t].concat(a.why).join(" ");
+  }
+  const fiveText = r => ["serious", "assault", "csc4"].includes(r.kind);
+  function convCard(r) {
+    const a = r.app, u = r.auto;
+    const lvl = (a.hold || u.hold) ? "help" : (a.st === "maybe" || u.st === "maybe" || u.mlh) ? "facts" : "law";
+    const kind = KIND_SHORT[r.kind];
+    const sub = [r.isF ? "Felony" : "Misdemeanor", kind, r.isF ? MAXF_SHORT[r.maxf] : MAXM_SHORT[r.maxm]].filter(Boolean).join(" · ");
+    const paras = [
+      `<p class="small">${esc(sub)}</p>`,
+      `<div class="route"><b>Automatic</b><p>${autoText(r)}</p></div>`,
+      `<div class="route"><b>Applying to the court</b><p>${appText(r)}</p></div>`,
+      u.mlh ? `<p class="small">Michigan Legal Help reads the felony wait as running from the end of probation or parole too. By that reading, the date would be ${plain(u.mlh)}. The law's text and the State Police list only sentencing and the end of state prison.</p>` : "",
+      r.note.length ? `<p class="small">${r.note.join(" ")}</p>` : ""
+    ];
+    const cites = [];
+    [...u.cites, ...a.cites].forEach(c => { if (!cites.some(x => x[0] === c[0] && x[1] === c[1])) cites.push(c); });
+    if (u.mlh) cites.push(["MLH: automatic", ""]);
+    return card(lvl, label(r), paras, cites);
+  }
+
+  // ---------- Page ----------
+  const fc = document.getElementById("f-convs"), fr = document.getElementById("f-rec");
+  let lastSummary = "";
+  function run() {
+    toggles();
+    const G = { pend: radio(fr, "pend"), oos: radio(fr, "oos"), den: radio(fr, "den") === "yes" ? parse(document.getElementById("den-date").value) : null };
+    document.getElementById("den-wrap").hidden = radio(fr, "den") !== "yes";
+    const rows = readConvs();
+    const R = analyze(rows, G);
+    const c = [];
+    const missing = rows.filter(r => !r.sent);
+    if (missing.length) c.push(card("facts", "Add the sentencing date", `Enter the date you were sentenced for conviction ${missing.map(r => r.n).join(" and ")}. Every waiting period counts from it.`));
+    const future = R.ok.filter(r => [r.sent, r.prob, r.lockEnd, r.parole].some(d => d && d > today));
+    if (future.length) c.push(card("facts", "Some dates are in the future", `Conviction ${future.map(r => r.n).join(" and ")} has a date after today. If probation or parole hasn't ended yet, the waiting period hasn't started, so the dates below are the earliest it could be if it ends on time.`));
+
+    if (R.ok.length) c.push(glance(R));
+
+    if (G.pend === "yes") c.push(card("help", "Open charges put everything on hold", [
+      "A court can't set aside a conviction while any criminal charge is open against you, and the automatic rule waits too. If the open case ends in a new conviction, it can restart your waiting periods.",
+      "The dates below show when you may qualify once the charges are over, if they don't end in a conviction."
+    ], [["MCL 780.621d", "(4)(b)"], ["MCL 780.621g", "(6)(b)"]], "Talk to the lawyer on your open case before you apply for anything."));
+    else if (G.pend === "unk") c.push(card("facts", "Check for open charges", "Open charges block both routes until they're resolved. The court that handles your case can tell you whether anything is still open."));
+
+    if (R.felCount > 3) c.push(card("law", `${R.felCount} felonies: most of your record can't be set aside by applying`, [
+      "You can apply only if you have 3 or fewer felony convictions in Michigan, after counting a single incident as one felony where the law allows it. That limit covers all of your convictions, misdemeanors included.",
+      "Two things still work: marijuana misdemeanors and trafficking-related prostitution convictions have their own routes, and misdemeanors can still clear automatically."
+    ], [["MCL 780.621", "(1)(a)"], ["MCL 780.621g", "(2)(b)"]], "Ask legal aid whether any of your felonies came from one incident, which could lower your count."));
+    R.G24.used.forEach(g => c.push(card("law", `Conviction ${g.map(r => r.n).join(" and ")} count as one felony`, "They happened within 24 hours as part of one incident, and none is assaultive, involved a dangerous weapon, or allows 10 or more years. So when you apply, they count as a single felony. This doesn't change the automatic rule, which counts each one.", [["MCL 780.621b", ""]])));
+    R.G24.blocked.forEach(([g, why]) => c.push(card("law", `Conviction ${g.map(r => r.n).join(" and ")} still count separately`, `They came from one incident, but ${why.join(" and ")}, so the one-incident rule doesn't apply. Each one counts on its own.`, [["MCL 780.621b", ""]])));
+    R.G24.unsure.forEach(g => c.push(card("facts", `Conviction ${g.map(r => r.n).join(" and ")} may count as one`, "They came from one incident. If none of them allows 10 or more years in prison, they count as one felony when you apply. Find the most allowed prison time on your record to be sure.", [["MCL 780.621b", ""]])));
+    if (R.assaultTotal > 1) c.push(card("law", "More than one assaultive conviction", [
+      "With more than one assaultive conviction, Michigan doesn't automatically clear your felonies or your misdemeanors that allow 93 days or more. Misdemeanors that allow 92 days or less can still clear on their own.",
+      R.assaultTotal > 2 ? "When you apply, only 2 assaultive convictions can ever be set aside. The others can still be." : "You can still apply."
+    ], [["MCL 780.621g", "(7)"], ["MCL 780.621", "(1)(b)"]]));
+    if (R.ok.some(r => !r.isF && r.maxm === "high")) c.push(card("facts", "High misdemeanors can be argued as felonies", "A high misdemeanor allows more than a year in jail. Michigan Legal Help warns that the Attorney General or prosecutor will likely argue it counts as a felony. That could change your felony count or your wait. A criminal lawyer can tell you how courts near you handle it.", [["MLH: what can be set aside", ""]]));
+    if (G.oos === "yes") c.push(card("facts", "Convictions from other states or federal court", [
+      "Michigan's law can only set aside Michigan convictions. A court in that state or the federal system has its own rules.",
+      "A conviction anywhere during one of your waiting periods can still block an application here, and the FBI check run on every application will find it. Add those dates when you talk to legal aid."
+    ], [["MCL 780.621", "(1)(a), (4)(c)"], ["MCL 780.621d", "(4)(c), (8)"], ["MLH: what can be set aside", ""]]));
+    if (G.den) c.push(card("law", "After a denial, a 3-year wait to try again", `After a court turns down an application, you can't file again for the same conviction until 3 years after the denial (${plain(addY(G.den, 3))}), unless the court's order named an earlier date. This page applies that date to every conviction to be safe. If your denial covered only some of them, the others may be sooner.`, [["MCL 780.621d", "(5)"]]));
+    else if (radio(fr, "den") === "yes") c.push(card("facts", "Add the denial date", "Enter the date the court turned down your application. You have to wait 3 years from it to apply again for the same conviction, unless the order said sooner."));
+
+    R.ok.forEach(r => c.push(convCard(r)));
+
+    const applying = R.ok.filter(r => r.app.st !== "no" && !r.app.any);
+    if (applying.length) c.push(card("law", "How to apply to a court", [
+      `<ol>
+        <li>Get your record from <a href="https://apps.michigan.gov/" target="_blank" rel="noopener">ICHAT</a> ($10 per name search). Get a certified copy of each judgment of sentence or register of actions from each court that convicted you.</li>
+        <li>Get fingerprinted at a local police agency on a Michigan applicant card (RI-008). Call ahead for hours.</li>
+        <li>Fill out form MC 227, Application to Set Aside Conviction(s), and sign it in front of a notary or court clerk. Use one application for each court.</li>
+        <li>File it with the court that convicted you. Mail a copy, the fingerprint card, and a $50 check or money order to the State of Michigan to the State Police (CJIC, P.O. Box 30266, Lansing, MI 48909). Mail copies to the Attorney General's Assistance with Convictions and Expungements Division (P.O. Box 30217, Lansing, MI 48909) and to the prosecutor's office that handled your case.</li>
+        <li>Go to your hearing. The State Police report to the court first, and the Attorney General can take up to 3 months after that. The whole process can take up to 8 months.</li>
+      </ol>`,
+      "The judge decides whether your conduct since the conviction and the public's interest support clearing it. It's not automatic, even when you qualify. Victims of assaultive crimes and serious misdemeanors get notice and can speak at the hearing."
+    ], [["MC 227", ""], ["MSP set aside", ""], ["AG FAQ", ""], ["MCL 780.621d", "(7)-(13)"]], `<a href="https://michiganlegalhelp.org/resources/crime-and-traffic/do-it-yourself-expungement-adult-conviction" target="_blank" rel="noopener">Michigan Legal Help's free tool</a> fills out MC 227 for you.`));
+    if (R.ok.some(r => r.kind === "mj" && r.app.any)) c.push(card("law", "Marijuana misdemeanors have a faster route", [
+      "Use form MC 227a. There's no waiting period, no fee, and no fingerprints, and your other convictions don't block it. File it with the court that convicted you and give a copy to the prosecutor.",
+      "If the prosecutor doesn't answer within 60 days, the court must set it aside within 21 days. If they object, the court holds a hearing within 30 days, and the prosecutor has to prove your conduct would still be a crime today."
+    ], [["MCL 780.621e", ""], ["MC 227a", ""], ["AG FAQ", ""]]));
+    if (R.ok.some(r => r.kind === "tvp" && r.app.any)) c.push(card("law", "If you were trafficked", "Prostitution-related convictions that happened because you were a victim of human trafficking can be set aside at any time, and more than one can be. Use form MC 227b. You'll need to show the court, more likely than not, that the conviction was a direct result of being trafficked.", [["MCL 780.621", "(3)"], ["MCL 780.621d", "(6), (12)"], ["MC 227b", ""]], "A legal aid lawyer can help you gather proof."));
+    if (R.ok.some(r => r.kind === "owi1" && r.app.st !== "no")) c.push(card("law", "About setting aside a first OWI", [
+      "You can only do this once in your life, and it never happens automatically. The judge may look at whether you finished any alcohol or drug programs the court ordered, and can say no if you didn't.",
+      "It stays on your Secretary of State driving record either way, so it won't fix your license by itself."
+    ], [["MCL 780.621c", "(3)-(5)"]]));
+    if (R.ok.some(r => r.kind === "csc4" || r.kind === "csc" || r.kind === "csam")) c.push(card("law", "Registration doesn't end with a set aside", "If a conviction is a listed offense under the Sex Offenders Registration Act, setting it aside doesn't remove it for registration. You're still treated as convicted of it for that law.", [["MCL 780.622", "(3)"]], "Talk to a lawyer about registration before you apply."));
+    c.push(card("law", "What clearing a conviction does", [
+      "Once a conviction is set aside, by a judge or automatically, the law treats you as not convicted of it. It drops off public records like ICHAT, and it can't be used against an employer, school, or licensing board in a negligent hiring lawsuit.",
+      `<ul>
+        <li>The State Police keep a nonpublic copy that courts, police, prosecutors, and a few licensing and hiring uses can see. It can count if you're charged with a crime later.</li>
+        <li>Fines and costs you paid aren't refunded, and you still owe any restitution. An automatic clearing can be undone if a court finds you made no good-faith effort to pay restitution, or that it cleared by mistake.</li>
+        <li>Traffic convictions stay on your driving record with the Secretary of State.</li>
+        <li>You aren't notified when something clears automatically. Check ICHAT, or pay the State Police $30 for a fingerprint check that shows everything.</li>
+      </ul>`
+    ], [["MCL 780.622", ""], ["MCL 780.623", ""], ["MCL 780.621h", ""], ["MCL 780.621c", "(5)"], ["MSP record check", ""]],
+      "If you aren't a U.S. citizen, immigration law treats old convictions its own way. Ask an immigration lawyer what a set aside does for you."));
+
+    document.getElementById("results").innerHTML =
+      `<div class="results-head"><h2>What may apply to you</h2>
+        <div class="legend"><span class="tag law">The law says</span><span class="tag facts">Depends on your facts</span><span class="tag help">Get help now</span></div></div>` + c.join("");
+    summary(R, G);
+  }
+
+  function glance(R) {
+    const auto = [], now = [], later = [], none = [], unsure = [];
+    R.ok.forEach(r => {
+      const u = r.auto, a = r.app, L = label(r);
+      if (u.st !== "no" && !u.hold && !u.during) auto.push(`${L}${u.st === "maybe" ? " (depends on your facts)" : ""}: ${u.D <= today ? "may already be cleared, so check ICHAT" : "may clear on its own on or after " + plain(u.D)}`);
+      if (a.st === "no" && u.st === "no") none.push(L);
+      else if (a.st !== "no" && !a.hold) {
+        const d = a.any ? (a.anyAfter || today) : a.B;
+        const s = `${L}${a.st === "maybe" ? " (depends on your facts)" : ""}`;
+        if (d <= today) now.push(s); else later.push(`${s}: on or after ${plain(d)}`);
+      }
+      if (a.hold || u.hold) unsure.push(`${L}: ${a.hold && u.hold ? "both routes are" : a.hold ? "applying is" : "automatic clearing is"} on hold while charges are open`);
+    });
+    const block = (t, items) => items.length ? `<div><h3>${t}</h3><ul>${items.map(i => `<li>${i}</li>`).join("")}</ul></div>` : "";
+    const level = unsure.length ? "help" : R.ok.some(r => r.app.st === "maybe" || r.auto.st === "maybe" || r.auto.mlh) ? "facts" : "law";
+    return card(level, "At a glance", [
+      `<div class="glance">
+        ${block("May clear automatically", auto)}
+        ${block("You may be able to apply now", now)}
+        ${block("You may be able to apply later", later)}
+        ${block("Can't be cleared under Michigan law", none)}
+        ${block("On hold", unsure)}
+      </div>`,
+      `<p class="small">Each conviction's card below explains why. "May" is the most this page can say. Only a judge, or the State Police for automatic clearing, can say for sure.</p>`
+    ]);
+  }
+
+  function summary(R, G) {
+    const L = [];
+    L.push(`Michigan Clean Slate Expungement Check: my results (${plain(today)})`);
+    L.push("This is information, not legal advice. Rules checked against Michigan law on October 31, 2026.", "");
+    R.rows.forEach(r => {
+      const bits = [r.isF ? "Felony" : "Misdemeanor", KIND_SHORT[r.kind], r.isF ? MAXF_SHORT[r.maxf] : MAXM_SHORT[r.maxm]].filter(Boolean).join(", ");
+      const dates = [r.sent ? "sentenced " + plain(r.sent) : "sentencing date not entered", r.prob ? "probation ended " + plain(r.prob) : "",
+        r.lockEnd ? (r.lock === "prison" ? "out of prison " : "out of jail ") + plain(r.lockEnd) : "", r.parole ? "parole ended " + plain(r.parole) : ""].filter(Boolean).join(", ");
+      L.push(`${r.n}. ${r.name || (r.isF ? "Felony" : "Misdemeanor")} (${bits}). ${dates.charAt(0).toUpperCase() + dates.slice(1)}.`);
+      if (r.same !== "0") { const o = R.rows.find(x => x.id === r.same); if (o) L.push(`   Same incident as conviction ${o.n}${r.weapon ? ", with a dangerous weapon" : ""}.`); }
+      if (r.sent && r.auto && r.app) {
+        const u = r.auto, a = r.app;
+        L.push(`   Automatic: ${u.st === "no" ? "not cleared automatically" : (u.D <= today ? "wait ended " + plain(u.D) + ", check ICHAT" : "may clear on or after " + plain(u.D))}${u.st === "maybe" ? " (depends on facts)" : ""}.`);
+        L.push(`   Applying: ${a.st === "no" ? "not eligible" : a.any ? (a.anyAfter ? "may apply on or after " + plain(a.anyAfter) : "may apply any time") + " (form " + a.form + ")" : (a.B <= today ? "may apply now" : "may apply on or after " + plain(a.B))}${a.st === "maybe" ? " (depends on facts)" : ""}${a.hold ? ", on hold while charges are open" : ""}.`);
+      }
+    });
+    L.push("");
+    L.push(`Open criminal charges: ${{ no: "No", yes: "Yes", unk: "Not sure" }[G.pend]}.`);
+    L.push(`Convictions from another state or federal court: ${G.oos === "yes" ? "Yes" : "No"}.`);
+    L.push(`A court turned down an earlier application: ${radio(fr, "den") === "yes" ? "Yes" + (G.den ? ", on " + plain(G.den) : "") : "No"}.`);
+    L.push("", "Made with the free Michigan Clean Slate Expungement Check from Free to All AI. Nothing entered was sent anywhere.");
+    lastSummary = L.join("\n");
+    document.getElementById("summary").textContent = lastSummary;
+  }
+
+  // Sample record so the page shows how it works
+  addConv({ name: "Retail fraud, 3rd degree", level: "m", kind: "gen", maxm: "ge93", sent: "2017-03-15", prob: "2018-03-15" });
+  addConv({ name: "Possession of a controlled substance", level: "f", kind: "gen", maxf: "lt10", sent: "2019-06-10", prob: "2021-06-10" });
+  document.getElementById("add").addEventListener("click", () => { const el = addConv(); run(); el.querySelector(".c-name").focus(); });
+  [fc, fr].forEach(f => { f.addEventListener("input", run); f.addEventListener("change", run); f.addEventListener("submit", e => e.preventDefault()); });
+  run();
+
+  document.getElementById("copy").addEventListener("click", () => {
+    const el = document.getElementById("summary"), msg = document.getElementById("copied");
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = "Selected. Press Ctrl+C or Cmd+C to copy."; };
+    try {
+      navigator.clipboard.writeText(lastSummary).then(() => { msg.textContent = "Copied"; }, fallback);
+    } catch (e) { fallback(); }
+  });
+  document.getElementById("print").addEventListener("click", () => {
+    document.body.classList.add("printing");
+    window.print();
+    setTimeout(() => document.body.classList.remove("printing"), 500);
+  });
+})();
+</script>
+</body>
+</html>
