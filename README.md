@@ -2,6 +2,8 @@
 
 **You can and must understand AI now.**
 
+**Use the tools here: [free-to-all-ai.github.io/tools](https://free-to-all-ai.github.io/tools/)**
+
 ## Why "Free to All"
 
 Three words are carved over the main entrance of the Boston Public Library: **FREE TO ALL**. Founded in 1848, it was the first large free municipal library in the United States. When its McKim Building opened in 1895, the promise went over the door. Anyone could walk in and use the most powerful information tools of the day, whoever they were and whatever they could pay. ([source](https://bpl.org/news/mckim-building-125th-anniversary))
@@ -41,6 +43,8 @@ Laws and rates change. Every tool lists the date its sources were checked. The b
 ## Add your own
 
 Have a tool that helps people and has a checkable right answer? Open an issue or a pull request. The bar is simple: it cites its sources, it doesn't track anyone, and it tells people when they need a real professional.
+
+So people can find a new tool: give its page a plain-language `<title>` and description in the words people actually search for, add a card to the homepage (`index.html`), add its address to `sitemap.xml`, and add a 1200 by 630 link-preview image in `og/`.
 
 ## License
 

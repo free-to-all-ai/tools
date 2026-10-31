@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Free Help Tools for Detroit and Michigan | Free to All AI</title>
+<meta name="description" content="Free tools for Detroit and Michigan: HOPE property tax exemption, tenant rights, medical bills, insurance appeals, SNAP and Medicaid hearings, and back pay. No sign-up.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Free Help Tools for Detroit and Michigan">
+<meta property="og:description" content="Free tools for Detroit and Michigan: HOPE property tax exemption, tenant rights, medical bills, insurance appeals, SNAP and Medicaid hearings, and back pay. No sign-up.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/home.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Free to All AI","url":"https://free-to-all-ai.github.io/tools/"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. Deadlines first, then every tool as a card, then why the project exists and how the tools work. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 32px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 19px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.lede { color: var(--muted); max-width: 62ch; }
+.notice { background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px; display: grid; gap: 4px; }
+section { display: grid; gap: 14px; }
+.tools { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.tool {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 6px; border-left: 5px solid var(--accent);
+}
+.tool.urgent { border-left-color: var(--help); }
+.tool h3 a { text-decoration: none; }
+.tool h3 a:hover { text-decoration: underline; }
+.when { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--help); }
+.where { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.tool p { color: var(--muted); }
+.prose { display: grid; gap: 12px; max-width: 64ch; }
+.prose ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Free to All AI</span>
+    <h1>Free help with Michigan bills, benefits, and rights</h1>
+    <p class="lede">Small, free tools for people in Detroit and across Michigan. Each one does one job, gives you an answer you can check, and links to the law or data the answer comes from.</p>
+    <div class="notice">
+      <strong>No sign-up and no tracking.</strong>
+      <span>What you type stays on your own device. These tools give information, not legal, medical, or tax advice.</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="h-soon">
+    <h2 id="h-soon">Deadlines coming up</h2>
+    <ul class="tools">
+      <li class="tool urgent">
+        <span class="when">Detroit · Due Friday, Nov 6, 2026, 4:30 PM</span>
+        <h3><a href="hope-exemption/">Detroit HOPE Property Tax Exemption Check</a></h3>
+        <p>Can't pay your Detroit property taxes? HOPE, the city's poverty exemption, can lower or wipe out your property taxes if your income is under the limit. See if you likely qualify and what your HOPE application needs. You don't have to be a senior.</p>
+      </li>
+      <!-- Deadline tools: add new cards above this line. -->
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-all">
+    <h2 id="h-all">All tools</h2>
+    <ul class="tools">
+      <li class="tool">
+        <span class="where">Michigan · Renters</span>
+        <h3><a href="renter-rights/">Michigan Renter Rights Check</a></h3>
+        <p>Michigan tenant rights for getting your security deposit back, eviction notices, repairs, lockouts, illegal lease clauses, and landlord retaliation. Works out your deadlines from your dates.</p>
+      </li>
+      <li class="tool">
+        <span class="where">Michigan · SNAP · Medicaid</span>
+        <h3><a href="benefits-deadlines/">Benefits Cut Letter Deadlines</a></h3>
+        <p>Got an MDHHS letter that denies, cuts, or stops food assistance (SNAP), Medicaid, cash, or child care help? See your deadline to ask for a hearing and to keep your benefits while you wait. Drafts the hearing request.</p>
+      </li>
+      <li class="tool">
+        <span class="where">Detroit area · Medical bills</span>
+        <h3><a href="bill-checker/">Detroit Medical Bill Check</a></h3>
+        <p>Type the CPT or HCPCS codes from an itemized medical bill and see the 2026 Medicare rate for each in the Detroit area. Flags charges billed twice and drafts a letter to dispute them.</p>
+      </li>
+      <li class="tool">
+        <span class="where">Health insurance</span>
+        <h3><a href="appeal-helper/">Insurance Denial Appeal Helper</a></h3>
+        <p>Health insurance denied a claim or a prior authorization? See your appeal deadlines, including Michigan's independent external review, and get an appeal letter you can edit and send.</p>
+      </li>
+      <li class="tool">
+        <span class="where">Michigan · Wages</span>
+        <h3><a href="back-pay/">Michigan Back Pay Check</a></h3>
+        <p>Shorted on pay? See Michigan's minimum wage by date, work out unpaid minimum wage, overtime, and promised pay week by week, and get the steps to file a free state wage claim.</p>
+      </li>
+      <li class="tool">
+        <span class="where">Uber · Lyft · DoorDash · Instacart</span>
+        <h3><a href="gig-pay/">Gig Driver True Pay Calculator</a></h3>
+        <p>Is driving for Uber, Lyft, or DoorDash worth it after gas? Enter your pay, hours, and miles to see what you really made per hour after car costs, plus a tax set-aside.</p>
+      </li>
+      <!-- All tools: add new cards above this line. -->
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-why" class="prose">
+    <h2 id="h-why">Why "Free to All"</h2>
+    <p>Three words are carved over the main entrance of the Boston Public Library: FREE TO ALL. Anyone could walk in and use the most powerful information tools of the day, whoever they were and whatever they could pay. AI is the most powerful information tool of our day. These tools are that promise, rewritten for now.</p>
+  </section>
+
+  <section aria-labelledby="h-how" class="prose">
+    <h2 id="h-how">How the tools work</h2>
+    <ul>
+      <li><strong>Nothing leaves your device.</strong> No accounts, no tracking, no servers. What you type stays on your screen.</li>
+      <li><strong>Every answer cites its source.</strong> Each result links to the law or data it came from and lists the date it was checked.</li>
+      <li><strong>Information, not advice.</strong> The tools explain your rights and the rules. They tell you when to get a lawyer or other help, and where to find it free.</li>
+      <li><strong>One file each.</strong> Save any tool's page and it works offline.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Free and open source. See the code, report a mistake, or suggest a tool on <a href="https://github.com/free-to-all-ai/tools">GitHub</a>.</p>
+  </footer>
+</div>
+</body>
+</html>
