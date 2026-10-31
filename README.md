@@ -25,6 +25,7 @@ This repo is a shelf of small, free tools for regular people. Each one does one 
 | [Benefits Cut Letter Deadlines](benefits-deadlines/) | For a Michigan letter that denies, lowers, or stops food assistance (SNAP), Medicaid, cash, or child care help. Works out the last day to ask for a hearing and keep your benefits while you wait, and the last day to ask at all. Drafts the hearing request. | MDHHS Bridges Administrative Manual (BAM 600, 220, and 210), 7 CFR 273.15, and 42 CFR 431, checked Oct 30, 2026 |
 | [Michigan Back Pay Check](back-pay/) | Shows Michigan's minimum wage by date. Takes your hours and pay week by week and works out unpaid minimum wage, overtime, and promised pay, plus your filing deadlines. Gives a summary to paste into the state's free wage claim and the steps to file it. | Michigan's Improved Workforce Opportunity Wage Act (MCL 408.934 to 408.939), Payment of Wages Act (MCL 408.481 to 408.488), and the state labor department's rate history and claim form, checked Oct 30, 2026 |
 | [Detroit HOPE Property Tax Exemption Check](hope-exemption/) | For Detroit homeowners. Takes household size, income, and savings and shows whether you likely qualify for a full or partial HOPE property tax exemption on the city's 2026 table. Gives the November 6, 2026 deadline, what to bring, how to apply, and the note that only the Board of Review decides. | The City of Detroit's 2026 HOPE page and application, and MCL 211.7u (Michigan's poverty exemption law), checked Oct 31, 2026 |
+| [Michigan Winter Shutoff Protection Check](shutoff-protection/) | For a Michigan gas or electric bill you're behind on, or a shut off notice. Shows whether the Winter Protection Plan (Nov 1 to Mar 31), senior protection, a medical hold, critical care, or military protection covers you, about what you'd pay each month to stay on, and whether your notice gave you the required 10 days. Covers state-regulated utilities like DTE and Consumers Energy, and flags where city utilities and co-ops differ. Writes a script for the call. | MPSC consumer standards (Mich. Admin. Code R 460.101 to 460.169), MCL 460.9c, 460.9q, 460.9r, 460.9s, and 460.36, and the 2026 HHS poverty guidelines, checked Oct 31, 2026 |
 
 ## How they work
 
@@ -35,7 +36,7 @@ This repo is a shelf of small, free tools for regular people. Each one does one 
 
 ## Keeping them current
 
-Laws and rates change. Every tool lists the date its sources were checked. The bill checker's rates come from CMS and change every January. To rebuild it, see `bill-checker/make.py`. The gig pay calculator's IRS mileage rates live in a short table near the top of its script. The IRS usually sets next year's rate in December.
+Laws and rates change. Every tool lists the date its sources were checked. The bill checker's rates come from CMS and change every January. To rebuild it, see `bill-checker/make.py`. The gig pay calculator's IRS mileage rates live in a short table near the top of its script. The IRS usually sets next year's rate in December. The shutoff check's poverty guideline numbers sit at the top of its script. HHS publishes new ones each January.
 
 ## Add your own
 

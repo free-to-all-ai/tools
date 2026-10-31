@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Michigan Winter Shutoff Protection Check (DTE, Consumers)</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Got a DTE or Consumers Energy shutoff notice? See if Michigan's Winter Protection Plan, a medical hold, or senior rules can keep your heat on, and who can help pay. Free.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/shutoff-protection/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Michigan Winter Shutoff Protection Check (DTE, Consumers)">
+<meta property="og:description" content="Got a DTE or Consumers Energy shutoff notice? See if Michigan's Winter Protection Plan, a medical hold, or senior rules can keep your heat on, and who can help pay. Free.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/shutoff-protection/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/shutoff-protection.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. A heating-season strip, the questions, a stack of protection cards (each with its rule chip), then a call script and the help list. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.season { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: grid; gap: 10px; }
+.season .big { font-family: var(--f-display); font-weight: 600; font-size: 20px; line-height: 1.25; }
+.track { position: relative; height: 12px; border-radius: 999px; background: var(--accent-soft); }
+.track .done { position: absolute; inset: 0 auto 0 0; border-radius: 999px; background: var(--accent); }
+.track .pin { position: absolute; top: -5px; width: 4px; height: 22px; border-radius: 2px; background: var(--fg); transform: translateX(-2px); }
+.months { display: flex; justify-content: space-between; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.panel { display: grid; gap: 18px; }
+form.q {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 22px;
+}
+fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 14px; min-width: 0; }
+fieldset + fieldset { border-top: 1px solid var(--line); padding-top: 20px; }
+legend { float: left; width: 100%; font-family: var(--f-display); font-weight: 600; font-size: 18px; padding: 0; }
+legend + * { clear: both; }
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="date"], input[type="number"], select {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px;
+}
+input[type="text"] {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%;
+}
+.money { display: flex; align-items: center; gap: 6px; max-width: 320px; }
+.money input { flex: 1; }
+.inc { display: flex; gap: 8px; flex-wrap: wrap; max-width: 320px; }
+.inc .money { flex: 1 1 150px; }
+.inc select { flex: 0 1 130px; width: auto; }
+.opts { display: grid; gap: 6px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.opts input { margin-top: 5px; accent-color: var(--accent); flex: none; }
+.hint { font-size: 14px; color: var(--muted); }
+.results { display: grid; gap: 12px; }
+.results-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line);
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.card ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.small { font-size: 15px; color: var(--muted); }
+.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.math { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; font-size: 15px; max-width: 460px; }
+.math .num { text-align: right; }
+.math .total { font-weight: 700; border-top: 1px solid var(--line); padding-top: 4px; }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.gethelp { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+details.list { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; }
+details.list summary { cursor: pointer; font-family: var(--f-display); font-weight: 600; font-size: 18px; }
+details.list[open] summary { margin-bottom: 10px; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 15px; }
+.tbl th, .tbl td { text-align: left; padding: 6px 8px 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tbl th { font-weight: 700; }
+.tbl td.num, .tbl th.num { text-align: right; padding-right: 0; white-space: nowrap; }
+.tbl a { white-space: nowrap; }
+.script {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px;
+  font-family: var(--f-body); white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; font-size: 16px;
+}
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 10px 16px;
+  background: var(--accent); color: var(--bg); border: 0;
+}
+.btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.btn:hover { filter: brightness(1.08); }
+.copied { font-size: 14px; color: var(--law); }
+.fill { background: var(--facts-bg); color: var(--facts); border-radius: 4px; padding: 0 3px; }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+@media print {
+  body.printing .wrap > :not(#s-script), body.printing #s-script > :not(.script) { display: none !important; }
+  body.printing { background: #fff; color: #000; }
+  body.printing .script { border: 0; padding: 0; color: #000; background: #fff; }
+  body.printing .fill { background: none; color: #000; }
+}
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Michigan · gas and electric · free</span>
+    <h1>Winter Shutoff Protection Check</h1>
+    <p class="lede">Behind on your DTE, Consumers Energy, SEMCO, or Michigan Gas Utilities bill, or holding a shut off notice? From November 1 to March 31, the Winter Protection Plan and the rules for seniors stop many shutoffs, and a medical hold works all year. Answer a few questions to see what fits you, about what you'd pay to stay on, what to say when you call, and who can help pay, like MEAP agencies and THAW.</p>
+    <div class="notice">
+      <strong>This is information, not legal advice.</strong>
+      <span>Your utility decides who qualifies and can ask for proof. If your shutoff notice or your utility's rules give you more time or more protection than this page, go by those. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section class="season" id="season" aria-live="polite"></section>
+
+  <section class="panel" aria-labelledby="h-q">
+    <h2 id="h-q">1. A few questions</h2>
+    <form class="q" id="f" novalidate>
+      <p class="sample">Sample answers are filled in so you can see how it works. Change them to yours.</p>
+
+      <fieldset>
+        <legend>Your utility</legend>
+        <div class="field"><span class="lbl" id="l-util">Who sends your gas or electric bill?</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-util">
+            <label><input type="radio" name="util" value="reg" checked> A company the state regulates: DTE, Consumers Energy, SEMCO, Michigan Gas Utilities, UPPCO, Indiana Michigan Power, Alpena Power, Xcel Energy, or Upper Michigan Energy Resources</label>
+            <label><input type="radio" name="util" value="muni"> A city-owned utility, like Lansing Board of Water &amp; Light or Holland Board of Public Works</label>
+            <label><input type="radio" name="util" value="coop"> An electric co-op, like Great Lakes Energy, HomeWorks Tri-County, Cherryland, Midwest Energy &amp; Communications, Presque Isle Electric &amp; Gas, Thumb Electric, Alger Delta, Cloverland, or Ontonagon</label>
+            <label><input type="radio" name="util" value="unsure"> I'm not sure</label>
+          </div>
+          <span class="hint">The company's name is at the top of your bill. Propane, heating oil, and water follow other rules this page doesn't cover.</span></div>
+        <div class="field"><span class="lbl" id="l-svc">Which service is behind or at risk?</span>
+          <div class="opts" aria-labelledby="l-svc">
+            <label><input type="checkbox" name="svc" value="elec" checked> Electric</label>
+            <label><input type="checkbox" name="svc" value="gas" checked> Natural gas</label>
+          </div></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>The person whose name is on the bill</legend>
+        <div class="field"><span class="lbl" id="l-age">Are they 65 or older?</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-age">
+            <label><input type="radio" name="age" value="yes"> Yes</label>
+            <label><input type="radio" name="age" value="no" checked> No</label>
+          </div></div>
+        <div class="field"><span class="lbl" id="l-ben">Do they get any of these right now?</span>
+          <div class="opts" aria-labelledby="l-ben">
+            <label><input type="checkbox" name="ben" value="fap"> Food Assistance (SNAP, called FAP in Michigan)</label>
+            <label><input type="checkbox" name="ben" value="ma"> Medicaid or the Healthy Michigan Plan</label>
+            <label><input type="checkbox" name="ben" value="ssi"> SSI (Supplemental Security Income)</label>
+            <label><input type="checkbox" name="ben" value="cash"> Cash assistance from MDHHS (FIP or SDA)</label>
+            <label><input type="checkbox" name="ben" value="ser"> State Emergency Relief (SER)</label>
+          </div>
+          <span class="hint">Skip this if none fit. Income alone can qualify you too.</span></div>
+        <div class="row2">
+          <div class="field"><label for="hh">People in the household</label><input id="hh" type="number" min="1" max="20" step="1" inputmode="numeric" value="3"></div>
+          <div class="field"><label for="inc">Household income before taxes</label>
+            <div class="inc"><span class="money">$<input id="inc" type="number" min="0" step="1" inputmode="decimal" value="36000"></span>
+              <select id="per" aria-label="Income period"><option value="year" selected>per year</option><option value="month">per month</option></select></div>
+            <span class="hint">Everyone who lives with you: pay, Social Security, unemployment, child support, and so on.</span></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Health, military, and renting</legend>
+        <div class="opts">
+          <label><input type="checkbox" name="x" value="med"> Someone in the home has a medical condition that losing heat or power would make worse</label>
+          <label><input type="checkbox" name="x" value="cc"> Someone uses home medical equipment or life support, like oxygen or a ventilator, and losing power would be immediately life-threatening</label>
+          <label><input type="checkbox" name="x" value="mil"> The person on the bill, or their spouse, was called to full-time active duty, and household income dropped</label>
+          <label><input type="checkbox" name="x" value="tenant"> I rent, and the bill is in my landlord's name</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Your bill</legend>
+        <div class="row2">
+          <div class="field"><label for="mo">Usual monthly bill (gas and electric together)</label>
+            <span class="money">$<input id="mo" type="number" min="0" step="1" inputmode="decimal" value="190"></span>
+            <span class="hint">A guess is fine. Some bills show a 12-month total.</span></div>
+          <div class="field"><label for="due">Amount past due</label>
+            <span class="money">$<input id="due" type="number" min="0" step="1" inputmode="decimal" value="720"></span></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Shutoff notice (if you got one)</legend>
+        <div class="row2">
+          <div class="field"><label for="nd">Date the notice was mailed or handed to you</label><input id="nd" type="date">
+            <span class="hint">Use the postmark or the date printed on it.</span></div>
+          <div class="field"><label for="sd">Shutoff date on the notice</label><input id="sd" type="date">
+            <span class="hint">Often worded "on or after."</span></div>
+        </div>
+        <div class="opts"><label><input type="checkbox" id="off"> My service is already shut off</label></div>
+      </fieldset>
+    </form>
+    <div class="results" id="r" aria-live="polite"></div>
+  </section>
+
+  <section class="panel" id="s-script" aria-labelledby="h-script">
+    <h2 id="h-script">2. What to say when you call</h2>
+    <p class="small">Your utility won't know you qualify until you tell them. This script follows your answers above. Read it on the phone, or use it as notes.</p>
+    <form class="q" id="fs" novalidate>
+      <div class="row2">
+        <div class="field"><label for="s-name">Name on the account</label><input id="s-name" type="text" value="Jordan Example" autocomplete="off"></div>
+        <div class="field"><label for="s-acct">Account number</label><input id="s-acct" type="text" value="" autocomplete="off" placeholder="On your bill"></div>
+      </div>
+    </form>
+    <div class="bar">
+      <h3>Your call script</h3>
+      <span class="btns"><span class="copied" id="copied" role="status"></span><button class="btn ghost" type="button" id="print">Print</button><button class="btn" type="button" id="copy">Copy script</button></span>
+    </div>
+    <div class="script" id="script" tabindex="0" aria-label="Call script"></div>
+    <p class="hint">Write down the date, the name of the person you talked to, and any confirmation number. Ask for your enrollment in writing.</p>
+  </section>
+
+  <section class="gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Help paying your bill, and help when a utility says no</h2>
+    <ul>
+      <li><strong>State Emergency Relief (SER)</strong> from MDHHS helps with heat and electric bills and can stop a shutoff. Apply at <a href="https://newmibridges.michigan.gov/" target="_blank" rel="noopener">MI Bridges</a> or through your <a href="https://www.michigan.gov/mdhhs/assistance-programs/emergency-relief" target="_blank" rel="noopener">local MDHHS office</a>. Applying counts as seeking heating assistance for the Winter Protection Plan.</li>
+      <li><strong>Call 2-1-1</strong> or visit <a href="https://www.mi211.org" target="_blank" rel="noopener">mi211.org</a> to reach a Michigan Energy Assistance Program (MEAP) agency near you, like THAW (The Heat and Warmth Fund, <a href="tel:18008668429">800-866-8429</a>), the Salvation Army, or St. Vincent de Paul.</li>
+      <li><strong>MPSC Customer Assistance: <a href="tel:18002929555">800-292-9555</a>.</strong> If a state-regulated utility won't enroll you or follow these rules, call or <a href="https://www.michigan.gov/mpsc/consumer/complaints" target="_blank" rel="noopener">file a complaint online</a>. A regulated utility can't shut you off while your complaint is open.</li>
+      <li><strong>Home Heating Credit</strong> from the Michigan Treasury pays part of winter heating costs for low-income homeowners and renters. You apply between January 1 and September 30. See the <a href="https://www.michigan.gov/mpsc/consumer/get-help/utility-customers" target="_blank" rel="noopener">MPSC's assistance page</a> for the income limits and a link to the form.</li>
+    </ul>
+  </section>
+
+  <details class="list">
+    <summary>Utility phone numbers</summary>
+    <p class="small" style="margin-bottom:10px">Customer service numbers as the Michigan Public Service Commission lists them, checked October 31, 2026. The number on your bill works too.</p>
+    <table class="tbl">
+      <thead><tr><th scope="col">Utility</th><th scope="col" class="num">Phone</th></tr></thead>
+      <tbody>
+        <tr><td>DTE Electric</td><td class="num"><a href="tel:18004774747">800-477-4747</a></td></tr>
+        <tr><td>DTE Gas, Southeast Michigan</td><td class="num"><a href="tel:18003380178">800-338-0178</a></td></tr>
+        <tr><td>DTE Gas, everywhere else</td><td class="num"><a href="tel:18005336220">800-533-6220</a></td></tr>
+        <tr><td>Consumers Energy (gas and electric)</td><td class="num"><a href="tel:18004775050">800-477-5050</a></td></tr>
+        <tr><td>SEMCO Energy Gas</td><td class="num"><a href="tel:18006242019">800-624-2019</a></td></tr>
+        <tr><td>Michigan Gas Utilities</td><td class="num"><a href="tel:18004016402">800-401-6402</a></td></tr>
+        <tr><td>Indiana Michigan Power (Michigan customers)</td><td class="num"><a href="tel:18003116424">800-311-6424</a></td></tr>
+        <tr><td>Upper Peninsula Power (UPPCO)</td><td class="num"><a href="tel:18005627680">800-562-7680</a></td></tr>
+        <tr><td>Alpena Power</td><td class="num"><a href="tel:19893584900">989-358-4900</a></td></tr>
+        <tr><td>Xcel Energy (Northern States Power, Wisconsin)</td><td class="num"><a href="tel:18008954999">800-895-4999</a></td></tr>
+        <tr><td>Upper Michigan Energy Resources, former WPS customers</td><td class="num"><a href="tel:18004507260">800-450-7260</a></td></tr>
+        <tr><td>Upper Michigan Energy Resources, former We Energies customers</td><td class="num"><a href="tel:18002429137">800-242-9137</a></td></tr>
+        <tr><td>Great Lakes Energy (co-op)</td><td class="num"><a href="tel:18884852537">888-485-2537</a></td></tr>
+        <tr><td>HomeWorks Tri-County Electric (co-op)</td><td class="num"><a href="tel:18005628232">800-562-8232</a></td></tr>
+        <tr><td>Cherryland Electric (co-op)</td><td class="num"><a href="tel:18004428616">800-442-8616</a></td></tr>
+        <tr><td>Midwest Energy &amp; Communications (co-op)</td><td class="num"><a href="tel:18004925989">800-492-5989</a></td></tr>
+        <tr><td>Presque Isle Electric &amp; Gas (co-op)</td><td class="num"><a href="tel:18004236634">800-423-6634</a></td></tr>
+        <tr><td>Thumb Electric (co-op)</td><td class="num"><a href="tel:18003270166">800-327-0166</a></td></tr>
+        <tr><td>Alger Delta (co-op)</td><td class="num"><a href="tel:18005620950">800-562-0950</a></td></tr>
+        <tr><td>Cloverland Electric (co-op)</td><td class="num"><a href="tel:18005624953">800-562-4953</a></td></tr>
+        <tr><td>Ontonagon County REA (co-op)</td><td class="num"><a href="tel:19068844151">906-884-4151</a></td></tr>
+        <tr><td>Bayfield Electric (co-op)</td><td class="num"><a href="tel:18002780166">800-278-0166</a></td></tr>
+      </tbody>
+    </table>
+    <p class="small" style="margin-top:10px">Sources: the MPSC's <a href="https://www.michigan.gov/mpsc/consumer/electricity/electric-utility-addresses-contacts" target="_blank" rel="noopener">electric utility contacts</a> and <a href="https://www.michigan.gov/mpsc/consumer/natural-gas/gas-utilities-in-michigan" target="_blank" rel="noopener">gas utility list</a>. City-owned utilities aren't on the state's list, so use the number on your bill.</p>
+  </details>
+
+  <footer>
+    <p><strong>How this works.</strong> For state-regulated utilities, the rules come from the Michigan Public Service Commission's Consumer Standards and Billing Practices for Electric and Natural Gas Service, <a href="https://ars.apps.lara.state.mi.us/AdminCode/DownloadAdminCodeFile?FileName=R%20460.101%20to%20R%20460.169.pdf" target="_blank" rel="noopener">Mich. Admin. Code R 460.101 to R 460.169</a> (last changed April 10, 2023). City-owned utilities follow state law instead: <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-460-9q" target="_blank" rel="noopener">MCL 460.9q</a>, <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-460-9r" target="_blank" rel="noopener">460.9r</a>, and <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-460-9s" target="_blank" rel="noopener">460.9s</a>. Member-regulated co-ops set their own billing rules under <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-460-36" target="_blank" rel="noopener">MCL 460.36</a>. The military rule is <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-460-9c" target="_blank" rel="noopener">MCL 460.9c</a>. All were checked against the official text on October 31, 2026.</p>
+    <p>The income line is 150% of the <a href="https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines" target="_blank" rel="noopener">2026 HHS poverty guidelines</a> (published in the <a href="https://www.federalregister.gov/d/2026-00755" target="_blank" rel="noopener">Federal Register</a> on January 15, 2026), which is what the rule points to. The MPSC's own <a href="https://www.michigan.gov/mpsc/consumer/get-help/utility-customers" target="_blank" rel="noopener">assistance page</a> still showed last season's lower 2025 numbers on October 31, 2026. Payment amounts here are estimates from your own numbers. Your utility works out the real ones.</p>
+    <p><strong>Is there a new shutoff law?</strong> Not as of October 31, 2026. The rules above haven't changed since 2023. <a href="https://www.legislature.mi.gov/Bills/Bill?ObjectName=2025-HB-5047" target="_blank" rel="noopener">House Bill 5047</a>, which would automatically enroll seniors and families with children in winter protection, was still waiting in the House Energy Committee, where it was sent on September 24, 2025.</p>
+    <p>Green cards are what the rule says directly. Amber cards depend on your facts. Red cards mean act now. This page doesn't cover water, propane, heating oil, or business accounts. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  // Update each year. HHS poverty guidelines for the 48 states and DC. The 2026 guidelines were
+  // published January 15, 2026 (Federal Register doc 2026-00755). HHS posts new ones each January.
+  const FPL = { year: 2026, base: 15960, add: 5680 };
+  const FPL_PREV = { year: 2025, base: 15650, add: 5500 };
+  const SHARE = 0.07;          // R 460.131(1): monthly payment is 7% of the estimated annual bill
+  const limit = (n, f = FPL) => Math.round(1.5 * (f.base + f.add * (n - 1)));
+
+  const DAY = 86400000;
+  const $ = id => document.getElementById(id);
+  const parse = v => { if (!v) return null; const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); };
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const add = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+  const plain = d => d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  const fmt = d => d.toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" });
+  const today = (() => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); })();
+  const diff = (a, b) => Math.round((b - a) / DAY);
+  const usd = n => "$" + Math.round(n).toLocaleString("en-US");
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const num = id => { const v = parseFloat($(id).value); return isFinite(v) && v >= 0 ? v : null; };
+  const addWork = (d, n) => { let x = d; while (n > 0) { x = add(x, 1); if (x.getDay() !== 0 && x.getDay() !== 6) n--; } return x; };
+  const LABEL = { law: "The rule says", facts: "Depends on your facts", help: "Act now" };
+
+  const ARS = "https://ars.apps.lara.state.mi.us/AdminCode/DownloadAdminCodeFile?FileName=R%20460.101%20to%20R%20460.169.pdf";
+  const MCL = s => `https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-${s}`;
+  const RULE_PAGE = { "102": 3, "102a": 4, "123": 19, "125": 21, "130": 24, "130a": 24, "131": 25, "132": 27, "133": 27, "134": 28,
+    "138": 29, "139": 30, "140": 31, "141": 32, "143": 33, "144": 34, "146": 34, "154": 40 };
+  const OTHER = {
+    "MCL 460.9q": MCL("460-9q"), "MCL 460.9r": MCL("460-9r"), "MCL 460.9s": MCL("460-9s"), "MCL 460.9c": MCL("460-9c"), "MCL 460.36": MCL("460-36"),
+    "HHS 2026 guidelines": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+    "MPSC help page": "https://www.michigan.gov/mpsc/consumer/get-help/utility-customers",
+    "MPSC medical form": "https://www.michigan.gov/mpsc/regulatory/medical-certification-form",
+    "MPSC complaints": "https://www.michigan.gov/mpsc/consumer/complaints",
+    "MPSC utility list": "https://www.michigan.gov/mpsc/consumer/electricity/electric-utility-addresses-contacts",
+    "MPSC Case U-21939": "https://www.michigan.gov/mpsc/commission/news-releases/2026/05/14/mpsc-seeks-public-comment-on-shutoff-protections-report",
+    "MPSC Case U-20140": "https://www.michigan.gov/mpsc/commission/events/2025/11/19/extreme-weather-technical-conference"
+  };
+  // A cite is "R 460.131(4)" style or a key in OTHER.
+  function cite(k) {
+    const m = /^R 460\.(\d+[a-z]?)/.exec(k);
+    const href = m ? `${ARS}#page=${RULE_PAGE[m[1]] || 1}` : OTHER[k];
+    return `<a class="cite" href="${href}" target="_blank" rel="noopener">${esc(k)}</a>`;
+  }
+  function card(level, title, paras, cites = [], next = "") {
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${LABEL[level]}</span></div>
+      ${[].concat(paras).filter(Boolean).map((t, i) => /^<(ul|div)/.test(t) ? t : `<p${i ? ' class="small"' : ""}>${t}</p>`).join("")}
+      ${next ? `<p class="next"><strong>What you can do:</strong> ${next}</p>` : ""}
+      ${cites.length ? `<div class="cites">${cites.map(cite).join("")}</div>` : ""}
+    </article>`;
+  }
+
+  // Heating season: November 1 through March 31 (R 460.102a(c); MCL 460.9r(3)(d)).
+  function seasonFor(d) {
+    const y = d.getFullYear(), m = d.getMonth();
+    if (m >= 10) return { start: new Date(y, 10, 1), end: new Date(y + 1, 2, 31), on: true };
+    if (m <= 2) return { start: new Date(y - 1, 10, 1), end: new Date(y, 2, 31), on: true };
+    return { start: new Date(y, 10, 1), end: new Date(y + 1, 2, 31), on: false };
+  }
+  const S = seasonFor(today);
+  const inSeason = d => { const s = seasonFor(d); return s.on; };
+
+  function drawSeason() {
+    const total = diff(S.start, S.end) + 1;
+    let big, sub, pct = 0;
+    if (S.on) {
+      const left = diff(today, S.end);
+      pct = Math.min(100, (diff(S.start, today) + 0.5) / total * 100);
+      big = `Winter protection is on now, through ${plain(S.end)}.`;
+      sub = left === 0 ? "Today is the last day of this heating season." : `${left} day${left === 1 ? "" : "s"} left in this heating season.`;
+    } else {
+      const until = diff(today, S.start);
+      big = until === 1 ? `Winter protection starts tomorrow, ${plain(S.start)}.` : `Winter protection starts ${plain(S.start)}, in ${until} days.`;
+      sub = `The heating season runs ${plain(S.start)} to ${plain(S.end)}. Medical, military, and notice protections apply all year.`;
+    }
+    $("season").innerHTML = `<p class="big">${big}</p>
+      <div class="track" role="img" aria-label="Heating season from November 1 to March 31${S.on ? ", with a marker at today" : ""}">
+        ${S.on ? `<div class="done" style="width:${pct}%"></div><div class="pin" style="left:${pct}%"></div>` : ""}</div>
+      <div class="months" aria-hidden="true"><span>Nov 1</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar 31</span></div>
+      <p class="small">${sub}</p>`;
+  }
+
+  const f = $("f");
+  const radio = name => { const el = f.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; };
+  const checks = name => [...f.querySelectorAll(`input[name="${name}"]:checked`)].map(el => el.value);
+  const BEN = { fap: "Food Assistance", ma: "Medicaid", ssi: "SSI", cash: "MDHHS cash assistance", ser: "State Emergency Relief" };
+
+  let st = {};
+  function run() {
+    const util = radio("util"), age65 = radio("age") === "yes";
+    const svc = checks("svc"), ben = checks("ben"), x = checks("x");
+    const med = x.includes("med"), cc = x.includes("cc"), mil = x.includes("mil"), tenant = x.includes("tenant");
+    const hh = Math.max(1, Math.min(20, Math.round(num("hh") || 1)));
+    const rawInc = num("inc"), yearly = rawInc === null ? null : ($("per").value === "month" ? rawInc * 12 : rawInc);
+    const mo = num("mo"), due = num("due");
+    const N = parse($("nd").value), SD = parse($("sd").value), off = $("off").checked;
+    const reg = util === "reg" || util === "unsure", muni = util === "muni", coop = util === "coop";
+    const elec = svc.includes("elec"), gas = svc.includes("gas");
+
+    // Who counts as low-income depends on the utility type.
+    // R 460.102(s): 150% FPL, SSI or MDHHS low-income assistance, food stamps, Medicaid.
+    // MCL 460.9r(3)(b): 150% FPL, State Emergency Relief, food stamps, Medicaid.
+    const benOk = muni ? ben.filter(b => ["ser", "fap", "ma"].includes(b)) : ben.filter(b => ["fap", "ma", "ssi", "cash", "ser"].includes(b));
+    const L = limit(hh), Lprev = limit(hh, FPL_PREV);
+    const incOk = yearly !== null && yearly <= L;
+    const low = benOk.length > 0 || incOk;
+    const muniWpp = muni && elec;                 // MCL 460.9r covers city-owned electric utilities
+    st = { util, age65, low, med, cc, mil, tenant, mo, due, N, SD, off, reg, muni, coop, svc, benOk, incOk, yearly, L };
+
+    const c = [];
+    const have = [];
+    const ask = coop ? " (ask your co-op)" : "";
+    if (age65 && (reg || muniWpp || coop)) have.push("Senior winter protection (65 and older)" + ask);
+    if (low && (reg || muniWpp || coop)) have.push("Winter Protection Plan for low-income customers" + ask);
+    if (cc) have.push((muni ? "Medical hold (critical care)" : "Critical care protection") + ask);
+    if (med) have.push("Medical emergency hold" + ask);
+    if (mil) have.push("Military shutoff protection");
+    have.push("Shut off notice and timing rules" + ask);
+    have.push("A payment plan for what you owe" + ask);
+    const coopNote = coop ? "For a member-regulated co-op, this is the state standard to ask for. Your co-op's own policy controls." : "";
+
+    // Which rules apply
+    if (reg) {
+      c.push(card("law", util === "unsure" ? "Not sure who your utility is? Start here" : "Your utility follows the state's shutoff rules", [
+        util === "unsure"
+          ? "Look at the top of your bill. If it's DTE, Consumers Energy, SEMCO, Michigan Gas Utilities, UPPCO, Indiana Michigan Power, Alpena Power, Xcel, or Upper Michigan Energy Resources, the Michigan Public Service Commission (MPSC) rules below apply. The cards below assume that. If it's a city utility or a co-op, pick that above, because the rules differ."
+          : "The Michigan Public Service Commission (MPSC) sets shutoff rules for these companies. The cards below come straight from those rules.",
+        "Your utility can offer a better deal than the rules, never a worse one."
+      ], ["R 460.101", "R 460.131(10)", "MPSC utility list"]));
+    } else if (muni) {
+      c.push(card("facts", "City-owned utilities follow a shorter state law", [
+        "The MPSC doesn't regulate city-owned utilities. A state law gives their customers a core set of protections instead: notice before a shutoff, medical holds, and, for electric service, winter protection for seniors and low-income customers. Your city utility's own rules may give you more.",
+        gas ? `That law's winter protection section covers city-owned <em>electric</em> utilities. For city-owned gas service, ask the utility for its winter policy. The medical hold, notice, and payment plan rules still apply to gas.` : "",
+        "You can't take a complaint about a city utility to the MPSC. Use the utility's own complaint process, and ask for it in writing."
+      ], ["MCL 460.9q", "MCL 460.9r", "MCL 460.9s"], "Ask the utility for a copy of its shutoff and winter protection policy."));
+    } else if (coop) {
+      c.push(card("facts", "Co-ops set many of their own rules", [
+        "Most Michigan electric co-ops are member-regulated. That means the co-op's board, not the MPSC, sets its billing practices and terms of service, including shutoff rules. On the MPSC's list, every co-op is marked member-regulated except Thumb Electric and Bayfield Electric, so the MPSC rules below should apply to those two. Confirm with the co-op.",
+        "Many co-ops offer the same Winter Protection Plan described below. The cards show the state rules so you know what to ask for. The military protection is state law and covers co-ops too.",
+        "The MPSC still handles some co-op complaints, like service quality. If you're not sure, call MPSC Customer Assistance and ask."
+      ], ["MCL 460.36", "MPSC utility list", "MCL 460.9c"], "Call your co-op and ask: \"Do you offer the Winter Protection Plan and medical holds? Can you send me your shutoff policy?\""));
+    }
+
+    // Senior protection
+    if (age65) {
+      if (reg || coop) {
+        c.push(card(S.on ? "help" : "law", "Seniors 65 and older: no shutoff from November 1 to March 31", [
+          `A regulated utility can't shut off a customer who is 65 or older during the heating season, ${S.on ? "which runs through " + plain(S.end) : "which starts " + plain(S.start)}. You don't have to meet an income limit or make a set payment. You do have to tell the utility your age, so call.`,
+          S.on ? "If your service is already off, the utility has to turn it back on at your request during the heating season, without making you pay what you owe, a deposit, or a reconnect fee first." : "",
+          "You still owe for what you use. After March 31, the utility adds up what's unpaid and lets you pay it in equal monthly amounts from April 1 to October 31. Paying what you can now keeps those spring bills smaller.",
+          coop ? "For a member-regulated co-op, this is the state standard to ask for. Your co-op's policy controls." : ""
+        ], ["R 460.102(u)", "R 460.132", "R 460.138(1)(b)"], "Call and say: \"I'm 65 or older. Please mark my account for senior winter protection.\""));
+      } else if (muniWpp) {
+        c.push(card(S.on ? "help" : "law", "65 or older: no shutoff in the heating season", [
+          `State law bars a city-owned electric utility from shutting off a customer who is 65 or older for an unpaid bill from November 1 to March 31. You have to tell the utility you qualify.`,
+          "You still owe for what you use. Ask the utility how it handles the balance in the spring."
+        ], ["MCL 460.9r"], "Call and say: \"I'm 65 or older. Please mark my account for senior winter protection.\""));
+      } else if (muni) {
+        c.push(card("facts", "65 or older with city-owned gas", [
+          "The state's senior winter protection for city utilities is written for electric service. Ask your city gas utility whether it protects seniors in winter. Medical holds still apply."
+        ], ["MCL 460.9r", "MCL 460.9s"]));
+      }
+    }
+
+    // Low-income qualification and the Winter Protection Plan
+    const incLine = yearly === null ? "" :
+      `Your household of ${hh} reports ${usd(yearly)} a year${$("per").value === "month" ? ` (${usd(rawInc)} a month)` : ""}. The ${FPL.year} line for ${hh} ${hh === 1 ? "person" : "people"} is ${usd(L)} a year, about ${usd(L / 12)} a month.`;
+    if (low) {
+      const why = benOk.length ? `You qualify through ${benOk.map(b => BEN[b]).join(" and ")}, no matter your income.` : incLine + " You're under it.";
+      if (reg || coop || muniWpp) {
+        const k = [];
+        const yearBill = mo !== null ? mo * 12 : null, share = yearBill !== null ? yearBill * SHARE : null;
+        const nowM = (S.on ? today : S.start);
+        const endYear = S.end.getFullYear();
+        const inst = (endYear * 12 + 9) - (nowM.getFullYear() * 12 + nowM.getMonth()) + 1;   // months through October
+        const arr = due ? due / inst : 0;
+        if (share !== null || due) {
+          k.push(`<div class="math">
+            ${share !== null ? `<span>7% of a ${usd(yearBill)} yearly bill</span><span class="num">${usd(share)}/mo</span>` : ""}
+            ${due ? `<span>${usd(due)} past due, split over ${inst} months</span><span class="num">${usd(arr)}/mo</span>` : ""}
+            ${share !== null && due ? `<span class="total">About this much a month</span><span class="num total">${usd(share + arr)}</span>` : ""}
+          </div>`);
+        }
+        const dl14 = add(S.on ? today : S.start, 14);
+        c.push(card(S.on ? "help" : "law", "Low-income: the Winter Protection Plan", [
+          `${why} That makes you an eligible low-income customer. From November 1 to March 31, the utility can't shut you off for an unpaid bill if you enroll and keep up with the plan.`,
+          ...k,
+          muni
+            ? "Under the plan you pay 7% of your estimated yearly bill each month, or other terms you and the utility agree on. Anything already past due gets split into equal monthly payments until next November."
+            : "Under the plan you pay 7% of your estimated yearly bill each month. Anything already past due gets split into equal monthly payments between when you sign up and next November 1. Your bill has to show the minimum you must pay to stay protected.",
+          `Within 14 days of asking for protection, you have to show you applied for state or federal heating help, such as State Emergency Relief through MI Bridges. ${S.on ? `If you call today, that's by ${plain(dl14)}.` : `If you sign up on ${plain(S.start)}, that's by ${plain(dl14)}.`}`,
+          muni ? "" : "While you're on the plan, the utility can't charge you late fees. After March 31, it settles up your account and lets you pay what's left in equal monthly amounts from April 1 to October 31.",
+          muni ? "" : "Exception: the plan doesn't cover a home where service was shut off for tampering or stolen service in the past 2 years, until that's paid or arranged.",
+          coopNote
+        ], muni ? ["MCL 460.9r"] : ["R 460.102(s)", "R 460.131(1)", "R 460.131(4)", "R 460.131(9)", "R 460.125(2)", "R 460.131(7)"],
+          "Call your utility and ask to enroll in the Winter Protection Plan. Then apply for State Emergency Relief right away and keep proof you applied."));
+        if (S.on && (off || (N || SD))) {
+          if (!muni) c.push(card("help", off ? "Service off? You can get it back on through the plan" : "If they shut you off anyway", [
+            "During the heating season, the utility can't make you pay a reconnect fee or a deposit before you apply for the Winter Protection Plan. To turn service back on or start the plan, it can't ask for more than 1/12 of what you owe" + (due ? `, which for you is about ${usd(due / 12)}.` : "."),
+            "Once restored, manual reconnections should happen the same day you ask, and no later than the next working day. Smart meters that reconnect remotely should be back on the same day.",
+            coopNote
+          ], ["R 460.131(5)", "R 460.131(6)", "R 460.144"]));
+        }
+        if (util === "reg" && gas && elec) c.push(card("facts", "If one company sends both your gas and electric", [
+          "With a combination utility, an eligible low-income customer can choose which service to keep if facing a shutoff, say how partial payments get applied, and protect the kept service through the heating season while paying for current use. Ask whether your company counts as a combination utility."
+        ], ["R 460.123(7)", "R 460.140(2)(a)"]));
+      } else {
+        c.push(card("facts", "Low-income, with city-owned gas", [
+          `${why} The state's winter payment plan for city utilities is written for electric service. Ask your gas utility whether it offers one, and ask for a payment plan on what you owe.`
+        ], ["MCL 460.9r", "MCL 460.9q"]));
+      }
+    } else if (yearly !== null) {
+      const near = yearly <= L * 1.1;
+      const paras = [incLine + ` That's ${usd(yearly - L)} over.`];
+      if (muni && ben.some(b => b === "ssi" || b === "cash")) paras.push("SSI and MDHHS cash assistance count for state-regulated utilities, but the city-utility law lists only State Emergency Relief, Food Assistance, and Medicaid. Ask your utility whether it counts them anyway.");
+      if (near) paras.push("You're close. Utilities count income their own way, often from recent pay stubs, so a lower month or a household change can put you under. Ask anyway.");
+      paras.push(age65 ? "Your age still protects you this winter. See the senior card." : "You can still get a payment plan, a medical hold, or energy assistance. Some help, like the Michigan Energy Assistance Program, goes up to 60% of the state's median income, which is higher than this line.");
+      c.push(card("facts", `Over the ${FPL.year} income line for the low-income plan`, paras, ["R 460.102(s)", "HHS 2026 guidelines", "MPSC help page"]));
+    }
+    if (low && benOk.length === 0 && incOk && yearly > Lprev) {
+      c.push(card("facts", "If the utility uses last year's numbers", [
+        `You're under the ${FPL.year} line but over the ${FPL_PREV.year} line of ${usd(Lprev)}, which the MPSC's assistance page still showed on October 31, 2026. The rule points to the poverty guidelines as published each year, and the ${FPL.year} ones came out January 15, ${FPL.year}. If the utility quotes the older number, ask it to use the current guidelines.`
+      ], ["R 460.102(s)", "HHS 2026 guidelines", "MPSC help page"]));
+    }
+
+    // Medical emergency and critical care
+    if (med || cc) {
+      const g3 = addWork(today, 3);
+      if (muni) {
+        c.push(card("help", "Medical hold: up to 21 days at a time", [
+          "A city-owned utility has to postpone a shutoff for up to 21 days when someone in the home has a certified medical emergency or relies on life-support equipment. If the power is already off, it has to restore it for up to 21 days.",
+          "With new certification each time, holds can be extended in 21-day steps up to 63 days in 12 months per person, and 126 days a year per household. A doctor or public health official certifies it on official letterhead or the utility's form. You still owe the bill."
+        ], ["MCL 460.9s"], "Call the utility today, say someone has a medical emergency, and ask for its medical form."));
+      } else {
+        if (med) c.push(card("help", "Medical hold: 21 days at a time for a medical emergency", [
+          "If someone in the home has a medical condition that losing service would make worse, the utility has to hold off a shutoff, or turn service back on, for up to 21 days. It can't charge an after-hours reconnect fee or a deposit to restore service for the hold.",
+          `Use the MPSC medical certification form, filled out by a doctor or public health official. Once you tell the utility, it has to give you 3 business days to get the form back, which from today is about ${plain(g3)} (later if a holiday falls in between).`,
+          "With a new form each time, the hold extends in 21-day steps up to 63 days in 12 months for each person, and the utility doesn't have to give more than 126 days a year per household. You still owe the bill, so use the time to set up a plan or get help paying.",
+          coopNote
+        ], ["R 460.102a(i)", "R 460.130", "MPSC medical form"], "Call the utility now and say: \"Someone here has a medical emergency. Please put a hold on my account and send me the medical certification form.\""));
+        if (cc) c.push(card("help", "Critical care: no shutoff for not paying", [
+          "If someone in the home needs home medical equipment or life support, and losing service would be immediately life-threatening, the utility can't shut off service because you can't pay. It has to restore service if it's off. This lasts as long as the need and the inability to pay continue.",
+          `The same MPSC form, signed by a doctor or medical facility, has to be renewed every year. You get 3 business days to turn it in after you tell the utility (about ${plain(g3)} from today). The utility can ask you to agree to a reasonable payment plan, and it can't shut you off remotely without first reaching you person to person.`,
+          "The MPSC is reviewing this rule (Case U-21939). As of October 31, 2026, the rule above was still the one in effect.",
+          coopNote
+        ], ["R 460.102(n)", "R 460.130a", "MPSC medical form", "MPSC Case U-21939"], "Ask your doctor or equipment supplier to fill out the form today. Ask the utility to confirm it got it."));
+      }
+    }
+
+    // Military
+    if (mil) {
+      c.push(card("law", "Active duty: 90 days of protection", [
+        "If the person on the bill or their spouse was called to full-time active duty during a declared war or national or state emergency, and household income dropped, the utility can't shut off service for 90 days once you ask. This state law is written for any provider of electric or gas service, so it reaches city utilities and co-ops too.",
+        reg ? "A regulated utility has to give at least one more 90-day period while you still qualify. Afterward, past-due amounts get spread over up to 12 months." : "The provider can grant more 90-day extensions, and has to let you repay past-due amounts over up to a year.",
+        "The utility can ask for proof of the call to active duty. Tell it when active duty ends."
+      ], reg ? ["R 460.102(t)", "R 460.133", "MCL 460.9c"] : ["MCL 460.9c"]));
+    }
+
+    // Shutoff notice check
+    if (N || SD) {
+      const rel = muni ? ["MCL 460.9q"] : ["R 460.139", "R 460.141"];
+      if (N && SD) {
+        const gap = diff(N, SD), earliest = add(N, 10);
+        if (gap < 0) {
+          c.push(card("facts", "Check those dates", ["The shutoff date is before the notice date. Check both dates on your notice."]));
+        } else if (gap < 10) {
+          c.push(card("help", `That notice gives ${gap} day${gap === 1 ? "" : "s"}. The rules require at least 10.`, [
+            `A utility has to mail or hand you a shutoff notice at least 10 days before the shutoff. Counting from ${plain(N)}, the earliest allowed date is ${plain(earliest)}, not ${plain(SD)}.`,
+            muni ? "Raise it with the utility in writing and ask for its dispute process." : "Call the utility and say the notice was too short. If it won't fix it, call MPSC Customer Assistance at 800-292-9555. A regulated utility can't shut you off while a complaint is open.",
+            coopNote
+          ], muni ? ["MCL 460.9q"] : ["R 460.139(1)", "R 460.138(1)(h)", "MPSC complaints"]));
+        } else {
+          c.push(card(diff(today, SD) <= 7 && diff(today, SD) >= 0 ? "help" : "law", `Your shut off notice gives ${gap} days, which meets the 10-day minimum`, [
+            `Your shutoff date is ${fmt(SD)}${diff(today, SD) >= 0 ? `, ${diff(today, SD) === 0 ? "today" : diff(today, SD) + " day" + (diff(today, SD) === 1 ? "" : "s") + " from now"}` : ""}. Once a proper notice has gone out, it's on you to call before that date, so call now.`,
+            inSeason(SD) && (age65 || low) && !muni ? "That date falls in the heating season. Enrolling in winter protection before then stops the shutoff." : ""
+          ], muni ? ["MCL 460.9q"] : ["R 460.139(1)", "R 460.123(4)"]));
+        }
+      }
+      c.push(card("law", "How and when they can shut you off, including weekends", [
+        `<ul>
+          <li>At least 10 days' notice by first-class mail or in person${muni ? "" : ", sent to your billing address and to the service address if it's different"}.</li>
+          <li>At least 2 tries to reach you at least 1 day before. ${muni ? "Calls, mail, a visit, or a door notice count, and the 10-day notice counts as one." : "Usually by phone, and the 10-day notice counts as one. If they can't call, they leave a notice at the door or mail one 5 business days ahead."}</li>
+          <li>Shutoffs only between 8 a.m. and 4 p.m.</li>
+          <li>No shutoff on a day the utility can't restore service, like many weekends and holidays, or on the day before one.</li>
+          ${muni ? "" : "<li>During the heating season, no Friday shutoff for someone who fell behind on a winter protection plan.</li>"}
+          <li>For a smart-meter shutoff, the notice must say it will be done remotely and that no one will come to the door first.</li>
+          ${muni ? "" : "<li>You can name a relative, friend, or agency to get a copy of shutoff notices.</li>"}
+        </ul>`,
+        coopNote
+      ], muni ? ["MCL 460.9q"] : ["R 460.139", "R 460.140", "R 460.141", "R 460.143"]));
+      if (!muni) c.push(card("law", "Disagree with the bill? Say so before the shutoff date", [
+        "Tell the utility the bill is in dispute before the shutoff date, by phone, in writing, or through the MPSC. It has to record the complaint, investigate, and can't shut you off while the complaint, a hearing, or an MPSC review is pending. Pay the part you don't dispute.",
+        "If it isn't settled, you can ask for a hearing with a hearing officer. You then have 10 business days to pay the part of the bill that isn't in dispute.",
+        coopNote
+      ], ["R 460.154", "R 460.138(1)(h)", "R 460.140(1)(g)", "MPSC complaints"]));
+    }
+
+    // Already off, outside the low-income path
+    if (off && !(low && S.on && !muni)) {
+      c.push(card("help", "Getting service turned back on", [
+        "The utility has to restore service promptly once the reason is fixed or you make payment arrangements it accepts. Manual reconnections should happen the day you ask, and no later than the next working day.",
+        age65 && S.on && !muni ? "You're 65 or older and it's the heating season, so you can ask to be reconnected without paying first. See the senior card." : "",
+        med || cc ? "A medical hold also restores service. See the medical card." : "A medical emergency in the home also gets service restored for up to 21 days."
+      ], muni ? ["MCL 460.9q", "MCL 460.9s"] : ["R 460.144", "R 460.130"]));
+    }
+
+    // Tenant with the bill in the landlord's name
+    if (tenant) {
+      c.push(card("facts", "The bill is in your landlord's name", [
+        "A utility can't shut off service to a home you live in just because the landlord didn't pay, unless you agree in writing or it isn't practical to serve you directly. Where it can serve you, it has to offer to put the account in your name.",
+        muni ? "" : "If your building has 3 or more homes on one meter, the utility has to send notice to each unit at least 30 days before a shutoff for the landlord's unpaid bill.",
+        "Winter protection and the other programs here usually apply to the person on the account. If you take the account into your name, they can apply to you."
+      ], muni ? ["MCL 460.9q"] : ["R 460.138(1)(e)", "R 460.139(4)"], "Call the utility, say you're the tenant, and ask how to put service in your name."));
+    }
+
+    // Payment plan for everyone else
+    if (!(low && S.on && !muni)) {
+      if (muni) c.push(card("law", "Ask for a payment plan", [
+        "A city-owned utility has to have a policy that lets you set up a payment plan for an undisputed amount you can't pay in full. It doesn't have to give you a new plan if you broke one in the last 12 months."
+      ], ["MCL 460.9q"]));
+      else c.push(card("law", "Help paying your bill: anyone can ask for a payment plan", [
+        "Regulated utilities have to offer residential customers at least 2 payment plans for an undisputed balance they can't pay in full. The down payment and the monthly amounts have to be reasonable given what you owe, what you can pay, how long it's been owed, why it wasn't paid, and your history.",
+        "If you're applying for energy assistance, tell the utility before you sign. Some agencies won't help if a payment plan already stopped the shutoff. If your income drops later, you can ask to change the plan.",
+        coopNote
+      ], ["R 460.146", "R 460.140(2)(c)"]));
+    }
+
+    if (reg) c.push(card("law", "Extreme cold and heat", [
+      "Each regulated utility has to keep an MPSC-approved policy for pausing shutoffs in extreme heat and cold. The MPSC reopened its review of these policies in 2025 (Case U-20140), so ask your utility for its current one."
+    ], ["R 460.134", "MPSC Case U-20140"]));
+
+    show(c, have);
+    script();
+  }
+
+  function show(c, have) {
+    const sum = `<article class="card law"><div class="top"><h3>What likely protects you</h3><span class="tag law">Summary</span></div>
+      <ul>${have.map(h => `<li>${esc(h)}</li>`).join("")}</ul>
+      <p class="small">Details, what you'd pay, and the rule behind each one are below.</p></article>`;
+    $("r").innerHTML = `<div class="results-head"><h2>Your protections</h2>
+      <div class="legend"><span class="tag law">The rule says</span><span class="tag facts">Depends on your facts</span><span class="tag help">Act now</span></div></div>` + sum + c.join("");
+  }
+
+  // Call script
+  const F = (v, ph) => v ? esc(v) : `<span class="fill">[${ph}]</span>`;
+  function script() {
+    const name = $("s-name").value.trim(), acct = $("s-acct").value.trim();
+    const svcName = st.svc.length === 2 ? "gas and electric" : st.svc.includes("gas") ? "gas" : "electric";
+    const L = [];
+    L.push(`Hi, my name is ${F(name, "Your name")}. My account number is ${F(acct, "Account number from your bill")}. I'm calling about my ${svcName} service.`, "");
+    if (st.N || st.SD) L.push(`I got a shutoff notice${st.N ? ` dated ${plain(st.N)}` : ""}${st.SD ? ` with a shutoff date of ${plain(st.SD)}` : ""}.${st.off ? " My service is now off." : ""}`, "");
+    else if (st.off) L.push("My service is off, and I want it restored.", "");
+    if (st.cc) L.push("Someone in my home uses medical equipment, and losing service would be life-threatening. I'm asking for critical care protection. Please send me the medical certification form, and note that I have 3 business days to return it.", "");
+    else if (st.med) L.push("Someone in my home has a medical condition that losing service would make worse. Please put a medical emergency hold on my account and send me the medical certification form. I understand I have 3 business days to return it.", "");
+    if (st.age65) L.push("I'm 65 or older. Please mark my account for senior winter protection, so my service stays on from November 1 to March 31.", "");
+    if (st.low) {
+      const basis = st.benOk.length ? `I get ${st.benOk.map(b => BEN[b]).join(" and ")}.` : `My household income is under 150% of the federal poverty guidelines for a household of ${Math.max(1, Math.round(num("hh") || 1))}.`;
+      L.push(`${S.on ? "I want to enroll in the Winter Protection Plan." : `I want to sign up for the Winter Protection Plan when it starts ${plain(S.start)}.`} ${basis} I'm applying for energy assistance, and I'll send proof within 14 days.`, "");
+      if (st.due) L.push(`I need my past-due balance of ${usd(st.due)} split into equal monthly payments until next November, as the plan allows.`, "");
+    } else if (!st.age65 && st.due) {
+      L.push(`I can't pay the ${usd(st.due)} past-due balance all at once. I'd like a payment plan with a reasonable down payment and monthly amount.`, "");
+    }
+    if (st.mil) L.push("My spouse or I was called to full-time active duty, and our household income went down. I'm asking for military shutoff protection.", "");
+    if (st.tenant) L.push("I'm the tenant at this address, and the account is in my landlord's name. I want to know how to put service in my name.", "");
+    L.push("Can you tell me the minimum I have to pay each month to stay protected?");
+    L.push("Please send me written confirmation of what you've set up on my account.", "");
+    L.push("Can I have your name and a confirmation number?", "", "Notes:", "Date and time: ______________", "Person I talked to: ______________", "Confirmation number: ______________");
+    $("script").innerHTML = L.join("\n");
+  }
+
+  // Sample notice dates so the notice card shows how it works.
+  $("nd").value = iso(add(today, -3));
+  $("sd").value = iso(add(today, 9));
+
+  [f, $("fs")].forEach(el => { el.addEventListener("input", run); el.addEventListener("change", run); el.addEventListener("submit", e => e.preventDefault()); });
+  drawSeason();
+  run();
+
+  $("copy").addEventListener("click", () => {
+    const el = $("script"), text = el.innerText, msg = $("copied");
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = "Selected. Press Ctrl+C or Cmd+C to copy."; };
+    try {
+      navigator.clipboard.writeText(text).then(() => { msg.textContent = "Copied"; }, fallback);
+    } catch (e) { fallback(); }
+  });
+  $("print").addEventListener("click", () => {
+    document.body.classList.add("printing");
+    window.print();
+    setTimeout(() => document.body.classList.remove("printing"), 500);
+  });
+})();
+</script>
+</body>
+</html>
