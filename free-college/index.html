@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Free College in Michigan: Reconnect, Achievement Scholarship, Detroit Promise Check</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="See if you qualify for free community college in Michigan: Michigan Reconnect (now ages 21 and up), the Michigan Achievement Scholarship, TIP, and the Detroit Promise. Free.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/free-college/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Free College in Michigan: Who Qualifies?">
+<meta property="og:description" content="See if you qualify for free community college in Michigan: Michigan Reconnect (now ages 21 and up), the Michigan Achievement Scholarship, TIP, and the Detroit Promise. Free.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/free-college/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/free-college.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. A "rules change" note, the questions, a summary of the four programs, one card per program (each with a rule-by-rule check list and source chips), the steps to claim it, then free help. */
+:root {
+  --bg: #f7f7fa;
+  --surface: #ffffff;
+  --fg: #1a1a24;
+  --muted: #545468;
+  --line: #d9d9e3;
+  --accent: #4a3a8c;      /* graduation-gown violet */
+  --accent-soft: #ece8f6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --no: #5d5d6e; --no-bg: #ececf1;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #13131a; --surface: #1c1c26; --fg: #ebebf2; --muted: #ababbf; --line: #33334a;
+    --accent: #b7a8f0; --accent-soft: #2a2342;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    --no: #b0b0c2; --no-bg: #2a2a38;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #13131a; --surface: #1c1c26; --fg: #ebebf2; --muted: #ababbf; --line: #33334a;
+  --accent: #b7a8f0; --accent-soft: #2a2342;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  --no: #b0b0c2; --no-bg: #2a2a38;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.change {
+  border: 2px solid var(--facts); background: var(--facts-bg); border-radius: 12px; padding: 14px 16px;
+  display: grid; gap: 4px; font-size: 15px;
+}
+.change strong { font-family: var(--f-display); font-size: 18px; font-weight: 600; color: var(--facts); }
+.panel { display: grid; gap: 18px; }
+form.q {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 18px;
+}
+fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 16px; min-width: 0; }
+legend { font-family: var(--f-display); font-weight: 600; font-size: 18px; padding: 0; margin-bottom: 4px; }
+fieldset + fieldset { border-top: 1px solid var(--line); padding-top: 16px; }
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="text"], input[type="number"], select {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px;
+}
+.opts { display: grid; gap: 6px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.opts input { margin-top: 5px; accent-color: var(--accent); flex: none; }
+.hint { font-size: 14px; color: var(--muted); }
+.results { display: grid; gap: 12px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line); min-width: 0;
+}
+.card.yes { border-left-color: var(--law); }
+.card.maybe { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card.no { border-left-color: var(--no); }
+.card.info { border-left-color: var(--accent); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.card ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.yes { color: var(--law); background: var(--law-bg); }
+.tag.maybe { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.tag.no { color: var(--no); background: var(--no-bg); }
+.tag.info { color: var(--accent); background: var(--accent-soft); }
+.small { font-size: 15px; color: var(--muted); }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.card ul.checks { list-style: none; padding: 0; gap: 4px; font-size: 15px; }
+.checks li { display: grid; grid-template-columns: 22px 1fr; gap: 6px; align-items: baseline; }
+.checks li::before { font-family: var(--f-mono); font-weight: 500; text-align: center; border-radius: 4px; font-size: 13px; line-height: 20px; }
+.checks li.ok::before { content: "\2713"; color: var(--law); background: var(--law-bg); }
+.checks li.bad::before { content: "\2715"; color: var(--no); background: var(--no-bg); }
+.checks li.unk::before { content: "?"; color: var(--facts); background: var(--facts-bg); }
+.checks li.bad { color: var(--fg); }
+ul.sum { list-style: none; padding: 0; gap: 8px; }
+ul.sum li { display: grid; grid-template-columns: 84px 1fr; gap: 10px; align-items: baseline; }
+ul.sum li .tag { text-align: center; }
+ul.sum li a { font-weight: 700; }
+ul.sum li .small { display: block; }
+details.more { border-top: 1px solid var(--line); padding-top: 8px; }
+details.more summary { cursor: pointer; color: var(--accent); font-weight: 700; font-size: 15px; }
+.tablewrap { overflow-x: auto; margin-top: 8px; }
+table.lim { border-collapse: collapse; width: 100%; font-size: 15px; }
+table.lim th, table.lim td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.lim th { font-weight: 700; font-size: 14px; color: var(--muted); }
+table.lim td.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.lim tr.you td { background: var(--accent-soft); }
+.steps, .gethelp { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 12px; }
+.steps ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.steps li label { display: flex; gap: 10px; align-items: flex-start; }
+.steps li input { margin-top: 5px; accent-color: var(--accent); flex: none; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Michigan · college · free</span>
+    <h1>Free College in Michigan: Who Qualifies?</h1>
+    <p class="lede">Michigan has four big programs that can make community college tuition free, and some help with a four-year degree. Michigan Reconnect is for adults 21 and older with no degree. The Michigan Achievement Scholarship, including its Community College Guarantee, is for recent high school graduates. TIP is for students who had Medicaid as kids. The Detroit Promise is for students who lived in Detroit and went to high school there.</p>
+    <p class="lede">Answer a few questions to see which ones you likely qualify for, which rule might stop you, and what to do next. Each answer links to the official page it comes from.</p>
+    <div class="change" role="note">
+      <strong>These rules change with each state budget.</strong>
+      <span>This year's budget (for the 2026-27 school year) lowered Reconnect's age from 25 to 21 and dropped the rule that Achievement Scholarship students must graduate from a Michigan high school. Everything here was checked against official pages on <span class="checked">October 31, 2026</span>.</span>
+    </div>
+    <div class="notice">
+      <strong>This is information, not advice.</strong>
+      <span>Your college's financial aid office and the state make the final call. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section class="panel" aria-labelledby="h-q">
+    <h2 id="h-q">1. About you</h2>
+    <form class="q" id="f" novalidate>
+      <p class="sample">Sample answers are filled in so you can see how it works. Change them to yours.</p>
+
+      <fieldset>
+        <legend>You</legend>
+        <div class="row2">
+          <div class="field"><label for="age">Your age</label><input id="age" type="number" inputmode="numeric" min="13" max="99" step="1" value="19"></div>
+        </div>
+        <div class="field"><span class="lbl" id="l-res">How long have you lived in Michigan?</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-res">
+            <label><input type="radio" name="res" value="long" checked> More than 2 years, or all my life</label>
+            <label><input type="radio" name="res" value="mid"> 1 to 2 years</label>
+            <label><input type="radio" name="res" value="short"> Less than a year</label>
+            <label><input type="radio" name="res" value="no"> I don't live in Michigan</label>
+          </div>
+          <span class="hint">If a parent is on your FAFSA, the state also looks at how long your parent has lived here.</span></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>High school</legend>
+        <div class="field"><span class="lbl" id="l-hs">How did you finish high school?</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-hs">
+            <label><input type="radio" name="hs" value="diploma" checked> High school diploma</label>
+            <label><input type="radio" name="hs" value="cert"> Certificate of completion</label>
+            <label><input type="radio" name="hs" value="ged"> GED or another high school equivalency test</label>
+            <label><input type="radio" name="hs" value="home"> Home school</label>
+            <label><input type="radio" name="hs" value="still"> I'm still in high school</label>
+            <label><input type="radio" name="hs" value="none"> I didn't finish, and don't have a GED</label>
+          </div></div>
+        <div class="row2" id="hs-when">
+          <div class="field"><label for="hsm" id="l-hsm">Month you finished</label>
+            <select id="hsm">
+              <option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option>
+              <option value="5">May</option><option value="6" selected>June</option><option value="7">July</option><option value="8">August</option>
+              <option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option>
+            </select></div>
+          <div class="field"><label for="hsy" id="l-hsy">Year you finished</label><input id="hsy" type="number" inputmode="numeric" min="1950" max="2035" step="1" value="2026">
+            <span class="hint" id="hs-hint">For a GED, use the date you passed.</span></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>College plans</legend>
+        <div class="field"><span class="lbl" id="l-deg">Do you already have a college degree?</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-deg">
+            <label><input type="radio" name="deg" value="none" checked> No degree yet (some college credits are fine)</label>
+            <label><input type="radio" name="deg" value="assoc"> Yes, an associate degree</label>
+            <label><input type="radio" name="deg" value="bach"> Yes, a bachelor's degree or higher</label>
+          </div></div>
+        <div class="field"><span class="lbl" id="l-sch">Where do you want to go?</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-sch">
+            <label><input type="radio" name="sch" value="cc" checked> A community college or Tribal college (a degree or a certificate)</label>
+            <label><input type="radio" name="sch" value="univ"> A four-year college or university</label>
+            <label><input type="radio" name="sch" value="career"> A career or trade training program somewhere other than a community college</label>
+            <label><input type="radio" name="sch" value="unsure"> Not sure yet</label>
+          </div></div>
+        <div class="row2">
+          <div class="field"><label for="load">Full time or part time?</label>
+            <select id="load">
+              <option value="full" selected>Full time (usually 12 or more credits)</option>
+              <option value="half">Part time, at least half time (usually 6 to 11 credits)</option>
+              <option value="less">Less than half time</option>
+              <option value="unsure">Not sure yet</option>
+            </select></div>
+          <div class="field"><label for="start">When will you start, or when did you first start, college or training after high school?</label>
+            <select id="start"></select></div>
+        </div>
+        <div class="field" id="sai-wrap"><label for="sai">Your Student Aid Index (SAI) from the FAFSA, if you know it</label><input id="sai" type="text" inputmode="numeric" autocomplete="off" placeholder="Leave blank if you don't know">
+          <span class="hint">Only matters for the Achievement Scholarship at a four-year school. It's on your FAFSA Submission Summary at studentaid.gov. It can be a negative number.</span></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Detroit</legend>
+        <div class="field"><span class="lbl" id="l-det">Did you live in Detroit and go to high school in Detroit?</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-det">
+            <label><input type="radio" name="det" value="4" checked> Yes, all four years of high school</label>
+            <label><input type="radio" name="det" value="2"> Yes, at least junior and senior years</label>
+            <label><input type="radio" name="det" value="no"> No</label>
+            <label><input type="radio" name="det" value="unsure"> Not sure, or it's complicated</label>
+          </div>
+          <span class="hint">Any high school with a Detroit address counts: public, charter, private, parochial, alternative, or home school.</span></div>
+        <div class="field" id="gpa-wrap"><label for="gpa">High school GPA (for Detroit Promise at a university)</label><input id="gpa" type="text" inputmode="decimal" autocomplete="off" value="2.8" style="max-width:140px"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>A few more</legend>
+        <div class="field"><span class="lbl" id="l-med">Did you have Medicaid for at least 2 years between age 9 and finishing high school?</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-med">
+            <label><input type="radio" name="med" value="yes"> Yes</label>
+            <label><input type="radio" name="med" value="no"> No</label>
+            <label><input type="radio" name="med" value="unsure" checked> Not sure</label>
+          </div>
+          <span class="hint">This is for TIP. The exact rule is 24 months within any 36 month stretch. The state checks its own records, so "not sure" is fine.</span></div>
+        <div class="field"><span class="lbl" id="l-cit">Are you a U.S. citizen, permanent resident, or approved refugee?</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-cit">
+            <label><input type="radio" name="cit" value="yes" checked> Yes</label>
+            <label><input type="radio" name="cit" value="no"> No</label>
+            <label><input type="radio" name="cit" value="unsure"> Not sure</label>
+          </div></div>
+        <div class="field"><span class="lbl" id="l-def">Are you in default on a federal student loan?</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-def">
+            <label><input type="radio" name="def" value="no" checked> No, or I never had one</label>
+            <label><input type="radio" name="def" value="yes"> Yes</label>
+            <label><input type="radio" name="def" value="unsure"> Not sure</label>
+          </div></div>
+      </fieldset>
+    </form>
+    <h2 id="h-r">2. What you may qualify for</h2>
+    <div class="results" id="r" aria-live="polite"></div>
+  </section>
+
+  <section class="steps" aria-labelledby="h-steps">
+    <h2 id="h-steps">3. Steps to claim it</h2>
+    <p class="small">These programs pay your college, not you, so most of the work is getting your paperwork to the college. Check things off as you go. Nothing is saved.</p>
+    <ul>
+      <li><label><input type="checkbox"> <span><strong>File the FAFSA</strong> at <a href="https://studentaid.gov/h/apply-for-aid/fafsa" target="_blank" rel="noopener">studentaid.gov</a> for the school year you'll start. Every program on this page needs it, and the Achievement Scholarship has no other application. If a parent has to be on your FAFSA, the state says the FAFSA has to be complete, parent part included.</span></label></li>
+      <li><label><input type="checkbox"> <span><strong>Apply to the college</strong> and list it on your FAFSA.</span></label></li>
+      <li><label><input type="checkbox"> <span><strong>Reconnect only:</strong> fill out the <a href="https://missg.guarantorsolutions.com/StudentPortal/reconnect" target="_blank" rel="noopener">Reconnect application</a>. The state says it takes under five minutes and works on a phone.</span></label></li>
+      <li><label><input type="checkbox"> <span><strong>Check your state aid</strong> in the <a href="https://missg.guarantorsolutions.com/StudentPortal" target="_blank" rel="noopener">MiSSG Student Portal</a> after your FAFSA goes through.</span></label></li>
+      <li><label><input type="checkbox"> <span><strong>Ask the financial aid office two things:</strong> are you "in-district" (that's what makes tuition fully free), and what will you still owe after aid? Books, parking, and fees not charged to every student usually aren't covered.</span></label></li>
+      <li><label><input type="checkbox"> <span><strong>Detroit:</strong> use the Detroit Promise <a href="https://detroitpromise.com/ns-pathback-application/" target="_blank" rel="noopener">Path Back form</a> if you finished high school between 2013 and 2025, or the <a href="https://forms.monday.com/forms/40febe7204e2587167d33534457b2694?r=use1" target="_blank" rel="noopener">contact form</a> for anything else. It only talks about your account with you, not your parents.</span></label></li>
+      <li><label><input type="checkbox"> <span><strong>Keep it:</strong> file the FAFSA again every year, keep your grades up (most programs use your college's "satisfactory academic progress" rule or a 2.0 GPA), and keep taking enough credits.</span></label></li>
+    </ul>
+  </section>
+
+  <section class="gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Free help</h2>
+    <ul>
+      <li><strong>Your college's financial aid office</strong> applies all of these programs to your bill and works out what's left. Start there.</li>
+      <li><strong>MI Student Aid</strong> (Achievement Scholarship, TIP, and Reconnect questions): <a href="tel:+18884472687">888-447-2687</a>, Monday to Friday, 8 a.m. to 4:45 p.m., or <a href="mailto:mistudentaid@michigan.gov">mistudentaid@michigan.gov</a>.</li>
+      <li><strong>Michigan Reconnect Navigators</strong> help for free with picking a program, the FAFSA, and registering. They hold online office hours Tuesdays 12 to 2 p.m. and Thursdays 5 to 7 p.m. See the <a href="https://www.michigan.gov/reconnect/community-college/navigators" target="_blank" rel="noopener">Navigators page</a>.</li>
+      <li><strong>Detroit Promise:</strong> <a href="mailto:info@detroitpromise.com">info@detroitpromise.com</a> or its <a href="https://forms.monday.com/forms/40febe7204e2587167d33534457b2694?r=use1" target="_blank" rel="noopener">contact form</a>. Students have to write in themselves, but can copy a parent.</li>
+      <li><strong>Detroit Reconnect</strong>, run by the Detroit Regional Chamber, gives free coaching to adults 21 and older in Southeast Michigan, from finishing a GED to filling out the FAFSA. <a href="https://www.detroitchamber.com/education-talent/detroit-drives-degrees/detroit-reconnect/" target="_blank" rel="noopener">Detroit Reconnect page</a>.</li>
+      <li><strong>No diploma or GED yet?</strong> The state's free adult education programs are listed at <a href="https://www.michigan.gov/LearnMoreEarnMore" target="_blank" rel="noopener">Michigan.gov/LearnMoreEarnMore</a>.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> Each program's rules come from its official page, listed below, and were checked on <span class="checked">October 31, 2026</span>. Reconnect's rules were also checked against the Michigan Reconnect Grant Recipient Act (MCL 390.1715 to 390.1717) and the state's July 22, 2026 summary of the 2026-27 budget.</p>
+    <p>Green cards mean your answers meet every rule the official pages list. Amber cards mean something depends on facts this page can't check. Grey cards mean at least one requirement isn't met right now, and the card says which one. Red cards mean a time limit is close.</p>
+    <p>Things the official pages don't settle, and how this page handles them:</p>
+    <ul>
+      <li>Michigan's Reconnect law still says 25. The 2026-27 budget lowered the age to 21, and the governor called the $25 million "ongoing." Bridge Michigan reported in August 2026 that advocates expect the lower age to last one year unless lawmakers change the law. This page uses 21 and flags it.</li>
+      <li>The Achievement Scholarship's 15-month start window comes with a chart for spring graduates (finish in spring, start by the fall of the next year). For other months, the state says to ask your financial aid office, so this page counts 15 months and labels it "maybe."</li>
+      <li>The Detroit Promise site says its application closed on July 1, 2026 while the program is updated, and doesn't say when it reopens. Its pages list the Path Back years as both 2013 to 2025 and 2013 to 2024. Its university GPA list and table disagree for the University of Olivet (2.5 or 3.0), and Siena Heights shows up on the eligibility page only.</li>
+      <li>TIP needs a diploma or GED before age 20. This page only knows your age now and the year you finished, so it estimates.</li>
+    </ul>
+    <p>Sources:</p>
+    <ul id="srclist"></ul>
+    <p>This page doesn't cover the Pell Grant amount, the Michigan Competitive Scholarship, the Michigan Tuition Grant, Fostering Futures, the Children of Veterans Tuition Grant, the Michigan Indian Tuition Waiver, or free tuition deals run by single universities. Michigan's public universities list theirs on the <a href="https://www.masu.org/student-success/financial-aid/free-tuition-programs" target="_blank" rel="noopener">MASU free tuition page</a>. Detroit College Promise is a separate, smaller private scholarship for Detroit Public Schools Community District students and isn't checked here.</p>
+    <p>To update this page for a new school year, change the one data block at the top of its script. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  /* ===== YEARLY UPDATE: change only this block. =====
+     Michigan sets these programs in each year's state budget (MiLEAP posts a summary each summer),
+     so recheck every page in SRC below when a new budget passes. Detroit Promise posts its own rules
+     for each graduating class at detroitpromise.com/do-i-qualify. */
+  const DATA = {
+    checked: "October 31, 2026",
+    reconnect: { minAge: 21, lawAge: 25, years: 4 },
+    mas: {
+      firstClass: 2023,        // diploma, certificate of completion, or GED earned in 2023 or after
+      saiMax: 30000,           // four-year schools only; the Community College Guarantee has no income test
+      univMax: 5500, univYears: 5, ccYears: 3, bonus: 1000,
+      skillsMax: 2000, skillsYears: 2,
+      grandfather: "2023-24"   // 2023-24 recipients meet the need test regardless of SAI
+    },
+    tip: { diplomaBefore: 20, earlyMiddle: 21, specialEd: 26, startWithin: 4, phase2Sem: 500, phase2Max: 2000 },
+    promise: {
+      open: false,                       // "As of July 1, 2026, the Detroit Promise application is closed."
+      closedOn: "July 1, 2026",
+      latestClass: 2026,                 // the newest class with posted rules
+      verifyBy: "June 1, 2026",
+      pathBack: [2013, 2025], pathBackAlt: 2024,
+      ccYears: 3, stipend: 50,
+      cc: ["Henry Ford College", "Jackson College", "Macomb Community College", "Oakland Community College", "Schoolcraft College", "St. Clair County Community College", "Wayne County Community College District"],
+      // [school, GPA needed by early March of senior year, seats]
+      univ: [
+        ["Albion College", 2.7, ""], ["Alma College", 2.75, ""], ["Central Michigan University", 3.0, ""],
+        ["Cleary University", 2.0, ""], ["College for Creative Studies", 3.0, "10 a year"], ["Eastern Michigan University", 3.0, ""],
+        ["Ferris State University", 3.0, ""], ["Grand Valley State University", 3.0, ""], ["Lawrence Technological University", 3.0, "1 a year"],
+        ["Madonna University", 2.8, ""], ["Michigan State University", 3.0, "100 a year"], ["Michigan Technological University", 3.0, ""],
+        ["Northern Michigan University", 3.0, ""], ["Oakland University", 3.0, ""], ["Rochester Christian University", 2.7, "4 a year"],
+        ["Saginaw Valley State University", 3.0, ""], ["Siena Heights University", 3.0, ""], ["University of Detroit Mercy", 3.0, "10 a year"],
+        ["University of Michigan (Ann Arbor)", 3.0, ""], ["University of Michigan-Dearborn", 3.0, ""], ["University of Michigan-Flint", 3.0, "3 a year"],
+        ["The University of Olivet", 2.5, "", "Listed at 2.5 in the table and 3.0 on the eligibility page"], ["Wayne State University", 3.0, ""],
+        ["Western Michigan University", 3.0, ""]
+      ]
+    }
+  };
+  /* ===== end of yearly data ===== */
+
+  const SRC = {
+    "Reconnect: about": "https://www.michigan.gov/reconnect/about",
+    "Reconnect: costs": "https://www.michigan.gov/reconnect/community-college/calculating-your-costs",
+    "Reconnect: keeping it": "https://www.michigan.gov/reconnect/community-college/stay-reconnected",
+    "Reconnect: find your college": "https://www.michigan.gov/reconnect/community-college/list-of-colleges",
+    "Governor, Aug 26, 2026": "https://www.michigan.gov/whitmer/news/press-releases/2026/08/26/whitmer-announces-eligibility-for-michigan-reconnect-opens-application-for-21-years",
+    "MCL 390.1715": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-390-1715",
+    "MCL 390.1717": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-390-1717",
+    "Bridge Michigan, Aug 2026": "https://bridgemi.com/michigan-education-watch/michigan-fills-free-college-gap-lowers-eligibility-to-21-for-now/",
+    "2026-27 budget summary": "https://content.govdelivery.com/accounts/MILEAP/bulletins/4216740",
+    "Achievement Scholarship": "https://www.michigan.gov/mistudentaid/programs/michigan-achievement-scholarship",
+    "Community College Guarantee": "https://www.michigan.gov/mistudentaid/programs/michigan-achievement-scholarship/community-college-guarantee",
+    "Guarantee FAQ": "https://www.michigan.gov/mistudentaid/programs/michigan-achievement-scholarship/community-college-guarantee/frequently-asked-questions/for-students-and-families/eligibility",
+    "Four-year schools": "https://www.michigan.gov/mistudentaid/programs/michigan-achievement-scholarship/college-and-university",
+    "Achievement FAQ": "https://www.michigan.gov/mistudentaid/programs/michigan-achievement-scholarship/college-and-university/frequently-asked-questions/for-students-and-families/eligibility",
+    "Skills Scholarship": "https://www.michigan.gov/mistudentaid/programs/michigan-achievement-scholarship/career-training",
+    "TIP": "https://www.michigan.gov/mistudentaid/programs/tuition-incentive-program",
+    "TIP Phase I": "https://www.michigan.gov/mistudentaid/programs/tuition-incentive-program/tip-phase-i",
+    "TIP Phase II": "https://www.michigan.gov/mistudentaid/programs/tuition-incentive-program/tip-phase-ii",
+    "Detroit Promise": "https://detroitpromise.com/",
+    "Promise: am I eligible": "https://detroitpromise.com/do-i-qualify/",
+    "Promise: community college": "https://detroitpromise.com/community-college-students/",
+    "Promise: universities": "https://detroitpromise.com/university/",
+    "Promise: what it covers": "https://detroitpromise.com/faq-parents/",
+    "Promise: verification": "https://detroitpromise.com/verification/",
+    "WCCCD residency": "https://www.wcccd.edu/steps-to-enroll/residency-information"
+  };
+
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const usd = n => "$" + Math.round(n).toLocaleString("en-US");
+  const num = v => { const t = String(v).replace(/[^0-9.\-]/g, ""); if (t === "" || t === "-") return null; const x = parseFloat(t); return isFinite(x) ? x : null; };
+  const val = name => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; };
+  const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const monthYear = d => `${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+  const LABEL = { yes: "Likely", maybe: "Maybe", no: "Not now", help: "Act now", info: "Good to know" };
+
+  document.querySelectorAll(".checked").forEach(e => e.textContent = DATA.checked);
+  document.getElementById("srclist").innerHTML = Object.entries(SRC).map(([k, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${esc(k)}</a></li>`).join("");
+
+  // Terms: W = winter (January), S = spring or summer (May), F = fall (August or September).
+  const TERM = { W: { name: "Winter", m: 0, d: 10, ord: 0, when: "starts in January" }, S: { name: "Spring or summer", m: 4, d: 10, ord: 1, when: "starts in May or June" }, F: { name: "Fall", m: 7, d: 20, ord: 2, when: "starts in August or September" } };
+  const today = new Date();
+  const thisYear = today.getFullYear();
+  (function fillStart() {
+    const sel = document.getElementById("start");
+    let h = `<option value="">Not sure yet</option>`;
+    for (let y = 2023; y <= thisYear + 4; y++) {
+      h += `<optgroup label="${y}">` + ["W", "S", "F"].map(t => `<option value="${y}-${t}">${TERM[t].name} ${y} (${TERM[t].when})</option>`).join("") + `</optgroup>`;
+    }
+    sel.innerHTML = h;
+    sel.value = `${thisYear + (today.getMonth() >= 8 ? 1 : 0)}-${today.getMonth() >= 8 ? "W" : "F"}`;
+  })();
+  const termDate = (y, t) => new Date(y, TERM[t].m, TERM[t].d);
+  const termName = (y, t) => `${TERM[t].name.toLowerCase()} ${y}`;
+  // The first term that hasn't started yet, for "not sure yet".
+  function nextTerm() {
+    for (let y = thisYear; ; y++) for (const t of ["W", "S", "F"]) if (termDate(y, t) > today) return { y, t };
+  }
+  // School years run fall to summer, so winter 2027 is in 2026-27.
+  const aidStart = (y, t) => t === "F" ? y : y - 1;
+
+  function card(level, title, { checks = [], paras = [], next = "", cites = [], extra = "" } = {}) {
+    const c = cites.map(k => `<a class="cite" href="${SRC[k]}" target="_blank" rel="noopener">${esc(k)}</a>`).join("");
+    const ch = checks.length ? `<ul class="checks">${checks.map(([s, t]) => `<li class="${s}">${t}</li>`).join("")}</ul>` : "";
+    let body = [].concat(paras).filter(Boolean).map(t => t.startsWith("<") ? t : `<p class="small">${t}</p>`).join("");
+    // A program that doesn't fit right now keeps its details folded away.
+    if (level === "no" && body) body = `<details class="more"><summary>What this program covers</summary>${body}</details>`;
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${LABEL[level]}</span></div>
+      ${ch}
+      ${body}
+      ${next ? `<p class="next"><strong>What you can do:</strong> ${next}</p>` : ""}
+      ${extra}
+      ${c ? `<div class="cites">${c}</div>` : ""}
+    </article>`;
+  }
+  const statusOf = checks => checks.some(c => c[0] === "bad") ? "no" : checks.some(c => c[0] === "unk") ? "maybe" : "yes";
+
+  function read() {
+    const ageRaw = num(document.getElementById("age").value);
+    const hs = val("hs");
+    const hsy = num(document.getElementById("hsy").value);
+    const hsm = Number(document.getElementById("hsm").value);
+    const sv = document.getElementById("start").value;
+    let start = null;
+    if (sv) { const [y, t] = sv.split("-"); start = { y: Number(y), t }; }
+    const saiRaw = document.getElementById("sai").value.trim();
+    return {
+      age: ageRaw === null ? null : Math.round(ageRaw),
+      res: val("res"), hs, hsy: hsy === null ? null : Math.round(hsy), hsm,
+      deg: val("deg"), sch: val("sch"), load: document.getElementById("load").value,
+      start, sai: saiRaw === "" ? null : num(saiRaw),
+      det: val("det"), gpa: num(document.getElementById("gpa").value),
+      med: val("med"), cit: val("cit"), def: val("def")
+    };
+  }
+
+  const hasHS = a => ["diploma", "cert", "ged", "home"].includes(a.hs);
+  // The day high school ended, as the last day of the month given.
+  const hsDate = a => a.hsy ? new Date(a.hsy, a.hsm, 0) : null;
+
+  // Shared checks used by the state programs.
+  function resCheck(a, sinceText) {
+    if (a.res === "long") return ["ok", `Lived in Michigan more than 2 years, so you meet "${sinceText}."`];
+    if (a.res === "mid") return ["unk", `You need to have lived in Michigan ${sinceText}. You've been here 1 to 2 years, so check your move-in date.`];
+    if (a.res === "short") return ["bad", `You need to have lived in Michigan ${sinceText}. Less than a year doesn't meet that yet.`];
+    return ["bad", "You have to live in Michigan."];
+  }
+  const citCheck = a => a.cit === "yes" ? ["ok", "U.S. citizen, permanent resident, or approved refugee"]
+    : a.cit === "no" ? ["bad", "Must be a U.S. citizen, permanent resident, or approved refugee"]
+    : ["unk", "Must be a U.S. citizen, permanent resident, or approved refugee. Ask the financial aid office if you're not sure."];
+  const defCheck = a => a.def === "no" ? ["ok", "Not in default on a federal student loan"]
+    : a.def === "yes" ? ["bad", "Can't be in default on a federal student loan. Getting out of default may fix this, and studentaid.gov explains how."]
+    : ["unk", "Can't be in default on a federal student loan. Check your loans at studentaid.gov."];
+
+  /* ---------- Michigan Reconnect ---------- */
+  function reconnect(a) {
+    const R = DATA.reconnect, checks = [];
+    if (a.age === null) checks.push(["unk", `Must be at least ${R.minAge} when you apply. Enter your age.`]);
+    else if (a.age >= R.minAge) checks.push(["ok", `At least ${R.minAge} (you're ${a.age})`]);
+    else checks.push(["bad", `Must be at least ${R.minAge} when you apply. You're ${a.age}, so that's ${R.minAge - a.age} year${R.minAge - a.age === 1 ? "" : "s"} away.`]);
+    checks.push(a.res === "long" || a.res === "mid" ? ["ok", "Lived in Michigan a year or more"]
+      : a.res === "short" ? ["bad", "Must have lived in Michigan a year or more"] : ["bad", "Must live in Michigan, for a year or more"]);
+    if (["diploma", "cert", "ged"].includes(a.hs)) checks.push(["ok", "Has a high school diploma, certificate of completion, or GED"]);
+    else if (a.hs === "home") checks.push(["unk", "Needs a diploma, certificate of completion, or GED. A home school diploma isn't named on Reconnect's list, so ask a Navigator."]);
+    else checks.push(["bad", "Needs a high school diploma, certificate of completion, or GED first"]);
+    checks.push(a.deg === "none" ? ["ok", "No associate or bachelor's degree yet"] : ["bad", "Only for people without an associate or bachelor's degree"]);
+    if (a.sch === "cc") checks.push(["ok", "Going to a Michigan public community college or Tribal college"]);
+    else if (a.sch === "univ") checks.push(["bad", "Only pays at Michigan public community colleges and Tribal colleges, not universities"]);
+    else if (a.sch === "career") checks.push(["unk", "Only covers Pell-eligible certificate programs at a public community college or Tribal college"]);
+    else checks.push(["unk", "Only pays at Michigan public community colleges and Tribal colleges"]);
+    if (a.cit !== "yes") checks.push(["unk", "Reconnect needs a completed FAFSA. If you can't file one, ask a Navigator first."]);
+
+    let st = statusOf(checks);
+    const paras = [];
+    if (st !== "no") {
+      paras.push(`<p>Reconnect pays your <strong>in-district</strong> tuition, the mandatory fees every student pays, and contact hours. It's "last dollar," so a Pell Grant or TIP pays first and Reconnect covers the rest. At a college where you're <strong>out-of-district</strong>, it pays only up to the in-district rate and you owe the difference. Books, parking, and application fees aren't covered.</p>`,
+        `To keep it: stay a Michigan resident, file the FAFSA every year, earn at least 12 credits a year once you start, and keep your college's "satisfactory academic progress" or a 2.0 GPA. It lasts until you earn an associate degree or for ${R.years} years from your first Reconnect semester.`);
+      if (a.age !== null && a.age < R.lawAge) paras.push(`Heads up: Michigan's Reconnect law still says ${R.lawAge}. The 2026-27 state budget lowered the age to ${R.minAge}. The governor called the money "ongoing," but advocates told Bridge Michigan they expect it to last one year unless lawmakers change the law. If you're ${R.minAge} to ${R.lawAge - 1}, apply while the door is open.`);
+      if (a.load === "less") paras.push(`Reconnect has no minimum credit load to start, but you need 12 credits a year to keep it.`);
+    } else if (a.age !== null && a.age < R.minAge && checks.filter(c => c[0] === "bad").length === 1) {
+      paras.push(`Everything else fits. You can apply once you turn ${R.minAge}, if the age stays at ${R.minAge} in future budgets.`);
+    }
+    const next = st === "no" ? "" : `Apply online in about five minutes, then apply to the college. Use the state's <a href="${SRC["Reconnect: find your college"]}" target="_blank" rel="noopener">college finder</a> to see which college you're in-district for.`;
+    return { key: "reconnect", name: "Michigan Reconnect", st, line: st === "no" ? firstBad(checks) : "Tuition-free at your in-district community college", html: card(st, "Michigan Reconnect (adults 21 and older)", { checks, paras, next, cites: ["Reconnect: about", "Reconnect: costs", "Reconnect: keeping it", "MCL 390.1715", "MCL 390.1717", "Governor, Aug 26, 2026", "Bridge Michigan, Aug 2026"] }) };
+  }
+  // The first unmet rule, cut to its first sentence, for the summary list.
+  const firstBad = checks => { const b = checks.find(c => c[0] === "bad"); return b ? b[1].replace(/<[^>]+>/g, "").replace(/\.\s.*$/, ".") : ""; };
+
+  /* ---------- Michigan Achievement Scholarship ---------- */
+  // Returns [state, text, deadlineDate] for "start within 15 months of finishing high school".
+  function window15(a) {
+    if (!a.hsy) return ["unk", "Must start college within 15 months of finishing high school. Enter the year you finished.", null];
+    const spring = a.hsm === 5 || a.hsm === 6;
+    const hd = hsDate(a);
+    const dl = spring ? termDate(a.hsy + 1, "F") : new Date(a.hsy, a.hsm + 15, 0);
+    const dlText = spring ? `the fall ${a.hsy + 1} semester` : `about ${monthYear(dl)}`;
+    const s = a.start;
+    if (s) {
+      const ok = spring ? (s.y * 3 + TERM[s.t].ord) <= ((a.hsy + 1) * 3 + 2) : termDate(s.y, s.t) <= dl;
+      const before = termDate(s.y, s.t) < hd;
+      if (before) return ["unk", `You picked a start date before you finished high school. Dual enrollment doesn't count as the start. Pick when you start (or started) college after high school.`, dl];
+      if (ok) return [spring ? "ok" : "unk", `Must start within 15 months of finishing high school, so by ${dlText}. You picked ${termName(s.y, s.t)}.${spring ? "" : " You didn't finish in the spring, so the state says to confirm your window with the financial aid office."}`, dl];
+      return ["bad", `Must start within 15 months of finishing high school, so by ${dlText}. ${termName(s.y, s.t)[0].toUpperCase() + termName(s.y, s.t).slice(1)} is too late.`, dl];
+    }
+    if (today > dl) return ["bad", `Had to start within 15 months of finishing high school, so by ${dlText}. That's passed, unless you already started college by then.`, dl];
+    return ["unk", `Must start within 15 months of finishing high school, so by ${dlText}.`, dl];
+  }
+
+  function achievement(a) {
+    const M = DATA.mas, checks = [];
+    const s = a.start || nextTerm();
+    const ay = aidStart(s.y, s.t);
+    const since = `since July 1, ${ay - 1} (for the ${ay}-${String(ay + 1).slice(2)} school year)`;
+    const path = a.sch === "univ" ? "univ" : a.sch === "career" ? "skills" : "cc";
+
+    // High school year
+    if (a.hs === "still") checks.push(a.hsy && a.hsy >= M.firstClass ? ["ok", `You'll finish high school in ${a.hsy}. Graduates from ${M.firstClass} on are covered.`] : ["unk", "Enter the year you expect to finish high school."]);
+    else if (a.hs === "none") checks.push(["bad", `Needs a diploma, certificate of completion, or GED earned in ${M.firstClass} or later. A GED you earn now counts, at any age.`]);
+    else if (!a.hsy) checks.push(["unk", `Needs a diploma, certificate of completion, or GED earned in ${M.firstClass} or later. Enter the year you finished.`]);
+    else if (a.hsy < M.firstClass) checks.push(["bad", `Needs a diploma, certificate of completion, or GED earned in ${M.firstClass} or later. You finished in ${a.hsy}.`]);
+    else if (a.hs === "home") checks.push(["unk", `Finished in ${a.hsy}. Home school counts if your college accepts your home school papers as proof.`]);
+    else checks.push(["ok", `Finished high school in ${a.hsy} (${M.firstClass} or later). Any high school counts, not just Michigan ones.`]);
+
+    const w = window15(a);
+    if (a.hs !== "none" && !(a.hsy && a.hsy < M.firstClass)) checks.push([w[0], w[1]]);
+
+    if (path === "skills") checks.push(a.res === "long" || a.res === "mid" ? ["ok", "Lived in Michigan for at least the past year"] : ["bad", "Must have lived in Michigan for at least the past year"]);
+    else checks.push(resCheck(a, since));
+    if (path === "skills") {
+      checks.push(a.deg === "none" ? ["ok", "No associate or bachelor's degree yet"] : ["bad", "Only for people without an associate or bachelor's degree"]);
+    } else {
+      if (a.deg === "bach") checks.push(["bad", "Only for undergraduates. A bachelor's degree ends it."]);
+      checks.push(a.load === "full" ? ["ok", "Going full time"] : a.load === "unsure" ? ["unk", "Must go full time, as your college defines it (usually 12 credits)"] : ["bad", "Must go full time, as your college defines it (usually 12 credits). Part time doesn't qualify."]);
+      if (path === "univ") {
+        if (a.sai === null) checks.push(["unk", `Needs a Student Aid Index (SAI) of ${M.saiMax.toLocaleString("en-US")} or less on the FAFSA. The state says 7 out of 10 students at four-year schools qualify.`]);
+        else if (a.sai <= M.saiMax) checks.push(["ok", `SAI of ${a.sai.toLocaleString("en-US")} is at or under ${M.saiMax.toLocaleString("en-US")}`]);
+        else checks.push(["bad", `Needs an SAI of ${M.saiMax.toLocaleString("en-US")} or less. Yours is ${a.sai.toLocaleString("en-US")}. If your family's money changed, the financial aid office can review it. ${M.grandfather} recipients keep qualifying regardless of SAI.`]);
+      }
+      checks.push(citCheck(a));
+      checks.push(defCheck(a));
+    }
+
+    let st = statusOf(checks);
+    const paras = [];
+    let title, cites, next = "", line = "";
+    if (path === "cc") {
+      title = "Achievement Scholarship: Community College Guarantee";
+      cites = ["Community College Guarantee", "Guarantee FAQ", "Achievement FAQ", "2026-27 budget summary"];
+      line = "Tuition-free at your in-district community college";
+      paras.push(`<p>No income limit. It pays your <strong>in-district</strong> tuition, contact hours, and mandatory fees at a community college or Tribal college. If you're out-of-district, it pays up to the in-district rate and you owe the difference. If you get a Pell Grant, you also get a $${M.bonus.toLocaleString("en-US")} bonus for other costs like books and rides.</p>`,
+        `You can use it for up to ${M.ccYears} years at a community college, and keep going at a four-year school for up to 5 years in all. There's no separate application. The FAFSA is the application.`);
+      if (a.sch === "unsure") paras.push(`At a four-year school instead, the Achievement Scholarship pays up to ${usd(M.univMax)} a year for up to ${M.univYears} years if your SAI is ${M.saiMax.toLocaleString("en-US")} or less, and you must go full time.`);
+    } else if (path === "univ") {
+      title = "Michigan Achievement Scholarship (four-year school)";
+      cites = ["Four-year schools", "Achievement FAQ", "2026-27 budget summary"];
+      line = `Up to ${usd(M.univMax)} a year for up to ${M.univYears} years`;
+      paras.push(`<p>Up to <strong>${usd(M.univMax)} a year for up to ${M.univYears} years</strong> at a Michigan public university, a private college or university, or a community college bachelor's program. It isn't free tuition by itself, but some universities promise free tuition to Achievement Scholarship students. The <a href="https://www.masu.org/student-success/financial-aid/free-tuition-programs" target="_blank" rel="noopener">MASU list</a> has the public ones.</p>`,
+        `No GPA requirement and no separate application. If you start at a community college instead, the Community College Guarantee has no income limit.`);
+    } else {
+      title = "Achievement Skills Scholarship (career training)";
+      cites = ["Skills Scholarship", "2026-27 budget summary"];
+      line = `Up to ${usd(M.skillsMax)} a year for career training`;
+      paras.push(`<p>Up to <strong>${usd(M.skillsMax)} a year for up to ${M.skillsYears} years</strong> for an approved career training program that leads to an industry-recognized certificate. Unlike the college version, you apply in the MiSSG Student Portal and pick from the state's list of approved programs.</p>`,
+        `If the training is a certificate program at a community college, the Community College Guarantee may pay more. Pick "community college" above to check that too.`);
+      next = `Find an approved program on the <a href="https://www.michigan.gov/mistudentaid/programs/michigan-achievement-scholarship/career-training/programs" target="_blank" rel="noopener">state's list</a>, then apply in the MiSSG Student Portal.`;
+    }
+    if (st === "no" && a.hs === "none") next = `Earn a GED. The state counts a GED earned in ${M.firstClass} or later at any age, and then you'd have 15 months to start. Free GED classes are at <a href="https://www.michigan.gov/LearnMoreEarnMore" target="_blank" rel="noopener">Michigan.gov/LearnMoreEarnMore</a>.`;
+    else if (st !== "no" && !next) next = `File the FAFSA for the ${ay}-${String(ay + 1).slice(2)} school year and list your college. Then check the MiSSG Student Portal.`;
+
+    // Act now: the 15-month window closes soon and no start term is picked.
+    if (st !== "no" && !a.start && w[2] && a.hs !== "still") {
+      const days = Math.round((w[2] - today) / 86400000);
+      if (days >= 0 && days <= 150) { st = "help"; paras.unshift(`<p><strong>Your window to start closes around ${monthYear(w[2])}.</strong> If you don't start college by then, you lose this scholarship for good.</p>`); }
+    }
+    if (st === "no") line = firstBad(checks);
+    return { key: "mas", name: path === "cc" ? "Community College Guarantee" : path === "univ" ? "Achievement Scholarship" : "Skills Scholarship", st, line, html: card(st, title, { checks, paras, next, cites }) };
+  }
+
+  /* ---------- Tuition Incentive Program (TIP) ---------- */
+  function tip(a) {
+    const T = DATA.tip, checks = [];
+    const s = a.start || nextTerm();
+    const ay = aidStart(s.y, s.t);
+    checks.push(a.med === "yes" ? ["ok", "Had Medicaid for 24 months within a 36 month stretch between age 9 and finishing high school"]
+      : a.med === "no" ? ["bad", "Must have had Medicaid for 24 months within a 36 month stretch between age 9 and finishing high school"]
+      : ["unk", "Must have had Medicaid for 24 months within a 36 month stretch between age 9 and finishing high school. The state keeps the list, so call MI Student Aid to ask."]);
+    // Diploma or GED before age 20 (21 for Early/Middle College, 26 for special education).
+    if (!hasHS(a) && a.hs !== "still") checks.push(a.age !== null && a.age >= T.diplomaBefore
+      ? ["bad", `Needs a diploma or GED before age ${T.diplomaBefore} (${T.specialEd} for students in special education when they finish)`]
+      : ["unk", `Needs a diploma or GED before age ${T.diplomaBefore}.${a.age !== null ? " You still have time." : ""}`]);
+    else if (a.age !== null && a.hsy) {
+      // Your age then was somewhere between lo and hi, since we only know your age in whole years.
+      const yrs = (today - hsDate(a)) / (365.25 * 86400000);
+      const lo = a.age - yrs, hi = a.age + 1 - yrs;
+      const when = a.hs === "still" ? "You'll finish" : "You finished";
+      if (hi <= T.diplomaBefore) checks.push(["ok", `${when} high school before age ${T.diplomaBefore}`]);
+      else if (lo < T.diplomaBefore) checks.push(["unk", `Needs a diploma or GED before age ${T.diplomaBefore}. By our math you were ${Math.floor(lo)} or ${Math.floor(lo) + 1}, so check your exact age when you finished.`]);
+      else checks.push(["bad", `Needs a diploma or GED before age ${T.diplomaBefore}. By our math you were at least ${Math.floor(lo)}. The limit is ${T.earlyMiddle} for Early/Middle College students and ${T.specialEd} for students in special education when they graduated.`]);
+    } else checks.push(["unk", `Needs a diploma or GED before age ${T.diplomaBefore}. Enter your age and the year you finished.`]);
+    // Begin within 4 years.
+    if (a.hsy && a.hs !== "none") {
+      const hd = hsDate(a);
+      const dl = new Date(hd.getFullYear() + T.startWithin, hd.getMonth(), hd.getDate());
+      if (a.start) checks.push(termDate(a.start.y, a.start.t) <= dl ? ["ok", `Starts within ${T.startWithin} years of finishing high school (by ${monthYear(dl)})`] : ["bad", `Must start using TIP within ${T.startWithin} years of finishing high school, so by ${monthYear(dl)}`]);
+      else checks.push(today <= dl ? ["unk", `Must start using TIP by ${monthYear(dl)}, ${T.startWithin} years after you finished high school`] : ["bad", `Had to start using TIP by ${monthYear(dl)}, unless you already started then`]);
+    }
+    checks.push(a.load === "full" || a.load === "half" ? ["ok", "Going at least half time"] : a.load === "less" ? ["bad", "Must go at least half time"] : ["unk", "Must go at least half time"]);
+    checks.push(resCheck(a, `since July 1, ${ay - 1}`));
+    if (a.deg === "bach") checks.push(["bad", "Covers certificates, associate degrees, and a first bachelor's degree only"]);
+    checks.push(citCheck(a));
+    checks.push(defCheck(a));
+
+    const st = statusOf(checks);
+    const paras = [`<p><strong>Phase I</strong> pays tuition at the in-district rate at a community college for a certificate or associate degree (the out-of-district rate can be approved if you don't live in any community college district). It doesn't pay contact hours. <strong>Phase II</strong> helps with a bachelor's degree once you have 56 transferable credits, a one-year certificate, or an associate degree. It pays up to $${T.phase2Sem} a semester and $${T.phase2Max.toLocaleString("en-US")} in all.</p>`,
+      `TIP counts as "gift aid," so it pays before Reconnect and the Detroit Promise. You can get TIP and the Achievement Scholarship together, up to your costs. Phase I ends 10 years after its first payment.`];
+    const next = st === "no" ? "" : `Call MI Student Aid at 888-447-2687 and ask whether you're on the TIP list. The state sends letters to students it identifies, starting as young as 12.`;
+    return { key: "tip", name: "TIP (Tuition Incentive Program)", st, line: st === "no" ? firstBad(checks) : "Pays community college tuition first, before other aid", html: card(st, "TIP: Tuition Incentive Program (had Medicaid as a kid)", { checks, paras, next, cites: ["TIP", "TIP Phase I", "TIP Phase II", "Achievement FAQ"] }) };
+  }
+
+  /* ---------- Detroit Promise ---------- */
+  function promise(a) {
+    const P = DATA.promise, checks = [];
+    const univ = a.sch === "univ";
+    if (a.det === "no") checks.push(["bad", "Only for students who lived in Detroit and went to high school in Detroit"]);
+    else if (a.det === "unsure") checks.push(["unk", `Community college: lived in Detroit and went to a Detroit high school for junior and senior years. University: all four years.`]);
+    else if (a.det === "2" && univ) checks.push(["bad", "University funding needs all four years of high school in Detroit (living there and going to school there). Junior and senior years are enough for community college."]);
+    else checks.push(["ok", a.det === "4" ? "Lived in Detroit and went to a Detroit high school all four years" : "Lived in Detroit and went to a Detroit high school for junior and senior years"]);
+
+    if (a.det === "no") return { key: "promise", name: "Detroit Promise", st: "no", line: firstBad(checks), html: card("no", "Detroit Promise", { checks, paras: [`The Detroit Promise pays the rest of tuition and mandatory fees at 7 partner community colleges, and has a path to partner universities, for students who lived in Detroit and went to a Detroit high school.`], cites: ["Promise: am I eligible", "Detroit Promise"] }) };
+    if (a.hs === "none") checks.push(["bad", "Must graduate from a Detroit high school"]);
+    else if (a.hs === "ged") checks.push(["unk", "The rules say you must graduate from a Detroit high school. They don't mention a GED, so ask Detroit Promise."]);
+    else if (a.hs === "still" || hasHS(a)) checks.push(["ok", a.hs === "still" ? "Will graduate from a Detroit high school" : "Graduated from high school"]);
+
+    // Which class rules apply.
+    let mode = "";
+    if (a.hsy) {
+      if (a.hs === "still" || a.hsy > P.latestClass) {
+        mode = "future";
+        checks.push(["unk", `The Detroit Promise application closed on ${P.closedOn} while the program is updated. The site doesn't say when it reopens or whether the rules for the class of ${a.hsy} will change.`]);
+      } else if (a.hsy === P.latestClass) {
+        mode = "current";
+        checks.push(["unk", `Class of ${P.latestClass}: you had to sign up and finish verification by ${P.verifyBy}. If you did, log in to finish any steps. If not, contact Detroit Promise.`]);
+      } else if (a.hsy >= P.pathBack[0] && a.hsy <= P.pathBack[1]) {
+        mode = "pathback";
+        if (univ) checks.push(["bad", "University funding has to be used right after high school. Graduates from earlier years can use Path Back at a partner community college, then transfer."]);
+        else checks.push([a.hsy > P.pathBackAlt ? "unk" : "ok", `Finished in ${a.hsy}. Path Back is for graduates who want to start or return at a partner community college (it covers ${P.pathBack[0]} to ${P.pathBack[1]} graduates${a.hsy > P.pathBackAlt ? `, though one page on the site says ${P.pathBack[0]} to ${P.pathBackAlt}` : ""})`]);
+      } else {
+        checks.push(["bad", `Detroit Promise started with the class of ${P.pathBack[0]}. Path Back covers ${P.pathBack[0]} to ${P.pathBack[1]} graduates.`]);
+      }
+    } else if (a.hs !== "none") checks.push(["unk", "Enter the year you finished (or will finish) high school."]);
+
+    let table = "";
+    if (univ && mode !== "pathback") {
+      const g = a.gpa;
+      const meets = P.univ.filter(u => g !== null && g >= u[1]).length;
+      if (g === null) checks.push(["unk", "University funding needs a GPA of 2.0 to 3.0 depending on the school, by early March of senior year. Enter your GPA."]);
+      else if (g >= 3.0) checks.push(["ok", `GPA ${g} meets the requirement at every partner university (most need 3.0)`]);
+      else if (meets) checks.push(["unk", `GPA ${g} meets the requirement at ${meets} of the ${P.univ.length} partner universities. Most need 3.0. See the table below.`]);
+      else checks.push(["bad", `GPA ${g} is under every partner university's requirement (2.0 to 3.0). Community college has no GPA requirement.`]);
+      checks.push(["unk", "No gap year: university funding has to be used right after high school."]);
+      table = `<details class="more"><summary>Partner universities and GPA needed (class of ${P.latestClass} rules)</summary><div class="tablewrap"><table class="lim"><thead><tr><th scope="col">School</th><th scope="col">GPA</th><th scope="col">Seats</th></tr></thead><tbody>${P.univ.map(u => `<tr${g !== null && g >= u[1] ? ' class="you"' : ""}><td>${esc(u[0])}${u[3] ? `<br><span class="small">${esc(u[3])}</span>` : ""}</td><td class="num">${u[1] === Math.round(u[1] * 10) / 10 ? u[1].toFixed(1) : u[1].toFixed(2)}</td><td>${u[2] || "Unlimited"}</td></tr>`).join("")}</tbody></table></div><p class="small">All are test optional. Highlighted rows are ones your GPA meets. You also have to be admitted to the school.</p></details>`;
+    } else if (a.sch === "career") {
+      checks.push(["unk", "Covers Pell-eligible certificate programs (6 to 18 months) at the partner community colleges, not other training providers"]);
+    } else if (a.sch === "cc" || a.sch === "unsure") {
+      checks.push(["ok", "Community college has no GPA or test score requirement"]);
+    }
+    if (a.cit !== "yes") checks.push(["unk", "Detroit Promise needs a completed FAFSA. If you can't file one, ask Detroit Promise first."]);
+
+    const st = statusOf(checks);
+    const paras = [`<p>The Detroit Promise is "last dollar." After Pell and TIP, it pays the rest of your <strong>tuition and mandatory fees</strong> at 7 partner community colleges: ${P.cc.join(", ")}. It lasts up to ${P.ccYears} years. Each community college student gets a campus coach and $${P.stipend} a month through the Detroit Promise Path. Books, housing, and meals aren't covered.</p>`,
+      `To keep it: file the FAFSA every year, keep at least a 2.0 GPA, and finish at least 67% of the classes you sign up for.`];
+    if (a.det !== "no" && (a.sch === "cc" || a.sch === "unsure")) paras.push(`If you live in Detroit, Wayne County Community College District (WCCCD) is your in-district college, because its district is all of Wayne County except Dearborn, Garden City, Highland Park, Livonia, Northville, Plymouth, and part of Canton. You'd likely be out-of-district at the other six, where the Detroit Promise says it covers any remaining balance up to the full cost of tuition and mandatory fees.`);
+    let next = "";
+    if (st !== "no") {
+      next = mode === "pathback" ? `Fill out the <a href="https://detroitpromise.com/ns-pathback-application/" target="_blank" rel="noopener">Path Back form</a> (or the <a href="https://detroitpromise.com/pathback-application-current/" target="_blank" rel="noopener">returning student form</a> if you signed up before). Detroit Promise checks your record and sends your name to the college.`
+        : mode === "future" ? `Watch <a href="${SRC["Detroit Promise"]}" target="_blank" rel="noopener">detroitpromise.com</a> for the new application, and ask your school counselor. File the FAFSA either way.`
+        : `Email <a href="mailto:info@detroitpromise.com">info@detroitpromise.com</a> from your own email with your name, birth date, and high school, and ask where your scholarship stands.`;
+    }
+    return { key: "promise", name: "Detroit Promise", st, line: st === "no" ? firstBad(checks) : univ ? "Tuition-free path at a partner university" : "Tuition and fees at 7 partner community colleges", html: card(st, "Detroit Promise", { checks, paras, next, extra: table, cites: ["Promise: am I eligible", "Promise: community college", "Promise: universities", "Promise: what it covers", "Promise: verification", "Detroit Promise", "WCCCD residency"] }) };
+  }
+
+  function run() {
+    const a = read();
+    document.getElementById("hs-when").hidden = a.hs === "none";
+    document.getElementById("l-hsm").textContent = a.hs === "still" ? "Month you expect to finish" : "Month you finished";
+    document.getElementById("l-hsy").textContent = a.hs === "still" ? "Year you expect to finish" : "Year you finished";
+    document.getElementById("sai-wrap").hidden = !(a.sch === "univ" || a.sch === "unsure");
+    document.getElementById("gpa-wrap").hidden = !(a.sch === "univ" && a.det !== "no");
+
+    const progs = [reconnect(a), achievement(a), tip(a), promise(a)];
+    const rank = { help: 0, yes: 1, maybe: 2, no: 3 };
+    progs.sort((x, y) => rank[x.st] - rank[y.st]);
+
+    const c = [];
+    const sum = progs.map(p => `<li><span class="tag ${p.st}">${LABEL[p.st]}</span><span><a href="#p-${p.key}">${esc(p.name)}</a><span class="small">${esc(p.line)}</span></span></li>`).join("");
+    const good = progs.filter(p => p.st === "yes" || p.st === "help").length;
+    c.push(`<article class="card info"><div class="top"><h3>${good ? `${good} likely, based on your answers` : progs.some(p => p.st === "maybe") ? "Some maybes, based on your answers" : "Nothing likely right now"}</h3><span class="tag info">Summary</span></div><ul class="sum">${sum}</ul><p class="small">These programs stack. Pell and TIP pay first, then the state programs and the Detroit Promise cover what's left of tuition and required fees. Your college's financial aid office does the math.</p></article>`);
+
+    // The gap between the Achievement Scholarship window and Reconnect's age.
+    const by = k => progs.find(p => p.key === k);
+    if (by("mas").st === "no" && by("reconnect").st === "no" && a.age !== null && a.age < DATA.reconnect.minAge && hasHS(a) && a.deg === "none" && a.res !== "no") {
+      c.push(card("info", `Under ${DATA.reconnect.minAge} and past the high school window`, { paras: [
+        `Michigan's two big tuition-free programs leave a gap: the Achievement Scholarship is for people who start college within 15 months of finishing high school (${DATA.mas.firstClass} or later), and Reconnect starts at ${DATA.reconnect.minAge}. If you're in between, file the FAFSA anyway. A federal Pell Grant doesn't have to be paid back, and the financial aid office can tell you about the college's own scholarships.`,
+        `Reconnect opens to you when you turn ${DATA.reconnect.minAge}, as long as the state keeps the lower age.${by("promise").st !== "no" ? " If you went to high school in Detroit, the Detroit Promise card below may still fit." : ""}`],
+        cites: ["Reconnect: about", "Community College Guarantee"] }));
+    }
+    progs.forEach(p => c.push(p.html.replace('<article class="card', `<article id="p-${p.key}" class="card`)));
+    document.getElementById("r").innerHTML = c.join("");
+  }
+
+  const f = document.getElementById("f");
+  f.addEventListener("input", run); f.addEventListener("change", run); f.addEventListener("submit", e => e.preventDefault());
+  run();
+})();
+</script>
+</body>
+</html>
