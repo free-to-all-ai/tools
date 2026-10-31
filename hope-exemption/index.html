@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Detroit HOPE Tax Exemption Check</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Detroit homeowner with low income? Enter your household size, income, and savings to see whether you likely qualify for a full or partial HOPE property tax exemption under the city's 2026 table, and how to apply by the deadline. Information, not advice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. A deadline banner, the household questions, a stack of result cards (each with its source chips), the document checklist, then where to get free help. */
+:root {
+  --bg: #f8f6f3;
+  --surface: #ffffff;
+  --fg: #1d1a17;
+  --muted: #5a524b;
+  --line: #ddd5cc;
+  --accent: #8a3a12;      /* Detroit brick */
+  --accent-soft: #f6e8df;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #171310; --surface: #211b17; --fg: #efe8e2; --muted: #b7aba0; --line: #3a312a;
+    --accent: #f0a274; --accent-soft: #3a2519;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #171310; --surface: #211b17; --fg: #efe8e2; --muted: #b7aba0; --line: #3a312a;
+  --accent: #f0a274; --accent-soft: #3a2519;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.due {
+  border: 2px solid var(--help); background: var(--help-bg); border-radius: 12px; padding: 14px 16px;
+  display: grid; gap: 4px;
+}
+.due strong { font-family: var(--f-display); font-size: 20px; font-weight: 600; color: var(--help); }
+.due.closed { border-color: var(--line); background: var(--surface); }
+.due.closed strong { color: var(--fg); }
+.panel { display: grid; gap: 18px; }
+form.q {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 16px;
+}
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="text"], input[type="number"] {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px;
+}
+.money { position: relative; max-width: 320px; }
+.money::before { content: "$"; position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.money input { padding-left: 24px; }
+.opts { display: grid; gap: 6px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.opts input { margin-top: 5px; accent-color: var(--accent); }
+.hint { font-size: 14px; color: var(--muted); }
+details.adder { border: 1px dashed var(--line); border-radius: 10px; padding: 10px 14px; }
+details.adder summary { cursor: pointer; color: var(--accent); font-weight: 700; font-size: 15px; }
+.adder-body { display: grid; gap: 10px; margin-top: 12px; }
+.adder-row { display: grid; grid-template-columns: 1fr minmax(110px, 150px); gap: 10px; align-items: center; font-size: 15px; }
+.adder-row .money { max-width: none; }
+.adder-foot { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; }
+.inline-opts { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 15px; }
+.inline-opts label { display: flex; gap: 6px; align-items: center; }
+.inline-opts input { accent-color: var(--accent); }
+.inline-opts .hint { flex-basis: 100%; }
+.results { display: grid; gap: 12px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line); min-width: 0;
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.card ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.small { font-size: 15px; color: var(--muted); }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+table.lim { border-collapse: collapse; width: 100%; font-size: 15px; }
+table.lim th, table.lim td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.lim th { font-weight: 700; font-size: 14px; color: var(--muted); }
+table.lim td.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.lim tr.you td { background: var(--accent-soft); font-weight: 700; }
+table.lim tr.you td:first-child { box-shadow: inset 4px 0 0 var(--accent); }
+.docs { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 12px; }
+.docs ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.docs li label { display: flex; gap: 10px; align-items: flex-start; }
+.docs li input { margin-top: 5px; accent-color: var(--accent); flex: none; }
+.gethelp { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 10px 16px;
+  background: var(--accent); color: var(--bg); border: 0;
+}
+.btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.btn.sm { padding: 6px 12px; font-size: 15px; }
+.btn:hover { filter: brightness(1.08); }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Detroit · property tax · free</span>
+    <h1>Detroit HOPE Tax Exemption Check</h1>
+    <p class="lede">HOPE, the Homeowners Property Exemption, can lower or wipe out property taxes for Detroit homeowners with low income. The city says HOPE, together with Wayne County's PAYS program, has helped thousands of Detroit owners avoid tax foreclosure. Answer a few questions to see whether you likely qualify under the city's <span class="yr">2026</span> table and what to do before the deadline.</p>
+    <div class="due" id="due" role="status"></div>
+    <div class="notice">
+      <strong>This is information, not legal or tax advice.</strong>
+      <span>Only Detroit's Board of Review decides who gets HOPE. If you're close to a limit, apply and let the Board decide. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section class="panel" aria-labelledby="h-q">
+    <h2 id="h-q">1. Your home and household</h2>
+    <form class="q" id="f" novalidate>
+      <p class="sample">Sample answers are filled in so you can see how it works. Change them to yours.</p>
+      <div class="field"><span class="lbl" id="l-where">Where is the home?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-where">
+          <label><input type="radio" name="where" value="det" checked> In the City of Detroit</label>
+          <label><input type="radio" name="where" value="hh"> In Hamtramck or Highland Park</label>
+          <label><input type="radio" name="where" value="mi"> Somewhere else in Michigan</label>
+        </div></div>
+      <div class="field"><span class="lbl" id="l-own">Do you own the home and live in it?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-own">
+          <label><input type="radio" name="own" value="yes" checked> Yes, I own it and it's my main home</label>
+          <label><input type="radio" name="own" value="lc"> I'm buying it on a land contract and live there</label>
+          <label><input type="radio" name="own" value="title"> I live there, but the deed is in someone else's name (like a relative who passed away)</label>
+          <label><input type="radio" name="own" value="away"> I own it, but I don't live there</label>
+          <label><input type="radio" name="own" value="rent"> I rent</label>
+        </div></div>
+      <div class="row2">
+        <div class="field"><label for="n">People living in the home</label><input id="n" type="number" inputmode="numeric" min="1" max="30" step="1" value="2">
+          <span class="hint">Count everyone who lives there, related or not, including children.</span></div>
+        <div class="field"><label for="inc">Household income for a year</label><div class="money"><input id="inc" type="text" inputmode="decimal" autocomplete="off" value="25,000"></div>
+          <span class="hint">Everyone's income added up, before taxes. That includes Social Security, SSI, child support, pensions, unemployment, and regular help from family.</span></div>
+      </div>
+      <details class="adder" id="adder">
+        <summary>Need help adding it up?</summary>
+        <div class="adder-body">
+          <div class="inline-opts" role="radiogroup" aria-label="Amounts are">
+            <span class="hint">These amounts are:</span>
+            <label><input type="radio" name="per" value="12" checked> per month</label>
+            <label><input type="radio" name="per" value="1"> per year</label>
+          </div>
+          <div id="adder-rows"></div>
+          <div class="adder-foot"><span id="adder-total" class="hint">Total for a year: $0</span><button class="btn sm" type="button" id="adder-use">Use this total</button></div>
+          <span class="hint">Add up everyone in the home, kids included. The city asks for proof of each one.</span>
+        </div>
+      </details>
+      <div class="field"><label for="ast">Savings and other assets, for everyone in the home</label><div class="money"><input id="ast" type="text" inputmode="decimal" autocomplete="off" value="1,500"></div>
+        <span class="hint">The city counts bank accounts, other real estate, boats, campers, stocks, bonds, and IRAs. Don't count the home you live in.</span></div>
+      <div class="field"><span class="lbl" id="l-ten">Is either of these true?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-ten">
+          <label><input type="radio" name="ten" value="no" checked> No</label>
+          <label><input type="radio" name="ten" value="fc"> The home is facing tax foreclosure</label>
+          <label><input type="radio" name="ten" value="drop"> Our household income dropped by 20% or more from last year</label>
+          <label><input type="radio" name="ten" value="unsure"> Not sure</label>
+        </div>
+        <span class="hint">This only matters for Detroit's smallest exemption (10%). If you've gotten a foreclosure notice or owe property taxes from past years, pick "Not sure" and ask a free HOPE helper.</span></div>
+    </form>
+    <div class="results" id="r" aria-live="polite"></div>
+    <div class="btns" id="ics-wrap"><button class="btn ghost" type="button" id="ics">Add the deadline to my calendar</button><span class="hint">Downloads a calendar file. Nothing is sent anywhere.</span></div>
+  </section>
+
+  <section class="docs" aria-labelledby="h-docs">
+    <h2 id="h-docs">2. What to gather</h2>
+    <p class="small">The city's list for the <span class="yr">2026</span> application. Check things off as you find them. Nothing is saved.</p>
+    <ul>
+      <li><label><input type="checkbox"> <span><strong>The application.</strong> Detroit's packet includes the state's Form 5737 (Application for MCL 211.7u Poverty Exemption) and Form 5739 (Affirmation of Ownership and Occupancy).</span></label></li>
+      <li><label><input type="checkbox"> <span><strong>Recorded proof you own the home:</strong> a deed, land contract, probate court order, divorce judgment, or similar.</span></label></li>
+      <li><label><input type="checkbox"> <span><strong>Photo ID with your address</strong> for the owner and every resident over 18.</span></label></li>
+      <li><label><input type="checkbox"> <span><strong>Proof of income for everyone in the home, kids included:</strong> W-2s, pay stubs, Social Security or SSI letters, pension statements, child support records, self-employment records, or a signed, notarized letter from anyone who helps you pay bills.</span></label></li>
+      <li><label><input type="checkbox"> <span><strong><span class="yrprev">2025</span> federal and state tax returns</strong> for every adult who filed, with any Homestead Property Tax Credit and Home Heating Credit forms. Adults who didn't file use the state's Form 4988 (Poverty Exemption Affidavit) plus W-2s, Social Security statements, or other proof of last year's income.</span></label></li>
+      <li><label><input type="checkbox"> <span><strong>Proof that children live with you,</strong> like a state benefits statement, report card, school transcript, or a tax return that lists them.</span></label></li>
+    </ul>
+    <div class="cites"><a class="cite" href="https://detroitmi.gov/hope" target="_blank" rel="noopener">Detroit HOPE page</a><a class="cite" id="app-cite" href="#" target="_blank" rel="noopener">2026 HOPE application</a></div>
+  </section>
+
+  <section class="gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Free help applying</h2>
+    <ul>
+      <li><strong>Book a free HOPE appointment</strong> with the "Schedule a HOPE appointment" button on the <a href="https://detroitmi.gov/hope" target="_blank" rel="noopener">city's HOPE page</a>, or at <a href="https://detroithope.timetap.com/" target="_blank" rel="noopener">detroithope.timetap.com</a>. The same page lists community groups that help (the HOPE Directory).</li>
+      <li><strong>Questions about the application:</strong> call <a href="tel:+13136280722">313-628-0722</a>, or go to the Coleman A. Young Municipal Center, 2 Woodward Ave., Suite 105, Detroit. Both are printed on the city's application.</li>
+      <li><strong>Behind on property taxes:</strong> the Wayne County Treasurer is at <a href="tel:+13132245990">(313) 224-5990</a>. The Detroit Tax Relief Fund is at <a href="tel:+18663132520">(866) 313-2520</a>.</li>
+      <li><strong>Disabled veterans</strong> may qualify for a separate exemption. Detroit's <a href="https://detroitmi.gov/node/80326" target="_blank" rel="noopener">Board of Review page</a> covers it.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> The income table, the $12,000 asset limit, the deadline, and the document list come from the City of Detroit's HOPE page and its <span class="yr">2026</span> HOPE application. The rules behind them are in MCL 211.7u, Michigan's poverty exemption law (last amended by 2023 PA 191). All were checked against the official sources on <span id="checked">October 31, 2026</span>.</p>
+    <p>Income limits are yearly totals for everyone in the home. Income equal to a limit counts as under it, because the city's table lists maximum incomes. The city's asset list says "other real property," so the home you live in isn't counted. It doesn't say whether cars count, so this page doesn't ask about them.</p>
+    <p id="diff-note" hidden></p>
+    <p>Green cards are what the rules say directly. Amber cards depend on your facts. Red cards mean act now. Every Michigan city and township has its own poverty exemption table, so this page only checks Detroit's. To update it for a new year or another city, swap the one data block at the top of its script.</p>
+    <p>This page doesn't cover the disabled veterans exemption, assessment appeals, or the <span class="yrprev">2025</span> income table. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  /* ===== YEARLY UPDATE: change only this block. =====
+     Detroit posts a new income table and deadline each year at detroitmi.gov/hope and in the
+     printed application. Copy the new numbers in here, change the dates, and update the
+     application link. Every Michigan city and township publishes its own table under
+     MCL 211.7u(4), so another city can reuse this page by swapping this block. */
+  const HOPE = {
+    city: "Detroit",
+    year: 2026,
+    deadline: "2026-11-06T16:30:00-05:00",   // 4:30 p.m. Detroit time (clocks fall back Nov 1, 2026)
+    deadlineText: "4:30 p.m., Friday, November 6, 2026",
+    board: "the December Board of Review, which starts December 15, 2026",
+    checked: "October 31, 2026",
+    application: "https://detroitmi.gov/sites/detroitmi.localhost/files/forms/2026-01/2026%20HOPE%20Application%2026CY%20USEA_0.pdf",
+    assetLimit: 12000,
+    tiers: [100, 75, 50, 25, 10],            // the 10% tier needs tax foreclosure or a 20% income drop
+    limits: {                                 // maximum yearly household income for each tier
+      1: [21597, 23162, 24884, 28014, 42114],
+      2: [26015, 27707, 29187, 32148, 50729],
+      3: [28782, 30381, 31980, 34912, 56125],
+      4: [33436, 35044, 36651, 39866, 65200],
+      5: [37650, 39533, 41039, 44051, 73418],
+      6: [43150, 44876, 46602, 49623, 84143],
+      7: [48650, 50596, 52056, 54875, 94868],
+      8: [54150, 55775, 57399, 60648, 105593]
+    },
+    perExtra: [5500, 5665, 5830, 6160, 10725],   // add for each person above 8
+    // Cells where the printed application differs from the web page (the table above uses the web page).
+    formDiffers: [{ size: 7, tier: 25, form: 54975 }],
+    // Detroit City Council let people who got no 2025 decision file a new 2025 application by the same deadline.
+    late: { year: 2025 }
+  };
+  /* ===== end of yearly data ===== */
+
+  const DAY = 86400000;
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const usd = n => "$" + Math.round(n).toLocaleString("en-US");
+  const num = v => { const x = parseFloat(String(v).replace(/[^0-9.]/g, "")); return isFinite(x) ? x : null; };
+  const val = name => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; };
+  const LABEL = { law: "The rule says", facts: "Depends on your facts", help: "Act now" };
+  const SRC = {
+    "Detroit HOPE page": "https://detroitmi.gov/hope",
+    [`${HOPE.year} HOPE application`]: HOPE.application,
+    "MCL 211.7u": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-211-7u",
+    "Detroit PAYS page": "https://detroitmi.gov/PAYS",
+    "City and county PAYS announcement": "https://detroitmi.gov/index%2Ephp/news/mayor-sheffield-and-wayne-county-treasurer-eric-sabree-announce-resumption-foreclosure-prevention",
+    "Board of Review page": "https://detroitmi.gov/node/80326"
+  };
+  const APP = `${HOPE.year} HOPE application`;
+  document.querySelectorAll(".yr").forEach(e => e.textContent = HOPE.year);
+  document.querySelectorAll(".yrprev").forEach(e => e.textContent = HOPE.year - 1);
+  document.getElementById("checked").textContent = HOPE.checked;
+  const appCite = document.getElementById("app-cite");
+  appCite.href = HOPE.application; appCite.textContent = APP;
+
+  function card(level, title, paras, cites = [], next = "") {
+    const c = cites.map(([k, p]) => `<a class="cite" href="${SRC[k]}" target="_blank" rel="noopener">${esc(k + (p ? " " + p : ""))}</a>`).join("");
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${LABEL[level]}</span></div>
+      ${[].concat(paras).filter(Boolean).map((t, i) => t.startsWith("<") ? t : `<p${i ? ' class="small"' : ""}>${t}</p>`).join("")}
+      ${next ? `<p class="next"><strong>What you can do:</strong> ${next}</p>` : ""}
+      ${c ? `<div class="cites">${c}</div>` : ""}
+    </article>`;
+  }
+
+  // Deadline, counted in Detroit's time zone whatever the device is set to.
+  const DUE = new Date(HOPE.deadline);
+  const dueDay = HOPE.deadline.slice(0, 10);
+  function daysLeft() {
+    const t = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Detroit", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+    const [y1, m1, d1] = t.split("-").map(Number), [y2, m2, d2] = dueDay.split("-").map(Number);
+    return Math.round((Date.UTC(y2, m2 - 1, d2) - Date.UTC(y1, m1 - 1, d1)) / DAY);
+  }
+  const open = () => Date.now() < DUE.getTime();
+  function dueText() {
+    const n = daysLeft();
+    if (!open()) return null;
+    if (n <= 0) return "That's today.";
+    return `That's ${n} day${n === 1 ? "" : "s"} from today.`;
+  }
+  function banner() {
+    const el = document.getElementById("due");
+    if (open()) {
+      el.className = "due";
+      el.innerHTML = `<strong>${HOPE.year} applications are due by ${HOPE.deadlineText}.</strong><span>${dueText()} Late applications aren't accepted.</span>`;
+    } else {
+      el.className = "due closed";
+      el.innerHTML = `<strong>The ${HOPE.year} deadline (${HOPE.deadlineText}) has passed.</strong><span>The limits below are the ${HOPE.year} ones. Detroit posted its ${HOPE.year} application in January ${HOPE.year}, so check the <a href="https://detroitmi.gov/hope" target="_blank" rel="noopener">city's HOPE page</a> early next year for the new table and deadline.</span>`;
+    }
+    document.getElementById("ics-wrap").hidden = !open();
+  }
+
+  const TIERNAME = t => t === 100 ? "full (100%)" : `${t}% partial`;
+  function limitsFor(n) {
+    const L = HOPE.limits, top = Math.max(...Object.keys(L).map(Number));
+    if (L[n]) return L[n];
+    return L[top].map((v, i) => v + (n - top) * HOPE.perExtra[i]);
+  }
+
+  // Income helper: monthly or yearly amounts, summed to a yearly total.
+  const SOURCES = ["Pay from work, before taxes", "Social Security, SSI, or disability", "Pension or retirement", "Unemployment",
+    "Child support or alimony", "Regular help from family or friends", "Self-employment profit", "Anything else (state cash help, scholarships)"];
+  const rows = document.getElementById("adder-rows");
+  rows.innerHTML = SOURCES.map((s, i) => `<label class="adder-row"><span>${s}</span><span class="money"><input type="text" inputmode="decimal" autocomplete="off" data-src="${i}" aria-label="${s}"></span></label>`).join("");
+  rows.style.display = "grid"; rows.style.gap = "8px";
+  function adderTotal() {
+    const per = Number(val("per") || 12);
+    let t = 0;
+    rows.querySelectorAll("input").forEach(i => { const x = num(i.value); if (x) t += x * per; });
+    document.getElementById("adder-total").textContent = `Total for a year: ${usd(t)}`;
+    return t;
+  }
+  document.getElementById("adder").addEventListener("input", adderTotal);
+  document.getElementById("adder").addEventListener("change", adderTotal);
+  document.getElementById("adder-use").addEventListener("click", () => {
+    document.getElementById("inc").value = Math.round(adderTotal()).toLocaleString("en-US");
+    run();
+    document.getElementById("r").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  function limitsTable(n, lim, inc, hit) {
+    const rowsH = HOPE.tiers.map((t, i) => `<tr${i === hit ? ' class="you"' : ""}><td>${t === 100 ? "Full (100%)" : t + "%"}${t === 10 ? "<br><span class=\"small\">Only with tax foreclosure or a 20% income drop</span>" : ""}</td><td class="num">${usd(lim[i])}</td></tr>`).join("");
+    return `<table class="lim"><thead><tr><th scope="col">Exemption</th><th scope="col">Income up to</th></tr></thead><tbody>${rowsH}</tbody></table>
+      <p class="small">Your household's income: <strong>${usd(inc)}</strong>.${n > Math.max(...Object.keys(HOPE.limits).map(Number)) ? ` For more than 8 people, the city adds a set amount per person, and these limits include that.` : ""}</p>`;
+  }
+
+  function run() {
+    banner();
+    const where = val("where"), own = val("own"), ten = val("ten");
+    const nRaw = num(document.getElementById("n").value);
+    const n = nRaw ? Math.max(1, Math.round(nRaw)) : null;
+    const inc = num(document.getElementById("inc").value);
+    const ast = num(document.getElementById("ast").value);
+    const c = [];
+
+    if (where !== "det") {
+      const hh = where === "hh";
+      c.push(card("law", hh ? "Hamtramck and Highland Park have their own exemption" : "Your city or township has its own exemption",
+        [hh ? `Hamtramck and Highland Park are separate cities inside Detroit's borders, so Detroit's HOPE table doesn't apply to them.` : `Detroit's HOPE table only covers homes in the City of Detroit.`,
+         `Every Michigan city and township has to offer a poverty exemption and publish its own guidelines, including income and asset limits. The state's rules for who can get one (own and live in the home, file with the local Board of Review, meet the income guidelines) are the same everywhere.`],
+        [["MCL 211.7u", "(2), (4)"]],
+        `Call your city or township assessor and ask for its "poverty exemption" guidelines, application, and deadline.`));
+      document.getElementById("r").innerHTML = c.join("");
+      return;
+    }
+
+    if (own === "rent" || own === "away") {
+      c.push(card("law", "HOPE is for homeowners who live in the home",
+        [`Michigan's poverty exemption only covers a home you own and live in as your main residence. ${own === "rent" ? "Renters can't apply." : "It can't lower taxes on a home you don't live in."}`],
+        [["MCL 211.7u", "(2)(a)"], ["Detroit HOPE page"]],
+        own === "rent" ? `If you rent and have a problem with your landlord, the <a href="../renter-rights/">Michigan Renter Rights Check</a> covers deposits, repairs, and eviction notices.` : ""));
+      document.getElementById("r").innerHTML = c.join("");
+      return;
+    }
+
+    if (own === "title") {
+      c.push(card("help", "You'll need recorded proof that you own the home",
+        [`The city asks for registered proof of ownership: a deed, land contract, probate court order, divorce judgment, or similar. If the deed is still in the name of someone who passed away, the city may not be able to approve HOPE until that's sorted out.`],
+        [["Detroit HOPE page"], ["MCL 211.7u", "(2)(a)"]],
+        `Book a free HOPE appointment (see "Free help applying" below) and bring every paper you have about the house. Ask about the ownership question first.`));
+    }
+
+    if (!n || inc === null) {
+      c.push(card("facts", "Enter your household size and income", [`Fill in the number of people living in the home and your household's yearly income to see where you fall on the ${HOPE.year} table.`]));
+      document.getElementById("r").innerHTML = c.join("");
+      return;
+    }
+
+    const lim = limitsFor(n);
+    let hit = HOPE.tiers.findIndex((t, i) => inc <= lim[i]);
+    const tenIdx = HOPE.tiers.indexOf(10);
+    const assetsOver = ast !== null && ast > HOPE.assetLimit;
+    const who = `A household of ${n} with ${usd(inc)} a year`;
+    const reason = { fc: "the home is facing tax foreclosure", drop: "your household income dropped 20% or more" }[ten];
+    let level = "facts", title, paras = [], next = "";
+
+    if (hit === -1) {
+      title = `Over the ${HOPE.year} limits`;
+      paras = [`${who} is over ${usd(lim[tenIdx])}, Detroit's top limit for any HOPE exemption at that household size.`,
+        `The city's application says applications outside the guidelines "will usually be denied."`];
+      next = `Check the total again. If income went down this year, or you counted something twice, the answer could change. A free HOPE helper can go over your numbers. If you're behind on taxes, the Wayne County Treasurer is at (313) 224-5990.`;
+    } else if (HOPE.tiers[hit] === 10 && ten === "no") {
+      title = "Over the regular limits";
+      paras = [`${who} is over ${usd(lim[tenIdx - 1])}, the limit for a 25% exemption. Detroit's 10% exemption goes up to ${usd(lim[tenIdx])} for your household, but only when the home is facing tax foreclosure or the household's income fell at least 20% from the year before.`];
+      next = `If either of those might be true, change your answer above to see the 10% result, and ask a free HOPE helper.`;
+      hit = -1;
+    } else if (HOPE.tiers[hit] === 10) {
+      const sure = ten !== "unsure";
+      title = sure ? "Likely a 10% exemption" : "Maybe a 10% exemption";
+      paras = [`${who} is over the 25% limit (${usd(lim[tenIdx - 1])}) but under the 10% limit (${usd(lim[tenIdx])}). ${sure ? `You said ${reason}, which is what Detroit requires for the 10% tier.` : `Detroit grants the 10% tier only when the home is facing tax foreclosure or the household's income fell at least 20% from the year before.`}`,
+        `A 10% exemption takes 10% off the home's taxable value, so its ${HOPE.year} property taxes drop by about a tenth.`];
+      if (ten === "fc" || ten === "unsure") paras.push(`If you're approved and owe back taxes, HOPE can also open the door to the county's PAYS program (see below).`);
+    } else {
+      const t = HOPE.tiers[hit];
+      title = `Likely a ${TIERNAME(t)} exemption`;
+      paras = [hit === 0
+        ? `${who} is at or under ${usd(lim[0])}, the city's limit for a full exemption. The city says most homeowners whose income is below the guidelines are generally approved.`
+        : `${who} is over the full-exemption limit (${usd(lim[0])}) but at or under ${usd(lim[hit])}, the limit for a ${t}% exemption.`,
+        hit === 0
+        ? `A full exemption takes the home's ${HOPE.year} taxable value to zero, so you'd owe no ${HOPE.year} property taxes on it. If you've already paid them, the city mails a refund for the extra.`
+        : `A ${t}% exemption takes ${t}% off the home's taxable value, so its ${HOPE.year} property taxes drop by about that share.`];
+      if (hit > 0 && inc - lim[hit - 1] <= 500) paras.push(`You're only ${usd(inc - lim[hit - 1])} over the ${TIERNAME(HOPE.tiers[hit - 1])} limit. Small differences in what counts as income can change the tier, so let the Board decide.`);
+    }
+    if (hit !== -1 && lim[hit] - inc <= 500) paras.push(`You're within ${usd(lim[hit] - inc)} of the top of this tier. If your total is a little off, the result could change.`);
+
+    // Flag incomes between the web page figure and a different figure printed on the application.
+    HOPE.formDiffers.forEach(d => {
+      const i = HOPE.tiers.indexOf(d.tier);
+      if (d.size !== n || i < 0) return;
+      const page = HOPE.limits[d.size][i], lo = Math.min(page, d.form), hi = Math.max(page, d.form);
+      if (inc > lo && inc <= hi) paras.push(`Heads up: you're right where the city's own documents disagree. For a household of ${n}, its web page lists ${usd(page)} as the ${d.tier}% limit and its printed application lists ${usd(d.form)}. This page uses the web page figure. Apply either way and let the Board decide.`);
+    });
+
+    if (assetsOver) {
+      level = "help";
+      title = `Assets look over the ${usd(HOPE.assetLimit)} limit`;
+      paras = [`Detroit's rule is that total household assets "SHALL NOT exceed ${usd(HOPE.assetLimit)}.00." You entered ${usd(ast)}.${hit !== -1 ? ` On income alone you'd fall in the ${TIERNAME(HOPE.tiers[hit])} tier.` : ""}`,
+        `The city counts bank accounts, other real estate, boats, campers, stocks, bonds, and IRAs. Its list doesn't include the home you live in, and it doesn't mention cars. The city says information you leave off that the Board finds may get the application denied.`];
+      next = `Make sure you only counted what's on the city's list. If you're still over, a free HOPE helper can tell you whether anything else can help.`;
+    } else if (ast === null) {
+      paras.push(`You didn't enter assets. The city's limit is ${usd(HOPE.assetLimit)} for everyone in the home combined.`);
+    }
+
+    c.push(card(level, title, paras, [["Detroit HOPE page"], [APP], ["MCL 211.7u", "(5)"]], next));
+    c.push(card("law", `${HOPE.year} limits for a household of ${n}`, [limitsTable(n, lim, inc, hit)], [["Detroit HOPE page"], [APP]]));
+
+    if (open()) {
+      c.push(card("help", `Apply by ${HOPE.deadlineText}`,
+        [`${dueText()} Applications that come in after 4:30 p.m. that day won't be accepted.`,
+         `<ul>
+            <li><strong>Online (fastest):</strong> on the <a href="https://detroitmi.gov/hope" target="_blank" rel="noopener">city's HOPE page</a>, use the ${HOPE.year} E-HOPE application. It only counts once your documents are uploaded and you've hit submit.</li>
+            <li><strong>In person:</strong> Coleman A. Young Municipal Center, 2 Woodward Ave., Suite 804, Detroit, MI 48226. Free help is in Suite 105.</li>
+            <li><strong>By mail:</strong> to the same Suite 804 address. ${daysLeft() <= 14 ? "It has to arrive by the deadline, and the city doesn't say a postmark counts, so mail is risky this close." : "The city suggests filing at least two weeks before the deadline."}</li>
+          </ul>`],
+        [["Detroit HOPE page"], [APP]],
+        `Gather the papers in "What to gather" below. If you can't find something, a free HOPE helper can tell you what else the city takes.`));
+    }
+
+    c.push(card("law", "Only the Board of Review decides",
+      [`This page can't approve you. Detroit's Board of Review looks at each application under the city's guidelines, and it may ask for more papers or do a random home inspection. Applications filed now go to ${HOPE.board}.`,
+       `Decisions come in writing. If you're turned down, the letter says why and how to appeal. A July or December Board decision can be appealed to the Michigan Tax Tribunal within 30 days. Most people apply again every year, and the city sends a statement after the March Board to anyone who doesn't need to.`],
+      [["MCL 211.7u", "(5)"], ["Detroit HOPE page"], [APP]]));
+
+    if (HOPE.late && open()) {
+      c.push(card("facts", `Didn't apply for ${HOPE.late.year}? You may be able to now`,
+        [`Detroit City Council is accepting new ${HOPE.late.year} HOPE applications until the same deadline. It's only for people who didn't get a ${HOPE.late.year} decision. If you owe ${HOPE.late.year} taxes, it could lower them. Look for the ${HOPE.late.year} E-HOPE application on the city's HOPE page.`,
+         `The ${HOPE.late.year} application uses the ${HOPE.late.year} income table, which this page doesn't check.`],
+        [["Detroit HOPE page"]]));
+    }
+
+    c.push(card("facts", "Behind on property taxes? HOPE can open up PAYS",
+      [`If you're approved for HOPE and owe back property taxes, Wayne County's Pay As You Stay (PAYS) program can lower what you owe by taking off interest, fees, and penalties, with up to 3 years to pay at no interest. Paying the lowered amount in full can take off another 10%.`,
+       `There's no separate PAYS application. Approved HOPE homeowners get an enrollment letter from the Wayne County Treasurer, (313) 224-5990.`],
+      [["Detroit PAYS page"], ["City and county PAYS announcement"]]));
+
+    document.getElementById("r").innerHTML = c.join("");
+  }
+
+  const f = document.getElementById("f");
+  f.addEventListener("input", run); f.addEventListener("change", run); f.addEventListener("submit", e => e.preventDefault());
+
+  // The page/application difference is spelled out in the footer.
+  if (HOPE.formDiffers.length) {
+    const el = document.getElementById("diff-note");
+    el.textContent = HOPE.formDiffers.map(d => `One number differs between the city's documents: for a household of ${d.size}, the HOPE page lists ${usd(HOPE.limits[d.size][HOPE.tiers.indexOf(d.tier)])} as the ${d.tier}% limit and the printed ${HOPE.year} application lists ${usd(d.form)}. This page uses the web page figure and flags incomes in between.`).join(" ");
+    el.hidden = false;
+  }
+
+  document.getElementById("ics").addEventListener("click", () => {
+    const u = d => d.toISOString().replace(/[-:]/g, "").replace(/\.\d+Z$/, "Z");
+    const start = new Date(DUE.getTime() - 3600000);
+    const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Free to All AI//HOPE Exemption Check//EN",
+      "BEGIN:VEVENT", `UID:hope-${HOPE.year}-deadline@free-to-all-ai`, `DTSTAMP:${u(new Date())}`,
+      `DTSTART:${u(start)}`, `DTEND:${u(DUE)}`, `SUMMARY:Detroit HOPE application due by 4:30 p.m.`,
+      `DESCRIPTION:Apply online at detroitmi.gov/hope or at 2 Woodward Ave.\\, Suite 804. Late applications aren't accepted.`,
+      "BEGIN:VALARM", "TRIGGER:-P2D", "ACTION:DISPLAY", "DESCRIPTION:Detroit HOPE application due in 2 days", "END:VALARM",
+      "END:VEVENT", "END:VCALENDAR", ""].join("\r\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
+    a.download = `detroit-hope-${HOPE.year}-deadline.ics`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+
+  run();
+})();
+</script>
+</body>
+</html>
