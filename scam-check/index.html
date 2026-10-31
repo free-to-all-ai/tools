@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Is This a Scam? Red-Flag Check for Calls, Texts, and Emails</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Got a call, text, or email asking for money, gift cards, or your Medicare number? Check it against known scam red flags and see how to report it in Michigan. Free.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/scam-check/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Is This a Scam? Red-Flag Check for Calls, Texts, and Emails">
+<meta property="og:description" content="Got a call, text, or email asking for money, gift cards, or your Medicare number? Check it against known scam red flags and see how to report it in Michigan. Free.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/scam-check/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/scam-check.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one wide reading column in large type for older readers. A "hang up now" box, then a checklist of what happened, then live results (the FTC's four signs, act-now steps, warning sign cards), then who to call, then family tips and sources. */
+:root {
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --fg: #0f1720;
+  --muted: #364552;
+  --line: #c9d1d8;
+  --accent: #0a4d7a;      /* Great Lakes blue, darker for contrast */
+  --accent-soft: #e1edf6;
+  --law: #17602f;  --law-bg: #e1f1e6;
+  --facts: #7a4a00; --facts-bg: #fbefd6;
+  --help: #9a1b1b; --help-bg: #fbe2e2;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d141a; --surface: #151f28; --fg: #eef3f7; --muted: #bccad5; --line: #33444f;
+    --accent: #7cc3ee; --accent-soft: #19354a;
+    --law: #8fdcaa; --law-bg: #163322; --facts: #f3c76b; --facts-bg: #3a2d12; --help: #f5a3a3; --help-bg: #3f1c1c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d141a; --surface: #151f28; --fg: #eef3f7; --muted: #bccad5; --line: #33444f;
+  --accent: #7cc3ee; --accent-soft: #19354a;
+  --law: #8fdcaa; --law-bg: #163322; --facts: #f3c76b; --facts-bg: #3a2d12; --help: #f5a3a3; --help-bg: #3f1c1c;
+  color-scheme: dark;
+}
+html { font-size: 100%; }
+html.t1 { font-size: 112.5%; }
+html.t2 { font-size: 125%; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 1.25rem; line-height: 1.6;
+}
+.wrap {
+  max-width: 820px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 56px;
+  display: grid; gap: 32px; grid-template-columns: minmax(0, 1fr);
+}
+.wrap > *, section > * { min-width: 0; }
+h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.2; }
+h1 { font-family: var(--f-display); font-size: clamp(2.1rem, 7vw, 2.9rem); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-family: var(--f-display); font-size: 1.65rem; font-weight: 800; }
+h3 { font-family: var(--f-body); font-size: 1.3rem; font-weight: 700; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+header { display: grid; gap: 14px; }
+.eyebrow { font-family: var(--f-mono); font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.lede { max-width: 62ch; }
+.notice {
+  background: var(--accent-soft); border-radius: 12px; padding: 16px 18px; font-size: 1.1rem;
+  display: grid; gap: 6px;
+}
+.sizer { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 1.05rem; }
+.sizer button {
+  font: inherit; font-weight: 700; cursor: pointer; min-width: 52px; min-height: 48px;
+  border-radius: 10px; border: 2px solid var(--accent); background: var(--surface); color: var(--accent); padding: 4px 12px;
+}
+.sizer button[aria-pressed="true"] { background: var(--accent); color: var(--surface); }
+section { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+.hint { font-size: 1.05rem; color: var(--muted); }
+
+/* Hang up box */
+.stop {
+  background: var(--help-bg); border: 3px solid var(--help); border-radius: 14px; padding: 20px;
+  display: grid; gap: 12px;
+}
+.stop h2 { color: var(--help); }
+.stop ol { margin: 0; padding-left: 1.4em; display: grid; gap: 10px; }
+.stop li::marker { font-weight: 700; color: var(--help); }
+
+/* Checklist */
+fieldset {
+  margin: 0; border: 1px solid var(--line); border-radius: 14px; background: var(--surface);
+  padding: 18px 18px 10px; display: grid; gap: 4px; min-width: 0;
+}
+legend { font-weight: 700; font-size: 1.3rem; padding: 0 6px; }
+.opt {
+  display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 14px; align-items: start;
+  padding: 12px 8px; border-radius: 10px; cursor: pointer; border-bottom: 1px solid var(--line);
+}
+.opt:last-child { border-bottom: 0; }
+.opt:hover { background: var(--accent-soft); }
+.opt input {
+  width: 30px; height: 30px; margin: 2px 0 0; accent-color: var(--accent); cursor: pointer;
+}
+.opt.on { background: var(--accent-soft); }
+.groups { display: grid; gap: 18px; }
+button.btn {
+  font: inherit; font-size: 1.15rem; font-weight: 700; cursor: pointer; min-height: 52px;
+  border-radius: 10px; padding: 10px 18px; border: 2px solid var(--accent);
+  background: var(--accent); color: var(--surface);
+}
+button.btn.ghost { background: transparent; color: var(--accent); }
+button.btn:hover { filter: brightness(1.08); }
+.btns { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.copied { font-size: 1.05rem; color: var(--law); font-weight: 700; }
+
+/* Results */
+.summary {
+  background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--accent);
+  border-radius: 14px; padding: 20px; display: grid; gap: 12px;
+}
+.summary.warn { border-left-color: var(--facts); }
+.big { font-family: var(--f-display); font-weight: 800; font-size: clamp(2.2rem, 9vw, 3rem); line-height: 1; }
+.alarm {
+  background: var(--help-bg); color: var(--fg); border: 2px solid var(--help); border-radius: 12px; padding: 14px 16px;
+  font-weight: 700;
+}
+.four { display: grid; gap: 8px; }
+.four h3 { font-size: 1.15rem; }
+.sign {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: center;
+  border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px;
+}
+.sign .what { font-weight: 700; }
+.sign .ex { grid-column: 1 / -1; font-size: 1.05rem; color: var(--muted); }
+.sign .st { font-family: var(--f-mono); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 4px 10px; border-radius: 999px; white-space: nowrap; color: var(--muted); border: 1px solid var(--line); }
+.sign.hit { border-color: var(--facts); background: var(--facts-bg); }
+.sign.hit .st { color: var(--facts); border-color: var(--facts); font-weight: 700; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px; font-size: 1rem; }
+.results { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+.results > * { min-width: 0; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px 20px; display: grid; gap: 10px; border-left: 6px solid var(--line);
+}
+.card.warn { border-left-color: var(--facts); }
+.card.act { border-left-color: var(--help); }
+.card.info { border-left-color: var(--law); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; }
+.tag { font-family: var(--f-mono); font-size: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; font-weight: 700; overflow-wrap: anywhere; }
+.tag.warn { color: var(--facts); background: var(--facts-bg); }
+.tag.act { color: var(--help); background: var(--help-bg); }
+.tag.info { color: var(--law); background: var(--law-bg); }
+.card .do { border-top: 1px dashed var(--line); padding-top: 10px; }
+.card .do strong { color: var(--fg); }
+.card ol, .card ul { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; }
+.cites { display: flex; flex-wrap: wrap; gap: 8px; }
+.cite {
+  font-family: var(--f-mono); font-size: 0.85rem; text-decoration: none; line-height: 1.4;
+  border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.tel { font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* Who to call */
+.calls { display: grid; gap: 14px; counter-reset: call; }
+.call {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px;
+  display: grid; gap: 8px; grid-template-columns: 44px minmax(0, 1fr); column-gap: 14px;
+}
+.call > * { grid-column: 2; }
+.call::before {
+  counter-increment: call; content: counter(call);
+  grid-column: 1; grid-row: 1 / span 4; align-self: start;
+  width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--accent); color: var(--surface); font-family: var(--f-display); font-weight: 800; font-size: 1.3rem;
+}
+.call .num { font-size: 1.45rem; font-weight: 700; }
+.call .num a { text-decoration: none; }
+.call .num a:hover { text-decoration: underline; }
+.call.side { border-style: dashed; }
+.call.side::before { content: "+"; background: var(--law); }
+.box { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: grid; gap: 10px; }
+.box ul, .box ol { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.facts div { display: grid; gap: 2px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+.facts .v { font-family: var(--f-display); font-weight: 800; font-size: 1.9rem; line-height: 1.1; }
+.facts .k { font-size: 1.02rem; color: var(--muted); }
+footer { font-size: 1.05rem; color: var(--muted); display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 20px; }
+footer ul { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
+@media (max-width: 560px) {
+  body { font-size: 1.2rem; }
+  .call { grid-template-columns: 36px minmax(0, 1fr); padding: 16px; }
+  .call::before { width: 36px; height: 36px; font-size: 1.1rem; }
+  fieldset { padding: 14px 10px 6px; }
+  .opt { grid-template-columns: 30px minmax(0, 1fr); gap: 12px; padding: 12px 4px; }
+  .opt input { width: 28px; height: 28px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+@media print {
+  html, html.t1, html.t2 { font-size: 90%; }
+  body { background: #fff; color: #000; }
+  .noprint, .sizer, .notice { display: none !important; }
+  .opt:not(.on) { display: none; }
+  .wrap { padding: 0; gap: 16px; }
+  .card, .call, .box, .summary, fieldset, .sign { break-inside: avoid; border-color: #999; }
+  a { color: #000; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Michigan · older adults and families · free</span>
+    <h1>Is this a scam? Check the warning signs.</h1>
+    <p class="lede">Got a call, text, email, or pop-up that feels wrong? Worried your mom, dad, or a neighbor is being scammed? Check off what happened. You'll see which warning signs from the FTC and the FBI it matches, what to do right away, and who to call in Michigan.</p>
+    <div class="notice">
+      <strong>This is information, not legal advice.</strong>
+      <span>A warning sign is not proof of a scam, and having no warning signs doesn't prove something is safe. When in doubt, stop and check with someone you trust. Nothing you check here leaves this page or gets saved.</span>
+    </div>
+    <div class="sizer noprint" role="group" aria-label="Text size">
+      <span>Text size:</span>
+      <button type="button" data-size="0" aria-pressed="true">A</button>
+      <button type="button" data-size="1" aria-pressed="false" style="font-size:1.15em">A+</button>
+      <button type="button" data-size="2" aria-pressed="false" style="font-size:1.3em">A++</button>
+    </div>
+  </header>
+
+  <section class="stop" aria-labelledby="stop-h">
+    <h2 id="stop-h">On the phone with them right now?</h2>
+    <ol>
+      <li><strong>Hang up.</strong> That's OK to do. A real bank, government office, or family member will understand.</li>
+      <li><strong>Don't send money,</strong> read out gift card numbers, or let anyone into your computer.</li>
+      <li><strong>Call back at a number you already know is real:</strong> the back of your bank card, a paper bill, or your family member's own phone number. Don't use a number the caller gave you.</li>
+      <li>If you feel unsafe, or someone is on the way to pick up cash or gold, <strong>call 911 or your local police.</strong></li>
+    </ol>
+    <div class="cites">
+      <a class="cite" href="https://consumer.ftc.gov/articles/how-avoid-scam" target="_blank" rel="noopener">FTC: How To Avoid a Scam</a>
+      <a class="cite" href="https://www.ic3.gov/PSA/2026/PSA260917" target="_blank" rel="noopener">FBI alert, Sept. 17, 2026</a>
+      <a class="cite" href="https://www.ic3.gov/" target="_blank" rel="noopener">FBI IC3</a>
+    </div>
+  </section>
+
+  <section aria-labelledby="what-h">
+    <h2 id="what-h">1. Check off what happened</h2>
+    <p class="hint">Check everything that fits. Your results show up further down as you go.</p>
+    <div class="groups" id="groups"></div>
+  </section>
+
+  <section aria-labelledby="did-h">
+    <h2 id="did-h">2. Did any of this already happen?</h2>
+    <p class="hint">Check what you already did. You'll get steps for each one. Calling fast gives you the best chance to stop the money.</p>
+    <div class="groups" id="did-groups"></div>
+    <div class="btns noprint">
+      <button class="btn" type="button" id="jump">See what this matches</button>
+      <button class="btn ghost" type="button" id="clear">Start over</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="res-h" id="results-sec">
+    <h2 id="res-h">3. What this matches</h2>
+    <div id="summary" aria-live="polite"></div>
+    <div class="results" id="act-cards"></div>
+    <div class="legend" id="legend" hidden>
+      <span class="tag act">Act now</span>
+      <span class="tag warn">Warning sign</span>
+      <span class="tag info">How to check</span>
+    </div>
+    <div class="results" id="cards"></div>
+    <div class="btns noprint" id="out-btns" hidden>
+      <button class="btn" type="button" id="copy">Copy a list for your report</button>
+      <button class="btn ghost" type="button" id="print">Print or save as PDF</button>
+      <span class="copied" id="copied" role="status"></span>
+    </div>
+  </section>
+
+  <section aria-labelledby="call-h">
+    <h2 id="call-h">4. Who to call in Michigan</h2>
+    <p class="hint">If money left your account, start at the top. Reporting helps even if the money is gone: it helps catch the people doing this.</p>
+    <div class="calls">
+      <div class="call">
+        <h3>Your bank or credit union</h3>
+        <p class="num">Use the number on the back of your card</p>
+        <p>Call first if any money left your account. Ask them to stop or reverse the payment and protect your accounts. For a wire, ask for a "recall" and a "hold harmless letter." The FBI says doing this fast may cut or erase your loss.</p>
+        <div class="cites"><a class="cite" href="https://www.ic3.gov/CrimeInfo/ElderFraud" target="_blank" rel="noopener">FBI IC3: Elder Fraud</a></div>
+      </div>
+      <div class="call">
+        <h3>Federal Trade Commission (FTC)</h3>
+        <p class="num"><a href="https://reportfraud.ftc.gov/" target="_blank" rel="noopener">ReportFraud.ftc.gov</a> or <a class="tel" href="tel:+18773824357">1-877-382-4357</a></p>
+        <p>Report a scam or a scam call, even if you didn't lose money. The phone line is 1-877-FTC-HELP. The website works in English, Spanish (<a href="https://reportefraude.ftc.gov/" target="_blank" rel="noopener">ReporteFraude.ftc.gov</a>), and a dozen other languages. The FTC shares reports with over 2,000 law enforcers. It can't solve your single case, but it uses reports to bring cases.</p>
+        <div class="cites"><a class="cite" href="https://reportfraud.ftc.gov/" target="_blank" rel="noopener">ReportFraud.ftc.gov</a><a class="cite" href="https://www.ftc.gov/about-ftc/contact" target="_blank" rel="noopener">FTC: Contact</a></div>
+      </div>
+      <div class="call">
+        <h3>FBI Internet Crime Complaint Center (IC3)</h3>
+        <p class="num"><a href="https://www.ic3.gov/" target="_blank" rel="noopener">ic3.gov</a> (online form)</p>
+        <p>The FBI's place to report scams by phone, text, email, or online, and anything with crypto. The FBI says to file "even if you are unsure of whether your complaint qualifies." Put in every payment detail. The IC3 will never call you first or ask you for money.</p>
+        <p><strong>Age 60 or older? Get free help filing.</strong> The U.S. Justice Department's National Elder Fraud Hotline: <a class="tel" href="tel:+18333728311">1-833-372-8311</a> (1-833-FRAUD-11), Monday to Friday, 10 a.m. to 6 p.m. Eastern. English, Spanish, and other languages. A family member can call for you, and the case manager can help fill out the IC3 and FTC forms.</p>
+        <div class="cites"><a class="cite" href="https://www.ic3.gov/" target="_blank" rel="noopener">IC3 home page</a><a class="cite" href="https://ovc.ojp.gov/program/stop-elder-fraud/providing-help-restoring-hope" target="_blank" rel="noopener">DOJ: Elder Fraud Hotline</a><a class="cite" href="https://ovc.ojp.gov/program/stop-elder-fraud/faqs" target="_blank" rel="noopener">Hotline FAQ</a></div>
+      </div>
+      <div class="call">
+        <h3>Michigan Attorney General, Consumer Protection</h3>
+        <p class="num"><a class="tel" href="tel:+18777658388">877-765-8388</a> (Michigan callers)</p>
+        <p>Report a scam to the Michigan Attorney General by phone or with the <a href="https://secure.ag.state.mi.us/complaints/consumer.aspx" target="_blank" rel="noopener">online consumer complaint form</a>. You can also call 517-335-7599. If the Attorney General doesn't handle your kind of complaint, it sends it to the agency that does.</p>
+        <div class="cites"><a class="cite" href="https://www.michigan.gov/ag/complaints" target="_blank" rel="noopener">Michigan AG: File a Complaint</a></div>
+      </div>
+      <div class="call">
+        <h3>Your local police</h3>
+        <p class="num">Non-emergency line, or 911 if you're in danger</p>
+        <p>Make a police report, especially if you handed cash or gold to someone, used a crypto ATM, or the scammer knows where you live.</p>
+        <div class="cites"><a class="cite" href="https://www.ic3.gov/PSA/2026/PSA260515-2" target="_blank" rel="noopener">FBI alert, May 15, 2026</a><a class="cite" href="https://www.ic3.gov/PSA/2026/PSA260917" target="_blank" rel="noopener">FBI alert, Sept. 17, 2026</a></div>
+      </div>
+      <div class="call side" id="aps">
+        <h3>If someone you know is taking the money: Michigan elder abuse hotline</h3>
+        <p class="num">Adult Protective Services: <a class="tel" href="tel:+18554443911">855-444-3911</a></p>
+        <p>For financial abuse by a relative, caregiver, or "new friend." Call any time, day or night. Staff look into reports within 24 hours. You can also use the Attorney General's <a href="https://secure.ag.state.mi.us/complaints/patient-abuse.aspx" target="_blank" rel="noopener">Elder Abuse and Fraud complaint form</a> (questions: 517-335-7560).</p>
+        <div class="cites"><a class="cite" href="https://www.michigan.gov/mdhhs/adult-child-serv/abuse-neglect/adult-ps" target="_blank" rel="noopener">MDHHS: Adult Protective Services</a><a class="cite" href="https://www.michigan.gov/ag/initiatives/elder-abuse" target="_blank" rel="noopener">Michigan AG: Elder Abuse</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="note-h">
+    <h2 id="note-h">What to write down for your report</h2>
+    <div class="box">
+      <ul>
+        <li>The date and time of each call, text, email, or visit.</li>
+        <li>Every phone number, email address, website, app, and name they used.</li>
+        <li>Each payment: the date, the amount, and how you paid. For a bank or wire, the account it went to. For crypto, the transaction ID, the wallet address, and where the crypto ATM is.</li>
+        <li>Keep receipts, gift cards, wire slips, and crypto ATM receipts. Take screenshots or photos of texts and messages.</li>
+      </ul>
+      <div class="cites">
+        <a class="cite" href="https://www.ic3.gov/PSA/2026/PSA260917" target="_blank" rel="noopener">FBI alert, Sept. 17, 2026</a>
+        <a class="cite" href="https://www.ic3.gov/PSA/2026/PSA260615" target="_blank" rel="noopener">FBI alert, June 15, 2026</a>
+        <a class="cite" href="https://www.ic3.gov/PSA/2026/PSA260515-2" target="_blank" rel="noopener">FBI alert, May 15, 2026</a>
+        <a class="cite" href="https://consumer.ftc.gov/articles/avoiding-and-reporting-gift-card-scams" target="_blank" rel="noopener">FTC: Gift card scams</a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="second-h">
+    <h2 id="second-h">Watch out for a second scam</h2>
+    <div class="box">
+      <p>After a scam, people often hear from someone who promises to get the money back for a fee. The FBI says the IC3 "will never directly contact you for information or money" and doesn't work with law firms or crypto services to get money back. The FBI also warns about crypto "recovery services, especially those charging an up-front fee." Scammers have even pretended to be the National Elder Fraud Hotline. If anyone contacts you about getting money back, hang up and call the real number on this page.</p>
+      <div class="cites">
+        <a class="cite" href="https://www.ic3.gov/" target="_blank" rel="noopener">FBI IC3 home page</a>
+        <a class="cite" href="https://www.ic3.gov/CrimeInfo/Cryptocurrency" target="_blank" rel="noopener">FBI IC3: Cryptocurrency</a>
+        <a class="cite" href="https://ovc.ojp.gov/program/stop-elder-fraud/providing-help-restoring-hope" target="_blank" rel="noopener">DOJ: Hotline fraud alert</a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="fam-h">
+    <h2 id="fam-h">Worried a parent or older relative is being scammed?</h2>
+    <div class="box">
+      <p>The FBI lists these signs that someone may be caught up in a crypto ATM scam. Many fit other scams too:</p>
+      <ul>
+        <li>Large cash withdrawals, especially for the first time, often asking for big bills.</li>
+        <li>QR code papers they can't explain.</li>
+        <li>Seeming confused or nervous when asked why they need the cash, or talking about a new "financial advisor" who wants cash.</li>
+        <li>Talking on a cell phone and seeming confused while taking out cash or using a crypto ATM.</li>
+      </ul>
+      <p>Talk without blame. The FBI's message to older adults is: "Do not be afraid to report a suspected crime." Go through this checklist together, and call the bank together if money went out. The National Elder Fraud Hotline (<a class="tel" href="tel:+18333728311">1-833-372-8311</a>) can help you report for a loved one who can't do it alone.</p>
+      <p>If the person taking money is someone they know, call Michigan Adult Protective Services at <a class="tel" href="tel:+18554443911">855-444-3911</a>.</p>
+      <div class="cites">
+        <a class="cite" href="https://www.ic3.gov/PSA/2026/PSA260515-2" target="_blank" rel="noopener">FBI alert, May 15, 2026</a>
+        <a class="cite" href="https://www.ic3.gov/CrimeInfo/ElderFraud" target="_blank" rel="noopener">FBI IC3: Elder Fraud</a>
+        <a class="cite" href="https://ovc.ojp.gov/program/stop-elder-fraud/faqs" target="_blank" rel="noopener">Hotline FAQ</a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="mi-h">
+    <h2 id="mi-h">Scams against older adults in Michigan, by the numbers</h2>
+    <div class="facts">
+      <div><span class="v">5,731</span><span class="k">complaints to the FBI's IC3 from Michigan residents 60 and older in 2025</span></div>
+      <div><span class="v">$169.9 million</span><span class="k">lost, as reported in those Michigan complaints</span></div>
+      <div><span class="v">368</span><span class="k">Michigan complaints in 2025 that involved a crypto ATM (all ages), with $11.9 million lost</span></div>
+      <div><span class="v">$7.7 billion</span><span class="k">lost by people 60 and older nationwide in 2025, as reported to IC3, up 59% from 2024</span></div>
+    </div>
+    <p class="hint">These count only people who filed a complaint. The FBI says its numbers are a point-in-time count and can change. Sources: <a href="https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf" target="_blank" rel="noopener">FBI 2025 IC3 Annual Report</a> (elder fraud section, starting on page 44) and the <a href="https://www.ic3.gov/PSA/2026/PSA260515-2" target="_blank" rel="noopener">IC3 crypto kiosk data by state</a> (May 15, 2026).</p>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> Each box you check is linked to warning signs written by the FTC, the FBI, or the Michigan Attorney General. The page shows those signs in plain words with a link to where each one comes from. It also checks your boxes against the FTC's four signs of a scam: they pretend to be from a group you know, they say there's a problem or a prize, they pressure you to act now, and they tell you to pay in a certain way. Red cards are steps to take now. Amber cards are warning signs. Green cards are ways to check. The page never decides whether something is a scam. Only you, your bank, or the police can find that out.</p>
+    <p>Sources, all checked on October 31, 2026. Dates in parentheses are when each page says it was last updated.</p>
+    <ul>
+      <li>FTC: <a href="https://consumer.ftc.gov/articles/how-avoid-scam" target="_blank" rel="noopener">How To Avoid a Scam</a> (Aug. 13, 2026), <a href="https://consumer.ftc.gov/articles/how-avoid-government-impersonation-scam" target="_blank" rel="noopener">How To Avoid a Government Impersonation Scam</a> (Aug. 13, 2026), <a href="https://consumer.ftc.gov/articles/avoiding-and-reporting-gift-card-scams" target="_blank" rel="noopener">Avoiding and Reporting Gift Card Scams</a> (June 9, 2026), <a href="https://consumer.ftc.gov/articles/scammers-use-fake-emergencies-steal-your-money" target="_blank" rel="noopener">Scammers Use Fake Emergencies To Steal Your Money</a> (Aug. 13, 2026), <a href="https://consumer.ftc.gov/articles/how-spot-avoid-and-report-tech-support-scams" target="_blank" rel="noopener">How To Spot, Avoid, and Report Tech Support Scams</a> (Dec. 29, 2025), <a href="https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams" target="_blank" rel="noopener">What To Know About Cryptocurrency and Scams</a> (Feb. 10, 2025), <a href="https://consumer.ftc.gov/articles/what-know-about-romance-scams" target="_blank" rel="noopener">What To Know About Romance Scams</a> (Aug. 13, 2026), <a href="https://consumer.ftc.gov/articles/fake-prize-sweepstakes-and-lottery-scams" target="_blank" rel="noopener">Fake Prize, Sweepstakes, and Lottery Scams</a> (Dec. 9, 2025), <a href="https://consumer.ftc.gov/articles/how-spot-avoid-and-report-fake-check-scams" target="_blank" rel="noopener">Fake Check Scams</a> (Aug. 13, 2026), <a href="https://consumer.ftc.gov/articles/what-know-you-wire-money" target="_blank" rel="noopener">What To Know Before You Wire Money</a> (June 17, 2026), <a href="https://consumer.ftc.gov/articles/phone-scams" target="_blank" rel="noopener">Phone Scams</a> (Aug. 13, 2026), <a href="https://consumer.ftc.gov/articles/what-do-if-you-were-scammed" target="_blank" rel="noopener">What To Do if You Were Scammed</a> (Aug. 21, 2026), <a href="https://consumer.ftc.gov/consumer-alerts/2026/07/way-spot-scams-how-someone-asks-you-pay" target="_blank" rel="noopener">A way to spot scams: how someone asks you to pay</a> (July 22, 2026), the <a href="https://www.ftc.gov/news-events/data-visualizations/data-spotlight/2025/08/false-alarm-real-scam-how-scammers-are-stealing-older-adults-life-savings" target="_blank" rel="noopener">Data Spotlight on impersonation scams against older adults</a> (Aug. 7, 2025), <a href="https://reportfraud.ftc.gov/" target="_blank" rel="noopener">ReportFraud.ftc.gov</a>, and <a href="https://www.ftc.gov/about-ftc/contact" target="_blank" rel="noopener">Contact the FTC</a>.</li>
+      <li>FBI Internet Crime Complaint Center: <a href="https://www.ic3.gov/CrimeInfo/ElderFraud" target="_blank" rel="noopener">Elder Fraud</a>, <a href="https://www.ic3.gov/CrimeInfo/Cryptocurrency" target="_blank" rel="noopener">Cryptocurrency</a>, the <a href="https://www.ic3.gov/" target="_blank" rel="noopener">home page</a>, and public service announcements on <a href="https://www.ic3.gov/PSA/2026/PSA260917" target="_blank" rel="noopener">law enforcement and government impersonation</a> (Sept. 17, 2026), <a href="https://www.ic3.gov/PSA/2026/PSA260615" target="_blank" rel="noopener">couriers collecting cash</a> (June 15, 2026), <a href="https://www.ic3.gov/PSA/2026/PSA260515-2" target="_blank" rel="noopener">crypto kiosks by state</a> (May 15, 2026), <a href="https://www.ic3.gov/PSA/2023/PSA231117" target="_blank" rel="noopener">grandparent scams</a> (Nov. 17, 2023), and <a href="https://www.ic3.gov/PSA/2023/PSA230929" target="_blank" rel="noopener">"Phantom Hacker" scams</a> (Sept. 29, 2023). Numbers from the <a href="https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf" target="_blank" rel="noopener">2025 IC3 Annual Report</a>.</li>
+      <li>U.S. Department of Justice, Office for Victims of Crime: <a href="https://ovc.ojp.gov/program/stop-elder-fraud/providing-help-restoring-hope" target="_blank" rel="noopener">National Elder Fraud Hotline</a> and its <a href="https://ovc.ojp.gov/program/stop-elder-fraud/faqs" target="_blank" rel="noopener">FAQ</a>.</li>
+      <li>Michigan: Attorney General <a href="https://www.michigan.gov/ag/complaints" target="_blank" rel="noopener">File a Complaint</a>, <a href="https://www.michigan.gov/consumerprotection/protect-yourself/consumer-alerts/scams/grandparent-family-emergency-scam" target="_blank" rel="noopener">Grandparent Family Emergency Scam</a>, and <a href="https://www.michigan.gov/ag/initiatives/elder-abuse" target="_blank" rel="noopener">Elder Abuse</a>; MDHHS <a href="https://www.michigan.gov/mdhhs/adult-child-serv/abuse-neglect/adult-ps" target="_blank" rel="noopener">Adult Protective Services</a>.</li>
+    </ul>
+    <p>Free and open source. No accounts, no tracking, nothing sent anywhere. Phone numbers change, so if one doesn't work, use the link next to it.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  /* ---------- Sources ---------- */
+  const S = {
+    avoid:   ["FTC: How To Avoid a Scam (Aug. 2026)", "https://consumer.ftc.gov/articles/how-avoid-scam"],
+    gov:     ["FTC: Government impersonation (Aug. 2026)", "https://consumer.ftc.gov/articles/how-avoid-government-impersonation-scam"],
+    gift:    ["FTC: Gift card scams (June 2026)", "https://consumer.ftc.gov/articles/avoiding-and-reporting-gift-card-scams"],
+    family:  ["FTC: Fake emergencies (Aug. 2026)", "https://consumer.ftc.gov/articles/scammers-use-fake-emergencies-steal-your-money"],
+    tech:    ["FTC: Tech support scams (Dec. 2025)", "https://consumer.ftc.gov/articles/how-spot-avoid-and-report-tech-support-scams"],
+    crypto:  ["FTC: Crypto and scams (Feb. 2025)", "https://consumer.ftc.gov/articles/what-know-about-cryptocurrency-scams"],
+    romance: ["FTC: Romance scams (Aug. 2026)", "https://consumer.ftc.gov/articles/what-know-about-romance-scams"],
+    prize:   ["FTC: Prize scams (Dec. 2025)", "https://consumer.ftc.gov/articles/fake-prize-sweepstakes-and-lottery-scams"],
+    check:   ["FTC: Fake check scams (Aug. 2026)", "https://consumer.ftc.gov/articles/how-spot-avoid-and-report-fake-check-scams"],
+    wire:    ["FTC: Wiring money (June 2026)", "https://consumer.ftc.gov/articles/what-know-you-wire-money"],
+    phone:   ["FTC: Phone scams (Aug. 2026)", "https://consumer.ftc.gov/articles/phone-scams"],
+    scammed: ["FTC: What To Do if You Were Scammed (Aug. 2026)", "https://consumer.ftc.gov/articles/what-do-if-you-were-scammed"],
+    pay:     ["FTC alert: How someone asks you to pay (July 22, 2026)", "https://consumer.ftc.gov/consumer-alerts/2026/07/way-spot-scams-how-someone-asks-you-pay"],
+    spot:    ["FTC Data Spotlight (Aug. 7, 2025)", "https://www.ftc.gov/news-events/data-visualizations/data-spotlight/2025/08/false-alarm-real-scam-how-scammers-are-stealing-older-adults-life-savings"],
+    rf:      ["ReportFraud.ftc.gov", "https://reportfraud.ftc.gov/"],
+    ic3elder:["FBI IC3: Elder Fraud", "https://www.ic3.gov/CrimeInfo/ElderFraud"],
+    ic3cry:  ["FBI IC3: Cryptocurrency", "https://www.ic3.gov/CrimeInfo/Cryptocurrency"],
+    ic3rpt:  ["FBI 2025 IC3 Report", "https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf"],
+    psaGov:  ["FBI alert: Government impersonation (Sept. 17, 2026)", "https://www.ic3.gov/PSA/2026/PSA260917"],
+    psaCour: ["FBI alert: Cash couriers (June 15, 2026)", "https://www.ic3.gov/PSA/2026/PSA260615"],
+    psaKiosk:["FBI alert: Crypto kiosks (May 15, 2026)", "https://www.ic3.gov/PSA/2026/PSA260515-2"],
+    psaGrand:["FBI alert: Grandparent scams (Nov. 17, 2023)", "https://www.ic3.gov/PSA/2023/PSA231117"],
+    psaPhan: ["FBI alert: Phantom Hacker scams (Sept. 29, 2023)", "https://www.ic3.gov/PSA/2023/PSA230929"],
+    miGrand: ["Michigan AG: Grandparent scam", "https://www.michigan.gov/consumerprotection/protect-yourself/consumer-alerts/scams/grandparent-family-emergency-scam"],
+    miElder: ["Michigan AG: Elder Abuse", "https://www.michigan.gov/ag/initiatives/elder-abuse"],
+    miComp:  ["Michigan AG: File a Complaint", "https://www.michigan.gov/ag/complaints"],
+    aps:     ["MDHHS: Adult Protective Services", "https://www.michigan.gov/mdhhs/adult-child-serv/abuse-neglect/adult-ps"]
+  };
+  const tel = (n, label) => `<a class="tel" href="tel:+1${n.replace(/\D/g, "").replace(/^1/, "")}">${label || n}</a>`;
+
+  /* ---------- What happened (warning signs) ----------
+     four: which of the FTC's four signs (pretend, problem, pressure, pay) the box counts toward. */
+  const GROUPS = [
+    { id: "who", legend: "Who did they say they were?", note: "Who they said they were:" },
+    { id: "did", legend: "What did they say or do?", note: "What they said or did:" },
+    { id: "pay", legend: "How did they want to be paid?", note: "How they wanted to be paid:" }
+  ];
+  const SIGNS = [
+    { id: "gov", g: "who", four: ["pretend"],
+      label: "The government or police: Social Security, Medicare, the IRS, the FTC, the FBI, a court, or a sheriff",
+      title: "They said they were the government or police", src: "FTC and FBI",
+      body: `The FTC says real government offices won't call, text, or email you to ask for money or personal information. They won't threaten to arrest you or suspend your Social Security number. The IRS contacts you by mail first, and Medicare won't call to sell you anything or charge you for your Medicare card. The FBI says: "Law enforcement and government officials will never request payment via prepaid cards, cryptocurrency, or courier."`,
+      todo: `Hang up. Look up the office's real number yourself, on its .gov website or a letter you already have, and call it.`,
+      cites: [S.gov, S.psaGov] },
+    { id: "bank", g: "who", four: ["pretend"],
+      label: "Your bank, or its fraud department",
+      title: "They said they were your bank's fraud team", src: "FTC and FBI",
+      body: `Scammers pretend to be your bank and say someone is in your account. The FBI calls one version the "Phantom Hacker" scam: a fake tech worker, then a fake bank worker, then a fake government worker, all telling you to move your money to a "safe" account. Victims have lost whole savings and retirement accounts this way.`,
+      todo: `Hang up and call the number on the back of your card or on your statement.`,
+      cites: [S.psaPhan, S.spot] },
+    { id: "tech", g: "who", four: ["pretend"],
+      label: "Tech support, like Microsoft, Apple, Amazon, Geek Squad, Norton, or McAfee",
+      title: "They said they were tech support", src: "FTC",
+      body: `The FTC says real tech companies won't call, email, or text you to say your computer has a problem. Scammers also send fake "renewal" bills for tech support plans, or say you were overpaid a refund and must pay the difference back.`,
+      todo: `Don't call the number in the message. If you need help, go to the company's own website or ask someone you trust.`,
+      cites: [S.tech] },
+    { id: "utility", g: "who", four: ["pretend", "problem"],
+      label: "Your power, gas, or water company, saying it will shut you off",
+      title: "They said your utility will shut you off", src: "FTC and FBI",
+      body: `The FTC lists fake utility companies threatening to cut off service among the people who ask for gift cards and wires. The FBI warns to be careful when anyone who says they're a utility will only take cryptocurrency.`,
+      todo: `Hang up and call the number on your bill.`,
+      cites: [S.gift, S.psaKiosk] },
+    { id: "family", g: "who", four: ["pretend", "problem"],
+      label: "A grandchild or other family member in trouble, or a lawyer, police officer, or doctor calling for them",
+      title: "A family member in trouble, or someone calling for them", src: "FTC, FBI, and Michigan AG",
+      body: `In this scam, a caller says a grandchild or other relative is in jail, in a car crash, or stuck while traveling, and needs money fast. A second person may come on as a lawyer, officer, or doctor. They often ask you to keep it secret, sometimes saying a judge ordered it. The FTC says some scammers use AI to copy a loved one's voice from a short clip, so it can really sound like them.`,
+      todo: `The FBI says: "Verify the story with your family member by calling them directly. If you cannot reach them, call someone else in your family, even if scammers told you to keep it secret." Michigan's Attorney General suggests asking something only your real grandchild would know, like the name of a pet.`,
+      cites: [S.family, S.psaGrand, S.miGrand] },
+    { id: "romance", g: "who", four: [],
+      label: "Someone you met online or on a dating app, but have never met in person",
+      title: "Someone you've only met online", src: "FTC",
+      body: `The FTC says romance scammers say they can't meet because they're overseas, on an oil rig, or in the military. Then they ask for money for medical bills, a plane ticket, a visa, or to get out of trouble. Some offer to help you start investing in crypto. The FTC's rule: "Never send money or gifts to a sweetheart you haven't met in person."`,
+      todo: `Stop talking with them and tell someone you trust. Search their job with the word "scammer," and do a reverse image search on their profile photo.`,
+      cites: [S.romance] },
+    { id: "prize", g: "who", four: ["problem"],
+      label: "Someone saying you won a prize, a lottery, or a sweepstakes",
+      title: "They said you won something", src: "FTC",
+      body: `The FTC says real prizes are free. Having to pay "taxes," "shipping," "processing," or "customs" to collect a prize, or paying to raise your odds, is a warning sign. The FTC says a message about a foreign lottery is "almost certainly from a scammer."`,
+      todo: `Don't pay, don't respond, and don't give your bank or Social Security number.`,
+      cites: [S.prize] },
+    { id: "invest", g: "who", four: [],
+      label: "Someone offering an investment, often crypto, with big or sure profits",
+      title: "An investment with big or sure profits", src: "FTC and FBI",
+      body: `The FTC says: "Only scammers will guarantee profits or big returns," and "Never mix online dating and investment advice." The FBI says fake investment sites show fake gains. When you try to take money out, they ask for "taxes" or "penalties," sometimes picked up in cash by a courier. In 2025, investment scams cost people 60 and older more than any other kind reported to the FBI: $3.5 billion.`,
+      todo: `Don't send more money to "unlock" a withdrawal. Search the platform's name and web address with the word "scam" or "complaint."`,
+      cites: [S.crypto, S.psaCour, S.ic3rpt] },
+    { id: "known", g: "who", four: [],
+      label: "Someone you know, like a relative, caregiver, or new friend, who is pushing you about money or using your money without asking",
+      title: "Someone you know is taking or misusing money", src: "Michigan AG",
+      body: `This can be elder financial abuse rather than a stranger's scam. Michigan's Attorney General says elder abuse happens when someone "takes advantage of an older adult," and asks people to report it to Adult Protective Services.`,
+      todo: `Call Michigan Adult Protective Services at ${tel("855-444-3911")}, any time, day or night. You can also use the Attorney General's <a href="https://secure.ag.state.mi.us/complaints/patient-abuse.aspx" target="_blank" rel="noopener">Elder Abuse and Fraud form</a>.`,
+      cites: [S.miElder, S.aps] },
+
+    { id: "safe", g: "did", four: ["problem"],
+      label: "Said your money isn't safe, and told you to move it, take out cash, or buy gold",
+      title: "They said to move your money to keep it \"safe\"", src: "FTC and FBI",
+      body: `The FTC says it will never "say you must transfer your money to “protect it,” or tell you to withdraw cash or buy gold and give it to someone." No real bank or government office will either. From 2020 to 2024, reports from older adults who lost $10,000 or more to these fake-alarm scams went up more than four times, from 1,790 to 8,269.`,
+      todo: `Don't move any money. Call your bank at the number on your card and tell them what the caller said.`,
+      cites: [S.rf, S.gov, S.spot] },
+    { id: "threat", g: "did", four: ["problem", "pressure"],
+      label: "Said you're in trouble: arrest, a warrant, missed jury duty, or your Social Security number used in a crime",
+      title: "They said you're in trouble with the law", src: "FTC and FBI",
+      body: `Most government impersonation reports to the FBI start this way: you're accused of a crime and told you'll be arrested unless you pay or "help the investigation." Others say you missed jury duty or a court date. The FBI says: "Law enforcement and government authorities will never contact members of the public by telephone or text message to demand any form of payment or to request personal or sensitive information."`,
+      todo: `Hang up. If you're worried, call your local police or the court yourself, using a number you look up.`,
+      cites: [S.psaGov, S.gov] },
+    { id: "popup", g: "did", four: ["problem"],
+      label: "A pop-up or message said your computer has a virus or was hacked, and gave a number to call",
+      title: "A pop-up or message with a number to call", src: "FTC and FBI",
+      body: `The FTC says real security warnings never ask you to call a phone number. The FBI says: "Do not contact the telephone number provided in a pop-up, text, or email." In 2024, 15% of older adults' reports of losing $10,000 or more to impersonation scams started with an online ad or pop-up.`,
+      todo: `Don't call the number and don't click anything in the message.`,
+      cites: [S.tech, S.psaPhan, S.spot] },
+    { id: "remote", g: "did", four: [],
+      label: "Asked you to download an app or let them into your computer or phone",
+      title: "They asked to get into your computer or phone", src: "FTC and FBI",
+      body: `Tech support scammers ask to control your computer, pretend to scan it, and then charge you to fix a problem that isn't there. Some use that time to look through your bank accounts. The FBI says: "Do not download software at the request of an unknown individual who contacted you. Do not allow an unknown individual who contacted you to have control of your computer."`,
+      todo: `Say no. If you already let them in, check "Let them into my computer or phone" in step 2 for what to do.`,
+      cites: [S.tech, S.psaPhan] },
+    { id: "link", g: "did", four: [],
+      label: "Sent a text or email you didn't expect, with a link to click to fix a problem",
+      title: "A surprise text or email with a link", src: "FTC",
+      body: `The FTC says links in unexpected emails, texts, or social media messages may be there to steal your money or information. That's true even when the message looks like it's from a company you use.`,
+      todo: `Don't click. Go to the company's website by typing it yourself, or call a number you already have.`,
+      cites: [S.avoid, S.gov] },
+    { id: "check", g: "did", four: ["pay"],
+      label: "Sent you a check and asked you to send some of the money back",
+      title: "A check, and a request to send money back", src: "FTC",
+      body: `The FTC says: "It can take weeks for a bank to figure out that the check is a fake." The money can show up in your account fast, but that doesn't mean the check is good. Being asked to send part back, by gift card, wire, or crypto, is the warning sign.`,
+      todo: `Don't send any money back. Ask your bank about the check.`,
+      cites: [S.check, S.avoid] },
+    { id: "info", g: "did", four: [],
+      label: "Asked for your Social Security, Medicare, or bank account number, or a password",
+      title: "They asked for your personal information", src: "FTC",
+      body: `The FTC says: "Honest organizations won't call, email, or text to ask for your personal information." Government offices don't call out of the blue to ask for your Social Security number.`,
+      todo: `Don't give it. If you already did, check it in step 2 for what to do.`,
+      cites: [S.avoid, S.phone] },
+    { id: "urgent", g: "did", four: ["pressure"],
+      label: "Said it's urgent: act now or something bad will happen",
+      title: "They said you have to act right now", src: "FTC",
+      body: `The FTC says: "Scammers want you to act before you have time to think." It also says: "Honest businesses will give you time to make a decision."`,
+      todo: `Slow down. Hang up and talk to someone you trust before you do anything.`,
+      cites: [S.avoid] },
+    { id: "secret", g: "did", four: [],
+      label: "Told you to keep it secret, even from family or your bank",
+      title: "They told you to keep it secret", src: "FBI and FTC",
+      body: `The FBI says impersonators urge people "not to tell family, friends, financial institutions, or law enforcement about the call." In grandparent scams, they may claim a judge put a "gag order" on the case.`,
+      todo: `Tell someone anyway. The FTC says to talk to someone you trust before you do anything else.`,
+      cites: [S.psaGov, S.psaGrand, S.avoid] },
+    { id: "stayon", g: "did", four: ["pressure"],
+      label: "Wanted you to stay on the phone, even at the bank or store, and told you what to do step by step",
+      title: "They kept you on the phone and told you what to do", src: "FTC and FBI",
+      body: `The FTC says scammers may tell you to stay on the phone, even while you load money onto gift cards. The FBI says crypto ATM scammers give step-by-step directions: how to take cash out of the bank, how to find a machine, and how to put the money in.`,
+      todo: `Hang up, even in the middle of it. The FBI says if the crypto ATM company calls to say your payment looks like fraud, stop or cancel it.`,
+      cites: [S.avoid, S.gift, S.psaKiosk] },
+    { id: "callerid", g: "did", four: ["pretend"],
+      label: "Caller ID showed a real-looking name or number, like your bank or the police",
+      title: "Caller ID looked real", src: "FTC",
+      body: `The FTC says: "Scammers can make any name or number show up on your caller ID. That's called spoofing." A call that looks local or official can come from anywhere in the world.`,
+      todo: `Don't trust caller ID. Hang up and call the real number yourself.`,
+      cites: [S.phone, S.avoid] },
+
+    { id: "giftcard", g: "pay", four: ["pay"],
+      label: "Gift cards, or reading them the numbers on the back",
+      title: "They wanted gift cards", src: "FTC",
+      body: `The FTC says: "No real business or government agency will ever tell you to buy a gift card to pay them." Scammers name the store and card, ask for the number and PIN on the back or a photo of the card, and may stay on the phone while you buy them.`,
+      todo: `Don't buy the cards or read out the numbers. If you already did, check "Gave them gift card numbers" in step 2.`,
+      cites: [S.gift] },
+    { id: "cryptoatm", g: "pay", four: ["pay"],
+      label: "A Bitcoin or crypto ATM, or a QR code to scan",
+      title: "They wanted a crypto ATM or a QR code", src: "FTC and FBI",
+      body: `The FTC says: "Only scammers demand payment in cryptocurrency." The FBI says: "No legitimate law enforcement or government official will call to demand payment via a cryptocurrency kiosk." A QR code they send you can send your money straight to their wallet, and once it's sent it's gone. Michigan had 368 crypto ATM complaints to the FBI in 2025, with $11.9 million lost.`,
+      todo: `Don't put money in. If the ATM company calls to say your payment looks like fraud, the FBI says stop or cancel it.`,
+      cites: [S.crypto, S.psaKiosk] },
+    { id: "wire", g: "pay", four: ["pay"],
+      label: "A wire transfer: Western Union, MoneyGram, Ria, or a bank wire",
+      title: "They wanted a wire transfer", src: "FTC",
+      body: `The FTC says if someone you haven't met in person asks you to wire money, it's a warning sign no matter what reason they give. It's also against the law for telemarketers to ask you to pay by wire. Scammers ask for wires because the money is hard to get back.`,
+      todo: `Don't send it. If you already did, check it in step 2 and call right away.`,
+      cites: [S.wire, S.avoid] },
+    { id: "app", g: "pay", four: ["pay"],
+      label: "A payment app: Zelle, Venmo, Cash App, or PayPal",
+      title: "They wanted a payment app", src: "FTC",
+      body: `The FTC says a demand to pay by bank transfer, wire, crypto, payment app, or gift card is a strong sign of fraud: "Anyone who says you can only pay in one of these ways is probably a scammer." Paying by credit card gives you more protection.`,
+      todo: `Don't send it. If you already did, check it in step 2.`,
+      cites: [S.pay] },
+    { id: "cash", g: "pay", four: ["pay"],
+      label: "Cash, mailed in a package or handed to someone who comes to get it",
+      title: "They wanted cash, by mail or pickup", src: "FBI",
+      body: `The FBI warns of scammers who have people hide cash in magazines or books and mail it, or hand it to a courier, even a ride share driver, who comes to the house. Couriers may show a dollar bill serial number or say a code word so you'll trust them. The FBI says officials "will never request payment via prepaid cards, cryptocurrency, or courier."`,
+      todo: `Don't hand over or mail anything. Don't give out your home address. If someone is on the way, call 911 or your local police.`,
+      cites: [S.psaGrand, S.psaCour, S.psaGov] },
+    { id: "gold", g: "pay", four: ["pay"],
+      label: "Gold or silver",
+      title: "They wanted gold or silver", src: "FTC",
+      body: `The FTC says it will never tell you to "buy gold and give it to someone," and no real government office will. In 2024, gold came up in about 21% of reports from older adults who lost more than $100,000 to impersonation scams.`,
+      todo: `Don't buy gold for anyone who called you. Call your bank and tell them what's going on.`,
+      cites: [S.rf, S.spot] }
+  ];
+
+  /* ---------- Already happened (act now) ---------- */
+  const DONE = [
+    { id: "d-bank", label: "Sent money by bank transfer, Zelle, or a bank wire",
+      title: "You sent money from your bank", steps: [
+        `Call your bank or credit union now, at the number on the back of your card or your statement.`,
+        `Tell them you were tricked and ask them to reverse the payment. For a wire, ask for a "recall" and a "hold harmless letter." The FBI says doing this as fast as you can may cut or erase your loss.`,
+        `File at <a href="https://www.ic3.gov/" target="_blank" rel="noopener">ic3.gov</a> with the full payment details. The FBI's team works with banks to freeze stolen money. In 2025 it helped freeze about $679 million.`
+      ], cites: [S.scammed, S.ic3elder, S.ic3rpt] },
+    { id: "d-wire", label: "Sent a wire through Western Union, MoneyGram, or Ria",
+      title: "You wired money through a money transfer company", steps: [
+        `Call the company right away. Say the transfer was fraud and ask them to reverse it.<br>Western Union: ${tel("1-800-448-1492")}<br>MoneyGram: ${tel("1-800-926-9400")}<br>Ria: ${tel("1-877-443-1399")}<br>Ria at Walmart (Walmart2Walmart or Walmart2World): ${tel("1-855-355-2144")}`,
+        `Report it at <a href="https://reportfraud.ftc.gov/" target="_blank" rel="noopener">ReportFraud.ftc.gov</a>.`
+      ], cites: [S.wire] },
+    { id: "d-app", label: "Paid through Venmo, Cash App, or PayPal",
+      title: "You paid through a payment app", steps: [
+        `Report the payment in the app right away and ask them to reverse it.`,
+        `Report it at <a href="https://reportfraud.ftc.gov/" target="_blank" rel="noopener">ReportFraud.ftc.gov</a>.`
+      ], cites: [S.scammed] },
+    { id: "d-gift", label: "Gave them gift card numbers",
+      title: "You gave someone gift card numbers: what to do", steps: [
+        `Call the company that issued the card right away, using the phone number on the card. Do this even if it was a while ago.`,
+        `Tell them you gave the card number and PIN to a scammer and ask for your money back. Some companies can return money that's still on the card.`,
+        `Keep the card and the store receipt. Then report it at <a href="https://reportfraud.ftc.gov/" target="_blank" rel="noopener">ReportFraud.ftc.gov</a>.`,
+        `Can't find the number? The FTC keeps a <a href="https://consumer.ftc.gov/articles/avoiding-and-reporting-gift-card-scams" target="_blank" rel="noopener">list of gift card company phone numbers</a>.`
+      ], cites: [S.gift, S.scammed] },
+    { id: "d-crypto", label: "Put money into a crypto ATM or sent crypto",
+      title: "You put money into a crypto ATM or sent crypto", steps: [
+        `Contact the company that runs the crypto ATM or the app you used, right away. Say the payment was fraud and ask them to reverse it.`,
+        `Keep every receipt. File at <a href="https://www.ic3.gov/" target="_blank" rel="noopener">ic3.gov</a> with the transaction ID, the wallet address the money went to, and where the machine is. Make a report with your local police too.`,
+        `The FTC says crypto payments usually can't be reversed. Report it anyway. The FBI uses reports to investigate, and sometimes to freeze stolen money.`
+      ], cites: [S.scammed, S.crypto, S.psaKiosk] },
+    { id: "d-credit", label: "Paid with a credit card",
+      title: "You paid with a credit card", steps: [
+        `Call the card company right away, using the number on the back of the card or its app. Ask for a refund.`
+      ], cites: [S.scammed] },
+    { id: "d-debit", label: "Paid with a debit card",
+      title: "You paid with a debit card", steps: [
+        `Call your bank or credit union right away, using the number on the back of the card or its app. Ask for a refund.`
+      ], cites: [S.scammed] },
+    { id: "d-mail", label: "Mailed cash (U.S. Mail, FedEx, or UPS)",
+      title: "You mailed cash", steps: [
+        `For U.S. Mail, call the U.S. Postal Inspection Service right away: ${tel("1-877-876-2455")}. If the package hasn't been delivered yet, they may be able to stop it, for a fee.`,
+        `For FedEx or UPS, call them as soon as you can.`
+      ], cites: [S.scammed] },
+    { id: "d-courier", label: "Handed cash or gold to someone in person",
+      title: "You handed cash or gold to someone", steps: [
+        `Don't meet them again and don't give out your address. If they're coming back or you feel unsafe, call 911.`,
+        `Make a report with your local police.`,
+        `File at <a href="https://www.ic3.gov/" target="_blank" rel="noopener">ic3.gov</a>. Include the phone numbers and names they used, and any code word or dollar bill number they gave you.`
+      ], cites: [S.psaCour, S.psaGov, S.ic3elder] },
+    { id: "d-mo", label: "Sent a money order",
+      title: "You sent a money order", steps: [
+        `Call the company that issued the money order right away and ask about stopping payment.`,
+        `If you sent it by U.S. Mail, also call the U.S. Postal Inspection Service at ${tel("877-876-2455")}.`
+      ], cites: [S.check] },
+    { id: "d-remote", label: "Let them into my computer or phone",
+      title: "You let them into your computer or phone", steps: [
+        `Update your security software, run a scan, and delete anything it flags.`,
+        `Change your passwords, and anywhere else you used the same one. Turn on two-step login (two-factor authentication).`,
+        `Check your bank and card statements for charges you don't know. If you find one, ask the bank or card company to reverse it.`,
+        `For help, the FTC suggests the company that made your device, a trusted tech company, or a friend or family member who knows computers.`
+      ], cites: [S.scammed, S.tech] },
+    { id: "d-ssn", label: "Gave my Social Security number",
+      title: "You gave your Social Security number", steps: [
+        `If someone used it, report it at <a href="https://www.identitytheft.gov/" target="_blank" rel="noopener">IdentityTheft.gov</a> and follow the recovery plan. If you're not sure, go to <a href="https://www.identitytheft.gov/databreach" target="_blank" rel="noopener">IdentityTheft.gov/databreach</a> for steps to protect yourself.`,
+        `The FBI says to contact the three credit bureaus to protect your credit: Equifax ${tel("800-685-1111")}, Experian ${tel("888-397-3742")}, TransUnion ${tel("888-909-8872")}.`
+      ], cites: [S.scammed, S.ic3elder] },
+    { id: "d-acct", label: "Gave a bank account number or a password",
+      title: "You gave a bank account number or a password", steps: [
+        `Call your bank and tell them. The FBI says to contact your bank to protect your accounts.`,
+        `If you can still log in, change that password, and anywhere else you used it. Turn on two-step login.`
+      ], cites: [S.scammed, S.ic3elder] }
+  ];
+
+  const FOUR = [
+    { k: "pretend", what: "They pretend to be from a group you know", ex: "Like the government, your bank, a company you use, or family. They can fake caller ID." },
+    { k: "problem", what: "They say there's a problem or a prize", ex: "Trouble with the law, a family emergency, a virus, money at risk, or a prize to claim." },
+    { k: "pressure", what: "They pressure you to act right now", ex: "They want you to act before you can think, or to stay on the phone." },
+    { k: "pay", what: "They tell you to pay in a certain way", ex: "Gift cards, crypto, a wire, a payment app, cash, gold, or a check you send money back from." }
+  ];
+
+  /* ---------- Build the checklists ---------- */
+  const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const opt = (id, label) => `<label class="opt" for="c-${id}"><input type="checkbox" id="c-${id}" value="${id}"><span>${esc(label)}</span></label>`;
+  document.getElementById("groups").innerHTML = GROUPS.map(g =>
+    `<fieldset><legend>${g.legend}</legend>${SIGNS.filter(s => s.g === g.id).map(s => opt(s.id, s.label)).join("")}</fieldset>`
+  ).join("");
+  document.getElementById("did-groups").innerHTML =
+    `<fieldset><legend>I already...</legend>${DONE.map(d => opt(d.id, d.label)).join("")}</fieldset>`;
+
+  /* ---------- Render results ---------- */
+  const chips = list => `<div class="cites">${list.map(([t, u]) => `<a class="cite" href="${u}" target="_blank" rel="noopener">${esc(t)}</a>`).join("")}</div>`;
+  const checked = () => new Set([...document.querySelectorAll('.opt input:checked')].map(i => i.value));
+  let lastSummary = "";
+
+  function run() {
+    const on = checked();
+    document.querySelectorAll(".opt").forEach(l => l.classList.toggle("on", l.querySelector("input").checked));
+    const signs = SIGNS.filter(s => on.has(s.id));
+    const done = DONE.filter(d => on.has(d.id));
+    const hits = new Set(signs.flatMap(s => s.four));
+
+    const sum = document.getElementById("summary");
+    if (!signs.length && !done.length) {
+      sum.className = "summary";
+      sum.innerHTML = `<p><strong>Nothing checked yet.</strong> Check what happened in steps 1 and 2, and your results show up here.</p>
+        <p>Not seeing your situation? Trust your gut. The FTC's advice works for any call, text, or email: don't click links or call numbers in a message you didn't expect, and contact the company or office yourself at a number you know is real.</p>
+        ${chips([S.avoid])}`;
+    } else {
+      sum.className = "summary" + (signs.length ? " warn" : "");
+      const n = signs.length;
+      const alarm = done.length ? `<p class="alarm">You checked that money or information already went out. Go to the red steps below now. The FBI says time is of the essence: the sooner you call, the better the chance to stop the money.</p>` : "";
+      const head = n ? `<p class="big">${n} warning sign${n === 1 ? "" : "s"}</p>
+        <p>What you checked matches ${n === 1 ? "a warning sign" : n + " warning signs"} listed by the FTC, the FBI, or Michigan's Attorney General. A warning sign isn't proof. But until you check it out yourself, don't send money, share information, or let anyone into your computer.</p>` : "";
+      const four = n ? `<div class="four"><h3>The FTC's four signs of a scam: ${hits.size} of 4 match what you checked</h3>
+        ${FOUR.map(f => `<div class="sign${hits.has(f.k) ? " hit" : ""}"><span class="what">${f.what}</span><span class="st">${hits.has(f.k) ? "✓ Matches" : "Not checked"}</span><span class="ex">${f.ex}</span></div>`).join("")}
+        ${chips([S.avoid])}</div>` : "";
+      sum.innerHTML = alarm + head + four;
+    }
+
+    document.getElementById("act-cards").innerHTML = done.map(d => `<article class="card act">
+        <div class="top"><h3>${d.title}</h3><span class="tag act">Act now</span></div>
+        <ol>${d.steps.map(s => `<li>${s}</li>`).join("")}</ol>
+        <p class="do">Then make the reports in step 4 below.</p>
+        ${chips(d.cites)}</article>`).join("");
+
+    document.getElementById("cards").innerHTML = signs.map(s => `<article class="card warn">
+        <div class="top"><h3>${s.title}</h3><span class="tag warn">Warning sign: ${s.src}</span></div>
+        <p>${s.body}</p>
+        <p class="do"><strong>What to do:</strong> ${s.todo}</p>
+        ${chips(s.cites)}</article>`).join("") + (signs.length ? `<article class="card info">
+        <div class="top"><h3>How to check it out</h3><span class="tag info">How to check</span></div>
+        <ul>
+          <li>Hang up, or don't reply. Then contact the bank, office, company, or family member yourself, at a number you know is real.</li>
+          <li>Talk to someone you trust before you pay or share anything.</li>
+          <li>Search the name, company, or phone number with the word "scam" or "complaint."</li>
+        </ul>
+        ${chips([S.avoid, S.pay])}</article>` : "");
+
+    document.getElementById("legend").hidden = !(signs.length || done.length);
+    document.getElementById("out-btns").hidden = !(signs.length || done.length);
+
+    const d = new Date();
+    const lines = [`What happened (notes for a scam report, ${d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })})`];
+    GROUPS.forEach(g => {
+      const inG = signs.filter(s => s.g === g.id);
+      if (inG.length) { lines.push("", g.note); inG.forEach(s => lines.push(`- ${s.label}`)); }
+    });
+    if (done.length) { lines.push("", "What I already did:"); done.forEach(x => lines.push(`- ${x.label}`)); }
+    lines.push("", "Add: the dates and times, phone numbers, emails, websites, and names they used, and each payment's date, amount, and how it was sent.");
+    lastSummary = lines.join("\n");
+  }
+
+  /* ---------- Wire up ---------- */
+  document.querySelectorAll(".groups").forEach(g => g.addEventListener("change", run));
+  document.getElementById("jump").addEventListener("click", () => {
+    const t = document.getElementById("results-sec");
+    t.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.getElementById("res-h").setAttribute("tabindex", "-1");
+    document.getElementById("res-h").focus({ preventScroll: true });
+  });
+  document.getElementById("clear").addEventListener("click", () => {
+    document.querySelectorAll(".opt input").forEach(i => { i.checked = false; });
+    run();
+    window.scrollTo({ top: document.getElementById("what-h").offsetTop - 12, behavior: "smooth" });
+  });
+  document.getElementById("print").addEventListener("click", () => window.print());
+  document.getElementById("copy").addEventListener("click", async () => {
+    const status = document.getElementById("copied");
+    try {
+      await navigator.clipboard.writeText(lastSummary);
+      status.textContent = "Copied. Paste it into your report.";
+    } catch (e) {
+      const ta = document.createElement("textarea");
+      ta.value = lastSummary; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      let ok = false; try { ok = document.execCommand("copy"); } catch (e2) {}
+      ta.remove();
+      status.textContent = ok ? "Copied. Paste it into your report." : "Couldn't copy. Use Print or save as PDF instead.";
+    }
+    setTimeout(() => { status.textContent = ""; }, 6000);
+  });
+  document.querySelectorAll(".sizer button").forEach(b => b.addEventListener("click", () => {
+    const n = b.dataset.size;
+    document.documentElement.classList.remove("t1", "t2");
+    if (n !== "0") document.documentElement.classList.add("t" + n);
+    document.querySelectorAll(".sizer button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  }));
+  run();
+})();
+</script>
+</body>
+</html>
