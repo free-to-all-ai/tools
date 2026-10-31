@@ -3,9 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Detroit HOPE Tax Exemption Check</title>
+<title>Detroit HOPE Property Tax Exemption Check (Due Nov 6)</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Detroit homeowner with low income? Enter your household size, income, and savings to see whether you likely qualify for a full or partial HOPE property tax exemption under the city's 2026 table, and how to apply by the deadline. Information, not advice.">
+<meta name="description" content="See if you qualify for Detroit's 2026 HOPE property tax exemption. Check the income limits for your household size and what to bring. Due Nov 6, 4:30 PM. Free.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/hope-exemption/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Detroit HOPE Property Tax Exemption Check (Due Nov 6)">
+<meta property="og:description" content="See if you qualify for Detroit's 2026 HOPE property tax exemption. Check the income limits for your household size and what to bring. Due Nov 6, 4:30 PM. Free.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/hope-exemption/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/hope-exemption.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
@@ -159,8 +167,9 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
 <div class="wrap">
   <header>
     <span class="eyebrow">Detroit · property tax · free</span>
-    <h1>Detroit HOPE Tax Exemption Check</h1>
-    <p class="lede">HOPE, the Homeowners Property Exemption, can lower or wipe out property taxes for Detroit homeowners with low income. The city says HOPE, together with Wayne County's PAYS program, has helped thousands of Detroit owners avoid tax foreclosure. Answer a few questions to see whether you likely qualify under the city's <span class="yr">2026</span> table and what to do before the deadline.</p>
+    <h1>Detroit HOPE Property Tax Exemption Check</h1>
+    <p class="lede">Can't pay your property taxes? HOPE, Detroit's Homeowners Property Exemption, is a property tax exemption for homeowners with low income. Michigan calls it the poverty exemption, and the state form is Form 5737. It can lower or wipe out your property taxes, and the city says HOPE, together with Wayne County's PAYS program, has helped thousands of Detroit owners avoid tax foreclosure.</p>
+    <p class="lede">You don't have to be a senior. Neither the state law nor the city's rules set an age requirement, only income limits and an asset limit. Answer a few questions to see whether you likely qualify under the city's <span class="yr">2026</span> income limits and what your HOPE application needs before the deadline.</p>
     <div class="due" id="due" role="status"></div>
     <div class="notice">
       <strong>This is information, not legal or tax advice.</strong>
@@ -259,7 +268,8 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
      Detroit posts a new income table and deadline each year at detroitmi.gov/hope and in the
      printed application. Copy the new numbers in here, change the dates, and update the
      application link. Every Michigan city and township publishes its own table under
-     MCL 211.7u(4), so another city can reuse this page by swapping this block. */
+     MCL 211.7u(4), so another city can reuse this page by swapping this block.
+     The <title>, description, and og: tags in <head> also name the due date, so change those too. */
   const HOPE = {
     city: "Detroit",
     year: 2026,
