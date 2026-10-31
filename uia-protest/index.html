@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Michigan Unemployment Protest and Appeal Deadline Check</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Michigan unemployment denied? See the last day UIA must receive your protest or appeal, where to fax or mail it, and draft your protest letter. Free.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/uia-protest/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Michigan Unemployment Protest and Appeal Deadline Check">
+<meta property="og:description" content="Michigan unemployment denied? See the last day UIA must receive your protest or appeal, where to fax or mail it, and draft your protest letter. Free.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/uia-protest/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/uia-protest.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. The notice questions on top, then a stack of deadline cards, each with its law or UIA source chip, then the protest letter builder. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.panel { display: grid; gap: 18px; }
+form.q {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 16px;
+}
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="date"], input[type="number"], select {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px;
+}
+input[type="text"], textarea {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%;
+}
+textarea { min-height: 96px; resize: vertical; }
+.opts { display: grid; gap: 6px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.opts input { margin-top: 5px; accent-color: var(--accent); }
+.opts small { display: block; color: var(--muted); font-size: 14px; }
+.hint { font-size: 14px; color: var(--muted); }
+.results { display: grid; gap: 12px; }
+.results-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line);
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.small { font-size: 15px; color: var(--muted); }
+.addr { font-family: var(--f-mono); font-size: 14px; white-space: pre-line; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; overflow-wrap: anywhere; }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.gethelp { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.letter {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px;
+  font-family: var(--f-body); white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; font-size: 16px;
+}
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 10px 16px;
+  background: var(--accent); color: var(--bg); border: 0;
+}
+.btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.btn:hover { filter: brightness(1.08); }
+.copied { font-size: 14px; color: var(--law); }
+.fill { background: var(--facts-bg); color: var(--facts); border-radius: 4px; padding: 0 3px; }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+@media print {
+  body.printing .wrap > :not(#s-letter), body.printing #s-letter > :not(.letter) { display: none !important; }
+  body.printing { background: #fff; color: #000; }
+  body.printing .letter { border: 0; padding: 0; color: #000; background: #fff; }
+  body.printing .fill { background: none; color: #000; }
+}
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Michigan · Unemployment (UIA) · free</span>
+    <h1>Unemployment Protest Deadline</h1>
+    <p class="lede">Michigan's Unemployment Insurance Agency (UIA) denied your unemployment, cut it, or says you were overpaid. You can protest. Enter the mail date on your notice to see the last day UIA must receive your protest or appeal, where to send it, and what happens next. Then draft the protest letter.</p>
+    <div class="notice">
+      <strong>This is information, not legal advice.</strong>
+      <span>The deadline is about when UIA gets your protest, not when you send it. If your notice shows an earlier date than this page, go by your notice. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section class="panel" aria-labelledby="h-notice-q">
+    <h2 id="h-notice-q">1. Your notice</h2>
+    <form class="q" id="f-plan" novalidate>
+      <p class="sample">A sample date is filled in so you can see how it works. Change it to yours.</p>
+      <div class="field"><span class="lbl" id="l-stage">Which notice did you get?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-stage">
+          <label><input type="radio" name="stage" value="det" checked><span>Notice of Determination<small>UIA's first decision on an issue, like why you left a job, whether you can work, or an overpayment. You answer it with a protest.</small></span></label>
+          <label><input type="radio" name="stage" value="mon"><span>Monetary Determination<small>Whether your past wages qualify you, and your weekly amount and number of weeks.</small></span></label>
+          <label><input type="radio" name="stage" value="redet"><span>Notice of Redetermination<small>UIA's answer after a protest. You answer it with an appeal for a hearing with a judge.</small></span></label>
+          <label><input type="radio" name="stage" value="alj"><span>Decision from an administrative law judge<small>After a hearing with the Michigan Office of Administrative Hearings and Rules (MOAHR).</small></span></label>
+          <label><input type="radio" name="stage" value="uiac"><span>Decision from the Unemployment Insurance Appeals Commission<small>After you appealed a judge's decision.</small></span></label>
+        </div></div>
+      <div class="field"><label for="n-date">Date the notice was mailed</label><input id="n-date" type="date">
+        <span class="hint">Use the date printed on the notice (the date it was issued or mailed). Not the day it arrived, and not the day you opened it online. The clock starts on that date.</span></div>
+      <div class="field" id="money-wrap"><span class="lbl" id="l-money">Does the notice say you owe money back?</span>
+        <div class="opts" aria-labelledby="l-money">
+          <label><input type="checkbox" id="c-over"> Yes, it says I was overpaid or must pay restitution</label>
+          <label><input type="checkbox" id="c-fraud"> It also says I committed fraud (an intentional misrepresentation)</label>
+        </div></div>
+    </form>
+    <div class="results" id="r-plan" aria-live="polite"></div>
+    <div class="btns"><button class="btn ghost" type="button" id="ics">Save the deadline to my calendar</button><span class="hint">Downloads a calendar file. Nothing is sent anywhere.</span></div>
+  </section>
+
+  <section class="panel" id="s-letter" aria-labelledby="h-letter">
+    <h2 id="h-letter">2. Your <span id="h-letter-kind">protest</span></h2>
+    <form class="q" id="f-letter" novalidate>
+      <div class="row2">
+        <div class="field"><label for="a-name">Your name</label><input id="a-name" type="text" value="Jordan Example" autocomplete="off"></div>
+        <div class="field"><label for="a-min">Michigan Identification Number (MIN)</label><input id="a-min" type="text" value="" autocomplete="off">
+          <span class="hint">It's on your UIA letters. Leave it blank to fill in by hand.</span></div>
+      </div>
+      <div class="field"><label for="a-case" id="l-case">Case number on the notice</label><input id="a-case" type="text" value="" autocomplete="off"></div>
+      <div class="field"><label for="a-why">In your own words, why the decision is wrong</label>
+        <textarea id="a-why">I did not quit. My manager cut my shifts to zero on September 12 and told me there was no more work. I have the text message from my manager saying this.</textarea>
+        <span class="hint">Facts help most: what happened, the dates, and any papers or messages that back you up. Attach copies. It's fine to keep it short.</span></div>
+      <div class="field" id="late-wrap" hidden><label for="a-late">Why it's late</label>
+        <textarea id="a-late" placeholder="For example: the notice went to my old address and I didn't get it until December 3."></textarea>
+        <span class="hint">UIA needs a reason to accept a late protest or appeal. Say what kept you from filing on time, with dates.</span></div>
+      <div class="field" id="combine-wrap" hidden><span class="lbl" id="l-combine">Other cases on this claim</span>
+        <div class="opts" aria-labelledby="l-combine">
+          <label><input type="checkbox" id="c-combine"> I have another protest or appeal pending on this claim. Ask to combine them into one hearing.</label>
+        </div>
+        <input id="a-combine" type="text" placeholder="Case numbers of the other cases" autocomplete="off" hidden></div>
+    </form>
+    <div class="bar">
+      <h3 id="h-letter-sub">Your protest letter</h3>
+      <span class="btns"><span class="copied" id="copied" role="status"></span><button class="btn ghost" type="button" id="print">Print</button><button class="btn" type="button" id="copy">Copy letter</button></span>
+    </div>
+    <div class="letter" id="letter" tabindex="0" aria-label="Protest letter"></div>
+    <p class="hint">Fill in anything highlighted, then sign it. UIA says a faxed or mailed protest or appeal must be signed. Keep a copy and your proof of the date UIA got it. You can also use the state's own form, <a href="https://www.michigan.gov/leo/-/media/Project/Websites/leo/Documents/UIA/Employer-Forms/UIA-1733-Protest-of-a-Determination.pdf" target="_blank" rel="noopener">Form UIA 1733</a>, which has a protest side and an appeal side.</p>
+  </section>
+
+  <section class="panel" id="s-court" aria-labelledby="h-court" hidden>
+    <h2 id="h-court">2. Going to circuit court</h2>
+    <p class="lede">An appeal from the Appeals Commission is filed in a circuit court, with court forms and a filing fee, so this page doesn't draft one. Free legal help is listed below. Bring the Commission's decision and the date it was mailed.</p>
+  </section>
+
+  <section class="gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Free help</h2>
+    <ul>
+      <li><strong>UIA Advocacy Program, 1-800-638-3994, option 2.</strong> A free advocate can help you at your first hearing with a judge. Call after you get your Notice of Hearing, at least two business days before the hearing. Some cases don't qualify.</li>
+      <li><a href="https://michiganlegalhelp.org/resources/employment/overview-of-unemployment-benefits" target="_blank" rel="noopener">Michigan Legal Help: Overview of Unemployment Benefits</a>, and its <a href="https://michiganlegalhelp.org/guide-to-legal-help" target="_blank" rel="noopener">Guide to Legal Help</a> to find free legal aid near you.</li>
+      <li><a href="https://www.michbar.org/public_resources/legalaid" target="_blank" rel="noopener">State Bar of Michigan legal aid directory</a>. Look for "employment" or "unemployment."</li>
+      <li>UIA customer service: 1-866-500-0017 (TTY 1-866-366-0004), Monday to Friday, 8 AM to 4:30 PM. Phones and offices are closed from 4:30 PM Monday, Nov. 2, 2026 until 8 AM Monday, Nov. 9.</li>
+      <li><a href="https://www.michigan.gov/lara/bureau-list/moahr/employment/unemployment" target="_blank" rel="noopener">MOAHR unemployment hearings</a>: 313-456-2700, MOAHRUA@michigan.gov.</li>
+      <li><a href="https://www.michigan.gov/leo/boards-comms-councils/welcome-to-the-michigan-unemployment-insurance-appeals-commission" target="_blank" rel="noopener">Unemployment Insurance Appeals Commission</a>: 800-738-6372 or 517-284-9300.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> Deadlines come from the Michigan Employment Security Act: MCL 421.32a (protests and appeals to a judge), 421.32 (monetary determinations), 421.33 (judge decisions), 421.34 (Appeals Commission), 421.38 (circuit court), 421.49 (weekends and legal holidays), and 421.62 (overpayments), plus MCL 435.101 (Michigan's legal holidays), MCL 8.6 (counting days), and Michigan Administrative Code R 421.270 (good cause). UIA's own rules come from its Protests and Appeals page, its Handbook for Unemployed Workers (July 2026), Form UIA 1733 (July 2026), its guide to appeals hearings, its 2026 law changes page, and its MiUI switchover page. All were checked against the official sources on October 31, 2026.</p>
+    <p>Days are calendar days, counted starting the day after the mail date. When day 30 lands on a Saturday, Sunday, or Michigan legal holiday, the law moves the deadline to the next day that isn't one. UIA counts a protest or appeal as filed when it has it in hand. A postmark doesn't count. Green cards are what the rule says directly. Amber cards depend on your facts. Red cards mean act now.</p>
+    <p>This page is for workers. It doesn't cover employer protests, federal pandemic programs (PUA), or criminal fraud charges. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+    <p><a href="https://free-to-all-ai.github.io/tools/">More free tools from Free to All AI</a></p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const DAY = 86400000;
+  const parse = v => { if (!v) return null; const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); };
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const add = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+  const addYears = (d, n) => { const x = new Date(d.getFullYear() + n, d.getMonth(), d.getDate()); return x.getMonth() === d.getMonth() ? x : new Date(x.getFullYear(), x.getMonth(), 0); };
+  const fmt = d => d.toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" });
+  const plain = d => d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  const weekday = d => d.toLocaleDateString("en-US", { weekday: "long" });
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const diff = (a, b) => Math.round((b - a) / DAY);
+  const same = (a, b) => a && b && a.getTime() === b.getTime();
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const val = (form, name) => { const el = form.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; };
+  const LABEL = { law: "The rule says", facts: "Depends on your facts", help: "Act now" };
+  const MCL = s => `https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-${s}`;
+  const UIA_PDF = "https://www.michigan.gov/leo/-/media/Project/Websites/leo/Documents/UIA/";
+  const SRC = {
+    "MCL 421.32": MCL("421-32"), "MCL 421.32a": MCL("421-32a"), "MCL 421.33": MCL("421-33"), "MCL 421.34": MCL("421-34"),
+    "MCL 421.38": MCL("421-38"), "MCL 421.49": MCL("421-49"), "MCL 421.62": MCL("421-62"), "MCL 435.101": MCL("435-101"), "MCL 8.6": MCL("8-6"),
+    "R 421.270": "https://www.law.cornell.edu/regulations/michigan/Mich-Admin-Code-R-421-270",
+    "UIA Protests and Appeals": "https://www.michigan.gov/leo/bureaus-agencies/uia/tools/publications/protest-and-appeal-process",
+    "UIA Protest Rights": "https://www.michigan.gov/leo/bureaus-agencies/uia/assets/protest-appeal-rights",
+    "UIA Handbook": UIA_PDF + "Claimant-Forms/UIA-1901.pdf",
+    "Form UIA 1733": UIA_PDF + "Employer-Forms/UIA-1733-Protest-of-a-Determination.pdf",
+    "Hearings Guide": UIA_PDF + "Publications/1800-Hearings-Handbook-4-23final--sec.pdf",
+    "MiUI Switch": "https://www.michigan.gov/leo/bureaus-agencies/uia/miui-university/overview",
+    "UIA Law Changes": "https://www.michigan.gov/UIALawChanges",
+    "MOAHR": "https://www.michigan.gov/lara/bureau-list/moahr/employment/unemployment",
+    "UIAC": "https://www.michigan.gov/leo/boards-comms-councils/welcome-to-the-michigan-unemployment-insurance-appeals-commission",
+    "Michigan Legal Help": "https://michiganlegalhelp.org/resources/employment/new-unemployment-benefits-protections-workers"
+  };
+
+  // Where each kind of notice goes, from the UIA Handbook (July 2026) and Form UIA 1733 (Rev. 07-26).
+  const PROTEST = { fax: "1-517-636-0427", mail: "Unemployment Insurance Agency\nP.O. Box 169\nGrand Rapids, MI 49501-0169" };
+  const APPEAL = { fax: "1-616-356-0739", mail: "Unemployment Insurance Agency\nP.O. Box 124\nGrand Rapids, MI 49501-0124" };
+  const UIAC = { fax: "517-241-7326", email: "LEO-UIAC-Info@michigan.gov", mail: "Unemployment Insurance Appeals Commission\nP.O. Box 30475\nLansing, MI 48909-7975" };
+  const STAGE = {
+    det:   { doc: "Notice of Determination", noun: "protest", uia: true, to: PROTEST, law: [["MCL 421.32a", "(1)"]] },
+    mon:   { doc: "Monetary Determination", noun: "protest", uia: true, to: PROTEST, law: [["MCL 421.32", "(e)"], ["MCL 421.32a", "(1)"]] },
+    redet: { doc: "Notice of Redetermination", noun: "appeal", uia: true, to: APPEAL, law: [["MCL 421.32a", "(1)"]] },
+    alj:   { doc: "administrative law judge's decision", noun: "appeal", uia: false, to: UIAC, law: [["MCL 421.33", "(1)-(2)"]] },
+    uiac:  { doc: "Appeals Commission decision", noun: "circuit court appeal", uia: false, to: null, law: [["MCL 421.38", "(1)"], ["MCL 421.34", "(7)"]] }
+  };
+
+  // Michigan legal holidays, MCL 435.101(1). These are the days MCL 421.49 skips. The statute names the
+  // dates themselves and has no "observed" rule, so a holiday on a weekend doesn't add a weekday.
+  const nthDow = (y, m, dow, n) => { const f = new Date(y, m, 1); return new Date(y, m, 1 + (dow - f.getDay() + 7) % 7 + 7 * (n - 1)); };
+  const lastDow = (y, m, dow) => { const l = new Date(y, m + 1, 0); return add(l, -((l.getDay() - dow + 7) % 7)); };
+  function legalIn(y) {
+    return [
+      [new Date(y, 0, 1), "New Year's Day"], [nthDow(y, 0, 1, 3), "Martin Luther King, Jr. Day"],
+      [new Date(y, 1, 12), "Lincoln's Birthday"], [nthDow(y, 1, 1, 3), "Washington's Birthday (Presidents Day)"],
+      [lastDow(y, 4, 1), "Memorial Day"], [new Date(y, 5, 19), "Juneteenth"], [new Date(y, 6, 4), "Independence Day"],
+      [nthDow(y, 8, 1, 1), "Labor Day"], [nthDow(y, 9, 1, 2), "Columbus Day"], [new Date(y, 10, 11), "Veterans Day"],
+      [nthDow(y, 10, 4, 4), "Thanksgiving"], [new Date(y, 11, 25), "Christmas Day"]
+    ];
+  }
+  const LEG = new Map();
+  function legalName(d) {
+    const y = d.getFullYear();
+    if (!LEG.has(y)) LEG.set(y, new Map(legalIn(y).map(([x, n]) => [iso(x), n])));
+    return LEG.get(y).get(iso(d)) || null;
+  }
+  const weekend = d => d.getDay() === 0 || d.getDay() === 6;
+  const legalDay = d => !weekend(d) && !legalName(d);
+  const roll = d => { let x = d; while (!legalDay(x)) x = add(x, 1); return x; };
+
+  // Days State of Michigan offices close, per Civil Service Regulation 5.08 (SPDOC 26-07). Saturday holidays
+  // are observed Friday and Sunday holidays Monday, except Christmas Eve and New Year's Eve, which move to
+  // Thursday when on a Friday and to Friday when on a Sunday. Used only to warn that offices are closed.
+  function observed(d, eve) {
+    const w = d.getDay();
+    if (eve && w === 5) return add(d, -1);
+    if (eve && w === 0) return add(d, -2);
+    if (w === 6) return add(d, -1);
+    if (w === 0) return add(d, 1);
+    return d;
+  }
+  function closedIn(y) {
+    const thanks = nthDow(y, 10, 4, 4);
+    const h = [
+      observed(new Date(y, 0, 1)), nthDow(y, 0, 1, 3), nthDow(y, 1, 1, 3), lastDow(y, 4, 1),
+      observed(new Date(y, 5, 19)), observed(new Date(y, 6, 4)), nthDow(y, 8, 1, 1),
+      observed(new Date(y, 10, 11)), thanks, add(thanks, 1),
+      observed(new Date(y, 11, 24), true), observed(new Date(y, 11, 25)), observed(new Date(y, 11, 31), true)
+    ];
+    if (y % 2 === 0) h.push(add(nthDow(y, 10, 1, 1), 1)); // general election day, even years only
+    return h;
+  }
+  const CLO = new Map();
+  function officeClosed(d) {
+    if (weekend(d)) return true;
+    const y = d.getFullYear();
+    for (const yy of [y - 1, y, y + 1]) {
+      if (!CLO.has(yy)) CLO.set(yy, new Set(closedIn(yy).map(iso)));
+      if (CLO.get(yy).has(iso(d))) return true;
+    }
+    return false;
+  }
+  const whatDay = d => legalName(d) ? `${legalName(d)}, a Michigan legal holiday` : `a ${weekday(d)}`;
+
+  // The switch from MiWAM to MiUI (michigan.gov/UIA, Oct. 2026). Systems, phones, and offices close at
+  // 4:30 PM Monday, Nov. 2, 2026 and MiUI opens at 8 AM Monday, Nov. 9. UIA says a protest or appeal
+  // due date that falls in that window becomes Nov. 9. Fax and mail are received as usual.
+  const DT_START = new Date(2026, 10, 2), DT_END = new Date(2026, 10, 9);
+  const DT_START_AT = new Date(2026, 10, 2, 16, 30), DT_END_AT = new Date(2026, 10, 9, 8, 0);
+  const preSwitch = now < DT_START_AT, inSwitch = now >= DT_START_AT && now < DT_END_AT;
+  const online = preSwitch
+    ? "online in MiWAM (sign in through MiLogin at Michigan.gov/UIA) until 4:30 PM Monday, Nov. 2, 2026, when MiWAM shuts down for good. From 8 AM Monday, Nov. 9, file online in MiUI, the new system"
+    : inSwitch
+      ? "online in MiUI, the new system, once it opens at 8 AM Monday, Nov. 9, 2026. Until then UIA's online system is down, so fax or mail it"
+      : "online in MiUI (sign in through MiLogin at Michigan.gov/UIA)";
+
+  function when(d) {
+    const n = diff(today, d);
+    if (n > 0) return `${fmt(d)} (${n} day${n === 1 ? "" : "s"} from today)`;
+    if (n === 0) return `${fmt(d)} (today)`;
+    return `${fmt(d)} (${-n} day${n === -1 ? "" : "s"} ago)`;
+  }
+  function card(level, title, paras, cites = [], next = "") {
+    const c = cites.map(([k, p, page]) => `<a class="cite" href="${SRC[k]}${page ? "#page=" + page : ""}" target="_blank" rel="noopener">${esc(k + (p ? " " + p : ""))}</a>`).join("");
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${LABEL[level]}</span></div>
+      ${[].concat(paras).filter(Boolean).map((t, i) => t.startsWith("<div") ? t : `<p${i ? ' class="small"' : ""}>${t}</p>`).join("")}
+      ${next ? `<p class="next"><strong>What you can do:</strong> ${next}</p>` : ""}
+      ${c ? `<div class="cites">${c}</div>` : ""}
+    </article>`;
+  }
+
+  const fp = document.getElementById("f-plan");
+  const nIn = document.getElementById("n-date");
+  nIn.value = iso(add(today, -5));
+
+  let state = {};
+  function plan() {
+    const stage = val(fp, "stage"), S = STAGE[stage];
+    const N = parse(nIn.value);
+    const moneyAsk = stage === "det" || stage === "redet";
+    document.getElementById("money-wrap").hidden = !moneyAsk;
+    const money = moneyAsk && document.getElementById("c-over").checked;
+    const fraud = money && document.getElementById("c-fraud").checked;
+    const c = [];
+    state = { stage, N, late: false };
+    if (!N) {
+      show([card("facts", "Enter the mail date on your notice", "Every deadline here counts from the date the notice was mailed. Look near the top of the notice.")]);
+      return;
+    }
+    if (diff(today, N) > 0) c.push(card("facts", "That date is in the future", "Check the mail date printed on your notice. The deadlines below count from it."));
+
+    // Day 30, then MCL 421.49, then the MiUI switch rule.
+    const D30 = add(N, 30);
+    let due = roll(D30);
+    const rolled = !same(due, D30);
+    const openHoliday = rolled && [...Array(diff(D30, due)).keys()].map(i => add(D30, i)).some(d => legalName(d) && !officeClosed(d));
+    let switchMoved = false, switchDay = false;
+    if (S.uia) {
+      if (due > DT_START && due < DT_END) { due = DT_END; switchMoved = true; }
+      else if (same(due, DT_START)) switchDay = true;
+    }
+    state.due = due; state.D30 = D30;
+    state.late = diff(today, due) < 0;
+    const left = diff(today, due);
+    const by = S.uia ? "UIA must have it" : stage === "alj" ? "The Appeals Commission must have it" : "The court must have it";
+
+    // The main deadline card
+    const verb = { det: "Get your protest to UIA", mon: "Get your protest to UIA", redet: "Get your appeal to UIA",
+      alj: "Appeal to the Appeals Commission", uiac: "Ask the circuit court to review it" }[stage];
+    const cites = S.law.concat([["MCL 421.49", "(1)"], ["MCL 8.6", ""]]);
+    if (rolled) cites.push(["MCL 435.101", "(1)"]);
+    if (S.uia) cites.push(["UIA Protests and Appeals", ""]);
+    if (switchMoved || switchDay) cites.push(["MiUI Switch", ""]);
+    if (stage === "alj") cites.push(["Hearings Guide", "p. 21", 22]);
+    if (!state.late) {
+      c.push(card(left <= 10 ? "help" : "law", `${verb} by ${plain(due)}`, [
+        `You have 30 calendar days from the date your ${S.doc} was mailed, ${plain(N)}. Day 1 is the day after. ${by} in hand by ${when(due)}. A postmark doesn't count, so mailing it on the last day is too late.`,
+        rolled ? `Day 30 is ${plain(D30)}, which is ${whatDay(D30)}. Michigan law moves the deadline to the end of the next day that isn't a weekend or legal holiday${switchMoved ? `, ${plain(roll(D30))}` : ""}.${openHoliday ? " State offices stay open on that holiday, so UIA may not count it." : ""} A fax goes through any day, so getting it in by ${plain(D30)} takes away any doubt.` : "",
+        switchMoved ? `That date falls while UIA's systems are shut down for the switch to MiUI (4:30 PM Monday, Nov. 2 to 8 AM Monday, Nov. 9, 2026). UIA says a protest or appeal due in that window is due Nov. 9 instead. Faxes and mail are still received during the shutdown, and filing early beats counting on the extra days.` : "",
+        switchDay ? `Nov. 2 is the day UIA shuts its systems down for the switch to MiUI. MiWAM closes for good at 4:30 PM, and phones and offices close too. UIA says due dates inside the shutdown move to Nov. 9, but Nov. 2 is the day it starts, so treat Nov. 2 as your deadline: file in MiWAM before 4:30 PM, or fax it that day.` : "",
+        !rolled && !switchMoved && officeClosed(due) ? `UIA's offices are closed that day for a state holiday, but the law doesn't move the deadline for that. File online or fax it by then.` : "",
+        stage === "alj" ? "The judge's decision also lists this deadline on its last page. If it shows an earlier date, go by the decision. Within the same 30 days you can instead ask the judge for a rehearing, for example if you have facts you couldn't get before the hearing." : "",
+        stage === "uiac" ? "Within the same 30 days you can instead ask the Commission for a rehearing. A circuit court appeal has a filing fee. Talk to a lawyer or legal aid before you file." : ""
+      ], cites));
+    } else {
+      // Missed it
+      const year = addYears(N, 1), three = addYears(N, 3);
+      const paras = [`The 30-day deadline was ${plain(due)}. You can still file, but it's now a late ${S.noun}.`];
+      const lc = [];
+      if (S.uia) {
+        paras.push(`Write down why it's late and include it. UIA then decides whether you had "good cause." The rule lists examples: you didn't get the notice in time, the mail delivered it late, UIA gave you wrong information, you had new facts you couldn't have known, or you had a real reason you couldn't act sooner. If UIA says no, you can appeal that to a judge.`);
+        if (stage === "redet") paras.push(`UIA can only reconsider within 1 year of the mail date of the first determination on this issue (3 years if it found fraud). That's the original Notice of Determination, not this redetermination.`);
+        else paras.push(`UIA can only reconsider within 1 year of the mail date, so by ${plain(year)}${fraud ? `. Because the notice found fraud, the limit is 3 years, so by ${plain(three)}` : " (3 years if the notice found fraud)"}.${diff(today, fraud ? three : year) < 0 ? " That has passed too, so talk to legal aid about what's left." : ""}`);
+        lc.push(["MCL 421.32a", "(2)"], ["R 421.270", ""], ["Hearings Guide", "p. 7", 8]);
+      } else if (stage === "alj") {
+        paras.push(`If you ask the judge for a rehearing late but within 1 year of the decision (by ${plain(year)}), it's treated as a request to reopen the case. The judge decides whether you had good cause for being late.${diff(today, year) < 0 ? " That year has passed too, so talk to legal aid." : ""}`);
+        lc.push(["MCL 421.33", "(1)"], ["Hearings Guide", "p. 21", 22]);
+      } else {
+        paras.push(`The Commission can reopen its own decision for good cause if you ask within 1 year of the mail date (by ${plain(year)}).${diff(today, year) < 0 ? " That year has passed too." : ""} Talk to a lawyer or legal aid.`);
+        lc.push(["MCL 421.34", "(7)"]);
+      }
+      c.push(card("help", `The 30-day deadline has passed`, paras, lc, "File right away. Every day makes it harder to show good cause."));
+    }
+
+    // How to file
+    if (S.uia) {
+      c.push(card("law", `How to file your ${S.noun}`, [
+        `File ${online}. UIA says online is best. Don't use the UIA chatbot, which can't take a protest or appeal.`,
+        `Or fax it to ${S.to.fax}, or mail it to:`,
+        `<div class="addr">${esc(S.to.mail)}</div>`,
+        `A faxed or mailed ${S.noun} must be signed. Put your name, your Michigan Identification Number (MIN), and the case number on everything you send. Use Form UIA 1733 or a signed letter like the one below. Attach copies of anything that backs you up.`,
+        `Keep proof of the date: print the fax confirmation page, or save the online confirmation. Mail can take days, so don't mail it close to the deadline.`
+      ], [["UIA Protests and Appeals", ""], ["Form UIA 1733", ""], ["UIA Handbook", "contacts", 3]],
+        "Your notice also lists the address and fax number. If it shows a different one, use the one on your notice."));
+    } else if (stage === "alj") {
+      c.push(card("law", "How to appeal to the Appeals Commission", [
+        `The Unemployment Insurance Appeals Commission (UIAC) is separate from UIA and from the judges. You can file with the appeal form on its website (E-File), email ${UIAC.email}, fax ${UIAC.fax}, or mail:`,
+        `<div class="addr">${esc(UIAC.mail)}</div>`,
+        "The Commission reviews the recording of your hearing and decides whether the judge got the facts and the law right. It usually doesn't hold a new hearing.",
+        "To ask for a rehearing instead, send it to MOAHR at the address on the judge's decision, or call MOAHR at 313-456-2700."
+      ], [["UIAC", ""], ["MOAHR", ""], ["Hearings Guide", "p. 21", 22]], "Keep proof of the date it was received."));
+    } else {
+      c.push(card("facts", "Where a circuit court appeal goes", [
+        "You file it in the circuit court for the county where you live, or where you worked. The court reviews the record of your hearing. It can reverse the decision only if it's against the law or not backed by enough evidence.",
+        "There is a filing fee. Court rules and forms apply, so get legal help."
+      ], [["MCL 421.38", "(1)"]]));
+    }
+
+    // MiUI switch notice while it matters
+    if (now < DT_END_AT) c.push(card(inSwitch ? "help" : "facts", "UIA is switching to a new system, MiUI", [
+      `From 4:30 PM Monday, Nov. 2, 2026 until 8 AM Monday, Nov. 9, all UIA systems, phone lines, and local offices are closed. MiWAM and MARVIN shut down for good. You can't file online, certify, or upload documents in that window, but UIA says faxes and mail are received as usual.`,
+      S.uia ? "UIA says a protest or appeal due date that falls during the shutdown becomes Nov. 9. The deadline above already counts that." : "",
+      preSwitch ? "Certify for benefits before 4:30 PM Monday, Nov. 2. Anyone can certify that day, whatever their usual day. If you miss it, you can certify for the past weeks once MiUI opens." : "",
+      "In MiUI you'll certify every week instead of every two weeks, and benefits will be paid weekly."
+    ], [["MiUI Switch", ""]]));
+
+    // Keep certifying
+    if (stage !== "uiac" || !state.late) c.push(card("facts", "Keep certifying while you wait", [
+      "Keep certifying for benefits on time while your protest or appeal is open, until you're back at full-time work. If you win, UIA pays only the weeks you certified on time.",
+      "This matters even if you're getting nothing right now. Weeks you don't certify on time aren't paid unless UIA finds you had good cause for being late."
+    ], [["UIA Handbook", "p. 18", 20], ["UIA Handbook", "p. 12", 14]]));
+
+    // What happens next
+    if (stage === "det" || stage === "mon") c.push(card("law", "What happens after you protest", [
+      "UIA looks at it again and mails you a Notice of Redetermination that keeps, changes, or reverses the decision. Sometimes UIA sends the case straight to a judge instead.",
+      "If you still disagree with the redetermination, you have another 30 days from its mail date to appeal for a hearing with an administrative law judge. Come back and pick Notice of Redetermination above."
+    ], [["MCL 421.32a", "(1)"], ["UIA Handbook", "p. 18", 20]]));
+    if (stage === "redet") {
+      c.push(card("law", "What happens after you appeal", [
+        "UIA sends your appeal to the Michigan Office of Administrative Hearings and Rules (MOAHR). MOAHR mails a Notice of Hearing at least 10 days before the hearing. Most hearings are by phone. Read the whole notice when it comes.",
+        "Send any papers you want the judge to see to the judge and to the other side (usually your old employer) before the hearing, even if you already gave them to UIA. The fax number is on your Notice of Hearing.",
+        "A free advocate from UIA's Advocacy Program can help you at this hearing. Call 1-800-638-3994, option 2, after you get the Notice of Hearing and at least two business days before the hearing. Not getting an advocate in time isn't a reason to move the hearing."
+      ], [["Hearings Guide", "p. 2-7", 3], ["MOAHR", ""], ["Form UIA 1733", "p. 2", 2]]));
+      c.push(card("facts", "More than one case on your claim?", [
+        "Since July 17, 2026, you can ask to have your related cases heard together at one hearing. You have to ask when you file this appeal: in your online account, on Form UIA 6631, or in your letter. The letter below can include it."
+      ], [["MCL 421.32a", "(7)"], ["UIA Law Changes", ""]]));
+    }
+
+    // Overpayments and fraud
+    if (money) {
+      c.push(card("facts", "If the notice says you were overpaid", [
+        `A notice that says you were overpaid is a determination too, so you protest it by the same 30-day deadline.`,
+        `If you protest or appeal on time, UIA agreed in a 2024 court settlement not to collect from you until there's a final decision. If you file within 30 days after the deadline, it decides good cause before it collects.`,
+        `You can also ask UIA to waive (cancel) the repayment for financial hardship, a UIA mistake, or wrong wages your employer reported. Since July 17, 2026 you can apply up to four times a year, and a waiver denial can be protested too.`
+      ], [["MCL 421.62", "(c)"], ["Michigan Legal Help", ""], ["UIA Law Changes", ""]]));
+      if (fraud) c.push(card("help", "A fraud finding is serious", [
+        "On top of paying it back, a fraud finding can bring penalties (UIA's handbook says up to 1.5 times the amount). Talk to legal aid before you file if you can, but don't let the deadline pass.",
+        "If an advocate helps you at a hearing and the judge finds fraud, you pay the advocate's cost."
+      ], [["UIA Handbook", "p. 16", 18], ["Form UIA 1733", "p. 2", 2]]));
+    }
+
+    show(c);
+  }
+  function show(c) {
+    document.getElementById("r-plan").innerHTML =
+      `<div class="results-head"><h2>Your deadline</h2>
+        <div class="legend"><span class="tag law">The rule says</span><span class="tag facts">Depends on your facts</span><span class="tag help">Act now</span></div></div>` + c.join("");
+    letter();
+  }
+
+  // Protest or appeal letter
+  const fl = document.getElementById("f-letter");
+  const g = id => document.getElementById(id).value.trim();
+  const F = (v, ph) => v ? esc(v) : `<span class="fill">[${ph}]</span>`;
+  function letter() {
+    const stage = state.stage, S = STAGE[stage] || STAGE.det, N = state.N;
+    const court = stage === "uiac";
+    document.getElementById("s-letter").hidden = court;
+    document.getElementById("s-court").hidden = !court;
+    if (court) return;
+    document.getElementById("late-wrap").hidden = !state.late;
+    document.getElementById("combine-wrap").hidden = stage !== "redet";
+    const combine = stage === "redet" && document.getElementById("c-combine").checked;
+    document.getElementById("a-combine").hidden = !combine;
+    const kind = stage === "alj" ? "appeal to the Appeals Commission" : S.noun;
+    document.getElementById("h-letter-kind").textContent = kind;
+    document.getElementById("h-letter-sub").textContent = `Your ${stage === "alj" ? "appeal" : S.noun} letter`;
+    document.getElementById("l-case").textContent = stage === "alj" ? "Docket or appeal number on the decision" : "Case number on the notice";
+    const name = g("a-name"), why = g("a-why"), dated = N ? plain(N) : F("", "Mail date");
+    const L = [];
+    L.push(plain(today), "");
+    if (S.uia) L.push("To: " + esc(S.to.mail), `Fax: ${S.to.fax}`, "");
+    else L.push("To: " + esc(UIAC.mail), `Fax: ${UIAC.fax}   Email: ${UIAC.email}`, "");
+    const re = { det: "Protest of a Determination", mon: "Protest of a Monetary Determination", redet: "Appeal of a Redetermination", alj: "Appeal of an Administrative Law Judge Decision" }[stage];
+    L.push(`Re: ${re}`);
+    L.push(`Name: ${F(name, "Your name")}`, `Michigan Identification Number (MIN): ${F(g("a-min"), "MIN")}`, `${stage === "alj" ? "Docket or appeal number" : "Case number"}: ${F(g("a-case"), stage === "alj" ? "Docket number" : "Case number")}`, `Date ${stage === "alj" ? "the decision" : "the " + S.doc} was mailed: ${dated}`, "");
+    const ask = {
+      det: `I protest the Notice of Determination mailed ${dated} and ask for a redetermination.`,
+      mon: `I protest the Monetary Determination mailed ${dated} and ask for a redetermination.`,
+      redet: `I appeal the Notice of Redetermination mailed ${dated} and ask for a hearing before an administrative law judge.`,
+      alj: `I appeal the decision of the administrative law judge mailed ${dated} to the Unemployment Insurance Appeals Commission.`
+    }[stage];
+    L.push(ask, "");
+    L.push(`I disagree with this decision because: ${why ? esc(why) : F("", "Why the decision is wrong")}`, "");
+    if (state.late) L.push(`I did not file within 30 calendar days of when the ${stage === "alj" ? "decision" : S.doc} was mailed because: ${g("a-late") ? esc(g("a-late")) : F("", "Why it's late, with dates")}`, "");
+    if (combine) L.push(`I also have ${g("a-combine") ? "these cases pending on this claim: " + esc(g("a-combine")) : F("", "Case numbers of other pending cases") + " pending on this claim"}. I ask that they be combined into one hearing with this appeal.`, "");
+    L.push("I have attached copies of documents that support this.", "");
+    L.push("I certify that the information I have reported is true and correct.", "");
+    L.push("Signature: ______________________________   Date: ______________", "", F(name, "Your name"), F("", "Phone number"), F("", "Mailing address"));
+    document.getElementById("letter").innerHTML = L.join("\n");
+  }
+
+  [fp, fl].forEach(f => { f.addEventListener("input", plan); f.addEventListener("change", plan); f.addEventListener("submit", e => e.preventDefault()); });
+  plan();
+
+  document.getElementById("copy").addEventListener("click", () => {
+    const el = document.getElementById("letter"), text = el.innerText, msg = document.getElementById("copied");
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = "Selected. Press Ctrl+C or Cmd+C to copy."; };
+    try {
+      navigator.clipboard.writeText(text).then(() => { msg.textContent = "Copied"; }, fallback);
+    } catch (e) { fallback(); }
+  });
+  document.getElementById("print").addEventListener("click", () => {
+    document.body.classList.add("printing");
+    window.print();
+    setTimeout(() => document.body.classList.remove("printing"), 500);
+  });
+
+  // Calendar file with the deadline, built on this device
+  document.getElementById("ics").addEventListener("click", () => {
+    if (!state.N || state.late) return;
+    const S = STAGE[state.stage];
+    const ev = [];
+    const d8 = d => iso(d).replace(/-/g, "");
+    const stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d+Z$/, "Z");
+    const push = (d, title, desc) => ev.push(["BEGIN:VEVENT", `UID:${d8(d)}-${ev.length}-uia-protest`, `DTSTAMP:${stamp}`,
+      `DTSTART;VALUE=DATE:${d8(d)}`, `DTEND;VALUE=DATE:${d8(add(d, 1))}`, `SUMMARY:${title}`, `DESCRIPTION:${desc}`,
+      "BEGIN:VALARM", "TRIGGER:-P3D", "ACTION:DISPLAY", `DESCRIPTION:${title}`, "END:VALARM", "END:VEVENT"].join("\r\n"));
+    const note = `For the ${S.doc} mailed ${plain(state.N)}. It must be received by this date. A postmark doesn't count. Check your notice. Information\\, not legal advice.`;
+    const what = state.stage === "alj" ? "UIAC appeal" : state.stage === "uiac" ? "circuit court appeal" : "UIA " + S.noun;
+    if (state.D30 < state.due && diff(today, state.D30) >= 0) push(state.D30, `Safest day to file ${what}`, note);
+    push(state.due, `Last day: ${what} must be received`, note);
+    const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Free to All AI//UIA Protest Deadline//EN", ...ev, "END:VCALENDAR", ""].join("\r\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
+    a.download = "uia-deadline.ics";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+})();
+</script>
+</body>
+</html>
