@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Detroit Hospital Financial Assistance Check (Charity Care)</title>
+<meta name="description" content="Can't pay a hospital bill? See if Henry Ford, Corewell (Beaumont), Trinity, Ascension, McLaren, or DMC may cut or erase it under their charity care rules. Free.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/hospital-aid/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Detroit Hospital Financial Assistance Check (Charity Care)">
+<meta property="og:description" content="Can't pay a hospital bill? See if Henry Ford, Corewell (Beaumont), Trinity, Ascension, McLaren, or DMC may cut or erase it under their charity care rules. Free.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/hospital-aid/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/hospital-aid.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. Household questions, then a summary of where the income falls, then one card per hospital system, then a quick table of every policy, how to apply, a request letter, rights, and sources. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --none: #5d6b77; --none-bg: #e9edf0;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    --none: #a3b2bf; --none-bg: #24313c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  --none: #a3b2bf; --none-bg: #24313c;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr);
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+section { display: grid; gap: 12px; min-width: 0; grid-template-columns: minmax(0, 1fr); }
+section > *, .wrap > * { min-width: 0; }
+.box {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 16px; min-width: 0;
+}
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="number"], select, textarea {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px; min-width: 0;
+}
+select { max-width: 100%; }
+textarea { max-width: none; font-size: 15px; line-height: 1.5; min-height: 280px; resize: vertical; }
+input[type="number"] { font-variant-numeric: tabular-nums; }
+.inline { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.inline input { flex: 1 1 140px; max-width: 220px; }
+.inline select { width: auto; flex: 0 0 auto; }
+.opts { display: grid; gap: 6px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.opts input { margin-top: 5px; accent-color: var(--accent); }
+.hint { font-size: 14px; color: var(--muted); }
+details.more > summary { cursor: pointer; font-weight: 700; color: var(--accent); }
+details.more[open] > summary { margin-bottom: 12px; }
+button.btn {
+  font: inherit; font-size: 15px; font-weight: 700; cursor: pointer;
+  border-radius: 8px; padding: 9px 14px; border: 1.5px solid var(--accent);
+  background: var(--accent); color: var(--surface);
+}
+button.btn.ghost { background: transparent; color: var(--accent); }
+button.btn:hover { filter: brightness(1.08); }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* Tables */
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: 13px; font-weight: 700; color: var(--muted); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+td.n { font-family: var(--f-mono); white-space: nowrap; }
+tr.me td { background: var(--accent-soft); }
+
+/* Summary */
+.total {
+  background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--accent);
+  border-radius: 12px; padding: 18px; display: grid; gap: 10px;
+}
+.big { font-family: var(--f-display); font-weight: 800; font-size: clamp(34px, 8vw, 48px); line-height: 1; font-variant-numeric: tabular-nums; }
+.prompt { color: var(--muted); }
+
+/* Cards */
+.results { display: grid; gap: 12px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 10px; border-left: 5px solid var(--line);
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card.none { border-left-color: var(--none); }
+.card.mine { box-shadow: 0 0 0 2px var(--accent); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.card .sub { font-size: 14px; color: var(--muted); }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.tag.none { color: var(--none); background: var(--none-bg); }
+.tag.you { color: var(--accent); background: var(--accent-soft); }
+.verdict { font-weight: 700; }
+.est { font-family: var(--f-mono); font-size: 15px; font-variant-numeric: tabular-nums; }
+.conds { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 15px; }
+.conds li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 6px; }
+.conds .ic { font-weight: 700; text-align: center; }
+.conds .ok .ic { color: var(--law); }
+.conds .warn .ic { color: var(--facts); }
+.conds .info .ic { color: var(--muted); }
+.card details > summary { cursor: pointer; font-size: 15px; color: var(--accent); }
+.card details ul { margin: 6px 0 0; padding-left: 20px; font-size: 15px; display: grid; gap: 2px; }
+.contact { font-size: 15px; }
+.checked { font-size: 13px; color: var(--muted); }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.phone { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+ol.steps { margin: 0; padding-left: 22px; display: grid; gap: 14px; }
+ol.steps > li { padding-left: 4px; }
+ol.steps > li > strong:first-child { display: block; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.copied { font-size: 14px; color: var(--law); }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+@media print {
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .noprint, .notice { display: none !important; }
+  .wrap { padding: 0; gap: 16px; }
+  .card, .total, .box, .scroll { break-inside: avoid; border-color: #999; }
+  a { color: #000; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Detroit area · hospital bills · free</span>
+    <h1>Detroit Hospital Financial Assistance Check</h1>
+    <p class="lede">Can't pay a hospital bill? Most big hospitals around Detroit have a financial assistance policy, often called charity care, that erases or cuts bills for people under set income limits. Enter your household size and income to see how the policies at Henry Ford, Corewell Health (Beaumont), Trinity Health, McLaren, the Detroit Medical Center (DMC), and Michigan Medicine would likely treat you. The old Ascension hospitals around Detroit are Henry Ford hospitals now, so they're here too.</p>
+    <div class="notice">
+      <strong>This is information, not legal or financial advice.</strong>
+      <span>Only the hospital can approve you, after you apply. Results are estimates from each hospital's posted policy, checked on October 31, 2026. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="you-h">
+    <h2 id="you-h">About your household</h2>
+    <form class="box" id="f" novalidate>
+      <div class="row2">
+        <div class="field">
+          <label for="size">People in your household</label>
+          <input id="size" type="number" min="1" max="20" step="1" value="1" inputmode="numeric">
+          <span class="hint">Count yourself, a spouse or partner, and children or relatives who live with you and depend on you. Roommates don't count.</span>
+        </div>
+        <div class="field">
+          <label for="inc">Household income before taxes</label>
+          <div class="inline">
+            <input id="inc" type="number" min="0" step="1" inputmode="decimal" placeholder="e.g. 42000" aria-describedby="inc-hint">
+            <select id="per" aria-label="Income period">
+              <option value="year">per year</option>
+              <option value="month">per month</option>
+            </select>
+          </div>
+          <span class="hint" id="inc-hint">Add up everyone's pay, Social Security, unemployment, pension, child support, and other money coming in. Food assistance (SNAP) and housing help don't count.</span>
+        </div>
+      </div>
+
+      <div class="field"><span class="lbl" id="l-ins">Your health coverage when you got care</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-ins">
+          <label><input type="radio" name="ins" value="none" checked> No insurance</label>
+          <label><input type="radio" name="ins" value="private"> Insurance through work, the Marketplace, or on my own</label>
+          <label><input type="radio" name="ins" value="medicare"> Medicare, including Medicare Advantage</label>
+          <label><input type="radio" name="ins" value="medicaid"> Medicaid or the Healthy Michigan Plan</label>
+        </div>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label for="county">Where you live</label>
+          <select id="county">
+            <option value="">Choose your county</option>
+            <option value="wayne">Wayne County (including Detroit)</option>
+            <option value="oakland">Oakland County</option>
+            <option value="macomb">Macomb County</option>
+            <option value="washtenaw">Washtenaw County</option>
+            <option value="livingston">Livingston County</option>
+            <option value="stclair">St. Clair County</option>
+            <option value="lapeer">Lapeer County</option>
+            <option value="monroe">Monroe County</option>
+            <option value="jackson">Jackson County</option>
+            <option value="genesee">Genesee County</option>
+            <option value="othermi">Another Michigan county</option>
+            <option value="ohio">Ohio</option>
+            <option value="other">Somewhere else</option>
+          </select>
+          <span class="hint">Several hospitals only help people who live in their area.</span>
+        </div>
+        <div class="field">
+          <label for="hosp">Hospital that billed you (optional)</label>
+          <select id="hosp"><option value="">Compare all of them</option></select>
+        </div>
+      </div>
+
+      <details class="more" id="more">
+        <summary>Add your bill and savings for a closer answer (optional)</summary>
+        <div class="row2">
+          <div class="field">
+            <label for="bill">Medical bills you owe now ($)</label>
+            <input id="bill" type="number" min="0" step="1" inputmode="decimal" placeholder="e.g. 8500">
+            <span class="hint">What you owe for this hospital care, plus other medical bills from the past year. Several hospitals cut bills that are large compared to your income.</span>
+          </div>
+          <div class="field">
+            <label for="assets">Savings and investments ($)</label>
+            <input id="assets" type="number" min="0" step="1" inputmode="decimal" placeholder="e.g. 2000">
+            <span class="hint">Cash, bank accounts, stocks, and similar. Don't count your home or retirement accounts. Some hospitals have savings limits.</span>
+          </div>
+        </div>
+      </details>
+    </form>
+  </section>
+
+  <section aria-labelledby="res-h">
+    <h2 id="res-h">What each hospital's policy says for you</h2>
+    <div id="total" aria-live="polite"></div>
+    <div class="results" id="lawcards"></div>
+    <div class="results" id="cards"></div>
+    <div class="btns noprint" id="out-btns" hidden>
+      <button class="btn ghost" type="button" id="print">Print or save as PDF</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="glance-h">
+    <h2 id="glance-h">Income limits at a glance</h2>
+    <p class="hint" id="glance-note">Limits are a percent of the 2026 federal poverty guideline. Dollar amounts are yearly income before taxes for a household of <span id="glance-n">1</span>.<span id="glance-me" hidden> Shaded rows are the ones where your income is under the free-care limit.</span></p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th scope="col">Hospital system</th><th scope="col">Free care up to</th><th scope="col">Discounts up to</th><th scope="col" class="n">Free care limit for your household</th></tr></thead>
+        <tbody id="glance-rows"></tbody>
+      </table>
+    </div>
+    <details class="more">
+      <summary>See the 2026 poverty guidelines by household size</summary>
+      <div class="scroll">
+        <table>
+          <thead><tr><th scope="col">People</th><th scope="col" class="n">100%</th><th scope="col" class="n">200%</th><th scope="col" class="n">250%</th><th scope="col" class="n">300%</th><th scope="col" class="n">400%</th><th scope="col" class="n">500%</th></tr></thead>
+          <tbody id="fpl-rows"></tbody>
+        </table>
+      </div>
+      <p class="hint">Yearly income, from the U.S. Department of Health and Human Services <a href="https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines" target="_blank" rel="noopener">2026 poverty guidelines</a> for the 48 contiguous states. For each person past 8, add $5,680 to the 100% column.</p>
+    </details>
+  </section>
+
+  <section aria-labelledby="apply-h">
+    <h2 id="apply-h">How to apply</h2>
+    <div class="box">
+      <ol class="steps">
+        <li><strong>Ask for the application now, even if you're not sure you qualify.</strong> Call the number on the hospital's card above or apply in its patient portal (MyChart at Henry Ford, Corewell, and Trinity). Nonprofit hospitals must take applications until at least 240 days after the first bill they send after your care (<a href="https://www.law.cornell.edu/cfr/text/26/1.501(r)-1" target="_blank" rel="noopener">26 CFR 1.501(r)-1(b)(3)</a>). At Henry Ford's former Ascension hospitals, applying late only helps with what you haven't paid yet.</li>
+        <li><strong>Gather proof of income.</strong> Most applications ask for your last federal tax return, W-2s, recent pay stubs or benefit letters, recent bank statements, and a photo ID. Henry Ford asks for 2 months of pay stubs and bank statements. Corewell asks for 3 months and wants the application back within 10 days. If you have no income, a letter from whoever supports you usually works.</li>
+        <li><strong>Apply for Medicaid too if you might qualify.</strong> Henry Ford, McLaren, and Corewell say they may require it before they decide. You can apply at <a href="https://newmibridges.michigan.gov/" target="_blank" rel="noopener">MI Bridges</a>, and hospital financial counselors can help.</li>
+        <li><strong>Send it, keep a copy, and ask them to pause collections.</strong> Once you apply during the 240 days, a nonprofit hospital has to stop collection actions until it decides (<a href="https://www.law.cornell.edu/cfr/text/26/1.501(r)-6" target="_blank" rel="noopener">26 CFR 1.501(r)-6(c)</a>).</li>
+        <li><strong>Get the answer in writing, and appeal a denial.</strong> Henry Ford decides within 30 days of a complete application and takes written appeals within 30 days of a denial. McLaren takes appeals within 30 calendar days at financialassistance@mclaren.org. Trinity gives at least 30 days to appeal. Corewell reviews denials at the next level up.</li>
+        <li><strong>If you already paid, ask for money back.</strong> If you qualify, a nonprofit hospital must refund what you paid above what you owe under its policy, unless it's under $5 (<a href="https://www.law.cornell.edu/cfr/text/26/1.501(r)-6" target="_blank" rel="noopener">26 CFR 1.501(r)-6(c)(6)</a>).</li>
+        <li><strong>Check the doctor bills separately.</strong> Doctors, labs, and ambulance companies that bill on their own may not follow the hospital's policy. Each hospital posts a list of who is covered. Ask each one that sends you a bill.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section aria-labelledby="letter-h">
+    <h2 id="letter-h">A letter asking for help</h2>
+    <p class="hint">Edit this, then mail it to the billing office or paste it into a portal message. It fills in from your answers above. Fill in the parts in [brackets].</p>
+    <textarea id="letter" aria-labelledby="letter-h" spellcheck="true"></textarea>
+    <div class="btns noprint">
+      <button class="btn" type="button" id="copy">Copy the letter</button>
+      <button class="btn ghost" type="button" id="reset">Start over from my answers</button>
+      <span class="copied" id="copied" role="status"></span>
+    </div>
+  </section>
+
+  <section aria-labelledby="rights-h">
+    <h2 id="rights-h">Rules that protect you</h2>
+    <div class="results" id="rights"></div>
+  </section>
+
+  <section class="box gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Free help</h2>
+    <ul>
+      <li><a href="https://dollarfor.org/" target="_blank" rel="noopener">Dollar For</a> is a nonprofit that fills out and sends hospital financial assistance applications for patients for free.</li>
+      <li><a href="../bill-checker/">Detroit Medical Bill Check</a> shows what Medicare pays in the Detroit area for each code on your itemized bill. Use it with Michigan's 115% of Medicare rule below.</li>
+      <li><a href="https://michiganlegalhelp.org/resources/public-assistance/income-and-asset-limits-medicaid" target="_blank" rel="noopener">Michigan Legal Help: Income and Asset Limits for Medicaid</a> helps you see if Medicaid could cover you.</li>
+      <li><a href="https://michiganlegalhelp.org/resources/money-debt-and-consumer-issues/how-deal-debt-collectors" target="_blank" rel="noopener">Michigan Legal Help: How to Deal with Debt Collectors</a> if a hospital bill already went to collections.</li>
+      <li><a href="https://michiganlegalhelp.org/guide-to-legal-help" target="_blank" rel="noopener">Michigan Legal Help: Guide to Legal Help</a> finds free legal aid near you if you're sued over a medical bill.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> The tool divides your yearly household income by the 2026 federal poverty guideline for your household size. Then it checks that percent against each hospital system's posted policy, along with the policy's rules on insurance, where you live, savings, and very large bills. Green means the policy likely covers you. Amber means it might, depending on facts the hospital decides. Gray means your income is over the policy's limit, though large-bill rules or an appeal may still help.</p>
+    <p>Hospitals decide who counts in a household and what counts as income in slightly different ways, and some still use last year's poverty guideline until they update. Close to a limit? Apply anyway.</p>
+    <p>Sources, all checked on October 31, 2026, on each hospital's own website unless noted.</p>
+    <ul id="srcs"></ul>
+    <p>Not covered: hospitals outside these systems, nursing homes, and doctors who bill separately. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  /* ---------- 2026 federal poverty guidelines (48 contiguous states and DC) ---------- */
+  // Source: HHS ASPE, 2026 Poverty Guidelines. 1 person $15,960, each added person $5,680.
+  const FPL_YEAR = 2026, FPL_BASE = 15960, FPL_STEP = 5680;
+  const fpl = n => FPL_BASE + FPL_STEP * (n - 1);
+  const CHECKED = "Oct 31, 2026";
+
+  const money = n => "$" + Math.round(n).toLocaleString("en-US");
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const pctTxt = p => (p < 10 ? p.toFixed(1) : Math.round(p)) + "%";
+  const tier = (p, rows) => { for (const [lim, v] of rows) if (p <= lim) return v; return null; };
+  const left = (bill, off) => bill * (1 - off / 100);
+  const COUNTY = { wayne: "Wayne County", oakland: "Oakland County", macomb: "Macomb County", washtenaw: "Washtenaw County", livingston: "Livingston County", stclair: "St. Clair County", lapeer: "Lapeer County", monroe: "Monroe County", jackson: "Jackson County", genesee: "Genesee County", othermi: "another Michigan county", ohio: "Ohio", other: "outside Michigan" };
+  const inMI = c => c && c !== "ohio" && c !== "other";
+
+  const HF_DOCS = "https://www.henryford.com/-/media/files/henry-ford/patients-visitors/financial-assistance-program-documents/";
+  const CW_DOCS = "https://assets.contentstack.io/v3/assets/blt3055f692fe7bf193/";
+  const SRC = {
+    aspe: ["HHS 2026 poverty guidelines", "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"],
+    aspePdf: ["2026 guidelines table (PDF)", "https://aspe.hhs.gov/sites/default/files/documents/b1bfa16b20ae9b89d525bc35de7c1643/detailed-guidelines-2026.pdf"],
+    mcl105d: ["MCL 400.105d(2)", "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-400-105d"],
+    r1: ["26 CFR 1.501(r)-1", "https://www.law.cornell.edu/cfr/text/26/1.501(r)-1"],
+    r5: ["26 CFR 1.501(r)-5", "https://www.law.cornell.edu/cfr/text/26/1.501(r)-5"],
+    r6: ["26 CFR 1.501(r)-6", "https://www.law.cornell.edu/cfr/text/26/1.501(r)-6"],
+    usc501: ["26 U.S.C. 501(r)", "https://www.law.cornell.edu/uscode/text/26/501"],
+    irs: ["IRS: 501(r) rules", "https://www.irs.gov/charities-non-profits/charitable-organizations/requirements-for-501c3-hospitals-under-the-affordable-care-act-section-501r"],
+    cfr44715: ["42 CFR 447.15", "https://www.law.cornell.edu/cfr/text/42/447.15"],
+    bills: ["Detroit Medical Bill Check", "../bill-checker/"],
+    mib: ["MI Bridges", "https://newmibridges.michigan.gov/"]
+  };
+  const cite = ([t, u]) => `<a class="cite" href="${u}"${u.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>${esc(t)}</a>`;
+
+  /* ---------- Hospital systems ---------- */
+  // Each eval(u) returns { lvl: free|disc|maybe|no, tag, line, est, pay, conds: [{s: ok|warn|info, t}] }.
+  // u: { n, inc, pct, ins, insured, county, bill, assets }
+  const SYSTEMS = [
+    {
+      id: "hf", name: "Henry Ford Health",
+      sub: "Henry Ford Hospital in Detroit and the West Bloomfield, Wyandotte, Macomb, Kingswood, Maplegrove, and Jackson hospitals",
+      kind: "Nonprofit",
+      hospitals: ["Henry Ford Hospital (Detroit)", "Henry Ford West Bloomfield Hospital", "Henry Ford Wyandotte Hospital and Medical Center Brownstown", "Henry Ford Macomb Hospital (Clinton Township)", "Henry Ford Kingswood Hospital (Ferndale)", "Henry Ford Maplegrove Center (West Bloomfield)", "Henry Ford Jackson Hospital", "Henry Ford medical centers and doctor's offices"],
+      glance: ["250%", "400%"], freePct: 250,
+      dated: "Patient Financial Assistance Policy, revised Aug 14, 2024",
+      links: [["Aid page", "https://www.henryford.com/visitors/billing/financial-assistance"], ["Policy (PDF)", HF_DOCS + "2024/english-program-policy-revised-8-14-24.pdf"], ["Application (PDF)", HF_DOCS + "2024/english-application-revised-8-14-24.pdf"]],
+      contact: `Call <span class="phone">(313) 874-7800</span>, email financialassistanceapp@HFHS.org, or apply in MyChart under Billing. In-person help: <span class="phone">(313) 916-4510</span>.`,
+      eval(u) {
+        const r = { conds: [], pay: null };
+        if (!u.insured) {
+          const t = tier(u.pct, [[250, 0], [300, 30], [350, 61], [400, 91]]);
+          if (t === 0) Object.assign(r, { lvl: "free", tag: "Likely free", line: "Uninsured with income at or under 250% of the guideline: 100% off.", pay: 0, est: u.bill ? `On your ${money(u.bill)} bill: about $0 left.` : "" });
+          else if (t != null) Object.assign(r, { lvl: "disc", tag: "Likely discount", line: `Uninsured with income from 251% to 400%: you pay ${t}% of what Medicare would pay for the same care.`, pay: null, est: `To see what that means for your bill, look up the Medicare rate for each code with the <a href="../bill-checker/">bill checker</a>.` });
+          else Object.assign(r, { lvl: "no", tag: "Not by income", line: "Your income is over the 400% limit.", est: "" });
+        } else {
+          const d = tier(u.pct, [[250, 100], [300, 75], [350, 50], [400, 25]]);
+          if (d === 100) Object.assign(r, { lvl: "free", tag: "Likely free", line: "With insurance and income at or under 250%: 100% off what you owe after insurance.", pay: 0, est: u.bill ? `On your ${money(u.bill)} bill: about $0 left.` : "" });
+          else if (d != null) Object.assign(r, { lvl: "disc", tag: `Likely ${d}% off`, line: `With insurance and income from 251% to 400%: ${d}% off what you owe after insurance.`, pay: 1 - d / 100, est: u.bill ? `On your ${money(u.bill)} bill: about ${money(left(u.bill, d))} left.` : "" });
+          else Object.assign(r, { lvl: "no", tag: "Not by income", line: "Your income is over the 400% limit.", est: "" });
+        }
+        // Method 2, catastrophic: Henry Ford bills over 12 months above 30% of income get cut to 30% of income.
+        const cap = 0.3 * u.inc;
+        if (u.bill && u.bill > cap && r.lvl !== "free") {
+          const medicareShare = r.lvl === "disc" && r.pay == null;
+          const better = r.lvl === "no" || medicareShare || cap < u.bill * r.pay;
+          if (better) {
+            if (r.lvl === "no") Object.assign(r, { lvl: "disc", tag: "Likely large-bill cut" });
+            r.est = `Large-bill rule: your bill is more than 30% of your income, so it may be cut to 30% of your income, about ${money(cap)}.` + (medicareShare ? ` You get whichever of the two discounts is bigger.` : "");
+            r.pay = Math.min(r.pay == null ? 1 : r.pay, cap / u.bill);
+          }
+        } else if (!u.bill && r.lvl !== "free") {
+          r.conds.push({ s: "info", t: `Large-bill rule: if your Henry Ford bills over 12 months add up to more than 30% of your yearly income (${money(cap)}), they can be cut to that amount. Add your bill above to check.` });
+        }
+        const ok = ["wayne", "oakland", "macomb", "jackson"].includes(u.county);
+        r.conds.push(!u.county ? { s: "info", t: "You must live in Wayne, Macomb, Oakland, or Jackson County, or within 5 miles of the Henry Ford hospital where you got care." }
+          : ok ? { s: "ok", t: `You live in ${COUNTY[u.county]}, which is in Henry Ford's service area.` }
+          : { s: "warn", t: "Henry Ford only covers people in Wayne, Macomb, Oakland, or Jackson County, or within 5 miles of the Henry Ford hospital where you got care." });
+        if (u.assets != null) r.conds.push(u.assets >= 100000 ? { s: "warn", t: "Savings of $100,000 or more rule you out. Your home equity up to $1 million, retirement accounts, business assets, and college savings don't count." } : { s: "ok", t: "Your savings are under Henry Ford's $100,000 limit." });
+        else r.conds.push({ s: "info", t: "Savings of $100,000 or more rule you out (not counting your home, retirement accounts, or college savings)." });
+        r.conds.push({ s: "info", t: "You must live in the U.S. permanently. Henry Ford may ask you to apply for Medicaid first." });
+        return r;
+      }
+    },
+    {
+      id: "hfse", name: "Henry Ford Health: former Ascension hospitals",
+      sub: "St. John, Providence Southfield, Providence Novi, Warren, Madison Heights, River District, and Brighton",
+      kind: "Nonprofit",
+      hospitals: ["Henry Ford St. John Hospital (Detroit), formerly Ascension St. John", "Henry Ford Providence Southfield Hospital", "Henry Ford Providence Novi Hospital", "Henry Ford Warren Hospital", "Henry Ford Madison Heights Hospital", "Henry Ford River District Hospital", "Henry Ford Brighton Center for Recovery"],
+      glance: ["250%", "400% (70% to 95% off)"], freePct: 250,
+      dated: "Financial Assistance Policy dated July 1, 2024; summary dated January 2025",
+      links: [["Aid page", "https://www.henryford.com/visitors/billing/financial-assistance"], ["Policy (PDF)", HF_DOCS + "2025/financial-assistance-policy/se-michigan-brighton/midet_english_financial-assistance-policy.pdf"], ["Summary (PDF)", HF_DOCS + "2025/se-michigan-brighton-plain-language-summary/se-mi_english_plain-language-summary-of-financial-assistance-policy-jan-2025.pdf"]],
+      contact: `The policy says to call <span class="phone">(877) 809-6191</span> for the application. Billing lines: St. John <span class="phone">877-809-6191</span>; Warren, Madison Heights, and River District <span class="phone">888-329-0421</span>; Providence Novi and Southfield <span class="phone">800-878-2455</span>. Mail applications to 3179 Solution Center, Chicago, IL 60677-3001. We couldn't find this application posted online on Oct 31, 2026.`,
+      counties: ["wayne", "oakland", "macomb", "stclair", "livingston"],
+      areaText: "Detroit or Wayne, Macomb, Oakland, St. Clair, or Livingston County",
+      eval(u) { return hfAscension(this, u); }
+    },
+    {
+      id: "hfroch", name: "Henry Ford Rochester Hospital",
+      sub: "Formerly Ascension Rochester",
+      kind: "Nonprofit",
+      hospitals: ["Henry Ford Rochester Hospital"],
+      glance: ["250%", "400% (70% to 95% off)"], freePct: 250,
+      dated: "Financial Assistance Policy dated July 1, 2024; summary dated January 2025",
+      links: [["Aid page", "https://www.henryford.com/visitors/billing/financial-assistance"], ["Summary (PDF)", HF_DOCS + "2025/rochester-plain-language-summary/henry-ford-rochester_english_plain-language-summary-of-fap-jan-2025.pdf"]],
+      contact: `Financial Counseling Office: <span class="phone">(877) 348-7072</span>. We found the English summary and a translated copy of the full policy, which shows the same discount tiers, but not the English policy itself.`,
+      counties: ["oakland", "macomb", "lapeer"],
+      areaText: "Oakland, Macomb, or Lapeer County",
+      eval(u) { return hfAscension(this, u); }
+    },
+    {
+      id: "cw", name: "Corewell Health (formerly Beaumont)",
+      sub: "Royal Oak, Troy, Grosse Pointe, Dearborn, Farmington Hills, Taylor, Trenton, and Wayne",
+      kind: "Nonprofit",
+      hospitals: ["Corewell Health William Beaumont University Hospital (Royal Oak)", "Corewell Health Beaumont Troy Hospital", "Corewell Health Beaumont Grosse Pointe Hospital", "Corewell Health Dearborn Hospital", "Corewell Health Farmington Hills Hospital", "Corewell Health Taylor Hospital", "Corewell Health Trenton Hospital", "Corewell Health Wayne Hospital", "Corewell Health Medical Group East"],
+      glance: ["250%", "None by income (large-bill review only)"], freePct: 250,
+      dated: "Financial Assistance Eligibility Policy, version 11, effective Nov 1, 2022 (file updated Aug 2026)",
+      links: [["Aid page", "https://corewellhealth.org/billing/financial-assistance"], ["Policy (PDF)", CW_DOCS + "blt501fe046b96bca94/faep-english.pdf"], ["Application (PDF)", CW_DOCS + "blt96841f74da7cff06/confidential-financial-assistance-application-english.pdf"]],
+      contact: `Financial counselors: <span class="phone">844-838-3115</span>, financialcounseling@corewellhealth.org, or apply in MyChart under Financial Assistance. In person at the Royal Oak hospital, 3601 W. 13 Mile Rd.`,
+      eval(u) {
+        const r = { conds: [], pay: null };
+        if (u.ins === "medicaid") Object.assign(r, { lvl: "free", tag: "Likely free", line: "Corewell treats people with Medicaid as qualifying for 100% help without the usual application.", pay: 0, est: "" });
+        else if (u.pct <= 250) Object.assign(r, { lvl: "free", tag: "Likely free", line: "Income at or under 250%: free care, with or without insurance.", pay: 0, est: u.bill ? `On your ${money(u.bill)} bill: about $0 left.` : "" });
+        else {
+          const cat = 0.25 * u.inc;
+          if (u.bill && u.bill >= cat) Object.assign(r, { lvl: "maybe", tag: "Maybe", line: "Your income is over the 250% limit, but your bills are 25% of your income or more, so Corewell can review your case for a smaller bill. It decides case by case.", est: "" });
+          else Object.assign(r, { lvl: "no", tag: "Not by income", line: "Your income is over the 250% limit, and Corewell has no partial discount tier.", est: "" });
+          if (!u.bill) r.conds.push({ s: "info", t: `Large-bill review: bills from the last 240 days plus care expected in the next 90 days that come to 25% of your yearly income (${money(cat)}) or more get a case-by-case look.` });
+        }
+        r.conds.push(!u.county ? { s: "info", t: "You must have lived in Michigan for at least 6 months, except for emergencies or care you can't get elsewhere." }
+          : inMI(u.county) ? { s: "ok", t: "You live in Michigan. Corewell asks for at least 6 months of Michigan residence." }
+          : { s: "warn", t: "Corewell only helps people who have lived in Michigan for 6 months, except for emergencies or care you can't get elsewhere." });
+        r.conds.push({ s: "info", t: "Corewell also looks at your savings, other debts, and job status. The policy sets no fixed savings limit." });
+        if (!u.insured && u.pct <= 250) r.conds.push({ s: "ok", t: "The policy also repeats Michigan's rule: uninsured patients at or under 250% won't be charged more than 115% of Medicare." });
+        return r;
+      }
+    },
+    {
+      id: "tr", name: "Trinity Health Michigan",
+      sub: "Livonia, Oakland (Pontiac), Ann Arbor, Chelsea, and Livingston (Howell)",
+      kind: "Nonprofit",
+      hospitals: ["Trinity Health Livonia Hospital", "Trinity Health Oakland Hospital (Pontiac)", "Trinity Health Ann Arbor Hospital", "Trinity Health Chelsea Hospital", "Trinity Health Livingston Hospital (Howell)"],
+      glance: ["200% (uninsured)", "400%"], freePct: 200,
+      dated: "Financial Assistance to Patients, effective Feb 20, 2024; Michigan discount table revised Jan 19, 2026",
+      links: [["Aid page", "https://www.trinityhealthmichigan.org/tools-and-resources/billing-and-insurance/financial-assistance"], ["Policy (PDF)", "https://www.trinityhealthmichigan.org/sites/default/files/hg_features/mercury_standard_layout/542695c4f0a2fbda94507a303574a75a.pdf"], ["Application (PDF)", "https://www.trinityhealthmichigan.org/sites/default/files/2025-05/Financial-Assistance-Application-and-Instructions-5-25.pdf"], ["Discount table (PDF)", "https://www.trinityhealthmichigan.org/sites/default/files/2026-01/Discount-Percentages-for-Trinity-Health-Michigan-1-27-26.pdf"]],
+      contact: `Customer service: <span class="phone">800-494-5797</span>, option 2. Financial counselors: Livonia <span class="phone">734-655-1755</span>, Oakland <span class="phone">248-858-6196</span>, Ann Arbor, Chelsea, and Livingston <span class="phone">734-712-2009</span>. You can also apply in MyChart.`,
+      eval(u) {
+        const r = { conds: [], pay: null };
+        if (!u.insured) {
+          if (u.pct <= 200) Object.assign(r, { lvl: "free", tag: "Likely free", line: "Uninsured with income at or under 200%: 100% off.", pay: 0, est: u.bill ? `On your ${money(u.bill)} bill: about $0 left.` : "" });
+          else if (u.pct <= 400) Object.assign(r, { lvl: "disc", tag: "Likely 76% to 78% off", line: "Uninsured with income from 201% to 400%: a partial discount, and you won't be charged more than Medicare-based rates. Trinity's 2026 table lists 76% to 78% off charges at its southeast Michigan hospitals.", pay: 0.24, est: u.bill ? `On your ${money(u.bill)} bill: roughly ${money(left(u.bill, 78))} to ${money(left(u.bill, 76))} left, if the bill is full charges.` : "" });
+          else Object.assign(r, { lvl: "no", tag: "Not by income", line: "Your income is over the 400% limit. Trinity's table still lists a 35% uninsured discount, which isn't need-based.", est: "" });
+        } else {
+          if (u.pct <= 400) Object.assign(r, { lvl: "maybe", tag: "Some help likely", line: "With insurance and income at or under 400%: help with copays, deductibles, and coinsurance. The policy doesn't say how much.", est: "" });
+          else Object.assign(r, { lvl: "no", tag: "Not by income", line: "Your income is over the 400% limit.", est: "" });
+        }
+        // Medically indigent: medical bills over 20% of family income.
+        const cap = 0.2 * u.inc;
+        if (u.bill && u.bill > cap && r.lvl !== "free") {
+          const before = r.pay == null ? 1 : r.pay;
+          if (cap / u.bill < before) {
+            if (r.lvl === "no") Object.assign(r, { lvl: "disc", tag: "Likely large-bill cut" });
+            if (r.lvl === "maybe") Object.assign(r, { lvl: "disc", tag: "Likely large-bill cut" });
+            r.line += " Your bills are also more than 20% of your income, which Trinity treats as a catastrophic cost.";
+            r.est = `Large-bill rule: the part of your bills above 20% of your income (${money(cap)}) can qualify for help, so you might owe about ${money(cap)}.`;
+            r.pay = cap / u.bill;
+          }
+        } else if (!u.bill && r.lvl !== "free") {
+          r.conds.push({ s: "info", t: `Large-bill rule: if your medical bills are more than 20% of your yearly income (${money(cap)}), the part above that can qualify for help. Add your bill above to check.` });
+        }
+        r.conds.push(u.county === "other" || u.county === "ohio"
+          ? { s: "warn", t: "Trinity only helps people who live in its service area, a list of ZIP codes it doesn't post, plus anyone treated for an emergency." }
+          : { s: "info", t: "Trinity helps people who live in its service area, a list of ZIP codes it doesn't post, and anyone treated for an emergency." });
+        r.conds.push({ s: "info", t: "Elective care, like cosmetic surgery, and care you got outside your insurance network aren't covered." });
+        return r;
+      }
+    },
+    {
+      id: "mc", name: "McLaren Health Care",
+      sub: "McLaren Macomb, McLaren Oakland, McLaren Port Huron, McLaren Lapeer, McLaren Flint, and Karmanos Cancer Institute",
+      kind: "Nonprofit",
+      hospitals: ["McLaren Macomb (Mount Clemens)", "McLaren Oakland (Pontiac)", "McLaren Port Huron", "McLaren Lapeer Region", "McLaren Flint", "Karmanos Cancer Institute (Detroit)", "McLaren Medical Group"],
+      glance: ["400%", "Free all the way to 400%"], freePct: 400,
+      dated: "Financial Assistance Policy, effective Mar 16, 2026, with 2026 income table",
+      links: [["Aid page", "https://www.mclaren.org/main/financial-assistance"], ["Policy (PDF)", "https://www.mclaren.org/Uploads/Public/Documents/corporate/financial-assistance/financial-assistance-policy-ENGLISH.pdf"], ["Application (PDF)", "https://www.mclaren.org/Uploads/Public/Documents/corporate/MHCC-542-A%20FINANCIAL%20ASSISTANCE%20APPLICATION.pdf"]],
+      contact: `Call <span class="phone">586-710-8300</span> or <span class="phone">1-844-321-1557</span>, or email FinancialAssistance@mclaren.org. Mail to McLaren Corporate Services, Attn: Revenue Cycle Operations, 50820 Schoenherr Rd., Shelby Township, MI 48315.`,
+      eval(u) {
+        const r = { conds: [], pay: null };
+        if (u.pct <= 400) Object.assign(r, { lvl: "free", tag: "Likely free", line: "Income at or under 400%: 100% off, with or without insurance. McLaren's 2026 table goes up to " + money(4 * fpl(u.n)) + " for a household of " + u.n + ".", pay: 0, est: u.bill ? `On your ${money(u.bill)} bill: about $0 left.` : "" });
+        else {
+          const cap = 0.3 * u.inc;
+          if (u.bill && u.bill > cap) Object.assign(r, { lvl: "maybe", tag: "Maybe, on appeal", line: "Your income is over the 400% limit. But if you're turned down and your McLaren bills are more than 30% of your income, you can appeal to cut them to 30% of your income.", est: `On appeal: about ${money(cap)}.`, pay: cap / u.bill });
+          else Object.assign(r, { lvl: "no", tag: "Not by income", line: `Your income is over the 400% limit. If your McLaren bills ever top 30% of your income (${money(cap)}), you can appeal a denial to cut them to that.`, est: "" });
+        }
+        r.conds.push(!u.county ? { s: "info", t: "You must live in Michigan or Ohio, within about 25 miles of a McLaren location." }
+          : (inMI(u.county) || u.county === "ohio") ? { s: "ok", t: "You live in Michigan or Ohio. McLaren also asks that you live within about 25 miles of one of its locations." }
+          : { s: "warn", t: "McLaren only covers people living in Michigan or Ohio, within about 25 miles of a McLaren location." });
+        if (u.assets != null) r.conds.push(u.assets > 200000 ? { s: "warn", t: "McLaren skips the first $100,000 of savings, plus your home equity up to $1 million and retirement accounts. More than $100,000 left over after that rules you out." } : { s: "ok", t: "Your savings are under McLaren's limit (the first $100,000 doesn't count, and then the limit is $100,000 more)." });
+        else r.conds.push({ s: "info", t: "Savings limit: after skipping the first $100,000, your home equity up to $1 million, and retirement accounts, more than $100,000 left over rules you out." });
+        r.conds.push({ s: "info", t: "You must live in the U.S. permanently and have filed federal taxes if you were required to. McLaren may ask you to apply for Medicaid first. Non-emergency care has to be in your insurance network." });
+        return r;
+      }
+    },
+    {
+      id: "dmc", name: "Detroit Medical Center (DMC)",
+      sub: "Detroit Receiving, Harper, Hutzel, Sinai-Grace, Children's Hospital of Michigan, Huron Valley-Sinai, and others",
+      kind: "For-profit (owned by Tenet Healthcare)",
+      hospitals: ["DMC Detroit Receiving Hospital", "DMC Harper University Hospital", "DMC Hutzel Women's Hospital", "DMC Heart Hospital", "DMC Sinai-Grace Hospital", "DMC Children's Hospital of Michigan", "DMC Huron Valley-Sinai Hospital (Commerce Township)", "DMC Rehabilitation Institute of Michigan"],
+      glance: ["200% (uninsured)", "500% (40% to 80% off)"], freePct: 200,
+      dated: "Policy text on DMC's Children's Hospital billing page, which still shows a poverty table dated Jan 15, 2020",
+      links: [["DMC aid page", "https://www.dmc.org/patients/insurance-financial-support"], ["Policy details", "https://childrensdmc.org/billingquestions"]],
+      contact: `DMC patient-care hotline for bills and financial assistance: <span class="phone">(855) 362-9600</span>. You can also ask for a registration representative at any DMC hospital, or call the customer service number on your bill.`,
+      eval(u) {
+        const r = { conds: [], pay: null };
+        // Schedule B: 100% to 200%, 80% to 300%, 60% to 400%, 40% to 500% (our reading of the table's columns).
+        const d = tier(u.pct, [[200, 100], [300, 80], [400, 60], [500, 40]]);
+        if (!u.insured) {
+          if (d === 100) Object.assign(r, { lvl: "free", tag: "Likely free", line: "Uninsured with income at or under 200%: 100% off hospital charges.", pay: 0, est: u.bill ? `On your ${money(u.bill)} bill: about $0 left.` : "" });
+          else if (d != null) Object.assign(r, { lvl: "disc", tag: `Likely ${d}% off`, line: `Uninsured with income from 200% to 500%: DMC lists ${d}% off at your income.`, pay: 1 - d / 100, est: u.bill ? `On your ${money(u.bill)} bill: about ${money(left(u.bill, d))} left.` : "" });
+        } else {
+          if (d != null && u.pct > 200) Object.assign(r, { lvl: "maybe", tag: `Maybe ${d}% off`, line: `DMC offers 40% to 80% off to "underinsured" patients with income from 200% to 500%; its table lists ${d}% at your income. It says routine copays and deductibles generally aren't covered unless you show hardship.`, pay: 1 - d / 100, est: u.bill ? `If approved, on your ${money(u.bill)} bill: about ${money(left(u.bill, d))} left.` : "" });
+          else if (d === 100) Object.assign(r, { lvl: "maybe", tag: "Maybe", line: "DMC's free care is for uninsured patients. With insurance, you may still get 40% to 80% off if your DMC hospital balance is more than half your yearly income. Routine copays and deductibles generally aren't covered unless you show hardship.", est: "" });
+        }
+        if (!r.lvl) {
+          // Over 500%: catastrophic Schedule C, balance at least 50% of income.
+          const share = u.bill ? u.bill / u.inc : 0;
+          const c = share >= 0.9 ? 80 : share >= 0.7 ? 60 : share >= 0.5 ? 40 : null;
+          if (c != null) Object.assign(r, { lvl: "disc", tag: `Likely ${c}% off`, line: `Your income is over 500%, but your DMC balance is ${Math.round(share * 100)}% of your yearly income. DMC's catastrophic schedule lists ${c}% off.`, pay: 1 - c / 100, est: `On your ${money(u.bill)} bill: about ${money(left(u.bill, c))} left.` });
+          else Object.assign(r, { lvl: "no", tag: "Not by income", line: `Your income is over 500%. DMC still gives 40% to 80% off if your DMC hospital balance is at least half your yearly income (${money(0.5 * u.inc)}).`, est: "" });
+        }
+        r.conds.push({ s: "info", t: "Covers DMC hospital (facility) charges only. Doctor bills are separate." });
+        r.conds.push({ s: "info", t: "If DMC asks for papers, send them within 14 calendar days or the request is denied." });
+        r.conds.push({ s: "warn", t: "Less certain: DMC's posted rules use a 2020 poverty table, the discount tiers are our reading of its table, and dmc.org blocks automated checks. Call to confirm." });
+        return r;
+      }
+    },
+    {
+      id: "um", name: "University of Michigan Health (Michigan Medicine)",
+      sub: "University Hospital, C.S. Mott Children's, and Von Voigtlander Women's in Ann Arbor",
+      kind: "Public university health system",
+      hospitals: ["University Hospital (Ann Arbor)", "C.S. Mott Children's Hospital", "Von Voigtlander Women's Hospital", "University of Michigan Medical Group clinics"],
+      glance: ["300% (uninsured)", "None listed"], freePct: 300,
+      dated: "MSupport policy effective Dec 2022 (its listed next review date, Dec 2025, has passed)",
+      links: [["Aid page", "https://www.uofmhealth.org/patient-visitor-guide/financial-assistance"], ["Policy (PDF)", "https://www.med.umich.edu/pdf/UM-health-financial-assistance-policy-patient-assistance-for-billable-medical-services-01-03-003.pdf"], ["Summary (PDF)", "https://www.med.umich.edu/pdf/UM-health-FAP-plain-language-summary-august-2.pdf"]],
+      contact: `Financial counselors: <span class="phone">(855) 855-0863</span> or <span class="phone">(734) 615-0863</span>, Monday to Friday, 8 am to 4 pm, or PFC-Counselors@med.umich.edu. You can also apply in the patient portal.`,
+      eval(u) {
+        const r = { conds: [], pay: null };
+        if (u.pct <= 300 && !u.insured) Object.assign(r, { lvl: "free", tag: "Likely free", line: "Uninsured with income at or under 300%: 100% off.", pay: 0, est: u.bill ? `On your ${money(u.bill)} bill: about $0 left.` : "" });
+        else if (u.pct <= 300) Object.assign(r, { lvl: "maybe", tag: "Maybe", line: "With insurance and income at or under 300%: MSupport can help with what's left after insurance or with services your plan doesn't cover, if you show financial hardship.", est: "" });
+        else Object.assign(r, { lvl: "no", tag: "Not by income", line: "Your income is over the 300% limit.", est: "" });
+        r.conds.push(!u.county ? { s: "info", t: "You must live in Michigan." } : inMI(u.county) ? { s: "ok", t: "You live in Michigan, which MSupport requires." } : { s: "warn", t: "MSupport only covers Michigan residents." });
+        if (u.assets != null) r.conds.push(u.assets > 10000 ? { s: "warn", t: "Cash and other liquid savings over $10,000 rule you out. Up to $100,000 in retirement accounts is OK." } : { s: "ok", t: "Your savings are under the $10,000 limit. Up to $100,000 in retirement accounts is also OK." });
+        else r.conds.push({ s: "info", t: "Liquid savings must be $10,000 or less. Up to $100,000 in retirement accounts is OK." });
+        r.conds.push({ s: "info", t: "Approval lasts 12 months, then you reapply." });
+        return r;
+      }
+    }
+  ];
+
+  // Former Ascension hospitals (Henry Ford southeast Michigan and Rochester): same tiers, different service areas.
+  function hfAscension(sys, u) {
+    const r = { conds: [], pay: null };
+    const d = tier(u.pct, [[250, 100], [275, 95], [300, 85], [350, 80], [375, 75], [400, 70]]);
+    const after = u.insured ? " what you owe after insurance" : "";
+    if (d === 100) Object.assign(r, { lvl: "free", tag: "Likely free", line: `Income at or under 250%: 100% off${after}.`, pay: 0, est: u.bill ? `On your ${money(u.bill)} bill: about $0 left.` : "" });
+    else if (d != null) Object.assign(r, { lvl: "disc", tag: `Likely ${d}% off`, line: `Income from 251% to 400%: the sliding scale gives ${d}% off${after} at your income.`, pay: 1 - d / 100, est: u.bill ? `On your ${money(u.bill)} bill: about ${money(left(u.bill, d))} left.` : "" });
+    else if (u.bill && u.bill >= u.inc) Object.assign(r, { lvl: "disc", tag: "Likely 70% off", line: "Your income is over 400%, but your total medical debt is at least your yearly income, so you can qualify for the same 70% off given at 400%.", pay: 0.3, est: `On your ${money(u.bill)} bill: about ${money(left(u.bill, 70))} left.` });
+    else Object.assign(r, { lvl: "no", tag: "Not by income", line: `Your income is over the 400% limit. If your total medical debt, from any provider, reaches your yearly income (${money(u.inc)}), you can get 70% off.`, est: "" });
+    r.conds.push(!u.county ? { s: "info", t: `You must live in ${sys.areaText}.` }
+      : sys.counties.includes(u.county) ? { s: "ok", t: `You live in ${COUNTY[u.county]}, which this policy covers.` }
+      : { s: "warn", t: `This policy only covers people who live in ${sys.areaText}, unless you're continuing care you qualified for at another Henry Ford hospital.` });
+    const limit = 2.5 * fpl(u.n);
+    if (u.assets != null) r.conds.push(u.assets > limit ? { s: "warn", t: `Savings above 250% of the poverty guideline for your household (${money(limit)}) may rule you out.` } : { s: "ok", t: `Your savings are under this policy's limit of ${money(limit)} (250% of the poverty guideline for your household).` });
+    else r.conds.push({ s: "info", t: `Savings above ${money(limit)} (250% of the poverty guideline for your household) may rule you out.` });
+    r.conds.push({ s: "info", t: "Apply within 240 days of your first bill after care. Later than that, help only covers what you haven't paid. Uninsured patients must work with a counselor on a Medicaid application." });
+    if (u.insured) r.conds.push({ s: "info", t: "If your insurance treats this hospital as out of network, help can be reduced or denied." });
+    return r;
+  }
+
+  /* ---------- Hospital picker ---------- */
+  const hospSel = document.getElementById("hosp");
+  for (const s of SYSTEMS) {
+    const g = document.createElement("optgroup");
+    g.label = s.name;
+    s.hospitals.forEach((h, i) => { const o = document.createElement("option"); o.value = s.id + "|" + i; o.textContent = h; g.appendChild(o); });
+    hospSel.appendChild(g);
+  }
+  const og = document.createElement("optgroup"); og.label = "Other";
+  const oo = document.createElement("option"); oo.value = "other|0"; oo.textContent = "A hospital not listed here"; og.appendChild(oo); hospSel.appendChild(og);
+
+  /* ---------- Read inputs ---------- */
+  const $ = id => document.getElementById(id);
+  const numOrNull = v => { if (v === "" || v == null) return null; const x = parseFloat(v); return isFinite(x) && x >= 0 ? x : null; };
+  function read() {
+    let n = parseInt($("size").value, 10);
+    if (!isFinite(n) || n < 1) n = null; else n = Math.min(n, 20);
+    let inc = numOrNull($("inc").value);
+    if (inc != null && $("per").value === "month") inc *= 12;
+    const ins = document.querySelector('input[name="ins"]:checked').value;
+    const bill = numOrNull($("bill").value);
+    return { n, inc, ins, insured: ins !== "none", county: $("county").value, bill: bill || null, assets: numOrNull($("assets").value), hosp: $("hosp").value, pct: n && inc != null ? inc / fpl(n) * 100 : null };
+  }
+
+  /* ---------- Render ---------- */
+  const LVL = { free: "law", disc: "law", maybe: "facts", no: "none" };
+  const RANK = { free: 0, disc: 1, maybe: 2, no: 3 };
+  const ICON = { ok: "✓", warn: "!", info: "•" };
+
+  function sysCard(s, r, mine, mineName) {
+    const conds = r.conds.map(c => `<li class="${c.s}"><span class="ic" aria-hidden="true">${ICON[c.s]}</span><span>${c.s === "warn" ? "<strong>Check:</strong> " : ""}${c.t}</span></li>`).join("");
+    const links = s.links.map(l => cite(l)).join("");
+    return `<article class="card ${LVL[r.lvl]}${mine ? " mine" : ""}" id="card-${s.id}">
+      <div class="top"><h3>${esc(s.name)}</h3><span class="btns">${mine ? '<span class="tag you">Your hospital</span>' : ""}<span class="tag ${LVL[r.lvl]}">${esc(r.tag)}</span></span></div>
+      <p class="sub">${esc(mine && mineName ? mineName : s.sub)} · ${esc(s.kind)}</p>
+      <p class="verdict">${r.line}</p>
+      ${r.est ? `<p class="est">${r.est}</p>` : ""}
+      ${conds ? `<ul class="conds">${conds}</ul>` : ""}
+      <p class="contact"><strong>How to apply:</strong> ${s.contact}</p>
+      <details><summary>Hospitals this policy covers</summary><ul>${s.hospitals.map(h => `<li>${esc(h)}</li>`).join("")}</ul></details>
+      <div class="cites">${links}</div>
+      <p class="checked">Checked ${CHECKED} on the hospital's own site. ${esc(s.dated)}.</p>
+    </article>`;
+  }
+
+  function lawCard(level, tag, title, body, cites) {
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${tag}</span></div>
+      <p>${body}</p>
+      ${cites && cites.length ? `<div class="cites">${cites.map(cite).join("")}</div>` : ""}
+    </article>`;
+  }
+
+  function run() {
+    const u = read();
+    $("glance-n").textContent = u.n || 1;
+    renderGlance(u.n || 1, u.pct);
+    renderLetter(u);
+    if (!u.n || u.inc == null) {
+      $("total").innerHTML = `<div class="total"><p class="prompt">Enter how many people are in your household and your income to see results. The table below shows every hospital's income limits.</p></div>`;
+      $("lawcards").innerHTML = ""; $("cards").innerHTML = ""; $("out-btns").hidden = true;
+      return;
+    }
+    const guide = fpl(u.n);
+    const results = SYSTEMS.map(s => ({ s, r: s.eval(u) }));
+    // A "check" flag (residency or savings) turns a likely result into a maybe.
+    for (const x of results) if ((x.r.lvl === "free" || x.r.lvl === "disc") && x.r.conds.some(c => c.s === "warn") && x.s.id !== "dmc") { x.r.lvl = "maybe"; x.r.tag = "Maybe: see Check"; }
+    const [hid, hidx] = (u.hosp || "|").split("|");
+    results.sort((a, b) => (b.s.id === hid) - (a.s.id === hid) || RANK[a.r.lvl] - RANK[b.r.lvl] || (a.r.pay ?? 2) - (b.r.pay ?? 2));
+    const nFree = results.filter(x => x.r.lvl === "free").length;
+    const nDisc = results.filter(x => x.r.lvl === "disc").length;
+
+    $("total").innerHTML = `<div class="total">
+      <div class="big">${pctTxt(u.pct)}</div>
+      <p>of the ${FPL_YEAR} federal poverty guideline. Your household of ${u.n} has ${money(u.inc)} a year before taxes, and the guideline for ${u.n} ${u.n === 1 ? "person" : "people"} is ${money(guide)}.</p>
+      <p>${nFree ? `<strong>${nFree} of ${SYSTEMS.length}</strong> hospital policies here would likely give you free care${nDisc ? `, and <strong>${nDisc}</strong> more would likely give a discount` : ""}.` : nDisc ? `None of the ${SYSTEMS.length} hospital policies here would likely give you free care, but <strong>${nDisc}</strong> would likely give a discount.` : `None of the ${SYSTEMS.length} hospital policies here would likely give you free care or a set discount. Some may still help, as the amber cards explain.`} Each card says what else you'd need.</p>
+    </div>`;
+
+    const law = [];
+    if (u.ins === "medicaid") law.push(lawCard("law", "The law says", "With Medicaid, the hospital takes Medicaid's payment as payment in full", "Hospitals that take Medicaid have to accept Medicaid's payment as payment in full, apart from any copay the plan allows. If you got a bill for care Medicaid covered, call the hospital's billing office and your Medicaid health plan before you pay it. If Medicaid didn't cover the care, the hospital policies below still apply.", [SRC.cfr44715]));
+    if (!u.insured && u.pct <= 250) law.push(lawCard("law", "The law says", "Michigan caps your bill at 115% of Medicare", `You're uninsured and at or under 250% of the guideline, so any Michigan hospital that takes Medicaid has to accept 115% of Medicare's rate as payment in full. That covers nearly every hospital, including for-profit ones like DMC. If Medicare would pay $1,000 for your care, the most the hospital can take is $1,150. Use the <a href="../bill-checker/">Detroit Medical Bill Check</a> to look up Medicare's rate for each code on your itemized bill.`, [SRC.mcl105d, SRC.bills]));
+    if (!u.insured && u.pct <= 400) law.push(lawCard("facts", "Depends on facts", "Apply for Medicaid at the same time", "With your income, it's worth checking whether Medicaid or the Healthy Michigan Plan could cover you. Several of these hospitals may ask you to apply first, and their financial counselors can help you do it.", [SRC.mib]));
+    if (hid === "other") law.push(lawCard("facts", "Depends on facts", "Your hospital isn't listed", "Call the billing office and ask for the hospital's financial assistance policy and application. Every nonprofit hospital must have one, post it online, and limit what people who qualify pay to the amounts it generally bills insured patients. Michigan's 115% of Medicare rule for uninsured patients at or under 250% applies at any hospital that takes Medicaid.", [SRC.usc501, SRC.irs, SRC.mcl105d]));
+    $("lawcards").innerHTML = law.join("");
+
+    $("cards").innerHTML = results.map(({ s, r }) => sysCard(s, r, s.id === hid, s.id === hid ? s.hospitals[+hidx] : "")).join("");
+    $("out-btns").hidden = false;
+  }
+
+  function renderGlance(n, pct) {
+    const g = fpl(n);
+    $("glance-me").hidden = pct == null;
+    $("glance-rows").innerHTML = SYSTEMS.map(s => {
+      const lim = g * s.freePct / 100;
+      const me = pct != null && pct <= s.freePct;
+      return `<tr${me ? ' class="me"' : ""}><td><a href="#card-${s.id}">${esc(s.name)}</a></td><td>${esc(s.glance[0])}</td><td>${esc(s.glance[1])}</td><td class="n">${money(lim)}</td></tr>`;
+    }).join("");
+  }
+
+  (function renderFpl() {
+    let rows = "";
+    for (let n = 1; n <= 8; n++) { const g = fpl(n); rows += `<tr><td>${n}</td>${[1, 2, 2.5, 3, 4, 5].map(m => `<td class="n">${money(g * m)}</td>`).join("")}</tr>`; }
+    $("fpl-rows").innerHTML = rows;
+  })();
+
+  /* ---------- Letter ---------- */
+  let letterEdited = false;
+  function letterText(u) {
+    const [hid, hidx] = (u.hosp || "|").split("|");
+    const sys = SYSTEMS.find(s => s.id === hid);
+    const hname = sys ? sys.hospitals[+hidx].replace(/ \(.*\)$/, "").replace(/, formerly.*$/, "") : "[Hospital name]";
+    const lines = [
+      "[Today's date]", "",
+      `To: Financial Assistance / Billing Office, ${hname}`, "",
+      "Patient: [Your name]",
+      "Date of birth: [Date of birth]",
+      "Account number: [Number on your bill]",
+      "Dates of care: [Dates]", "",
+      "I am writing to apply for help under your financial assistance policy for the bills listed above. Please send me your application, or tell me how to apply, and let me know what documents you need.", "",
+      u.n && u.inc != null
+        ? `My household has ${u.n} ${u.n === 1 ? "person" : "people"}, and ${u.n === 1 ? "my" : "our"} income before taxes is about ${money(u.inc)} a year. That is about ${pctTxt(u.pct)} of the ${FPL_YEAR} federal poverty guideline.${u.insured ? "" : " I did not have health insurance when I got this care."}`
+        : "My household has [number] people, and our income before taxes is about $[amount] a year.",
+      "",
+      "Once I apply, please put this account on hold and stop any collection activity while you decide, as federal rules for nonprofit hospitals require (26 CFR 1.501(r)-6(c)). If I qualify, please refund any amount I have paid above what I owe under the policy.",
+      ...(!u.insured && u.pct != null && u.pct <= 250 ? ["", "Because I was uninsured and my income is under 250% of the poverty guideline, I also ask that you limit my bill to 115% of the Medicare rate, as Michigan law requires (MCL 400.105d(2))."] : []),
+      "", "Please send me your decision in writing, along with an itemized bill.", "",
+      "Thank you,", "[Your name]", "[Phone]", "[Mailing address]"
+    ];
+    return lines.join("\n");
+  }
+  function renderLetter(u) { if (!letterEdited) $("letter").value = letterText(u); }
+  $("letter").addEventListener("input", () => { letterEdited = true; });
+  $("reset").addEventListener("click", () => { letterEdited = false; renderLetter(read()); });
+  $("copy").addEventListener("click", async () => {
+    const status = $("copied"), text = $("letter").value;
+    try { await navigator.clipboard.writeText(text); status.textContent = "Copied."; }
+    catch (e) {
+      $("letter").select();
+      let ok = false; try { ok = document.execCommand("copy"); } catch (e2) {}
+      status.textContent = ok ? "Copied." : "Couldn't copy. Select the text and copy it yourself.";
+    }
+    setTimeout(() => { status.textContent = ""; }, 5000);
+  });
+
+  /* ---------- Rights ---------- */
+  $("rights").innerHTML = [
+    lawCard("law", "The law says", "You have at least 240 days to apply", "Nonprofit hospitals must accept and process your application from the day you get care until at least 240 days after the first bill they send after your care.", [SRC.r1]),
+    lawCard("law", "The law says", "No credit reporting or lawsuits for at least 120 days", "A nonprofit hospital can't report you to credit bureaus, sell your debt, sue you, or put a lien on your property until at least 120 days after its first bill after your care, and only after telling you about its financial assistance policy. Once you apply, it has to pause those actions until it decides.", [SRC.r6]),
+    lawCard("law", "The law says", "People who qualify can't be charged more than insured patients", "If you qualify, a nonprofit hospital can't charge you more for emergency or other medically necessary care than the amounts it generally bills people who have insurance.", [SRC.r5]),
+    lawCard("law", "The law says", "Uninsured and at or under 250%? Michigan caps the bill at 115% of Medicare", "Any Michigan hospital that takes Medicaid has to accept 115% of Medicare's rate as payment in full from an uninsured patient with income up to 250% of the poverty guideline. This one applies to for-profit hospitals too.", [SRC.mcl105d, SRC.bills]),
+    lawCard("facts", "Depends on facts", "DMC is for-profit", "The federal rules above cover nonprofit hospitals. The Detroit Medical Center is owned by Tenet Healthcare, a for-profit company, so they don't apply there, though DMC posts its own policy and Michigan's 115% rule still does. Michigan Medicine is run by a public university and posts its own policy.", [SRC.usc501, SRC.irs])
+  ].join("");
+
+  /* ---------- Sources ---------- */
+  const srcItems = [
+    `Poverty guidelines: <a href="${SRC.aspe[1]}" target="_blank" rel="noopener">HHS ASPE, 2026 poverty guidelines</a> and its <a href="${SRC.aspePdf[1]}" target="_blank" rel="noopener">detailed table</a>`,
+    `Michigan's 115% of Medicare rule: <a href="${SRC.mcl105d[1]}" target="_blank" rel="noopener">MCL 400.105d(2)</a> (the Legislature's site said it was complete through Public Act 114 of 2026)`,
+    `Federal rules for nonprofit hospitals: <a href="${SRC.usc501[1]}" target="_blank" rel="noopener">26 U.S.C. 501(r)</a>, <a href="${SRC.r1[1]}" target="_blank" rel="noopener">26 CFR 1.501(r)-1</a>, <a href="${SRC.r5[1]}" target="_blank" rel="noopener">1.501(r)-5</a>, and <a href="${SRC.r6[1]}" target="_blank" rel="noopener">1.501(r)-6</a>. Medicaid payment in full: <a href="${SRC.cfr44715[1]}" target="_blank" rel="noopener">42 CFR 447.15</a>`,
+    ...SYSTEMS.map(s => `${esc(s.name)}: ${s.links.map(l => `<a href="${l[1]}" target="_blank" rel="noopener">${esc(l[0])}</a>`).join(", ")}. ${esc(s.dated)}.`)
+  ];
+  $("srcs").innerHTML = srcItems.map(x => `<li>${x}</li>`).join("");
+
+  /* ---------- Wire up ---------- */
+  $("f").addEventListener("input", run);
+  $("f").addEventListener("change", run);
+  $("f").addEventListener("submit", e => e.preventDefault());
+  $("print").addEventListener("click", () => window.print());
+  run();
+})();
+</script>
+</body>
+</html>
