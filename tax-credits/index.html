@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Michigan Tax Credits Check: EITC, Homestead, Home Heating</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="See if you can get Michigan's earned income tax credit, the homestead property tax credit (renters too), the home heating credit, and the federal EITC. Free.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/tax-credits/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Michigan Tax Credits Check: EITC, Homestead, Home Heating">
+<meta property="og:description" content="See if you can get Michigan's earned income tax credit, the homestead property tax credit (renters too), the home heating credit, and the federal EITC. Free.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/tax-credits/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/tax-credits.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. Key dates, the questions, a total and one card per credit, then earlier years still open, a summary to bring to free tax help, and where to get that help. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.dates { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: grid; gap: 10px; }
+.dates ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.dates li { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr); gap: 4px 14px; align-items: baseline; }
+.dates .d { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--accent); }
+.dates .d small { display: block; color: var(--muted); text-transform: none; letter-spacing: 0; }
+@media (max-width: 520px) { .dates li { grid-template-columns: minmax(0, 1fr); } }
+.panel { display: grid; gap: 18px; }
+form.q {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 22px;
+}
+fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 14px; min-width: 0; }
+fieldset + fieldset { border-top: 1px solid var(--line); padding-top: 20px; }
+legend { float: left; width: 100%; font-family: var(--f-display); font-weight: 600; font-size: 18px; padding: 0; }
+legend + * { clear: both; }
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="number"], select {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px;
+}
+.money { display: flex; align-items: center; gap: 6px; max-width: 320px; }
+.money input { flex: 1; min-width: 0; }
+.opts { display: grid; gap: 6px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.opts input { margin-top: 5px; accent-color: var(--accent); flex: none; }
+.hint { font-size: 14px; color: var(--muted); }
+details.why { font-size: 14px; color: var(--muted); }
+details.why summary { cursor: pointer; color: var(--accent); }
+details.why ul { margin: 6px 0 0; padding-left: 20px; display: grid; gap: 4px; }
+.results { display: grid; gap: 12px; }
+.results-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line);
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card.total { border-left-color: var(--accent); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.card ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.amt { font-family: var(--f-display); font-weight: 800; font-size: 30px; line-height: 1.1; }
+.amt small { font-family: var(--f-body); font-weight: 400; font-size: 15px; color: var(--muted); }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.small { font-size: 15px; color: var(--muted); }
+.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.card details > summary { cursor: pointer; font-size: 15px; color: var(--accent); }
+.math { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; font-size: 15px; max-width: 520px; margin-top: 8px; }
+.math .num { text-align: right; white-space: nowrap; }
+.math .total { font-weight: 700; border-top: 1px solid var(--line); padding-top: 4px; }
+.sum { width: 100%; border-collapse: collapse; font-size: 16px; }
+.sum td { padding: 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.sum td.num { text-align: right; padding-left: 12px; white-space: nowrap; }
+.sum tr.all td { font-weight: 700; border-bottom: 0; }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.tbl-wrap { overflow-x: auto; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 15px; }
+.tbl th, .tbl td { text-align: left; padding: 7px 10px 7px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tbl th { font-weight: 700; }
+.tbl .soon { color: var(--help); font-weight: 700; }
+.tbl .gone { color: var(--muted); }
+.gethelp { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+details.list { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; }
+details.list summary { cursor: pointer; font-family: var(--f-display); font-weight: 600; font-size: 18px; }
+details.list[open] summary { margin-bottom: 10px; }
+details.list ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.script {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px;
+  font-family: var(--f-body); white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; font-size: 16px;
+}
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 10px 16px;
+  background: var(--accent); color: var(--bg); border: 0;
+}
+.btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.btn:hover { filter: brightness(1.08); }
+.copied { font-size: 14px; color: var(--law); }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+@media print {
+  body.printing .wrap > :not(#s-sum), body.printing #s-sum > :not(.script) { display: none !important; }
+  body.printing { background: #fff; color: #000; }
+  body.printing .script { border: 0; padding: 0; color: #000; background: #fff; }
+}
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Michigan · tax credits · free</span>
+    <h1>Michigan Tax Credits You Might Be Missing</h1>
+    <p class="lede">Lots of working families, renters, and seniors in Michigan qualify for tax credits they never claim. Answer a few questions to estimate four of them: the federal Earned Income Tax Credit (EITC), Michigan's Working Families Tax Credit (the Michigan earned income tax credit), the Homestead Property Tax Credit for homeowners and renters, and the Home Heating Credit. Some of this money comes to you even if you owe no tax.</p>
+    <div class="notice">
+      <strong>This is tax information, not tax advice.</strong>
+      <span>It's an estimate built from the rules and numbers listed at the bottom of this page. The IRS and the Michigan Department of Treasury decide what you actually get. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section class="dates" aria-labelledby="h-dates">
+    <h2 id="h-dates">Key dates</h2>
+    <ol id="dates"></ol>
+  </section>
+
+  <section class="panel" aria-labelledby="h-q">
+    <h2 id="h-q">1. A few questions</h2>
+    <form class="q" id="f" novalidate>
+      <p class="sample">Sample answers are filled in so you can see how it works: a single parent of two who rents in Detroit. Change them to yours.</p>
+
+      <fieldset>
+        <legend>Which tax year?</legend>
+        <div class="opts" role="radiogroup" aria-label="Tax year">
+          <label><input type="radio" name="yr" value="2026" checked> 2026, the year ending December 31. You file in early 2027.</label>
+          <label><input type="radio" name="yr" value="2025"> 2025. You didn't file, or you left a credit off. You can still claim most of these.</label>
+        </div>
+        <span class="hint">Earlier years are in section 2.</span>
+      </fieldset>
+
+      <fieldset>
+        <legend>You and your household</legend>
+        <div class="field"><span class="lbl" id="l-fs">Filing status</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-fs">
+            <label><input type="radio" name="fs" value="single"> Single</label>
+            <label><input type="radio" name="fs" value="hoh" checked> Head of household (not married, and you pay more than half the cost of a home for a child or relative)</label>
+            <label><input type="radio" name="fs" value="mfj"> Married filing jointly</label>
+            <label><input type="radio" name="fs" value="mfs"> Married filing separately</label>
+          </div></div>
+        <div class="opts" id="w-apart" hidden>
+          <label><input type="checkbox" id="apart"> I lived apart from my spouse for the last 6 months of the year, or we're legally separated and lived apart at the end of the year</label>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="age">Your age on December 31</label><input id="age" type="number" min="14" max="120" step="1" inputmode="numeric" value="34"></div>
+          <div class="field" id="w-sage" hidden><label for="sage">Your spouse's age on December 31</label><input id="sage" type="number" min="14" max="120" step="1" inputmode="numeric" value=""></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="kids">Children who count for the EITC</label>
+            <select id="kids"><option value="0">None</option><option value="1">1</option><option value="2" selected>2</option><option value="3">3 or more</option></select>
+            <details class="why"><summary>Who counts?</summary>
+              <ul>
+                <li>Your son, daughter, stepchild, adopted or foster child, brother, sister, half or step sibling, or a grandchild, niece, or nephew.</li>
+                <li>Under 19 at the end of the year, or under 24 and a full-time student for 5 months, and younger than you. Any age if permanently and totally disabled.</li>
+                <li>Lived with you in the U.S. more than half the year. A shelter counts as home.</li>
+                <li>Has a Social Security number valid for work. Only one person can claim each child.</li>
+              </ul>
+            </details></div>
+          <div class="field"><label for="dep">Other people who live with you and whom you support</label><input id="dep" type="number" min="0" max="15" step="1" inputmode="numeric" value="2">
+            <span class="hint">Your children plus any other dependents, like a parent. Not you or your spouse. This sets the Home Heating Credit's household size.</span></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="dis">People in your home who are deaf, blind, or totally and permanently disabled</label>
+            <select id="dis"><option value="0" selected>None</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4 or more</option></select>
+            <span class="hint">Includes paraplegic, hemiplegic, and quadriplegic. Count total and permanent disability (Social Security's definition) only for people under full retirement age.</span></div>
+          <div class="field"><span class="lbl">More about you</span>
+            <div class="opts">
+              <label><input type="checkbox" id="dis-me"> One of them is me or my spouse</label>
+              <label><input type="checkbox" id="widow"> I'm the unremarried surviving spouse of someone who was 65 or older</label>
+              <label><input type="checkbox" id="vet"> Someone in my home is a disabled veteran (honorable or general discharge, disability from service)</label>
+            </div></div>
+        </div>
+        <div class="field"><label for="months">Months you lived in Michigan this year</label><input id="months" type="number" min="0" max="12" step="1" inputmode="numeric" value="12"></div>
+        <div class="opts">
+          <label><input type="checkbox" id="ssn" checked> I, my spouse (if filing jointly), and each child I listed have a Social Security number valid for work</label>
+          <label><input type="checkbox" id="depother"> Someone else can claim me as a dependent</label>
+          <label><input type="checkbox" id="invest"> My interest, dividends, capital gains, and rental income added up to more than <span id="inv-lim">$12,200</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Income for the year</legend>
+        <span class="hint">For everyone on your return, or for a married couple, both of you. Yearly amounts.</span>
+        <div class="row2">
+          <div class="field"><label for="earned">Pay from work</label>
+            <span class="money">$<input id="earned" type="number" min="0" step="1" inputmode="decimal" value="28000"></span>
+            <span class="hint">Wages, tips, and overtime (all of it, even the part that's tax free now), plus gig or self-employment profit after expenses.</span></div>
+          <div class="field"><label for="other">Other taxable income</label>
+            <span class="money">$<input id="other" type="number" min="0" step="1" inputmode="decimal" value="0"></span>
+            <span class="hint">Unemployment, pensions, IRA withdrawals, interest. Put Social Security in the next box instead.</span></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="nontax">Income that isn't taxed</label>
+            <span class="money">$<input id="nontax" type="number" min="0" step="1" inputmode="decimal" value="0"></span>
+            <span class="hint">Social Security, SSI, child support, VA disability, workers' comp, and cash gifts or bills others paid for you over $300. Not food assistance.</span></div>
+          <div class="field"><label for="mdhhs">Cash help from MDHHS</label>
+            <span class="money">$<input id="mdhhs" type="number" min="0" step="1" inputmode="decimal" value="0"></span>
+            <span class="hint">FIP or SDA cash, and shelter or utility payments MDHHS made for you. It's on the Client Annual Statement (DHS-1241) MDHHS mails in January.</span></div>
+        </div>
+        <div class="field"><label for="prem">Health, dental, and vision insurance premiums you paid yourself</label>
+          <span class="money">$<input id="prem" type="number" min="0" step="1" inputmode="decimal" value="0"></span>
+          <span class="hint">Not premiums taken out of your paycheck before tax. Marketplace plans: what you paid after the premium tax credit.</span></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Your home in Michigan</legend>
+        <div class="opts" role="radiogroup" aria-label="Your home">
+          <label><input type="radio" name="home" value="rent" checked> I rent, and I have a lease or rental agreement (a mobile home lot counts)</label>
+          <label><input type="radio" name="home" value="own"> I own my home</label>
+          <label><input type="radio" name="home" value="none"> Neither. I live with someone and don't pay rent under an agreement, or I'm in a nursing home, dorm, or adult foster care</label>
+        </div>
+        <div class="row2" id="w-rent">
+          <div class="field"><label for="rent">Your rent each month</label>
+            <span class="money">$<input id="rent" type="number" min="0" step="1" inputmode="decimal" value="950"></span>
+            <span class="hint">Only the part you pay. Leave out any housing subsidy paid for you. Mobile home lot rent: subtract $3 a month.</span></div>
+          <div class="field"><label for="rmonths">Months you paid rent this year</label><input id="rmonths" type="number" min="0" max="12" step="1" inputmode="numeric" value="12"></div>
+        </div>
+        <div class="opts" id="w-rent2">
+          <label><input type="checkbox" id="svcfee"> My building pays a service charge instead of property taxes (some subsidized and senior housing; ask your manager)</label>
+          <label><input type="checkbox" id="heatrent"> My heat is included in my rent</label>
+        </div>
+        <div class="row2" id="w-own" hidden>
+          <div class="field"><label for="ptax">Property taxes billed for the year</label>
+            <span class="money">$<input id="ptax" type="number" min="0" step="1" inputmode="decimal" value="1800"></span>
+            <span class="hint">Summer and winter bills added together. Leave out late fees, back taxes, and most special assessments.</span></div>
+          <div class="field"><label for="tv">Taxable value of your home</label>
+            <span class="money">$<input id="tv" type="number" min="0" step="1" inputmode="decimal" value="45000"></span>
+            <span class="hint">It's on your tax bill or assessment notice. Not the same as what the house would sell for.</span></div>
+        </div>
+        <div class="field" id="w-heat"><label for="heat">Heating bills from November 1 to October 31</label>
+          <span class="money">$<input id="heat" type="number" min="0" step="1" inputmode="decimal" value="1400"></span>
+          <span class="hint">Optional. Gas or electric heat bills, or what you spent on propane, oil, or wood. It can raise the Home Heating Credit for very low incomes.</span></div>
+      </fieldset>
+    </form>
+    <div class="results" id="r" aria-live="polite"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-late">
+    <h2 id="h-late">2. Missed a year? Some are still open</h2>
+    <p class="small">If you didn't file, or filed without a credit you qualified for, you can usually still claim it for a few years. You file that year's return (or an amended one). These dates are the last day to claim a refund.</p>
+    <div class="card" id="late"></div>
+  </section>
+
+  <section class="panel" id="s-sum" aria-labelledby="h-sum">
+    <h2 id="h-sum">3. Your summary for free tax help</h2>
+    <p class="small">Bring this to a free tax site or show it on your phone. It lists your answers, the estimates, and what to ask.</p>
+    <div class="bar">
+      <h3>Your summary</h3>
+      <span class="btns"><span class="copied" id="copied" role="status"></span><button class="btn ghost" type="button" id="print">Print</button><button class="btn" type="button" id="copy">Copy summary</button></span>
+    </div>
+    <div class="script" id="sum" tabindex="0" aria-label="Summary for free tax help"></div>
+  </section>
+
+  <section class="gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">4. Get them filed for free</h2>
+    <ul>
+      <li><strong>Free tax help near you:</strong> call <a href="tel:211">2-1-1</a>, text <strong>898211</strong>, or go to <a href="https://www.michiganfreetaxhelp.org/" target="_blank" rel="noopener">MichiganFreeTaxHelp.org</a>. Trained volunteers file your federal and Michigan returns and the credit forms at no cost.</li>
+      <li><strong>IRS volunteer sites (VITA and TCE):</strong> use the <a href="https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers" target="_blank" rel="noopener">IRS site finder</a> or call <a href="tel:18009069887">800-906-9887</a>. For AARP Tax-Aide, which helps people of any age, call <a href="tel:18882277669">888-227-7669</a> from January to April.</li>
+      <li><strong>Do it yourself online:</strong> <a href="https://www.irs.gov/e-file-do-your-taxes-for-free" target="_blank" rel="noopener">IRS Free File</a> reopens in January 2027. For the 2026 filing season, its guided software was free with income of $95,000 or less. Michigan lets you file your state return free through <a href="https://www.michigan.gov/taxes/mitreasuryeservices" target="_blank" rel="noopener">Michigan Treasury eServices</a>.</li>
+      <li><strong>Paper forms</strong> are at most public libraries and county MDHHS offices.</li>
+      <li><strong>If you pay a preparer,</strong> they have to sign your return and give their preparer number. Never sign a blank return.</li>
+    </ul>
+  </section>
+
+  <details class="list">
+    <summary>What to bring</summary>
+    <ul>
+      <li>Photo ID, and Social Security cards for you, your spouse, and each child.</li>
+      <li>W-2s and 1099s, including 1099-NEC or 1099-K for gig work, plus your records of self-employment income and expenses.</li>
+      <li>Social Security or SSI statements (SSA-1099), unemployment (1099-G), and pension forms (1099-R).</li>
+      <li>MDHHS Client Annual Statement (DHS-1241), and the Friend of the Court statement (FEN-851) if you get child support through the court.</li>
+      <li>Owners: both property tax bills for the year (summer and winter) and your taxable value.</li>
+      <li>Renters: your lease or your landlord's name and address, and the rent you paid each month.</li>
+      <li>Heating bills or fuel receipts from November 1 to October 31.</li>
+      <li>Health insurance premiums you paid, and Form 1095-A if you had a Marketplace plan.</li>
+      <li>Your bank's routing number and your account number, for direct deposit.</li>
+      <li>Last year's tax returns, if you filed.</li>
+    </ul>
+  </details>
+
+  <footer>
+    <p><strong>Federal EITC.</strong> The 2026 amounts come from <a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" target="_blank" rel="noopener">IRS Revenue Procedure 2025-32</a>, section 4.06, and the 2025 amounts from <a href="https://www.irs.gov/pub/irs-drop/rp-24-40.pdf" target="_blank" rel="noopener">Revenue Procedure 2024-40</a>, section 3.06, which match the <a href="https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/earned-income-and-earned-income-tax-credit-eitc-tables" target="_blank" rel="noopener">IRS EITC tables</a>. The phase-in and phase-out rates are in <a href="https://www.law.cornell.edu/uscode/text/26/32" target="_blank" rel="noopener">26 U.S.C. 32(b)</a>. Who qualifies follows the IRS pages on <a href="https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/who-qualifies-for-the-earned-income-tax-credit-eitc" target="_blank" rel="noopener">who qualifies</a>, <a href="https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/qualifying-child-rules" target="_blank" rel="noopener">qualifying children</a>, and <a href="https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/how-to-claim-the-earned-income-tax-credit-eitc" target="_blank" rel="noopener">claiming earlier years</a>. For a full check, use the <a href="https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/use-the-eitc-assistant" target="_blank" rel="noopener">IRS EITC Assistant</a>.</p>
+    <p><strong>Michigan.</strong> The Working Families Tax Credit is 30% of the federal EITC under <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-206-272" target="_blank" rel="noopener">MCL 206.272</a> (Treasury's <a href="https://www.michigan.gov/taxes/iit/tax-guidance/credits-exemptions/eitc" target="_blank" rel="noopener">EITC page</a>). The Homestead Property Tax Credit follows <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-206-520" target="_blank" rel="noopener">MCL 206.520</a>, Treasury's <a href="https://www.michigan.gov/taxes/iit/tax-guidance/credits-exemptions/hptc/tax-year-credit-information/2025" target="_blank" rel="noopener">2025 limits</a>, and the <a href="https://www.michigan.gov/taxes/-/media/Project/Websites/taxes/Forms/IIT/TY2025/MI-1040CR-Instr.pdf" target="_blank" rel="noopener">2025 MI-1040CR instructions</a>. The Home Heating Credit follows <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-206-527a" target="_blank" rel="noopener">MCL 206.527a</a> (last changed by 2025 PA 55), Treasury's 2025 <a href="https://www.michigan.gov/taxes/iit/tax-guidance/credits-exemptions/home-heating-credit/table-a-home-heating-credit-mi-1040cr-7-standard-allowance" target="_blank" rel="noopener">Table A</a> and <a href="https://www.michigan.gov/taxes/iit/tax-guidance/credits-exemptions/home-heating-credit/table-b-home-heating-credit-mi-1040cr-7-alternate-credit-computation" target="_blank" rel="noopener">Table B</a>, its <a href="https://www.michigan.gov/taxes/questions/iit/accordion/heating/home-heating-credit-information-1" target="_blank" rel="noopener">Home Heating Credit page</a>, and the 2025 MI-1040CR-7 form. Treasury took that form down after the deadline, so the link is an <a href="https://taxsim.nber.org/historical_state_tax_forms/MI/2025/MI-1040CR-7.pdf" target="_blank" rel="noopener">archived copy</a>.</p>
+    <p><strong>2026 Michigan numbers.</strong> As of October 31, 2026, Treasury hadn't posted 2026 limits for the Homestead or Home Heating credits. It says the <a href="https://www.michigan.gov/taxes/iit/tax-guidance/credits-exemptions/home-heating-credit/hhc-deadline" target="_blank" rel="noopener">2026 Home Heating Credit form comes out in January 2027</a>. Until then, 2026 Michigan estimates use the 2025 numbers and are marked as estimates. The federal 2026 EITC numbers are final.</p>
+    <p>All sources were checked October 31, 2026. Green cards use that year's official numbers. Amber cards are rough estimates. Red cards mean act now or the window has closed. This page doesn't cover the Child Tax Credit, the farmland credit, city income taxes, or business returns. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  // ===== Update each year =====
+  // Federal EITC by tax year. Each list is indexed by qualifying children: 0, 1, 2, 3 or more.
+  // start/end = phase-out begins/ends (All other filing statuses); startJ/endJ = married filing jointly.
+  const EITC = {
+    2026: { src: "Rev. Proc. 2025-32", url: "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf",
+      earned: [8680, 13020, 18290, 18290], max: [664, 4427, 7316, 8231],
+      start: [10860, 23890, 23890, 23890], end: [19540, 51593, 58629, 62974],
+      startJ: [18140, 31160, 31160, 31160], endJ: [26820, 58863, 65899, 70244], invest: 12200 },
+    2025: { src: "Rev. Proc. 2024-40", url: "https://www.irs.gov/pub/irs-drop/rp-24-40.pdf",
+      earned: [8490, 12730, 17880, 17880], max: [649, 4328, 7152, 8046],
+      start: [10620, 23350, 23350, 23350], end: [19104, 50434, 57310, 61555],
+      startJ: [17730, 30470, 30470, 30470], endJ: [26214, 57554, 64430, 68675], invest: 11950 }
+  };
+  const RATE_IN = [0.0765, 0.34, 0.40, 0.45], RATE_OUT = [0.0765, 0.1598, 0.2106, 0.2106]; // 26 USC 32(b)(1)
+  const MI_SHARE = 0.30;                                                                   // MCL 206.272(1)(d)
+
+  // Michigan posts each year's Homestead and Home Heating numbers around January of the next year.
+  // Add a 2026 entry to HPTC and HHC when Treasury posts it; the page then marks 2026 Michigan results as final.
+  const HPTC = { 2025: { tv: 165400, thr: 71500, phase: 62500, max: 1900 } };
+  const HHC = { 2025: { allow: [604, 815, 1027, 1239, 1451, 1662], allowAdd: 212, ceil: [17243, 23271, 29329, 35385, 41443, 47471], ceilAdd: 6057,
+    alt: [18592, 25018, 31449, 34227], heatCap: 3765, share: 0.60 } };
+  const HHC_SHARE_HISTORY = "It paid 52% for 2024 and 60% for 2025.";
+  const DUE = { 2025: { ret: "2026-04-15", hhc: "2026-09-30" }, 2026: { ret: "2027-04-15", hhc: "2027-09-30" } };
+
+  // Last day to claim a missed credit. Federal: 3 years (IRS "how to claim" page). Michigan EITC and Homestead: 4 years
+  // from the original due date (Treasury). fedText is used where the IRS hasn't printed the exact date yet.
+  const LATE = [
+    { y: 2022, fed: "2026-04-15", mi: "2027-04-18", fedMax: 6935, miMax: 2081 },
+    { y: 2023, fed: "2027-04-15", mi: "2028-04-15", fedMax: 7430, miMax: 2229 },
+    { y: 2024, fed: "2028-04-17", mi: "2029-04-15", fedMax: 7830, miMax: 2349, hMax: 1800 },
+    { y: 2025, fed: "2029-04-15", fedText: "about April 15, 2029", mi: "2030-04-15", fedMax: 8046, miMax: 2414, hMax: 1900 }
+  ];
+  // ===== End of yearly numbers =====
+
+  const DAY = 86400000;
+  const $ = id => document.getElementById(id);
+  const parse = v => { const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); };
+  const plain = d => d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  const today = (() => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); })();
+  const diff = (a, b) => Math.round((b - a) / DAY);
+  const usd = n => "$" + Math.round(n).toLocaleString("en-US");
+  const pct = x => (Math.round(x * 1000) / 10) + "%";
+  const num = id => { const v = parseFloat($(id).value); return isFinite(v) && v >= 0 ? v : 0; };
+  const numOrNull = id => { const v = parseFloat($(id).value); return isFinite(v) && v >= 0 ? v : null; };
+  const LABEL = { law: "Official numbers", facts: "Estimate", help: "Act now" };
+
+  const URL = {
+    rp2532: "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf", rp2440: "https://www.irs.gov/pub/irs-drop/rp-24-40.pdf",
+    usc32: "https://www.law.cornell.edu/uscode/text/26/32",
+    who: "https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/who-qualifies-for-the-earned-income-tax-credit-eitc",
+    qc: "https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/qualifying-child-rules",
+    how: "https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/how-to-claim-the-earned-income-tax-credit-eitc",
+    mcl272: "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-206-272",
+    mieitc: "https://www.michigan.gov/taxes/iit/tax-guidance/credits-exemptions/eitc",
+    mcl520: "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-206-520",
+    cr: "https://www.michigan.gov/taxes/-/media/Project/Websites/taxes/Forms/IIT/TY2025/MI-1040CR-Instr.pdf",
+    hptc25: "https://www.michigan.gov/taxes/iit/tax-guidance/credits-exemptions/hptc/tax-year-credit-information/2025",
+    mcl527a: "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-206-527a",
+    hhcA: "https://www.michigan.gov/taxes/iit/tax-guidance/credits-exemptions/home-heating-credit/table-a-home-heating-credit-mi-1040cr-7-standard-allowance",
+    hhcB: "https://www.michigan.gov/taxes/iit/tax-guidance/credits-exemptions/home-heating-credit/table-b-home-heating-credit-mi-1040cr-7-alternate-credit-computation",
+    hhcInfo: "https://www.michigan.gov/taxes/questions/iit/accordion/heating/home-heating-credit-information-1",
+    hhcDeadline: "https://www.michigan.gov/taxes/iit/tax-guidance/credits-exemptions/home-heating-credit/hhc-deadline",
+    cr7: "https://taxsim.nber.org/historical_state_tax_forms/MI/2025/MI-1040CR-7.pdf",
+    gov: "https://www.michigan.gov/whitmer/news/press-releases/2026/09/01/governor-whitmer-announces-home-heating-tax-credit-filing-deadline",
+    ty25: "https://www.michigan.gov/taxes/iit/tax-guidance/tax-year-info/tax-year-2025-guidance",
+    refund: "https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/when-to-expect-your-refund-if-you-claimed-the-earned-income-tax-credit-or-additional-child-tax-credit"
+  };
+  const cite = (label, key) => `<a class="cite" href="${URL[key]}" target="_blank" rel="noopener">${label}</a>`;
+  function card(level, title, parts, cites = [], next = "", tag = LABEL[level]) {
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${tag}</span></div>
+      ${parts.filter(Boolean).join("")}
+      ${next ? `<p class="next"><strong>How to get it:</strong> ${next}</p>` : ""}
+      ${cites.length ? `<div class="cites">${cites.join("")}</div>` : ""}
+    </article>`;
+  }
+  const P = (t, small) => `<p${small ? ' class="small"' : ""}>${t}</p>`;
+  const amt = (n, note = "") => `<p class="amt">${n > 0 ? "About " + usd(n) : "$0"}${note ? ` <small>${note}</small>` : ""}</p>`;
+  function math(rows) {
+    return `<details><summary>See the math</summary><div class="math">${rows.map(([k, v, total]) =>
+      `<span${total ? ' class="total"' : ""}>${k}</span><span class="num${total ? " total" : ""}">${v}</span>`).join("")}</div></details>`;
+  }
+
+  // ---------- Key dates ----------
+  function drawDates() {
+    const items = [
+      { when: "January 2027", what: "2026 tax forms come out, and free tax sites start opening. Michigan's 2026 Home Heating Credit form arrives then too." },
+      { d: "2027-04-15", what: "2026 federal and Michigan returns are due. It's also the last day to claim a missed <strong>2023</strong> federal EITC." },
+      { d: "2027-04-18", what: "Last day to claim a missed <strong>2022</strong> Michigan Working Families Tax Credit or Homestead credit." },
+      { d: "2027-09-30", what: "Last day for the 2026 Home Heating Credit. Michigan doesn't take late claims." }
+    ];
+    $("dates").innerHTML = items.filter(i => !i.d || diff(today, parse(i.d)) >= 0).map(i => {
+      if (!i.d) return `<li><span class="d">${i.when}</span><span>${i.what}</span></li>`;
+      const n = diff(today, parse(i.d));
+      const away = n === 0 ? "today" : n === 1 ? "tomorrow" : `in ${n} days`;
+      return `<li><span class="d">${plain(parse(i.d))}<small>${away}</small></span><span>${i.what}</span></li>`;
+    }).join("");
+  }
+
+  // ---------- The three credits' math ----------
+  function eitcAmount(E, k, earned, agi, joint) {
+    const start = joint ? E.startJ[k] : E.start[k];
+    const phaseIn = Math.min(RATE_IN[k] * earned, E.max[k]);
+    const over = Math.max(0, Math.max(agi, earned) - start);
+    const cap = E.max[k] - RATE_OUT[k] * over;
+    return { amount: Math.max(0, Math.round(Math.min(phaseIn, cap))), start, end: joint ? E.endJ[k] : E.end[k], phaseIn, over };
+  }
+  // MI-1040CR Table 2: share of household resources that isn't refunded, for seniors and disabled claimants.
+  const notRefundable = (thr, special) => !special || thr > 6000 ? 0.032 : thr <= 3000 ? 0 : thr <= 4000 ? 0.01 : thr <= 5000 ? 0.02 : 0.03;
+  // MI-1040CR Table A: senior credit percentage, 100% at $21,000 or less, down 4 points per $1,000 to 60% over $30,000.
+  const seniorPct = thr => thr <= 21000 ? 1 : thr > 30000 ? 0.60 : 1 - 0.04 * Math.ceil((thr - 21000) / 1000);
+  // MI-1040CR Table B: 10% less for every $1,000 (or part) over the phase-out start.
+  const phasePct = (thr, H) => thr <= H.phase ? 1 : Math.max(0, 1 - 0.1 * Math.ceil((thr - H.phase) / 1000));
+  const byEx = (list, add, ex) => ex <= 6 ? list[Math.max(1, ex) - 1] : list[5] + add * (ex - 6);
+
+  const f = $("f");
+  const radio = name => f.querySelector(`input[name="${name}"]:checked`).value;
+  let depTouched = false;
+  $("dep").addEventListener("input", () => { depTouched = true; });
+  $("kids").addEventListener("change", () => { if (!depTouched) $("dep").value = $("kids").value; });
+
+  let S = {};
+  function run() {
+    const yr = Number(radio("yr")), fs = radio("fs"), home = radio("home");
+    const joint = fs === "mfj", mfs = fs === "mfs";
+    $("w-apart").hidden = !mfs;
+    $("w-sage").hidden = !joint;
+    $("w-rent").hidden = $("w-rent2").hidden = home !== "rent";
+    $("w-own").hidden = home !== "own";
+    $("w-heat").hidden = home === "none";
+
+    const E = EITC[yr];
+    $("inv-lim").textContent = usd(E.invest);
+    const age = numOrNull("age"), sage = joint ? numOrNull("sage") : null;
+    const k = Number($("kids").value), kidsText = ["no qualifying children", "1 qualifying child", "2 qualifying children", "3 or more qualifying children"][k];
+    const dep = Math.round(num("dep")), dis = Number($("dis").value);
+    const disMe = $("dis-me").checked && dis > 0, vet = $("vet").checked;
+    const senior = (age !== null && age >= 65) || (sage !== null && sage >= 65) || $("widow").checked;
+    const months = Math.min(12, Math.round(num("months")));
+    const ssn = $("ssn").checked, depOther = $("depother").checked, invest = $("invest").checked;
+    const earned = num("earned"), other = num("other"), nontax = num("nontax"), mdhhs = num("mdhhs"), prem = num("prem");
+    const agi = earned + other;
+    const thr = Math.max(0, earned + other + nontax + mdhhs - prem);
+    const rentYear = home === "rent" ? num("rent") * Math.min(12, num("rmonths")) : 0;
+    const svcfee = home === "rent" && $("svcfee").checked, heatInRent = home === "rent" && $("heatrent").checked;
+    const ptax = home === "own" ? num("ptax") : 0, tv = home === "own" ? numOrNull("tv") : null;
+    const heat = home === "none" ? 0 : num("heat");
+    const fsText = { single: "single", hoh: "head of household", mfj: "married filing jointly", mfs: "married filing separately" }[fs];
+
+    const out = [];
+    const rows = [];
+
+    // ----- Federal EITC -----
+    const why = [];
+    if (earned <= 0) why.push("The EITC needs pay from work: wages, tips, or self-employment profit.");
+    if (invest) why.push(`Investment income over ${usd(E.invest)} rules out the EITC for ${yr}.`);
+    if (!ssn) why.push("You, your spouse if filing jointly, and each child you claim need a Social Security number that's valid for work, issued by the return's due date.");
+    if (depOther) why.push("If someone else can claim you as a dependent or as their qualifying child, you can't take the EITC yourself.");
+    if (mfs && !(k > 0 && $("apart").checked)) why.push("When you're married and file separately, you can claim the EITC only with a qualifying child who lived with you more than half the year, and only if you lived apart from your spouse for the last 6 months of the year or were legally separated.");
+    if (k === 0) {
+      const ok = a => a !== null && a >= 25 && a < 65;
+      if (age !== null && !ok(age) && !(joint && ok(sage))) why.push(`Without a qualifying child, you${joint ? " or your spouse" : ""} must be at least 25 and under 65 on December 31.`);
+    }
+    let fed = 0;
+    const e = eitcAmount(E, k, earned, agi, joint);
+    const eitcCites = [cite(E.src + " sec. " + (yr === 2026 ? "4.06" : "3.06"), yr === 2026 ? "rp2532" : "rp2440"), cite("26 U.S.C. 32", "usc32"), cite("IRS: who qualifies", "who"), cite("IRS: qualifying child", "qc"), cite("IRS: refund timing", "refund")];
+    if (why.length) {
+      out.push(card("law", "Federal Earned Income Tax Credit (EITC)", [amt(0), P("From your answers, you likely can't get it this year:"), `<ul>${why.map(w => `<li>${w}</li>`).join("")}</ul>`,
+        P("If any answer above isn't right, fix it and the estimate updates.", true)], eitcCites));
+    } else {
+      fed = e.amount;
+      const incomeUsed = Math.max(agi, earned);
+      const parts = [amt(fed, `for ${yr}`)];
+      if (fed > 0) {
+        parts.push(P(`For ${yr}, with ${kidsText}, the EITC is up to ${usd(E.max[k])}. ${fs === "mfj" ? "For married couples filing jointly" : "For your filing status"}, it starts going down once income passes ${usd(e.start)} and ends at ${usd(e.end)}.`));
+        parts.push(P("This follows the IRS formula. The table on the tax form works in $50 steps, so your exact amount can be off by a few dollars.", true));
+      } else {
+        parts.push(P(`With ${kidsText} and your filing status, the EITC ends at ${usd(e.end)} of income, and yours is ${usd(incomeUsed)}.`));
+      }
+      if (k === 0 && age === null) parts.push(P("Without a qualifying child, you must be at least 25 and under 65 on December 31.", true));
+      if (k > 0 && fed > 0) parts.push(P("Each child needs to meet the age, relationship, and living-with-you rules. Tap \"Who counts?\" above.", true));
+      parts.push(math([
+        [`Pay from work × ${pct(RATE_IN[k])}`, usd(RATE_IN[k] * earned)],
+        ["Most it can be", usd(E.max[k])],
+        [`Income over ${usd(e.start)} (the larger of total income or pay from work)`, usd(e.over)],
+        [`Phase-out: that amount × ${pct(RATE_OUT[k])}`, "− " + usd(RATE_OUT[k] * e.over)],
+        ["Estimated EITC", usd(fed), true]
+      ]));
+      out.push(card("law", "Federal Earned Income Tax Credit (EITC)", parts, eitcCites,
+        fed > 0 ? `File a federal return (Form 1040${k > 0 ? " with Schedule EIC" : ""}), even if you owe no tax and aren't required to file. By law, the IRS can't send refunds that include the EITC before mid-February.` : ""));
+    }
+    rows.push(["Federal EITC", fed, "law"]);
+
+    // ----- Michigan Working Families Tax Credit -----
+    const mi = Math.round(fed * MI_SHARE);
+    const miCites = [cite("MCL 206.272", "mcl272"), cite("Treasury: Michigan EITC", "mieitc")];
+    if (months === 0) {
+      out.push(card("law", "Michigan Working Families Tax Credit", [amt(0), P("You need to have lived in Michigan for part of the year, or be a nonresident with taxable Michigan income.")], miCites));
+      rows.push(["Michigan Working Families Tax Credit", 0, "law"]);
+    } else {
+      out.push(card("law", "Michigan Working Families Tax Credit", [
+        amt(mi, `for ${yr}`),
+        P(fed > 0 ? `Michigan's earned income tax credit, which the state calls the Working Families Tax Credit, is 30% of your federal EITC. It's refundable: if it's more than the Michigan tax you owe, Treasury sends you the difference.`
+          : "Michigan's credit is 30% of the federal EITC, so if the federal credit is $0, this one is too."),
+        months < 12 && fed > 0 ? P("Part-year residents can claim it too. Ask a free tax site how the amount works when you moved during the year.", true) : ""
+      ], miCites, fed > 0 ? "Claim it on your Michigan return (MI-1040). Michigan requires you to file the federal return and claim the federal EITC too, even if you don't have to file otherwise." : ""));
+      rows.push(["Michigan Working Families Tax Credit", mi, "law"]);
+    }
+
+    // ----- Homestead Property Tax Credit -----
+    const hYear = HPTC[yr] ? yr : Math.max(...Object.keys(HPTC).map(Number));
+    const H = HPTC[hYear], hFinal = hYear === yr;
+    const hLevel = hFinal ? "law" : "facts";
+    const hCites = [cite("MCL 206.520", "mcl520"), cite("MI-1040CR instructions (2025)", "cr"), cite(`Treasury: ${hYear} limits`, "hptc25")];
+    const hNote = hFinal ? "" : P(`Michigan posts the ${yr} limits around January ${yr + 1}. Until then this uses the ${hYear} limits: total household resources up to ${usd(H.thr)}, a credit of up to ${usd(H.max)}, and, for owners, a taxable value of ${usd(H.tv)} or less. The law raises them each year by the rise in consumer prices, so the ${yr} limits should be a little higher.`, true);
+    let hp = 0, hWhy = "";
+    if (home === "none") hWhy = "You need to own your home or rent it under a lease or rental agreement. If you live with someone and don't pay rent under an agreement, or you live in a dorm, you can't claim it. Nursing homes and adult foster care follow special rules, so ask a free tax site.";
+    else if (months < 6) hWhy = "You must have lived in Michigan for at least 6 months of the year.";
+    else if (home === "own" && tv !== null && tv > H.tv) hWhy = `Your home's taxable value is over the ${usd(H.tv)} limit${hFinal ? "" : ` (the ${hYear} limit)`}.`;
+    else if (thr > H.thr) hWhy = `Your total household resources (${usd(thr)}) are over the ${usd(H.thr)} limit${hFinal ? "" : ` (the ${hYear} limit)`}.`;
+    if (hWhy) {
+      out.push(card(hLevel, "Homestead Property Tax Credit", [amt(0), P(hWhy), hNote], hCites, "", hFinal ? LABEL.law : LABEL.facts));
+    } else {
+      const special = disMe || senior;
+      const share = svcfee ? 0.10 : 0.23;
+      const rentTax = rentYear * share;
+      const taxes = ptax + rentTax;
+      const nr = notRefundable(thr, special);
+      const l35 = Math.max(0, taxes - nr * thr);
+      const sec = disMe ? 1 : senior ? seniorPct(thr) : 0.60;
+      let l42 = Math.min(l35 * sec, H.max);
+      const mdhhsRatio = mdhhs > 0 && thr > 0 ? Math.max(0, thr - mdhhs) / thr : 1;
+      l42 = l42 * mdhhsRatio;
+      const ph = phasePct(thr, H);
+      let credit = l42 * ph, alt = 0, usedAlt = false;
+      if (home === "rent" && senior) {             // MI-1040CR Worksheet 5: renters 65 or older
+        alt = Math.max(0, rentYear - 0.40 * thr);
+        if (alt > credit) { credit = Math.min(alt, H.max); usedAlt = true; }
+      }
+      hp = Math.round(credit);
+      const who = disMe ? "Because you or your spouse is deaf, blind, or disabled, Michigan pays 100% of it" :
+        senior ? `Because you're 65 or older, Michigan pays ${pct(sec)} of it` : "Michigan pays 60% of it";
+      const parts = [amt(hp, `for ${yr}`)];
+      if (home === "rent") parts.push(P(`Michigan treats ${svcfee ? "10%" : "23%"} of your rent as property tax: ${usd(rentTax)} of the ${usd(rentYear)} you paid. The credit covers the part over ${pct(nr)} of your total household resources (${usd(thr)}). ${who}, up to ${usd(H.max)}.`));
+      else parts.push(P(`The credit covers the part of your ${usd(ptax)} in property taxes over ${pct(nr)} of your total household resources (${usd(thr)}). ${who}, up to ${usd(H.max)}.`));
+      if (usedAlt) parts.push(P(`As a renter 65 or older, you get the larger of that or your rent minus 40% of your household resources. The second way gives more here.`));
+      if (ph < 1) parts.push(P(`Because your household resources are over ${usd(H.phase)}, the credit is cut to ${pct(ph)} of the full amount.`));
+      if (mdhhsRatio < 1) parts.push(P(`Because part of your income is MDHHS cash help, the credit is reduced to match the share of income from other sources (${pct(mdhhsRatio)}).`, true));
+      if (hp === 0 && taxes > 0) parts.push(P(`Your ${home === "rent" ? "rent share" : "property tax"} is less than ${pct(nr)} of your household resources, so it works out to $0.`, true));
+      if (months < 12) parts.push(P("Because you lived in Michigan part of the year, your credit is figured on the part of the year you lived here and will likely be smaller.", true));
+      if ((home === "own" && dis > 0) || vet) parts.push(P("If you're blind and own your home, or you're a veteran, a veteran's surviving spouse, or in the military, also fill out Form MI-1040CR-2 and use whichever form gives more.", true));
+      if (home === "own" && tv === null) parts.push(P(`Owners can't claim it if the home's taxable value is over ${usd(H.tv)}. Check the number on your tax bill.`, true));
+      parts.push(hNote);
+      const m = [];
+      if (home === "rent") m.push([`Rent paid × ${svcfee ? "10%" : "23%"}`, usd(rentTax)]);
+      else m.push(["Property taxes", usd(ptax)]);
+      m.push([`Total household resources × ${pct(nr)}`, "− " + usd(nr * thr)]);
+      m.push(["Difference", usd(l35)]);
+      m.push([`× ${pct(sec)}, up to ${usd(H.max)}`, usd(Math.min(l35 * sec, H.max))]);
+      if (mdhhsRatio < 1) m.push([`× ${pct(mdhhsRatio)} (MDHHS cash share)`, usd(l42)]);
+      if (ph < 1) m.push([`× ${pct(ph)} (income phase-out)`, usd(l42 * ph)]);
+      if (usedAlt) m.push(["Renter 65+ way: rent − 40% of household resources", usd(alt)]);
+      m.push(["Estimated credit", usd(hp), true]);
+      parts.push(math(m));
+      out.push(card(hLevel, "Homestead Property Tax Credit", parts, hCites,
+        hp > 0 ? "File Form MI-1040CR with your MI-1040, or by itself if you don't have to file a Michigan return. You have 4 years from the return's due date to claim it." : "", hFinal ? LABEL.law : LABEL.facts));
+    }
+    rows.push(["Homestead Property Tax Credit", hp, hLevel]);
+
+    // ----- Home Heating Credit -----
+    const hhcDue = parse(DUE[yr].hhc), closed = diff(today, hhcDue) < 0;
+    const cYear = HHC[yr] ? yr : Math.max(...Object.keys(HHC).map(Number));
+    const C = HHC[cYear], cFinal = cYear === yr;
+    const ex = Math.max(1, (joint ? 2 : 1) - (depOther ? 1 : 0) + dep + dis + (vet ? 1 : 0));
+    const cCites = [cite("MCL 206.527a", "mcl527a"), cite(`Table A (${cYear})`, "hhcA"), cite(`Table B (${cYear})`, "hhcB"), cite(`MI-1040CR-7 (${cYear})`, "cr7"), cite("Treasury: Home Heating Credit", "hhcInfo")];
+    let hh = 0;
+    if (closed) {
+      out.push(card("help", "Home Heating Credit", [
+        P(`<strong>The ${yr} deadline has passed.</strong> Claims for ${yr} were due ${plain(hhcDue)}, and Michigan doesn't take late Home Heating Credit claims.`),
+        P(`You can still claim the ${yr + 1} credit. The form comes out in January ${yr + 2} and is due ${plain(parse(DUE[yr + 1] ? DUE[yr + 1].hhc : (yr + 2) + "-09-30"))}. Switch the tax year above to ${yr + 1} to estimate it.`)
+      ], [cite("Treasury: deadline", "hhcDeadline"), cite("Governor's notice", "gov")], "", "Closed"));
+      rows.push(["Home Heating Credit", null, "help"]);
+    } else if (home === "none") {
+      out.push(card(cFinal ? "law" : "facts", "Home Heating Credit", [amt(0),
+        P("You need to own your home or have a lease or rental agreement. People who live in a licensed care facility, college housing, or as a full-time student claimed on someone else's return all year can't claim it.")], cCites));
+      rows.push(["Home Heating Credit", 0, cFinal ? "law" : "facts"]);
+    } else {
+      const allow = byEx(C.allow, C.allowAdd, ex), ceil = byEx(C.ceil, C.ceilAdd, ex);
+      const altMax = C.alt[Math.min(4, ex) - 1];
+      const stdOk = thr < ceil;
+      const allowP = allow * Math.min(1, months / 12);
+      let std = stdOk ? Math.max(0, allowP - 0.035 * thr) : 0;
+      const stdBefore = std;
+      if (heatInRent) std *= 0.5;
+      const altOk = !heatInRent && months >= 12 && thr < altMax && heat > 0;
+      const alt = altOk ? Math.max(0, Math.min(heat, C.heatCap) - 0.11 * thr) * 0.70 : 0;
+      const base = heatInRent ? std : Math.max(std, alt);
+      hh = Math.round(base * C.share);
+      const parts = [amt(hh, `for ${yr}`)];
+      if (!stdOk && !altOk) {
+        parts.push(P(`With ${ex} exemption${ex === 1 ? "" : "s"}, income must be under ${usd(ceil)}${cFinal ? "" : ` (the ${cYear} limit)`}. Your total household resources are ${usd(thr)}.`));
+      } else {
+        parts.push(P(`You have ${ex} exemption${ex === 1 ? "" : "s"}: ${joint ? "you and your spouse" : depOther ? "none for yourself, since someone can claim you" : "you"}${dep ? `, ${dep} ${dep === 1 ? "person" : "people"} you support` : ""}${dis ? `, ${dis} for deafness, blindness, or disability` : ""}${vet ? ", 1 for a disabled veteran" : ""}. The standard credit is ${usd(allow)}${months < 12 ? " (cut for the months you lived here)" : ""} minus 3.5% of your household resources${heatInRent ? ", then half, because heat is in your rent" : ""}.${altOk ? ` The other way uses your heating bills: up to ${usd(C.heatCap)} of them, minus 11% of your household resources, times 70%. You get the larger.` : ""}`));
+        parts.push(P(`Michigan then pays a share set by how much federal heating aid (LIHEAP) money it gets. ${HHC_SHARE_HISTORY} ${cFinal ? "" : `This estimate uses 60%. The ${yr} share will be set when the form comes out.`}`, true));
+      }
+      if (!cFinal) parts.push(P(`Michigan's ${yr} tables come out in January ${yr + 1}. Until then this uses the ${cYear} tables, so treat it as rough.`, true));
+      if (hh > 20) parts.push(P("If you get food assistance (SNAP) and you're a senior, disabled, or a veteran, a Home Heating Credit over $20 may raise your food benefits.", true));
+      if (stdOk || altOk) {
+        const m = [[`Standard allowance for ${ex} exemption${ex === 1 ? "" : "s"}${months < 12 ? `, × ${months}/12` : ""}`, usd(allowP)],
+          ["Total household resources × 3.5%", "− " + usd(0.035 * thr)],
+          ["Standard credit", usd(stdBefore)]];
+        if (heatInRent) m.push(["Heat in rent: × 50%", usd(std)]);
+        if (altOk) m.push([`Heating-cost way: (${usd(Math.min(heat, C.heatCap))} − 11% of resources) × 70%`, usd(alt)]);
+        m.push([`Larger amount × ${pct(C.share)} federal share`, usd(base * C.share)]);
+        m.push(["Estimated credit", usd(hh), true]);
+        parts.push(math(m));
+      }
+      const next = hh > 0 ? `File Form MI-1040CR-7 from January ${yr + 1} through ${plain(hhcDue)}. You can file it by itself. ${heatInRent ? "Since heat is in your rent, Treasury sends a check." : "If you pay your own heat bill, it comes as an energy draft for your heat company. With DTE, Consumers Energy, or SEMCO, it may go straight to your account."}` : "";
+      out.push(card(cFinal ? "law" : "facts", "Home Heating Credit", parts, cCites, next));
+      rows.push(["Home Heating Credit", hh, cFinal ? "law" : "facts"]);
+    }
+
+    // ----- Total -----
+    const total = rows.reduce((s, r) => s + (r[1] || 0), 0);
+    const anyEst = rows.some(r => r[2] === "facts");
+    const sumRows = rows.map(([n, v, lvl]) => `<tr><td>${n}${lvl === "facts" ? " <span class=\"small\">(estimate)</span>" : ""}</td><td class="num">${v === null ? "Closed" : v > 0 ? usd(v) : "$0"}</td></tr>`).join("");
+    const head = card("total", total > 0 ? `For ${yr}, you may be able to get about ${usd(total)}` : `For ${yr}, these credits likely come to $0 for you`, [
+      `<table class="sum"><tbody>${sumRows}<tr class="all"><td>Total</td><td class="num">${usd(total)}</td></tr></tbody></table>`,
+      P(`These are estimates from your answers.${anyEst ? ` Michigan hasn't posted its ${yr} numbers yet, so the Michigan property tax and heating figures are rough.` : ""} The IRS and Michigan Treasury figure the real amounts.`, true)
+    ], [], "", "Your estimate");
+
+    const extra = [];
+    extra.push(card("law", "You have to file to get them", [
+      P("The EITC and Michigan's Working Families credit only come if you file a federal return and a Michigan MI-1040, even when your income is too low to have to file."),
+      P("The Homestead and Home Heating credits have their own forms. You can file them without an income tax return.", true)
+    ], [cite("Treasury: Michigan EITC", "mieitc"), cite("MI-1040CR instructions", "cr"), cite("Treasury: Home Heating Credit", "hhcInfo")]));
+    if (k > 0) extra.push(card("facts", "Also ask about the Child Tax Credit", [
+      P(`With children, a free tax site will also check the Child Tax Credit. For ${yr}, up to $1,700 per child of it can come back as a refund even if you owe no tax. This page doesn't figure that one.`)
+    ], [cite(yr === 2026 ? "Rev. Proc. 2025-32 sec. 4.05" : "Rev. Proc. 2024-40 sec. 3.05", yr === 2026 ? "rp2532" : "rp2440")], "", "Ask"));
+
+    $("r").innerHTML = `<div class="results-head"><h2>Your results</h2>
+      <div class="legend"><span class="tag law">Official numbers</span><span class="tag facts">Estimate</span><span class="tag help">Act now</span></div></div>
+      ${head}${out.join("")}${extra.join("")}`;
+
+    S = { yr, fsText, kidsText, k, age, sage, joint, earned, other, nontax, mdhhs, prem, thr, home, rentYear, ptax, tv, heat, heatInRent, svcfee, months, rows, total, anyEst, dep, dis, vet, senior };
+    drawSummary();
+  }
+
+  // ---------- Earlier years ----------
+  function drawLate() {
+    const fmtCell = (iso, text) => {
+      const d = parse(iso), n = diff(today, d);
+      if (n < 0) return `<span class="gone">Closed ${plain(d)}</span>`;
+      const label = text || plain(d);
+      return n <= 183 ? `<span class="soon">${label}</span> <span class="small">(${n} days)</span>` : label;
+    };
+    const rows = LATE.filter(r => diff(today, parse(r.mi)) >= 0).map(r => `<tr>
+      <th scope="row">${r.y}</th>
+      <td>${fmtCell(r.fed, r.fedText)}<br><span class="small">up to ${usd(r.fedMax)}</span></td>
+      <td>${fmtCell(r.mi)}<br><span class="small">Working Families up to ${usd(r.miMax)}${r.hMax ? `; Homestead up to ${usd(r.hMax)}` : ""}</span></td></tr>`).join("");
+    $("late").innerHTML = `<div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th scope="col">Tax year</th><th scope="col">Federal EITC: last day</th><th scope="col">Michigan EITC and Homestead credit: last day</th></tr></thead>
+      <tbody>${rows}</tbody></table></div>
+      <p class="small">"Up to" is the most anyone could get that year. For the EITC, that's with 3 or more children. Red means the window closes within 6 months. The Home Heating Credit can't be claimed late: each year closes on September 30 of the next year.</p>
+      <p class="next"><strong>How:</strong> file that year's federal Form 1040 (with Schedule EIC if you had a qualifying child) and Michigan's MI-1040 and MI-1040CR. If you filed but left the credit off, file an amended return (federal Form 1040-X). Free tax sites can do earlier years too.</p>
+      <div class="cites">${cite("IRS: claiming earlier years", "how")}${cite("Treasury: 4-year rule", "ty25")}${cite("Treasury: Michigan EITC", "mieitc")}</div>`;
+  }
+
+  // ---------- Summary to bring ----------
+  function drawSummary() {
+    const s = S, L = [];
+    L.push(`Tax credit check for tax year ${s.yr}`, `Made with the free Michigan tax credits check at free-to-all-ai.github.io/tools/tax-credits/`, "");
+    L.push("My situation");
+    L.push(`Filing status: ${s.fsText[0].toUpperCase() + s.fsText.slice(1)}`);
+    L.push(`Children who may count for the EITC: ${s.kidsText.replace(" qualifying children", "").replace(" qualifying child", "")}`);
+    L.push(`Other people I support who live with me: ${s.dep}`);
+    if (s.age !== null) L.push(`My age on December 31: ${s.age}${s.joint && s.sage !== null ? `; spouse: ${s.sage}` : ""}`);
+    if (s.dis) L.push(`People in my home who are deaf, blind, or disabled: ${s.dis}`);
+    if (s.vet) L.push("Disabled veteran in my home: yes");
+    if (s.months < 12) L.push(`Months in Michigan: ${s.months}`);
+    L.push(`Pay from work: ${usd(s.earned)}`);
+    if (s.other) L.push(`Other taxable income: ${usd(s.other)}`);
+    if (s.nontax) L.push(`Income that isn't taxed (Social Security, child support, and so on): ${usd(s.nontax)}`);
+    if (s.mdhhs) L.push(`MDHHS cash help: ${usd(s.mdhhs)}`);
+    if (s.prem) L.push(`Insurance premiums I paid: ${usd(s.prem)}`);
+    L.push(`Total household resources (Michigan's word for all income): about ${usd(s.thr)}`);
+    if (s.home === "rent") L.push(`Home: I rent. Rent paid this year: ${usd(s.rentYear)}${s.svcfee ? " (service-fee housing)" : ""}. Heat ${s.heatInRent ? "is" : "is not"} included in rent.`);
+    else if (s.home === "own") L.push(`Home: I own. Property taxes for the year: ${usd(s.ptax)}${s.tv !== null ? `; taxable value ${usd(s.tv)}` : ""}.`);
+    else L.push("Home: I don't own or rent under an agreement.");
+    if (s.home !== "none" && s.heat) L.push(`Heating costs, Nov 1 to Oct 31: ${usd(s.heat)}`);
+    L.push("", "Estimates");
+    s.rows.forEach(([n, v, lvl]) => L.push(`${n}: ${v === null ? "deadline passed" : v > 0 ? "about " + usd(v) : "$0"}${lvl === "facts" ? " (rough, on last year's Michigan numbers)" : ""}`));
+    L.push(`Total: about ${usd(s.total)}`);
+    L.push("", "Please help me check");
+    L.push("- Do I qualify for the federal EITC and Michigan's Working Families Tax Credit?");
+    if (s.home !== "none") {
+      L.push("- Please file my Homestead Property Tax Credit (MI-1040CR).");
+      if (!s.rows.some(r => r[0] === "Home Heating Credit" && r[1] === null)) L.push("- Please file my Home Heating Credit (MI-1040CR-7).");
+    }
+    if (s.k > 0) L.push("- Do I qualify for the Child Tax Credit?");
+    L.push("- Did I miss any of these in earlier years that I can still claim?");
+    $("sum").textContent = L.join("\n");
+  }
+
+  f.addEventListener("input", run);
+  f.addEventListener("change", run);
+  f.addEventListener("submit", e => e.preventDefault());
+  drawDates();
+  drawLate();
+  run();
+
+  $("copy").addEventListener("click", () => {
+    const el = $("sum"), text = el.innerText, msg = $("copied");
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = "Selected. Press Ctrl+C or Cmd+C to copy."; };
+    try {
+      navigator.clipboard.writeText(text).then(() => { msg.textContent = "Copied"; }, fallback);
+    } catch (e) { fallback(); }
+  });
+  $("print").addEventListener("click", () => {
+    document.body.classList.add("printing");
+    window.print();
+    setTimeout(() => document.body.classList.remove("printing"), 500);
+  });
+})();
+</script>
+</body>
+</html>
