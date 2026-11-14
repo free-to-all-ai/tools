@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Michigan Payday Loan Calculator: Real APR, Fee Limits, Your Rights</title>
+<meta name="description" content="How much does a payday loan cost in Michigan? Enter the amount, fee, and days to see the real APR, whether the fee is over Michigan's legal cap, your rights, and cheaper options. Free.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/payday-loan/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Michigan Payday Loan Calculator: Real APR, Fee Limits, Your Rights">
+<meta property="og:description" content="How much does a payday loan cost in Michigan? Enter the amount, fee, and days to see the real APR, whether the fee is over Michigan's legal cap, your rights, and cheaper options. Free.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/payday-loan/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/payday-loan.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. Your loan on top, then the true-cost tiles, the APR math, what happens if you keep borrowing, and cards with sources. A cheaper-options comparison sits below. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.panel { display: grid; gap: 18px; min-width: 0; }
+form.q {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 18px;
+}
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.group { display: grid; gap: 10px; }
+.group-h { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; }
+.field { display: grid; gap: 6px; min-width: 0; align-content: start; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+input[type="text"], select, textarea {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px;
+  font-variant-numeric: tabular-nums;
+}
+select { min-height: 44px; }
+textarea { max-width: none; min-height: 260px; resize: vertical; line-height: 1.45; }
+input[aria-invalid="true"] { border-color: var(--help); }
+.money { position: relative; max-width: 320px; }
+.money::before { content: "$"; position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.money input { padding-left: 24px; }
+.pctf { position: relative; max-width: 320px; }
+.pctf::after { content: "%"; position: absolute; right: 11px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; min-height: 32px; }
+.check input { margin-top: 4px; width: 20px; height: 20px; accent-color: var(--accent); flex: none; }
+.hint { font-size: 14px; color: var(--muted); }
+.results { display: grid; gap: 12px; min-width: 0; }
+.results-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; margin-top: 6px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.stat {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 14px 16px; display: grid; gap: 2px; align-content: start; min-width: 0;
+}
+.stat.main { border: 2px solid var(--accent); background: var(--accent-soft); }
+.stat.bad { border: 2px solid var(--help); background: var(--help-bg); }
+.stat .k { font-size: 14px; font-weight: 700; }
+.stat .v { font-family: var(--f-display); font-size: 36px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.stat.main .v { color: var(--accent); }
+.stat.bad .v { color: var(--help); }
+.stat .s { font-size: 13px; color: var(--muted); }
+.math { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 6px 18px; }
+.math table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.math td, .math th { padding: 8px 0; border-top: 1px solid var(--line); vertical-align: top; text-align: left; }
+.math tr:first-child td, .math tr:first-child th { border-top: 0; }
+.math th { font-size: 13px; font-weight: 700; color: var(--muted); }
+.math td.n, .math th.n { text-align: right; font-family: var(--f-mono); font-size: 15px; white-space: nowrap; padding-left: 12px; }
+.math th.n { font-family: var(--f-body); font-size: 13px; }
+.math tr.tot td { font-weight: 700; border-top: 2px solid var(--fg); }
+.math .sub { display: block; font-size: 13px; color: var(--muted); font-weight: 400; }
+.math-h { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line); min-width: 0;
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.card ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.empty { background: var(--surface); border: 1px dashed var(--line); border-radius: 12px; padding: 16px 18px; color: var(--muted); }
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: flex-end; }
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 10px 16px; min-height: 44px;
+  background: var(--accent); color: var(--bg); border: 0;
+}
+.btn:hover { filter: brightness(1.08); }
+.copied { font-size: 14px; color: var(--law); }
+.gethelp { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+[hidden] { display: none !important; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Michigan · payday loans · free</span>
+    <h1>Payday Loan True Cost Calculator</h1>
+    <p class="lede">A payday lender shows you a fee. This shows what that fee is as a yearly rate, whether it's over Michigan's legal limit, and what it adds up to if you keep borrowing. It also lists your rights under Michigan law and some cheaper ways to get through a short week.</p>
+    <div class="notice">
+      <strong>This is information, not legal or financial advice.</strong>
+      <span>The math is exact. The rules come from Michigan law and the state's lending regulator, with a link on every card. Nothing you type leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section class="panel" aria-labelledby="h-loan">
+    <h2 id="h-loan">1. Your loan</h2>
+    <form class="q" id="f-loan" novalidate>
+      <p class="sample">Sample answers are filled in so you can see how it works. Change them to yours. The numbers are on the lender's fee sign and on your agreement.</p>
+
+      <div class="row2">
+        <div class="field"><label for="amt">Cash you get</label>
+          <div class="money"><input id="amt" type="text" inputmode="decimal" value="400" aria-describedby="amt-h"></div>
+          <span class="hint" id="amt-h">The amount you borrow, before any fee.</span></div>
+        <div class="field"><label for="fee">Total fee</label>
+          <div class="money"><input id="fee" type="text" inputmode="decimal" value="56.40" aria-describedby="fee-h"></div>
+          <span class="hint" id="fee-h">Everything you pay on top of what you borrow. It's also the check you write minus the cash you get. Don't know it yet? Leave it blank to see Michigan's highest legal fee.</span></div>
+      </div>
+
+      <div class="row2">
+        <div class="field"><label for="days">Days until it's due</label>
+          <input id="days" type="text" inputmode="numeric" value="14" aria-describedby="days-h">
+          <span class="hint" id="days-h">Usually your next payday. In Michigan it can't be more than 31 days.</span></div>
+        <div class="field"><label for="past">Payday loans in the last 12 months</label>
+          <input id="past" type="text" inputmode="numeric" value="3" aria-describedby="past-h">
+          <span class="hint" id="past-h">Count every loan from any Michigan payday lender, but not this one. A guess is fine.</span></div>
+      </div>
+
+      <div class="group">
+        <span class="group-h">A few questions</span>
+        <div class="row2">
+          <div class="field"><label for="where">Where is the lender?</label>
+            <select id="where">
+              <option value="store">A store in Michigan</option>
+              <option value="online">Online or an app</option>
+              <option value="unsure">Not sure</option>
+            </select></div>
+          <div class="field"><label for="open">Other payday loans you have open right now</label>
+            <select id="open">
+              <option value="none">None</option>
+              <option value="other1">One, with a different lender</option>
+              <option value="same">One, with this same lender</option>
+              <option value="two">Two or more</option>
+            </select></div>
+        </div>
+        <label class="check"><input type="checkbox" id="mil"> <span>I'm on active duty in the military, or I'm the spouse or dependent of someone who is.</span></label>
+      </div>
+    </form>
+
+    <div class="results" id="r-loan" aria-live="polite"></div>
+    <div class="bar" id="copy-bar"><span class="copied" id="copied" role="status"></span><button class="btn" type="button" id="copy">Copy my numbers</button></div>
+  </section>
+
+  <section class="panel" id="s-notice" aria-labelledby="h-notice" hidden>
+    <h2 id="h-notice">A written notice you can give the lender</h2>
+    <p class="hint">Michigan law lets you tell a payday lender in writing that you think it broke the law, and gives the lender 3 business days to answer. This draft uses your numbers. Fill in the brackets, change anything that isn't right, and keep a copy. Attach a copy of your agreement.</p>
+    <textarea id="notice-text" aria-label="Notice to the lender" spellcheck="true"></textarea>
+    <div class="bar"><span class="copied" id="copied2" role="status"></span><button class="btn" type="button" id="copy2">Copy the notice</button></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-alt">
+    <h2 id="h-alt">2. Compare cheaper options</h2>
+    <form class="q" id="f-alt" novalidate>
+      <p class="hint">Uses the amount from section 1. The credit card numbers below are examples, not from any real card. Type in the ones from your own card agreement or statement.</p>
+      <div class="row2">
+        <div class="field"><label for="c-apr">Your card's cash advance APR</label>
+          <div class="pctf"><input id="c-apr" type="text" inputmode="decimal" value="30"></div></div>
+        <div class="field"><label for="c-fee">Your card's cash advance fee</label>
+          <div class="pctf"><input id="c-fee" type="text" inputmode="decimal" value="5" aria-describedby="c-fee-h"></div>
+          <span class="hint" id="c-fee-h">Many cards also set a smallest fee. This uses $10.</span></div>
+      </div>
+    </form>
+    <div class="results" id="r-alt" aria-live="polite"></div>
+  </section>
+
+  <section class="gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Free help and where to complain</h2>
+    <ul>
+      <li><strong>DIFS, Michigan's lending regulator: <a href="tel:18779996442">877-999-6442</a></strong>, Monday through Friday, 8 a.m. to 5 p.m. Ask whether a lender is licensed, how many payday loans the state database shows for you in the last 12 months, or how to file a complaint. You can also <a href="https://difs.state.mi.us/Complaints/" target="_blank" rel="noopener">file a complaint online</a> or mail it to DIFS, P.O. Box 30220, Lansing, MI 48909.</li>
+      <li><strong>Check a lender's license</strong> with the <a href="https://difs.state.mi.us/locators" target="_blank" rel="noopener">DIFS licensee locator</a>. Banks and credit unions don't need this license.</li>
+      <li><strong>Michigan Attorney General, Consumer Protection: <a href="tel:18777658388">877-765-8388</a>.</strong> Read its <a href="https://www.michigan.gov/consumerprotection/protect-yourself/consumer-alerts/credit/payday-loans" target="_blank" rel="noopener">payday loan alert</a> or <a href="https://secure.ag.state.mi.us/complaints/consumer.aspx" target="_blank" rel="noopener">file a complaint</a>.</li>
+      <li><strong>Consumer Financial Protection Bureau: <a href="tel:18554112372">855-411-2372</a></strong> or <a href="https://www.consumerfinance.gov/complaint/" target="_blank" rel="noopener">consumerfinance.gov/complaint</a>. Useful for online lenders that aren't in Michigan.</li>
+      <li><strong>Call 2-1-1</strong> or visit <a href="https://www.mi211.org" target="_blank" rel="noopener">mi211.org</a> for local help with rent, utilities, food, and other bills. For a shutoff or eviction emergency, apply for <a href="https://www.michigan.gov/mdhhs/assistance-programs/emergency-relief" target="_blank" rel="noopener">State Emergency Relief</a> at <a href="https://newmibridges.michigan.gov/" target="_blank" rel="noopener">MI Bridges</a>.</li>
+      <li><strong>Nonprofit credit counseling</strong> can help you make a budget and a plan for payday and other debts. The CFPB explains <a href="https://www.consumerfinance.gov/ask-cfpb/what-is-credit-counseling-en-1451/" target="_blank" rel="noopener">how to find a counselor and what to ask</a>.</li>
+      <li><strong>Free legal help.</strong> If a lender or collector is suing you or threatening to, the <a href="https://michiganlegalhelp.org/guide-to-legal-help" target="_blank" rel="noopener">Michigan Legal Help guide</a> finds free legal aid near you. It also explains <a href="https://michiganlegalhelp.org/resources/money-debt-and-consumer-issues/how-deal-debt-collectors" target="_blank" rel="noopener">how to deal with debt collectors</a>.</li>
+      <li><strong>Military families:</strong> find your nearest <a href="https://legalassistance.law.af.mil/" target="_blank" rel="noopener">military legal assistance office</a>.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> The yearly rate (APR) is the fee divided by the amount borrowed, times the number of loan-length stretches in a year (365 divided by the days until it's due). That is the federal Truth in Lending method for a loan paid back in one payment, and it's how the Michigan Attorney General gets 391% for a $15 fee on $100 for 14 days. Michigan's fee cap is 15% of the first $100 you borrow, 14% of the second, 13% of the third, 12% of the fourth, and 11% of the fifth and sixth, plus a database fee of up to $2.40. Green cards are what the rule says directly. Amber cards depend on your facts. Red cards mean act now.</p>
+    <p><strong>Sources, checked <span id="chk">November 14, 2026</span>.</strong> Michigan's Deferred Presentment Service Transactions Act, <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-Act-244-of-2005" target="_blank" rel="noopener">MCL 487.2121 to 487.2173</a>. DIFS: <a href="https://www.michigan.gov/difs/industry/licensing-cf/deferred-presentment/database-provider/overview-of-deferred-presentment-fees" target="_blank" rel="noopener">database fee</a>, Bulletins <a href="https://www.michigan.gov/difs/legal/bulletins/2026-bulletins" target="_blank" rel="noopener">2026-06-CF and 2026-07-CF</a> (returned check charge and repayment plan fee for 2026 through 2030), its <a href="https://www.michigan.gov/difs/news-and-outreach/faq/consumer-finance/deferred-presentment/general" target="_blank" rel="noopener">payday lending questions and answers</a>, and its <a href="https://www.michigan.gov/difs/news-and-outreach/reports" target="_blank" rel="noopener">annual report</a> for October 2025 through September 2026. Federal: <a href="https://www.law.cornell.edu/cfr/text/12/appendix-J_to_part_1026" target="_blank" rel="noopener">12 CFR 1026.22 and Appendix J</a> (APR), <a href="https://www.law.cornell.edu/cfr/text/12/701.21" target="_blank" rel="noopener">12 CFR 701.21(c)(7)</a> (credit union payday alternative loans), and <a href="https://www.law.cornell.edu/uscode/text/10/987" target="_blank" rel="noopener">10 U.S.C. 987</a> with <a href="https://www.law.cornell.edu/cfr/text/32/232.4" target="_blank" rel="noopener">32 CFR 232</a> (Military Lending Act).</p>
+    <p>Two state pages still show older numbers. The DIFS questions and answers and the Attorney General's alert list a $31.14 returned check charge and an $18.69 repayment plan fee. DIFS raised those to $38.96 and $23.38 for 2026 through 2030 in the bulletins above, so this page uses the bulletins. A lender may charge less than any of these limits.</p>
+    <p>This page covers payday loans from lenders licensed in Michigan. It doesn't cover car title loans, pawn loans, installment loans, or pay advance apps. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+    <p class="report"><strong>See a mistake?</strong> <a href="https://github.com/free-to-all-ai/tools/issues/new?template=mistake.yml&amp;title=Mistake%3A+Payday+Loan+True+Cost+Calculator&amp;tool=Payday+Loan+True+Cost+Calculator" target="_blank" rel="noopener">Report it on GitHub</a>. You'll need a free GitHub account, and what you write there is public, so leave out personal details.</p>
+    <p><a href="https://free-to-all-ai.github.io/tools/">More free tools from Free to All AI</a></p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  /* ---------- Every number, limit, and date lives in this block ---------- */
+  // Update when: DIFS changes the database fee (no set schedule), DIFS re-sets the two CPI fees (next due by March 1, 2031),
+  // DIFS posts a new annual report (each October 31 through 2031), or the NCUA Board moves its loan rate ceiling.
+  const D = {
+    checked: "November 14, 2026",
+    // MCL 487.2153(1): the most one loan can be, and the fee as a percent of each $100 slice. No amendments since 2005.
+    // https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-487-2153 (checked Nov 14, 2026)
+    maxLoan: 600, tiers: [15, 14, 13, 12, 11, 11],
+    // MCL 487.2154(5) and DIFS "Overview of Deferred Presentment Fees": database verification fee a lender may pass on.
+    // $2.40 from Sept 1, 2025 (was $1.35). (checked Nov 14, 2026)
+    dbFee: 2.40, dbFeeFrom: "September 1, 2025",
+    // MCL 487.2153(4)(b): maturity date no more than 31 days out. DIFS Q&A (updated 9/4/25): minimum term 7 days.
+    maxDays: 31, minDays: 7,
+    // MCL 487.2155(2): repayment plan right starts with the 8th loan in any 12 months. 3 equal installments. Ask within 30 days after the due date.
+    planAt: 8, planParts: 3, planAskDays: 30,
+    // DIFS Bulletin 2026-07-CF (Jan 26, 2026): repayment plan fee for calendar years 2026 through 2030. Was $18.69.
+    planFee: 23.38,
+    // DIFS Bulletin 2026-06-CF (Jan 26, 2026): most a lender can charge once for a returned check, 2026 through 2030. Was $31.14.
+    nsf: 38.96, cpiYears: "2026 through 2030",
+    // MCL 487.2156(4) and (8): restitution when a lender broke the act.
+    restTimes: 5, restMin: 15, difsTimes: 3, difsMin: 45, answerDays: 3,
+    // Military Lending Act: 10 U.S.C. 987(b), 32 CFR 232.4(b).
+    mapr: 36,
+    // 12 CFR 701.21(c)(7)(iii) and (iv): 1000 basis points over the NCUA Board's ceiling. Board ceiling is 18% through Sept 10, 2027
+    // (NCUA press release Feb 6, 2026), so PALs top out at 28%.
+    palApr: 28, palAppFee: 20, pal1Min: 200, pal1Max: 1000, pal1Months: 6, pal2Max: 2000, pal2Months: 12, ncuaThrough: "September 10, 2027",
+    // DIFS annual report under MCL 487.2171, October 2025 through September 2026. eightPlus is added up from the report's customer table:
+    // 57,484 of 110,901 customers had 8 or more loans.
+    rpt: { period: "October 2025 through September 2026", customers: 110901, loans: 1142961, avgAmt: 524.29, avgFee: 67.34, twoPlus: 86.3, eightPlus: 51.8, plans: 88266 },
+    // Example credit card terms. NOT from a source. The person types their own.
+    cardMinFee: 10,
+    difsPhone: "877-999-6442"
+  };
+
+  const L = "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-487-";
+  const SRC = {
+    "MCL 487.2131": L + "2131", "MCL 487.2151": L + "2151", "MCL 487.2152": L + "2152", "MCL 487.2153": L + "2153", "MCL 487.2154": L + "2154",
+    "MCL 487.2155": L + "2155", "MCL 487.2156": L + "2156", "MCL 487.2157": L + "2157", "MCL 487.2158": L + "2158",
+    "MCL 487.2165": L + "2165", "MCL 487.2173": L + "2173",
+    "DIFS: fees": "https://www.michigan.gov/difs/industry/licensing-cf/deferred-presentment/database-provider/overview-of-deferred-presentment-fees",
+    "DIFS: questions and answers": "https://www.michigan.gov/difs/news-and-outreach/faq/consumer-finance/deferred-presentment/general",
+    "DIFS: repayment plans": "https://www.michigan.gov/en/difs/News-and-Outreach/faq/consumer-finance/deferred-presentment/repayment-plan",
+    "DIFS Bulletin 2026-06-CF": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/Bulletins/2026/Bulletin_2026-06-CF.pdf",
+    "DIFS Bulletin 2026-07-CF": "https://www.michigan.gov/difs/-/media/Project/Websites/difs/Bulletins/2026/Bulletin_2026-07-CF.pdf",
+    "DIFS: payday loans": "https://www.michigan.gov/-/media/Project/Websites/difs/Publication/Financial/FIS-PUB_8500.pdf",
+    "DIFS annual report": "https://www.michigan.gov/difs/news-and-outreach/reports",
+    "DIFS: complaints": "https://www.michigan.gov/difs/consumers/complaint",
+    "DIFS licensee locator": "https://difs.state.mi.us/locators",
+    "Michigan AG: payday loans": "https://www.michigan.gov/consumerprotection/protect-yourself/consumer-alerts/credit/payday-loans",
+    "12 CFR 1026.22": "https://www.law.cornell.edu/cfr/text/12/1026.22",
+    "Reg Z Appendix J": "https://www.law.cornell.edu/cfr/text/12/appendix-J_to_part_1026",
+    "12 CFR 701.21(c)(7)": "https://www.law.cornell.edu/cfr/text/12/701.21",
+    "NCUA: rate ceiling": "https://ncua.gov/newsroom/press-release/2026/ncua-board-extends-loan-interest-rate-ceiling",
+    "NCUA: payday alternative loans": "https://mycreditunion.gov/manage-your-money/consumer-loans-credit-cards/payday-alternative-loans",
+    "NCUA credit union locator": "https://mapping.ncua.gov/",
+    "10 U.S.C. 987": "https://www.law.cornell.edu/uscode/text/10/987",
+    "32 CFR 232.4": "https://www.law.cornell.edu/cfr/text/32/232.4",
+    "32 CFR 232.8": "https://www.law.cornell.edu/cfr/text/32/232.8",
+    "CFPB: Military Lending Act": "https://www.consumerfinance.gov/consumer-tools/military-financial-lifecycle/military-lending-act-mla/",
+    "CFPB: online payday loans": "https://www.consumerfinance.gov/ask-cfpb/what-should-i-consider-if-im-thinking-about-getting-a-payday-loan-online-en-1617/",
+    "CFPB: stopping withdrawals": "https://www.consumerfinance.gov/ask-cfpb/how-can-i-stop-a-payday-lender-from-electronically-taking-money-out-of-my-bank-or-credit-union-account-en-1605/",
+    "CFPB: is a lender licensed": "https://www.consumerfinance.gov/ask-cfpb/how-can-i-tell-if-a-payday-lender-is-licensed-to-do-business-in-my-state-en-1597/",
+    "CFPB: what is a payday loan": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-payday-loan-en-1567/",
+    "CFPB: can't repay": "https://www.consumerfinance.gov/ask-cfpb/what-can-i-do-if-i-cant-repay-my-payday-loan-en-1601/",
+    "MDHHS: emergency relief": "https://www.michigan.gov/mdhhs/assistance-programs/emergency-relief",
+    "Michigan 2-1-1": "https://www.mi211.org"
+  };
+
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const r2 = n => Math.round((n + Number.EPSILON) * 100) / 100;
+  const usd = n => n.toLocaleString("en-US", { style: "currency", currency: "USD" });
+  const usd0 = n => (Math.round(n * 100) % 100 ? usd(n) : "$" + Math.round(n).toLocaleString("en-US"));
+  const num = (n, d = 2) => n.toLocaleString("en-US", { maximumFractionDigits: d });
+  const pct = x => (x >= 100 ? Math.round(x).toLocaleString("en-US") : num(x, 1)) + "%";
+  const plural = (n, w) => n + " " + w + (n === 1 ? "" : "s");
+  const ord = n => n + (n % 100 >= 11 && n % 100 <= 13 ? "th" : ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"][n % 10]);
+
+  // Returns null when blank, NaN when it can't be read.
+  function amount(v) {
+    v = v.replace(/[$,%\s]/g, "");
+    if (!v) return null;
+    return /^\d*\.?\d+$/.test(v) ? parseFloat(v) : NaN;
+  }
+  function whole(v) {
+    v = v.replace(/[,\s]/g, "");
+    if (!v) return null;
+    return /^\d+$/.test(v) ? parseInt(v, 10) : NaN;
+  }
+
+  // Michigan's service fee cap, MCL 487.2153(1)(a): a percent of each $100 slice of the amount borrowed.
+  function capParts(a) {
+    const parts = [];
+    D.tiers.forEach((p, i) => {
+      const slice = Math.min(Math.max(a - 100 * i, 0), 100);
+      if (slice > 0) parts.push({ p, slice, fee: slice * p / 100 });
+    });
+    return parts;
+  }
+  const serviceCap = a => r2(capParts(a).reduce((s, x) => s + x.fee, 0));
+  const apr = (fee, a, d) => fee / a * (365 / d) * 100;
+  // Interest on a loan paid back in n equal monthly payments.
+  function installment(a, ratePct, n) {
+    const r = ratePct / 100 / 12;
+    if (!r) return { pay: a / n, interest: 0 };
+    const pay = a * r / (1 - Math.pow(1 + r, -n));
+    return { pay, interest: pay * n - a };
+  }
+
+  const LABEL = { law: "The rule says", facts: "Depends on your facts", help: "Act now" };
+  function card(level, title, body, cites = [], next = "") {
+    const c = cites.map(k => `<a class="cite" href="${SRC[k]}" target="_blank" rel="noopener">${esc(k)}</a>`).join("");
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${LABEL[level]}</span></div>
+      ${body.startsWith("<") ? body : `<p>${body}</p>`}
+      ${next ? `<p class="next"><strong>What you can do:</strong> ${next}</p>` : ""}
+      ${c ? `<div class="cites">${c}</div>` : ""}
+    </article>`;
+  }
+  const stat = (k, v, s, cls = "") => `<div class="stat ${cls}"><span class="k">${k}</span><span class="v">${v}</span><span class="s">${s}</span></div>`;
+
+  const fl = $("f-loan"), fa = $("f-alt");
+  let bad = [];
+  const read = (id, fn = amount) => {
+    const el = $(id), v = fn(el.value);
+    el.setAttribute("aria-invalid", Number.isNaN(v) ? "true" : "false");
+    if (Number.isNaN(v)) bad.push(document.querySelector(`label[for="${id}"]`).textContent.toLowerCase());
+    return Number.isNaN(v) ? null : v;
+  };
+  let summary = "", loan = null;
+
+  function calc() {
+    bad = [];
+    const a = read("amt"), feeIn = read("fee"), d = read("days", whole), past = read("past", whole);
+    const where = $("where").value, open = $("open").value, mil = $("mil").checked;
+    const out = $("r-loan");
+    const stop = msg => { out.innerHTML = `<p class="empty">${msg}</p>`; $("copy-bar").hidden = true; $("s-notice").hidden = true; summary = ""; loan = null; alt(); };
+
+    if (bad.length) return stop(`The calculator can't read what's in: ${esc(bad.join("; "))}. Use plain numbers like 400 or 56.40.`);
+    const missing = [];
+    if (!a) missing.push("the cash you get");
+    if (!d) missing.push("the days until it's due");
+    if (missing.length) return stop(`Fill in ${missing.join(" and ")} to see the true cost.`);
+    if (d > 366) return stop("This calculator is for short loans paid back in one payment. Enter 366 days or fewer.");
+    $("copy-bar").hidden = false;
+
+    const overMax = a > D.maxLoan;
+    const svcCap = serviceCap(Math.min(a, D.maxLoan));
+    const cap = r2(svcCap + D.dbFee);
+    const guessed = feeIn == null;
+    const fee = guessed ? cap : feeIn;
+    const overFee = !overMax && fee > cap + 0.005;
+    const overDays = d > D.maxDays;
+    const rate = apr(fee, a, d);
+    const periods = 365 / d;
+    const n = (past || 0) + 1;                       // this loan's number in the last 12 months
+    const yearLoans = Math.max(1, Math.floor(365 / d));
+    loan = { a, fee, d, rate, guessed };
+
+    /* ----- Tiles ----- */
+    let html = `<div class="results-head"><h2>The true cost</h2></div><div class="stats">`;
+    html += stat("Yearly rate (APR)", pct(rate), `${usd(fee)} to borrow ${usd0(a)} for ${plural(d, "day")}`, "main");
+    html += stat("You pay back", usd(a + fee), `in ${plural(d, "day")}. That's ${usd(fee / a * 100)} for every $100 you borrow.`);
+    if (overMax) html += stat("Michigan's limit", usd0(D.maxLoan), `per loan. This one is ${usd0(a - D.maxLoan)} over.`, "bad");
+    else if (overFee) html += stat("Over Michigan's cap by", usd(fee - cap), `The most allowed on ${usd0(a)} is ${usd(cap)}.`, "bad");
+    else html += stat("Michigan's fee cap", usd(cap), guessed ? `on ${usd0(a)}. You left the fee blank, so this page uses the cap.` : (cap - fee < 0.005 ? `on ${usd0(a)}. Your fee is right at the cap.` : `on ${usd0(a)}. Your fee is ${usd(cap - fee)} under it.`));
+    html += `</div>`;
+
+    /* ----- APR, step by step ----- */
+    html += `<p class="math-h">The yearly rate, step by step</p><div class="math"><table>
+      <tr><td>1. Divide the fee by what you borrow<span class="sub">${usd(fee)} ÷ ${usd(a)}. This is what the loan costs for ${plural(d, "day")}.</span></td><td class="n">${num(fee / a * 100, 2)}%</td></tr>
+      <tr><td>2. Count the ${d}-day stretches in a year<span class="sub">365 ÷ ${d}</span></td><td class="n">${num(periods, 2)}</td></tr>
+      <tr class="tot"><td>3. Multiply the two<span class="sub">${num(fee / a * 100, 2)}% × ${num(periods, 2)}. Your agreement has to show this as a percentage rate per year.</span></td><td class="n">${pct(rate)}</td></tr>
+    </table></div>`;
+
+    /* ----- Keep borrowing ----- */
+    const steps = [...new Set([1, 3, 6, 12, yearLoans].filter(k => k <= yearLoans))].sort((x, y) => x - y);
+    html += `<p class="math-h">If you pay it off and borrow again each time</p><div class="math"><table>
+      <tr><th>Loans in a row</th><th class="n">Fees paid</th></tr>
+      ${steps.map(k => `<tr${k === yearLoans && k > 1 ? ' class="tot"' : ""}><td>${plural(k, "loan")}${k === yearLoans && k > 1 ? ", a full year" : ""}<span class="sub">${plural(k * d, "day")} of owing ${usd0(a)}</span></td><td class="n">${usd(fee * k)}</td></tr>`).join("")}
+    </table></div>`;
+
+    /* ----- Cards ----- */
+    const c = [];
+    const capLines = capParts(Math.min(a, D.maxLoan)).map((x, i) => `<li>${x.p}% of ${i === 0 ? "the first" : "the " + ["", "second", "third", "fourth", "fifth", "sixth"][i]} ${x.slice === 100 ? "$100" : usd(x.slice)}: ${usd(x.fee)}</li>`).join("");
+    const capMath = `<ul>${capLines}<li>Database fee, up to: ${usd(D.dbFee)}</li><li><strong>Most the lender can charge: ${usd(cap)}</strong></li></ul>`;
+    const violations = [];
+
+    if (overMax) {
+      violations.push("amount");
+      c.push(card("help", `${usd0(a)} is over Michigan's ${usd0(D.maxLoan)} limit for one payday loan`,
+        `A licensed Michigan payday lender can make one loan of up to ${usd0(D.maxLoan)} to you, not counting the fee. A person can have two payday loans open at once, each ${usd0(D.maxLoan)} or less, but they have to be with two different lenders. If one lender is offering ${usd0(a)} on a single check, it may not be a licensed payday loan at all, and Michigan's fee cap and other protections may not come with it.`,
+        ["MCL 487.2153", "DIFS: questions and answers"],
+        `Ask the lender what kind of loan this is and which Michigan license it holds. Then check the license with DIFS at ${D.difsPhone} before you sign.`));
+    }
+    if (overFee) {
+      violations.push("fee");
+      const face = a + fee, rest = Math.min(Math.max(D.restTimes * fee, D.restMin), face);
+      c.push(card("help", `This fee is ${usd(fee - cap)} over Michigan's legal cap`,
+        `<p>For ${usd0(a)}, Michigan law allows:</p>${capMath}<p>You entered ${usd(fee)}. A licensed lender can't charge interest or any other fee on top of the cap. If part of your number is something else, like a fee to cash the lender's check somewhere else, take that out and check again.</p><p>If a lender agrees it broke the law, it has to give back your check and the fee, you give back the cash, and it owes you 5 times the fee for each violation (at least ${usd0(D.restMin)}, and no more than the amount of your check). On these numbers that could be ${usd(rest)}. If the lender says no and the state finds a violation, DIFS can order up to 3 times that.</p>`,
+        ["MCL 487.2153", "MCL 487.2154", "DIFS: fees", "MCL 487.2156"],
+        `Tell the lender in writing what's wrong and attach a copy of your agreement. A draft is below. The lender has ${D.answerDays} business days to answer. If it says no, file a complaint with DIFS at ${D.difsPhone}.`));
+    }
+    if (overDays) {
+      violations.push("days");
+      c.push(card("help", `${d} days is longer than Michigan allows`,
+        `A Michigan payday lender can't set a due date more than ${D.maxDays} days after the loan date, and can't hold your check past that unless you're in a written repayment plan. A longer loan from a licensed payday lender breaks the act. If the lender isn't a licensed payday lender, the fee cap and the other rules on this page may not apply to it.`,
+        ["MCL 487.2153", "DIFS: questions and answers"],
+        `Check the dates on your agreement. If they really are more than ${D.maxDays} days apart, you can give the lender written notice (a draft is below) or call DIFS at ${D.difsPhone}.`));
+    } else if (d < D.minDays) {
+      c.push(card("facts", `${plural(d, "day")} is shorter than the state's minimum`,
+        `DIFS, the state regulator, says the shortest term for a Michigan payday loan is ${D.minDays} days and the longest is ${D.maxDays}. The ${D.minDays}-day minimum is in DIFS's published answers, not in the text of the act, so check the dates on your agreement and ask DIFS if they're really this close.`,
+        ["DIFS: questions and answers"]));
+    }
+
+    if (open === "same") c.push(card("help", "A lender can't give you a second loan while the first is open",
+      `Michigan law bars a licensed payday lender from making you a loan while you still have one open with that same lender. The lender has to check a statewide database before every loan. You also can't pay off the old loan with a new fee. Renewing a loan for a fee is banned.`,
+      ["MCL 487.2153", "MCL 487.2155"],
+      `If a lender offers to "roll over" or "refinance" your loan for another fee, that's the thing the law bans. You can report it to DIFS at ${D.difsPhone}.`));
+    else if (open === "two") c.push(card("help", "Two open payday loans is Michigan's limit",
+      `A licensed lender can't make you a loan if you already have more than one open payday loan with other lenders. Every licensed lender has to check the statewide database first, so a lender that will still lend to you may not be licensed in Michigan.`,
+      ["MCL 487.2153", "MCL 487.2154"],
+      `Before you take a third loan anywhere, look at the free help list at the bottom of this page. A lender that skips the database check is one to stay away from.`));
+    else if (open === "other1") c.push(card("law", "This would put you at Michigan's limit of two",
+      `You can have two payday loans open at once in Michigan, as long as they're with two different lenders. With one already open somewhere else, this one is your second. No licensed lender can make you a third until one is paid off.`,
+      ["MCL 487.2153", "DIFS: questions and answers"]));
+
+    if (where !== "store") c.push(card("help", where === "online" ? "Online payday lenders often aren't licensed in Michigan" : "Find out who the lender really is before you sign",
+      `DIFS warns that online payday lenders are typically not licensed to do business in Michigan and generally charge rates well above what the state allows. The fee cap, the 31-day limit, the right to cancel, and the repayment plan on this page come from Michigan's payday lending act, and a lender that ignores Michigan law may ignore them too. Many payday websites aren't lenders at all. The federal consumer bureau says they are often "lead generators" that sell your Social Security and bank account numbers to other companies. An online lender may be based in another state, another country, or on tribal land, and may not follow Michigan's rules.`,
+      ["DIFS: payday loans", "CFPB: online payday loans", "CFPB: stopping withdrawals"],
+      `Look the lender up in the DIFS licensee locator or call ${D.difsPhone} before you give out any account numbers. If you already have an online loan and the lender keeps pulling money from your account, you have the right to tell your bank to stop the payments. You still owe the loan.`));
+    else c.push(card("law", "A Michigan payday lender needs a state license for each store",
+      `Every business making payday loans in Michigan has to be licensed by DIFS, with a separate license for each location. Banks and credit unions are the exception. The lender also has to post its fees and give you a signed copy of your agreement.`,
+      ["MCL 487.2131", "MCL 487.2151", "MCL 487.2153"],
+      `Look the store up in the <a href="${SRC["DIFS licensee locator"]}" target="_blank" rel="noopener">DIFS licensee locator</a> or call ${D.difsPhone}.`));
+
+    if (mil) {
+      const maxCharge = a * D.mapr / 100 * d / 365;
+      c.push(card(rate > D.mapr ? "help" : "law", rate > D.mapr ? `This loan is over the ${D.mapr}% cap for military borrowers` : `This loan is under the ${D.mapr}% cap for military borrowers`,
+        `The federal Military Lending Act caps the cost of most loans to covered borrowers at a ${D.mapr}% Military Annual Percentage Rate, with nearly all fees counted. Covered borrowers are active-duty servicemembers, Reserve members on active duty, National Guard members on federal orders for more than 30 days in a row, their spouses, and some other dependents. On ${usd0(a)} for ${plural(d, "day")}, ${D.mapr}% works out to no more than about ${usd(maxCharge)} in total charges. ${rate > D.mapr ? `This loan's fee is ${usd(fee)}, a rate of ${pct(rate)}. ` : ""}The rule also bars a lender from using a covered borrower's check to secure the loan, which is how a Michigan payday loan works.`,
+        ["10 U.S.C. 987", "32 CFR 232.4", "32 CFR 232.8", "CFPB: Military Lending Act", "NCUA: payday alternative loans"],
+        `Talk to your installation's legal assistance office or financial readiness office before you sign anything. They can confirm whether you're covered. The federal credit union regulator also suggests asking a military relief society for help.`));
+    }
+
+    if (n >= D.planAt) c.push(card("law", `This is your ${ord(n)} loan in 12 months, so you can ask for a repayment plan`,
+      `<p>Once you've had ${D.planAt} payday loans from any Michigan lenders in a 12-month stretch, the lender has to offer you a repayment plan on the ${ord(D.planAt)} loan and each one after it, and has to tell you about it in writing.</p><ul>
+        <li>You pay the loan back in ${D.planParts} equal parts, one on each of your next ${D.planParts} paydays. On ${usd(a + fee)} that's about ${usd((a + fee) / D.planParts)} each.</li>
+        <li>You have to ask, out loud or in writing, at the lender's place of business, within ${D.planAskDays} days after the due date. The plan itself has to be in writing and signed.</li>
+        <li>The lender can charge a plan fee of up to ${usd(D.planFee)} (the limit for ${D.cpiYears}).</li>
+        <li>The lender can't deposit your check while you keep up with the plan. If you miss a payment, it can.</li>
+        <li>You can't take any new payday loan in Michigan until the plan is paid off.</li></ul>`,
+      ["MCL 487.2155", "DIFS Bulletin 2026-07-CF", "DIFS: repayment plans"],
+      `Ask for the plan before the due date if you can. If the check has already been deposited, DIFS says you have to wait until it comes back unpaid. If the lender refuses a plan you qualify for, call DIFS at ${D.difsPhone}. Not sure of your count? DIFS can look it up.`));
+    else c.push(card("facts", `A repayment plan starts with your ${ord(D.planAt)} loan in 12 months`,
+      `By your count this would be loan number ${n}. Michigan makes lenders offer a ${D.planParts}-payment plan only after you've had ${D.planAt} payday loans from any lenders in a 12-month stretch. Before that, a lender may give you more time, but it doesn't have to. If it does, it can't charge a fee for the extra time, can't raise what you owe, and can't push the due date past ${D.maxDays} days from the day you got the loan.`,
+      ["MCL 487.2155", "DIFS: repayment plans"],
+      `If you're not sure how many loans you've had, DIFS can check the state database for you at ${D.difsPhone}.`));
+
+    c.push(card("law", "You can cancel by the end of the next business day",
+      `You can cancel a Michigan payday loan for any reason, at no cost, if you bring back the cash (or the lender's check) by the time the store closes on its next business day after the loan. The lender has to hand back your check and any fee you paid. The database fee can't be charged on a canceled loan.`,
+      ["MCL 487.2157", "DIFS: questions and answers"],
+      `If you just signed and this page changed your mind, go back before the store closes on its next business day.`));
+
+    c.push(card("law", "What the lender can and can't do",
+      `<ul>
+        <li><strong>No rollovers.</strong> The lender can't renew the loan for another fee. It can give you more time only for free.</li>
+        <li><strong>No interest and no extra fees.</strong> The fee on this page is all it can charge to make the loan. Paying early doesn't lower the fee, because the law treats it as earned on day one.</li>
+        <li><strong>Cash if you ask.</strong> You can take the money as cash, a money order, or a check, your choice. The lender can't make you take a debit card.</li>
+        <li><strong>No early deposit.</strong> The lender can't deposit your check before the due date.</li>
+        <li><strong>If your check bounces,</strong> the lender can charge one returned check fee of up to ${usd(D.nsf)} (the limit for ${D.cpiYears}), once per loan. Your own bank may add its fees. The lender can then try to collect, and can sue.</li>
+        <li><strong>No criminal charges.</strong> You can't be prosecuted for taking a payday loan or because your check to the lender didn't clear, and the lender can't use any criminal process to collect.</li></ul>`,
+      ["MCL 487.2152", "MCL 487.2153", "MCL 487.2155", "MCL 487.2157", "MCL 487.2158", "DIFS Bulletin 2026-06-CF", "DIFS: questions and answers"]));
+
+    if (!overFee) c.push(card("law", guessed ? `The most a lender can charge on ${usd0(Math.min(a, D.maxLoan))}` : `How Michigan's cap on ${usd0(Math.min(a, D.maxLoan))} is figured`,
+      `${capMath}<p>The percentages are set by law and step down as the loan gets bigger. The database fee pays for the statewide check every lender has to run before a loan. It has been ${usd(D.dbFee)} since ${D.dbFeeFrom}, and a lender can pass on all, part, or none of it. If you think a lender broke the act, you can give it written notice. It has ${D.answerDays} business days to answer. If it agrees, it returns your check and fee and owes you ${D.restTimes} times the fee. If it doesn't, you can file a complaint with DIFS or sue for your losses.</p>`,
+      ["MCL 487.2153", "MCL 487.2154", "DIFS: fees", "MCL 487.2156", "MCL 487.2173"]));
+
+    c.push(card("facts", "Most Michigan payday borrowers come back for more",
+      `In the state's latest yearly report, covering ${D.rpt.period}, ${D.rpt.customers.toLocaleString("en-US")} people took out ${D.rpt.loans.toLocaleString("en-US")} payday loans. The average loan was ${usd(D.rpt.avgAmt)} with a ${usd(D.rpt.avgFee)} fee. ${D.rpt.twoPlus}% of borrowers took two or more loans in the year, and about ${Math.round(D.rpt.eightPlus)}% took eight or more. ${n > 1 ? `Counting this one, you'd be at ${plural(n, "loan")} in 12 months. At this fee, that's about ${usd(fee * n)} in fees.` : "One loan can stay one loan, but plan now for how you'll cover the payback without borrowing again."}`,
+      ["DIFS annual report"],
+      `Before the due date, work out where the ${usd(a + fee)} will come from. If paying it back would leave you short again, see the cheaper options below.`));
+
+    html += `<div class="results-head"><h2>What Michigan's rules say</h2>
+      <div class="legend"><span class="tag law">The rule says</span><span class="tag facts">Depends on your facts</span><span class="tag help">Act now</span></div></div>` + c.join("");
+    out.innerHTML = html;
+
+    /* ----- Notice draft, only when the numbers break a rule ----- */
+    const sec = $("s-notice"), key = violations.join() + "|" + a + "|" + fee + "|" + d;
+    sec.hidden = !violations.length;
+    if (violations.length && sec.dataset.key !== key) {
+      sec.dataset.key = key;
+      const why = [];
+      if (violations.includes("amount")) why.push(`The amount of the transaction is ${usd(a)}. MCL 487.2153(1) limits a deferred presentment service transaction to ${usd0(D.maxLoan)}.`);
+      if (violations.includes("fee")) why.push(`The fees charged total ${usd(fee)}. For a ${usd(a)} transaction, MCL 487.2153(1)(a) allows a service fee of no more than ${usd(svcCap)}, and the database verification fee under MCL 487.2154(5) is ${usd(D.dbFee)}, for a total of ${usd(cap)}.`);
+      if (violations.includes("days")) why.push(`The maturity date is ${d} days after the date of the transaction. MCL 487.2153(4)(b) does not allow a maturity date more than ${D.maxDays} days after the transaction.`);
+      $("notice-text").value = [
+        "[Today's date]", "",
+        "To: [Lender's name]", "[Store address]", "",
+        "Re: Notice of violation. Deferred presentment service agreement dated [date of loan], transaction number [number, if shown].", "",
+        "I am giving you written notice under MCL 487.2156(2) that I believe this agreement violates the Deferred Presentment Service Transactions Act.", "",
+        ...why, "",
+        "A copy of my agreement is attached as evidence.", "",
+        "Under MCL 487.2156(3), please determine whether you violated the law and tell me your decision no later than the close of the third business day after you receive this notice.", "",
+        "[Your name]", "[Your address]", "[Your phone number]"
+      ].join("\n");
+    }
+
+    summary = [
+      "Payday loan true cost",
+      `Cash I get: ${usd(a)}`,
+      `Total fee: ${usd(fee)}${guessed ? " (Michigan's highest legal fee, since I didn't enter one)" : ""}`,
+      `Due in: ${plural(d, "day")}`,
+      `I pay back: ${usd(a + fee)}`,
+      `Yearly rate (APR): ${pct(rate)}`,
+      overMax ? `Michigan's limit for one payday loan is ${usd0(D.maxLoan)}.` : `Michigan's fee cap on ${usd0(a)}: ${usd(cap)}${overFee ? ` (this fee is ${usd(fee - cap)} over)` : ""}`,
+      yearLoans > 1 ? `If I borrow again every time for a year (${yearLoans} loans): ${usd(fee * yearLoans)} in fees` : null,
+      `Payday loans in the last 12 months, counting this one: ${n}`,
+      "",
+      "Made with the free Payday Loan True Cost Calculator: https://free-to-all-ai.github.io/tools/payday-loan/"
+    ].filter(x => x != null).join("\n");
+    alt();
+  }
+
+  /* ----- Section 2: cheaper options, for the same amount ----- */
+  function alt() {
+    const out = $("r-alt");
+    bad = [];
+    const cApr = read("c-apr"), cFee = read("c-fee");
+    if (!loan) { out.innerHTML = `<p class="empty">Finish section 1 to compare options.</p>`; return; }
+    const { a, fee, d, rate } = loan;
+    const k3 = Math.max(1, Math.round(91 / d));        // payday loans back to back in about 3 months
+    let html = `<div class="stats">`;
+    html += stat("This payday loan", usd(fee * k3), `to have ${usd0(a)} for about 3 months: ${plural(k3, "loan")} in a row at ${usd(fee)} each. APR ${pct(rate)}.`);
+
+    const palOk = a <= D.pal2Max;
+    if (palOk) {
+      const p3 = installment(a, D.palApr, 3), p1 = a * D.palApr / 100 / 12;
+      html += stat("Credit union payday alternative loan", usd(p3.interest + D.palAppFee), `at most, to have ${usd0(a)} paid back in 3 monthly payments of about ${usd(p3.pay)}: up to ${usd(p3.interest)} interest at ${D.palApr}% plus up to ${usd0(D.palAppFee)} to apply. Paid back in one month it would be at most ${usd(p1 + D.palAppFee)}.`, "main");
+    }
+    if (bad.length) html += stat("Credit card cash advance", "?", `Can't read ${esc(bad.join(" or "))}. Use plain numbers like 30 and 5.`);
+    else if (cApr != null) {
+      const upfront = cFee ? Math.max(a * cFee / 100, D.cardMinFee) : 0;
+      const c3 = installment(a, cApr, 3), cd = a * cApr / 100 * d / 365;
+      html += stat("Credit card cash advance", usd(upfront + c3.interest), `paid back over 3 months: ${upfront ? usd(upfront) + " fee plus " : ""}about ${usd(c3.interest)} interest at ${num(cApr, 2)}%. Paid back in ${plural(d, "day")} it would be about ${usd(upfront + cd)}.`);
+    }
+    html += `</div>`;
+
+    const c = [];
+    c.push(card("facts", "Payday alternative loans from a federal credit union",
+      `Federal credit unions are allowed to make small loans called payday alternative loans (PALs). Federal rules cap the rate at ${D.palApr}% a year and the application fee at ${usd0(D.palAppFee)}, with no rollovers. One kind is for ${usd0(D.pal1Min)} to ${usd0(D.pal1Max)}, paid back over 1 to ${D.pal1Months} months, and you have to have been a member for at least a month. The other kind goes up to ${usd0(D.pal2Max)} over 1 to ${D.pal2Months} months with no waiting period. ${palOk ? "" : `Your amount is over the ${usd0(D.pal2Max)} limit for these loans. `}Not every credit union offers them, you have to qualify, and the ${D.palApr}% cap depends on a federal rate ceiling that is set through ${D.ncuaThrough}. State-chartered credit unions may have their own small loans.`,
+      ["12 CFR 701.21(c)(7)", "NCUA: rate ceiling", "NCUA: payday alternative loans"],
+      `Call a credit union you belong to, or could join, and ask if it makes payday alternative loans or another small loan. The <a href="${SRC["NCUA credit union locator"]}" target="_blank" rel="noopener">NCUA locator</a> lists credit unions near you.`));
+    c.push(card("facts", "A cash advance on a credit card you already have",
+      `A cash advance comes with a higher rate than the card's rate for purchases, and interest starts the day you take it. Your card may also charge a fee each time. The federal credit union regulator says the cost will still most likely be lower than a payday loan's. The numbers above come from what you typed in the two boxes, and the starting numbers are only examples. A card also lets you pay back a little at a time, which a payday loan doesn't.`,
+      ["NCUA: payday alternative loans", "CFPB: what is a payday loan"],
+      `Find "cash advance" on your card statement or agreement for your real rate, fee, and limit.`));
+    c.push(card("facts", "Help that isn't a loan",
+      `<ul>
+        <li><strong>Ask for more time.</strong> The Attorney General lists asking the company you owe for more time, and asking your employer for an advance on your pay, as cheaper choices than a payday loan.</li>
+        <li><strong>State Emergency Relief.</strong> MDHHS may help with a heat or electric shutoff, rent you're behind on, or home repairs that fix unsafe conditions, if you qualify.</li>
+        <li><strong>2-1-1.</strong> Call 2-1-1 or search mi211.org for local help with rent, utilities, food, and other bills.</li>
+        <li><strong>Free tools on this site.</strong> <a href="../shutoff-protection/">Winter shutoff protection</a>, <a href="../hospital-aid/">hospital financial assistance</a>, and <a href="../tax-credits/">tax credits you might be missing</a> may free up the money another way.</li></ul>`,
+      ["Michigan AG: payday loans", "MDHHS: emergency relief", "Michigan 2-1-1", "CFPB: can't repay"]));
+    html += `<div class="results-head"><h2>About these options</h2></div>` + c.join("") +
+      `<p class="hint">This page doesn't recommend any lender. Whether a credit union loan, a card, or an aid program is open to you depends on your own situation.</p>`;
+    out.innerHTML = html;
+  }
+
+  $("chk").textContent = D.checked;
+  [fl, fa].forEach(f => {
+    f.addEventListener("input", f === fl ? calc : alt);
+    f.addEventListener("change", f === fl ? calc : alt);
+    f.addEventListener("submit", e => e.preventDefault());
+  });
+  calc();
+
+  function copier(btn, msgEl, getText) {
+    $(btn).addEventListener("click", () => {
+      const msg = $(msgEl), text = getText();
+      if (!text) return;
+      const fallback = () => {
+        const ta = document.createElement("textarea");
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        let ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+        ta.remove();
+        msg.textContent = ok ? "Copied" : "Couldn't copy. Select the text and copy it by hand.";
+      };
+      try { navigator.clipboard.writeText(text).then(() => { msg.textContent = "Copied"; }, fallback); }
+      catch (e) { fallback(); }
+    });
+  }
+  copier("copy", "copied", () => summary);
+  copier("copy2", "copied2", () => $("notice-text").value);
+})();
+</script>
+</body>
+</html>
