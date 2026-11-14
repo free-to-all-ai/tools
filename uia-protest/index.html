@@ -236,7 +236,7 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
   </section>
 
   <footer>
-    <p><strong>How this works.</strong> Deadlines come from the Michigan Employment Security Act: MCL 421.32a (protests and appeals to a judge), 421.32 (monetary determinations), 421.33 (judge decisions), 421.34 (Appeals Commission), 421.38 (circuit court), 421.49 (weekends and legal holidays), and 421.62 (overpayments), plus MCL 435.101 (Michigan's legal holidays), MCL 8.6 (counting days), and Michigan Administrative Code R 421.270 (good cause). UIA's own rules come from its Protests and Appeals page, its Handbook for Unemployed Workers (July 2026), Form UIA 1733 (July 2026), its guide to appeals hearings, its 2026 law changes page, and its MiUI switchover page. All were checked against the official sources on October 31, 2026.</p>
+    <p><strong>How this works.</strong> Deadlines come from the Michigan Employment Security Act: MCL 421.32a (protests and appeals to a judge), 421.32 (monetary determinations), 421.33 (judge decisions), 421.34 (Appeals Commission), 421.38 (circuit court), 421.49 (weekends and legal holidays), and 421.62 (overpayments), plus MCL 435.101 (Michigan's legal holidays), MCL 8.6 (counting days), and Michigan Administrative Code R 421.270 (good cause). UIA's own rules come from its Protests and Appeals page, its Handbook for Unemployed Workers (November 2026), Form UIA 1733 (July 2026), its guide to appeals hearings, its 2026 law changes page, its MiUI Downtime Period page, and the state's April 30, 2024 release on the overpayment settlement. All were checked against the official sources on October 31, 2026.</p>
     <p>Days are calendar days, counted starting the day after the mail date. When day 30 lands on a Saturday, Sunday, or Michigan legal holiday, the law moves the deadline to the next day that isn't one. UIA counts a protest or appeal as filed when it has it in hand. A postmark doesn't count. Green cards are what the rule says directly. Amber cards depend on your facts. Red cards mean act now.</p>
     <p>This page is for workers. It doesn't cover employer protests, federal pandemic programs (PUA), or criminal fraud charges. Free and open source. Nothing you enter is sent anywhere or stored.</p>
     <p class="report"><strong>See a mistake?</strong> <a href="https://github.com/free-to-all-ai/tools/issues/new?template=mistake.yml&amp;title=Mistake%3A+Michigan+Unemployment+Protest+Deadline+Check&amp;tool=Michigan+Unemployment+Protest+Deadline+Check" target="_blank" rel="noopener">Report it on GitHub</a>. You'll need a free GitHub account, and what you write there is public, so leave out personal details.</p>
@@ -268,18 +268,17 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
     "MCL 421.38": MCL("421-38"), "MCL 421.49": MCL("421-49"), "MCL 421.62": MCL("421-62"), "MCL 435.101": MCL("435-101"), "MCL 8.6": MCL("8-6"),
     "R 421.270": "https://www.law.cornell.edu/regulations/michigan/Mich-Admin-Code-R-421-270",
     "UIA Protests and Appeals": "https://www.michigan.gov/leo/bureaus-agencies/uia/tools/publications/protest-and-appeal-process",
-    "UIA Protest Rights": "https://www.michigan.gov/leo/bureaus-agencies/uia/assets/protest-appeal-rights",
     "UIA Handbook": UIA_PDF + "Claimant-Forms/UIA-1901.pdf",
     "Form UIA 1733": UIA_PDF + "Employer-Forms/UIA-1733-Protest-of-a-Determination.pdf",
     "Hearings Guide": UIA_PDF + "Publications/1800-Hearings-Handbook-4-23final--sec.pdf",
-    "MiUI Switch": "https://www.michigan.gov/leo/bureaus-agencies/uia/miui-university/overview",
+    "MiUI Downtime Period": "https://www.michigan.gov/leo/bureaus-agencies/uia/miui-university/miui-resources-for-workers/worker-miui-faqs/miui-for-employees/downtime-period",
     "UIA Law Changes": "https://www.michigan.gov/UIALawChanges",
     "MOAHR": "https://www.michigan.gov/lara/bureau-list/moahr/employment/unemployment",
     "UIAC": "https://www.michigan.gov/leo/boards-comms-councils/welcome-to-the-michigan-unemployment-insurance-appeals-commission",
-    "Michigan Legal Help": "https://michiganlegalhelp.org/resources/employment/new-unemployment-benefits-protections-workers"
+    "2024 Settlement Release": "https://www.michigan.gov/leo/news/2024/04/30/court-gives-preliminary-approval-to-pandemic-era-class-action-settlement-between-uia-and-workers"
   };
 
-  // Where each kind of notice goes, from the UIA Handbook (July 2026) and Form UIA 1733 (Rev. 07-26).
+  // Where each kind of notice goes, from the UIA Handbook (Rev. 11-26) and Form UIA 1733 (Rev. 07-26).
   const PROTEST = { fax: "1-517-636-0427", mail: "Unemployment Insurance Agency\nP.O. Box 169\nGrand Rapids, MI 49501-0169" };
   const APPEAL = { fax: "1-616-356-0739", mail: "Unemployment Insurance Agency\nP.O. Box 124\nGrand Rapids, MI 49501-0124" };
   const UIAC = { fax: "517-241-7326", email: "LEO-UIAC-Info@michigan.gov", mail: "Unemployment Insurance Appeals Commission\nP.O. Box 30475\nLansing, MI 48909-7975" };
@@ -349,8 +348,10 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
   const whatDay = d => legalName(d) ? `${legalName(d)}, a Michigan legal holiday` : `a ${weekday(d)}`;
 
   // The switch from MiWAM to MiUI (michigan.gov/UIA, Oct. 2026). Systems, phones, and offices close at
-  // 4:30 PM Monday, Nov. 2, 2026 and MiUI opens at 8 AM Monday, Nov. 9. UIA says a protest or appeal
-  // due date that falls in that window becomes Nov. 9. Fax and mail are received as usual.
+  // 4:30 PM Monday, Nov. 2, 2026 and MiUI opens at 8 AM Monday, Nov. 9. Before the shutdown, UIA's MiUI
+  // overview page said a protest or appeal due date in that window became Nov. 9 (read Oct. 31, 2026).
+  // UIA rewrote that page after launch and it no longer says so, so the cards say that plainly and
+  // cite UIA's Downtime Period page for the dates only. Fax and mail were received as usual.
   const DT_START = new Date(2026, 10, 2), DT_END = new Date(2026, 10, 9);
   const DT_START_AT = new Date(2026, 10, 2, 16, 30), DT_END_AT = new Date(2026, 10, 9, 8, 0);
   const preSwitch = now < DT_START_AT, inSwitch = now >= DT_START_AT && now < DT_END_AT;
@@ -417,15 +418,15 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
     const cites = S.law.concat([["MCL 421.49", "(1)"], ["MCL 8.6", ""]]);
     if (rolled) cites.push(["MCL 435.101", "(1)"]);
     if (S.uia) cites.push(["UIA Protests and Appeals", ""]);
-    if (switchMoved || switchDay) cites.push(["MiUI Switch", ""]);
+    if (switchMoved || switchDay) cites.push(["MiUI Downtime Period", ""]);
     if (stage === "alj") cites.push(["Hearings Guide", "p. 21", 22]);
     if (!state.late) {
       c.push(card(left <= 10 ? "help" : "law", `${verb} by ${plain(due)}`, [
         `You have 30 calendar days from the date your ${S.doc} was mailed, ${plain(N)}. Day 1 is the day after. ${by} in hand by ${when(due)}. A postmark doesn't count, so mailing it on the last day is too late.`,
         rolled ? `Day 30 is ${plain(D30)}, which is ${whatDay(D30)}. Michigan law moves the deadline to the end of the next day that isn't a weekend or legal holiday${switchMoved ? `, ${plain(roll(D30))}` : ""}.${openHoliday ? " State offices stay open on that holiday, so UIA may not count it." : ""} A fax goes through any day, so getting it in by ${plain(D30)} takes away any doubt.` : "",
-        switchMoved ? `That date falls while UIA's systems are shut down for the switch to MiUI (4:30 PM Monday, Nov. 2 to 8 AM Monday, Nov. 9, 2026). UIA says a protest or appeal due in that window is due Nov. 9 instead. Faxes and mail are still received during the shutdown, and filing early beats counting on the extra days.` : "",
-        switchDay ? `Nov. 2 is the day UIA shuts its systems down for the switch to MiUI. MiWAM closes for good at 4:30 PM, and phones and offices close too. UIA says due dates inside the shutdown move to Nov. 9, but Nov. 2 is the day it starts, so treat Nov. 2 as your deadline: file in MiWAM before 4:30 PM, or fax it that day.` : "",
-        !rolled && !switchMoved && officeClosed(due) ? `UIA's offices are closed that day for a state holiday, but the law doesn't move the deadline for that. File online or fax it by then.` : "",
+        switchMoved ? `That date fell while UIA's systems were shut down for the switch to MiUI (4:30 PM Monday, Nov. 2 to 8 AM Monday, Nov. 9, 2026). Before the shutdown, UIA's MiUI page said a protest or appeal due in that window was due Nov. 9 instead. UIA has since rewritten that page and it no longer says so, so keep proof of the day you filed.` : "",
+        switchDay ? `Nov. 2 is the day UIA shuts its systems down for the switch to MiUI. MiWAM closes for good at 4:30 PM, and phones and offices close too. Before the shutdown, UIA's MiUI page said due dates inside it moved to Nov. 9, but Nov. 2 is the day it starts, so treat Nov. 2 as your deadline: file in MiWAM before 4:30 PM, or fax it that day.` : "",
+        !switchMoved && officeClosed(due) ? `UIA's offices are closed ${rolled ? "on " + plain(due) + " too," : "that day"} for a state holiday, but the law doesn't move the deadline for that. File online or fax it by then.` : "",
         stage === "alj" ? "The judge's decision also lists this deadline on its last page. If it shows an earlier date, go by the decision. Within the same 30 days you can instead ask the judge for a rehearing, for example if you have facts you couldn't get before the hearing." : "",
         stage === "uiac" ? "Within the same 30 days you can instead ask the Commission for a rehearing. A circuit court appeal has a filing fee. Talk to a lawyer or legal aid before you file." : ""
       ], cites));
@@ -433,7 +434,9 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
       // Missed it
       const year = addYears(N, 1), three = addYears(N, 3);
       const paras = [`The 30-day deadline was ${plain(due)}. You can still file, but it's now a late ${S.noun}.`];
+      if (switchMoved) paras.push(`Day 30 was ${plain(D30)}, during UIA's shutdown for the switch to MiUI (4:30 PM Monday, Nov. 2 to 8 AM Monday, Nov. 9, 2026). Before the shutdown, UIA's MiUI page said a protest or appeal due in that window was due Nov. 9 instead, and this page counts it that way. UIA has since rewritten that page and it no longer says so. If you filed by Nov. 9 and UIA calls it late, say in writing that the shutdown is the reason.`);
       const lc = [];
+      if (switchMoved) lc.push(["MiUI Downtime Period", ""]);
       if (S.uia) {
         paras.push(`Write down why it's late and include it. UIA then decides whether you had "good cause." The rule lists examples: you didn't get the notice in time, the mail delivered it late, UIA gave you wrong information, you had new facts you couldn't have known, or you had a real reason you couldn't act sooner. If UIA says no, you can appeal that to a judge.`);
         if (stage === "redet") paras.push(`UIA can only reconsider within 1 year of the mail date of the first determination on this issue (3 years if it found fraud). That's the original Notice of Determination, not this redetermination.`);
@@ -476,10 +479,10 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
     // MiUI switch notice while it matters
     if (now < DT_END_AT) c.push(card(inSwitch ? "help" : "facts", "UIA is switching to a new system, MiUI", [
       `From 4:30 PM Monday, Nov. 2, 2026 until 8 AM Monday, Nov. 9, all UIA systems, phone lines, and local offices are closed. MiWAM and MARVIN shut down for good. You can't file online, certify, or upload documents in that window, but UIA says faxes and mail are received as usual.`,
-      S.uia ? "UIA says a protest or appeal due date that falls during the shutdown becomes Nov. 9. The deadline above already counts that." : "",
+      S.uia ? "Before the shutdown, UIA's MiUI page said a protest or appeal due date that falls during it becomes Nov. 9. The deadline above already counts that." : "",
       preSwitch ? "Certify for benefits before 4:30 PM Monday, Nov. 2. Anyone can certify that day, whatever their usual day. If you miss it, you can certify for the past weeks once MiUI opens." : "",
       "In MiUI you'll certify every week instead of every two weeks, and benefits will be paid weekly."
-    ], [["MiUI Switch", ""]]));
+    ], [["MiUI Downtime Period", ""]]));
 
     // Keep certifying
     if (stage !== "uiac" || !state.late) c.push(card("facts", "Keep certifying while you wait", [
@@ -507,9 +510,9 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
     if (money) {
       c.push(card("facts", "If the notice says you were overpaid", [
         `A notice that says you were overpaid is a determination too, so you protest it by the same 30-day deadline.`,
-        `If you protest or appeal on time, UIA agreed in a 2024 court settlement not to collect from you until there's a final decision. If you file within 30 days after the deadline, it decides good cause before it collects.`,
+        `In a 2024 court settlement, UIA agreed not to restart collecting an overpayment until your protest or appeal rights are used up. A protest or appeal filed on time keeps those rights alive.`,
         `You can also ask UIA to waive (cancel) the repayment for financial hardship, a UIA mistake, or wrong wages your employer reported. Since July 17, 2026 you can apply up to four times a year, and a waiver denial can be protested too.`
-      ], [["MCL 421.62", "(c)"], ["Michigan Legal Help", ""], ["UIA Law Changes", ""]]));
+      ], [["MCL 421.62", "(c)"], ["2024 Settlement Release", ""], ["UIA Law Changes", ""]]));
       if (fraud) c.push(card("help", "A fraud finding is serious", [
         "On top of paying it back, a fraud finding can bring penalties (UIA's handbook says up to 1.5 times the amount). Talk to legal aid before you file if you can, but don't let the deadline pass.",
         "If an advocate helps you at a hearing and the judge finds fraud, you pay the advocate's cost."
