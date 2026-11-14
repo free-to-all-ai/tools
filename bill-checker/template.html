@@ -149,7 +149,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     <div class="stale" id="stale" role="status" hidden></div>
     <div class="notice">
       <strong>This is information, not medical, legal, or financial advice.</strong>
-      <span>Medicare's rate isn't what you owe. Your insurer's contract or the hospital's own policy decides that. Use these numbers to ask better questions. Nothing you type here leaves this page or gets saved.</span>
+      <span>The rates here are what Medicare pays the doctor, not the hospital. Medicare's rate isn't what you owe. Your insurer's contract or the hospital's own policy decides that. Use these numbers to ask better questions. Nothing you type here leaves this page or gets saved.</span>
     </div>
     <p class="good" id="good" hidden></p>
   </header>
@@ -181,6 +181,10 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
         <button class="seg" type="button" data-set="non" aria-pressed="true">Doctor's office or clinic</button>
         <button class="seg" type="button" data-set="fac" aria-pressed="false">Hospital, ER, or surgery center</button>
       </div>
+      <div class="notice" id="facwarn" role="status" hidden>
+        <strong>Is this the hospital's own bill, or the doctor's?</strong>
+        <span>The rates below are what Medicare pays the doctor. For care in a hospital, Medicare also pays the hospital a separate facility fee on a different schedule, and that fee is often much larger. For a diagnostic colonoscopy (code 45378), Medicare's <a href="https://www.medicare.gov/procedure-price-lookup/" target="_blank" rel="noopener">Procedure Price Lookup</a> lists a 2026 national average doctor fee of $164 and a hospital facility fee of $950. This page doesn't check facility fees. If the bill is the hospital's own, a charge far above the doctor rate doesn't show an overcharge by itself, and a billing office can say so. Ask which lines are facility fees.</span>
+      </div>
     </div>
   </section>
 
@@ -189,11 +193,11 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     <div class="summary" id="summary"></div>
     <div class="tablewrap">
       <table>
-        <thead><tr><th>Code</th><th>Date</th><th class="n">Billed</th><th class="n">Medicare rate</th><th class="n">Billed vs Medicare</th><th>What this means</th></tr></thead>
+        <thead><tr><th>Code</th><th>Date</th><th class="n">Billed</th><th class="n">Medicare doctor rate</th><th class="n">Billed vs doctor rate</th><th>What this means</th></tr></thead>
         <tbody id="rows"></tbody>
       </table>
     </div>
-    <p class="hint">Medicare rate = 2026 Medicare Physician Fee Schedule amount for Michigan locality 01 (Detroit) times units, or the 2026 Clinical Lab Fee Schedule for lab tests. Private insurers usually pay more than Medicare. A 2022 <a href="https://www.cbo.gov/system/files/2022-01/57422-medical-prices.pdf" target="_blank" rel="noopener">Congressional Budget Office review</a> found they paid about 1.3 times Medicare's price for doctors' services on average, and about 2.4 times for hospital outpatient services. A line at 5 times Medicare or more is worth asking about. A hospital's separate facility fee (rows with 4-digit revenue codes and no CPT code) is paid differently and isn't checked here.</p>
+    <p class="hint">Medicare doctor rate = what Medicare pays the doctor or other clinician: the 2026 Medicare Physician Fee Schedule amount for Michigan locality 01 (Detroit) times units. For lab tests it is the 2026 Clinical Lab Fee Schedule. Private insurers usually pay more than Medicare. A 2022 <a href="https://www.cbo.gov/system/files/2022-01/57422-medical-prices.pdf" target="_blank" rel="noopener">Congressional Budget Office review</a> found they paid about 1.3 times Medicare's price for doctors' services on average, and about 2.4 times for hospital outpatient services. A line at 5 times the doctor rate or more is worth asking about. A hospital's own facility fee is paid on a different, higher Medicare schedule and isn't checked here. That includes rows with 4-digit revenue codes and no CPT code, and CPT lines on the hospital's own bill.</p>
   </section>
 
   <section aria-labelledby="h-dup">
@@ -374,9 +378,9 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     const ratio = tRate > 0 ? (tBilledCompared / tRate) : null;
     s.innerHTML =
       stat('Total billed', money(tBilled)) +
-      stat('Medicare rate, lines with a rate', money(tRate)) +
-      stat('Billed vs Medicare, same lines', ratio ? ratio.toFixed(1) + '×' : 'n/a') +
-      stat('Lines at 5× Medicare or more', String(high));
+      stat('Medicare doctor rate, lines with a rate', money(tRate)) +
+      stat('Billed vs doctor rate, same lines', ratio ? ratio.toFixed(1) + '×' : 'n/a') +
+      stat('Lines at 5× the doctor rate or more', String(high));
 
     lastDupes = dupes(rows);
     const f = document.getElementById('flags');
@@ -411,7 +415,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
       });
       lastLines.forEach(({ r, L, b }) => {
         if (L.rate && b && b / L.rate >= 2.5) {
-          asks.push('- Code ' + r.code + (r.mod ? '-' + r.mod : '') + (r.date ? ' (' + r.date + ')' : '') + ' was billed at ' + money(b) + '. The 2026 Medicare rate for this code in the Detroit area is ' + money(L.rate) + ', so this charge is ' + (b / L.rate).toFixed(1) + ' times that amount. Please explain how this charge was set.');
+          asks.push('- Code ' + r.code + (r.mod ? '-' + r.mod : '') + (r.date ? ' (' + r.date + ')' : '') + ' was billed at ' + money(b) + '. For comparison, ' + (L.kind === 'Lab fee schedule' ? 'the 2026 Medicare Clinical Lab Fee Schedule amount for this code' : 'the 2026 Medicare Physician Fee Schedule amount for this code in the Detroit area, which is what Medicare pays the doctor,') + ' is ' + money(L.rate) + '. This charge is ' + (b / L.rate).toFixed(1) + ' times that amount. Please explain how this charge was set' + (setting === 'fac' && L.kind !== 'Lab fee schedule' ? ', and tell me whether it is a professional fee or a hospital facility fee.' : '.'));
         }
         if (L.kind === 'Status B' || L.kind === 'Status P') {
           asks.push('- Code ' + r.code + ' is listed by Medicare as bundled into other services. Please explain why it was charged separately.');
@@ -453,6 +457,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
   ledger.addEventListener('input', render);
   document.querySelectorAll('.seg').forEach(b => b.addEventListener('click', () => {
     setting = b.dataset.set;
+    document.getElementById('facwarn').hidden = setting !== 'fac';
     document.querySelectorAll('.seg').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
     render();
   }));
