@@ -386,7 +386,14 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
 
   const money = n => "$" + Math.round(n).toLocaleString("en-US");
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const pctTxt = p => (p < 10 ? p.toFixed(1) : Math.round(p)) + "%";
+  // Near a tier edge, a rounded number can read as "250%" when the income is a few dollars over it, so say which side it's on.
+  const EDGES = [200, 250, 275, 300, 350, 375, 400, 500];
+  const pctTxt = p => {
+    if (p < 10) return p.toFixed(1) + "%";
+    const r = Math.round(p);
+    if (EDGES.includes(r) && p !== r) return (p > r ? "just over " : "just under ") + r + "%";
+    return r + "%";
+  };
   const tier = (p, rows) => { for (const [lim, v] of rows) if (p <= lim) return v; return null; };
   const left = (bill, off) => bill * (1 - off / 100);
   const COUNTY = { wayne: "Wayne County", oakland: "Oakland County", macomb: "Macomb County", washtenaw: "Washtenaw County", livingston: "Livingston County", stclair: "St. Clair County", lapeer: "Lapeer County", monroe: "Monroe County", jackson: "Jackson County", genesee: "Genesee County", othermi: "another Michigan county", ohio: "Ohio", other: "outside Michigan" };
@@ -585,7 +592,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
       glance: ["200% (uninsured)", "500% (40% to 80% off)"], freePct: 200,
       dated: "Policy text on DMC's Children's Hospital billing page, which still shows a poverty table dated Jan 15, 2020",
       links: [["DMC aid page", "https://www.dmc.org/patients/insurance-financial-support"], ["Policy details", "https://childrensdmc.org/billingquestions"]],
-      contact: `DMC patient-care hotline for bills and financial assistance: <span class="phone">(855) 362-9600</span>. You can also ask for a registration representative at any DMC hospital, or call the customer service number on your bill.`,
+      contact: `DMC patient-care hotline for bills and financial assistance: <span class="phone">(855) 362-9600</span>. DMC's Children's Hospital billing page lists <span class="phone">(888) 730-3989</span> for the same help. You can also ask for a registration representative at any DMC hospital, or call the customer service number on your bill.`,
       eval(u) {
         const r = { conds: [], pay: null };
         // Schedule B: 100% to 200%, 80% to 300%, 60% to 400%, 40% to 500% (our reading of the table's columns).
@@ -627,6 +634,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
         r.conds.push(!u.county ? { s: "info", t: "You must live in Michigan." } : inMI(u.county) ? { s: "ok", t: "You live in Michigan, which MSupport requires." } : { s: "warn", t: "MSupport only covers Michigan residents." });
         if (u.assets != null) r.conds.push(u.assets > 10000 ? { s: "warn", t: "Cash and other liquid savings over $10,000 rule you out. Up to $100,000 in retirement accounts is OK." } : { s: "ok", t: "Your savings are under the $10,000 limit. Up to $100,000 in retirement accounts is also OK." });
         else r.conds.push({ s: "info", t: "Liquid savings must be $10,000 or less. Up to $100,000 in retirement accounts is OK." });
+        r.conds.push({ s: "info", t: "The policy says you must first apply for Medicaid or a Marketplace plan and be turned down, or have an MSupport coordinator find that you don't qualify for them. The application asks for that answer." });
         r.conds.push({ s: "info", t: "Approval lasts 12 months, then you reapply." });
         return r;
       }
@@ -773,7 +781,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
       "Dates of care: [Dates]", "",
       "I am writing to apply for help under your financial assistance policy for the bills listed above. Please send me your application, or tell me how to apply, and let me know what documents you need.", "",
       u.n && u.inc != null
-        ? `My household has ${u.n} ${u.n === 1 ? "person" : "people"}, and ${u.n === 1 ? "my" : "our"} income before taxes is about ${money(u.inc)} a year. That is about ${pctTxt(u.pct)} of the ${FPL_YEAR} federal poverty guideline.${u.insured ? "" : " I did not have health insurance when I got this care."}`
+        ? `My household has ${u.n} ${u.n === 1 ? "person" : "people"}, and ${u.n === 1 ? "my" : "our"} income before taxes is about ${money(u.inc)} a year. That is ${pctTxt(u.pct).startsWith("just") ? "" : "about "}${pctTxt(u.pct)} of the ${FPL_YEAR} federal poverty guideline.${u.insured ? "" : " I did not have health insurance when I got this care."}`
         : "My household has [number] people, and our income before taxes is about $[amount] a year.",
       "",
       "Once I apply, please put this account on hold and stop any collection activity while you decide, as federal rules for nonprofit hospitals require (26 CFR 1.501(r)-6(c)). If I qualify, please refund any amount I have paid above what I owe under the policy.",
