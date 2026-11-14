@@ -78,6 +78,13 @@ header { display: grid; gap: 12px; }
   background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
   display: grid; gap: 4px;
 }
+.good { font-size: 14px; color: var(--muted); }
+.stale {
+  background: var(--facts-bg); border-left: 4px solid var(--facts); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.stale.old { background: var(--help-bg); border-left-color: var(--help); }
+.stale[hidden], .good[hidden] { display: none; }
 section { display: grid; gap: 12px; min-width: 0; grid-template-columns: minmax(0, 1fr); }
 section > *, .wrap > * { min-width: 0; }
 .box {
@@ -196,10 +203,12 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     <span class="eyebrow">Detroit area · hospital bills · free</span>
     <h1>Detroit Hospital Financial Assistance Check</h1>
     <p class="lede">Can't pay a hospital bill? Most big hospitals around Detroit have a financial assistance policy, often called charity care, that erases or cuts bills for people under set income limits. Enter your household size and income to see how the policies at Henry Ford, Corewell Health (Beaumont), Trinity Health, McLaren, the Detroit Medical Center (DMC), and Michigan Medicine would likely treat you. The old Ascension hospitals around Detroit are Henry Ford hospitals now, so they're here too.</p>
+    <div class="stale" id="stale" role="status" hidden></div>
     <div class="notice">
       <strong>This is information, not legal or financial advice.</strong>
       <span>Only the hospital can approve you, after you apply. Results are estimates from each hospital's posted policy, checked on October 31, 2026. Nothing you type here leaves this page or gets saved.</span>
     </div>
+    <p class="good" id="good" hidden></p>
   </header>
 
   <section aria-labelledby="you-h">
@@ -353,10 +362,12 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
 
   <footer>
     <p><strong>How this works.</strong> The tool divides your yearly household income by the 2026 federal poverty guideline for your household size. Then it checks that percent against each hospital system's posted policy, along with the policy's rules on insurance, where you live, savings, and very large bills. Green means the policy likely covers you. Amber means it might, depending on facts the hospital decides. Gray means your income is over the policy's limit, though large-bill rules or an appeal may still help.</p>
-    <p>Hospitals decide who counts in a household and what counts as income in slightly different ways, and some still use last year's poverty guideline until they update. Close to a limit? Apply anyway.</p>
+    <p>Hospitals decide who counts in a household and what counts as income in slightly different ways, and some still use last year's poverty guideline until they update. This page shows a warning at the top once newer guidelines are likely out, and again once its policy check is more than a year old. Close to a limit? Apply anyway.</p>
     <p>Sources, all checked on October 31, 2026, on each hospital's own website unless noted.</p>
     <ul id="srcs"></ul>
     <p>Not covered: hospitals outside these systems, nursing homes, and doctors who bill separately. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+    <p class="report"><strong>See a mistake?</strong> <a href="https://github.com/free-to-all-ai/tools/issues/new?template=mistake.yml&amp;title=Mistake%3A+Detroit+Hospital+Financial+Assistance+Check&amp;tool=Detroit+Hospital+Financial+Assistance+Check" target="_blank" rel="noopener">Report it on GitHub</a>. You'll need a free GitHub account, and what you write there is public, so leave out personal details.</p>
+    <p><a href="https://free-to-all-ai.github.io/tools/">More free tools from Free to All AI</a></p>
   </footer>
 </div>
 
@@ -367,6 +378,11 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
   const FPL_YEAR = 2026, FPL_BASE = 15960, FPL_STEP = 5680;
   const fpl = n => FPL_BASE + FPL_STEP * (n - 1);
   const CHECKED = "Oct 31, 2026";
+  // Good-through dates (YYYY-MM-DD). The page warns visitors once each one arrives.
+  // FPL_NEXT: HHS posts new poverty guidelines in mid-January (2026's came out January 15, 2026), so from this day the page says newer ones are probably out.
+  // POLICY_RECHECK: one year after the hospital policies were last read.
+  // Move them forward only after updating FPL_BASE and FPL_STEP and rechecking every policy in SYSTEMS.
+  const FPL_NEXT = "2027-01-15", POLICY_RECHECK = "2027-10-31";
 
   const money = n => "$" + Math.round(n).toLocaleString("en-US");
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -798,6 +814,32 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     ...SYSTEMS.map(s => `${esc(s.name)}: ${s.links.map(l => `<a href="${l[1]}" target="_blank" rel="noopener">${esc(l[0])}</a>`).join(", ")}. ${esc(s.dated)}.`)
   ];
   $("srcs").innerHTML = srcItems.map(x => `<li>${x}</li>`).join("");
+
+  /* ---------- Good-through check ---------- */
+  // Compares today's date in Michigan with the dates next to CHECKED and warns when the numbers have aged out.
+  (() => {
+    const pad = x => String(x).padStart(2, "0");
+    let today;
+    try {
+      const p = {};
+      new Intl.DateTimeFormat("en-US", { timeZone: "America/Detroit", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date()).forEach(x => { p[x.type] = x.value; });
+      today = `${p.year}-${p.month}-${p.day}`;
+    } catch (e) { const t = new Date(); today = `${t.getFullYear()}-${pad(t.getMonth() + 1)}-${pad(t.getDate())}`; }
+    const long = iso => { const [y, m, d] = iso.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }); };
+    const hhs = `<a href="${SRC.aspe[1]}" target="_blank" rel="noopener">HHS poverty guidelines page</a>`;
+    const good = $("good"), stale = $("stale");
+    if (today < FPL_NEXT) {
+      good.innerHTML = `<strong>Good through about ${long(FPL_NEXT)}.</strong> HHS usually posts new poverty guidelines around then, and this page uses ${FPL_YEAR}'s. Hospitals can change their own policies at any time. These were last checked on ${CHECKED}.`;
+      good.hidden = false;
+    } else if (today < POLICY_RECHECK) {
+      stale.innerHTML = `<strong>The income numbers here may be last year's.</strong><span>HHS usually posts new poverty guidelines in mid-January, and this page still uses ${FPL_YEAR}'s. The new ones are usually a little higher, so you may qualify at a slightly higher income than this page shows. Close to a limit? Apply anyway. The current numbers are on the ${hhs}.</span>`;
+      stale.hidden = false;
+    } else {
+      stale.innerHTML = `<strong>This page is out of date.</strong><span>Its hospital policies were last checked on ${CHECKED}, more than a year ago, and it uses the ${FPL_YEAR} poverty guidelines. Hospitals change these policies. Read the hospital's current policy from the links on its card below, or call its billing office and ask for financial assistance. The current poverty numbers are on the ${hhs}.</span>`;
+      stale.classList.add("old");
+      stale.hidden = false;
+    }
+  })();
 
   /* ---------- Wire up ---------- */
   $("f").addEventListener("input", run);

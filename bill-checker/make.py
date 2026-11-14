@@ -4,6 +4,8 @@ Usage: python make.py <data-dir>
 <data-dir> must hold dl/PPRRVU2026_Oct_nonQPP.csv and dl/OPPSCAP_Oct.csv (from the CMS RVU26D zip)
 and clfs/PUF_CLFS_CY2026_Q4V1.csv (from the CMS 26CLABQ4 zip).
 Each January, swap in the new year's files, conversion factor and GPCI values.
+Then update the year text in template.html, including RATE_YEAR and GOOD_THROUGH near the top of its script,
+which drive the good-through line and the out-of-date warning.
 """
 import csv, json, os, sys
 D=os.path.join(sys.argv[1] if len(sys.argv)>1 else '.', '')

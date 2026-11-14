@@ -67,6 +67,9 @@ header { display: grid; gap: 12px; }
 .lede { color: var(--muted); max-width: 62ch; }
 .eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
 .notice { background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px; display: grid; gap: 4px; }
+.good { font-size: 14px; color: var(--muted); }
+.stale { background: var(--warn-bg); border-left: 4px solid var(--warn); border-radius: 10px; padding: 14px 16px; font-size: 15px; display: grid; gap: 4px; }
+.stale[hidden], .good[hidden] { display: none; }
 section { display: grid; gap: 14px; }
 .box { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 14px; min-width: 0; }
 .hint { font-size: 14px; color: var(--muted); }
@@ -142,11 +145,13 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
   <header>
     <span class="eyebrow">Detroit area · 2026 · free</span>
     <h1>Detroit Medical Bill Check</h1>
-    <p class="lede">Got an itemized bill with codes on it? Type each line below and see what Medicare pays a doctor for the same service in Wayne, Oakland, Macomb, or Washtenaw County this year. It's a yardstick for spotting charges worth asking about, and it flags lines that look billed twice.</p>
+    <p class="lede">Got an itemized bill with codes on it? Type each line below and see what Medicare pays a doctor for the same service in Wayne, Oakland, Macomb, or Washtenaw County in 2026. It's a yardstick for spotting charges worth asking about, and it flags lines that look billed twice.</p>
+    <div class="stale" id="stale" role="status" hidden></div>
     <div class="notice">
       <strong>This is information, not medical, legal, or financial advice.</strong>
       <span>Medicare's rate isn't what you owe. Your insurer's contract or the hospital's own policy decides that. Use these numbers to ask better questions. Nothing you type here leaves this page or gets saved.</span>
     </div>
+    <p class="good" id="good" hidden></p>
   </header>
 
   <section aria-labelledby="h-lines">
@@ -235,8 +240,9 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
       <li>2026 Clinical Laboratory Fee Schedule, fourth quarter (26CLABQ4). <a href="https://www.cms.gov/medicare/payment/fee-schedules/clinical-laboratory-fee-schedule-clfs/files/26clabq4" target="_blank" rel="noopener">CMS 26CLABQ4</a></li>
       <li>Formula: (work RVU × work GPCI + practice expense RVU × PE GPCI + malpractice RVU × MP GPCI) × conversion factor. Clinicians in qualifying alternative payment models get a slightly higher factor ($33.5675), about half a percent more.</li>
       <li>Not covered: drugs and supplies (most J and A codes), anesthesia time, hospital facility fees, ambulance, and dental. Code descriptions aren't shown because the American Medical Association owns them. Your bill lists what each code means.</li>
-      <li>Data pulled from cms.gov on 2026-10-28. Rates change each January.</li>
+      <li>Data pulled from cms.gov on 2026-10-28. Rates change each January 1. This page shows a warning at the top once 2026 ends, and flags any line dated in a different year.</li>
     </ul>
+    <p class="report"><strong>See a mistake?</strong> <a href="https://github.com/free-to-all-ai/tools/issues/new?template=mistake.yml&amp;title=Mistake%3A+Detroit+Medical+Bill+Check&amp;tool=Detroit+Medical+Bill+Check" target="_blank" rel="noopener">Report it on GitHub</a>. You'll need a free GitHub account, and what you write there is public, so leave out personal details.</p>
     <p><a href="https://free-to-all-ai.github.io/tools/">More free tools from Free to All AI</a></p>
   </footer>
 </div>
@@ -245,6 +251,9 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
 (function () {
   const DATA = JSON.parse(document.getElementById('feedata').textContent);
   const PFS = DATA.pfs, CLFS = DATA.clfs;
+  // The year of the CMS files in DATA, and the last day those rates are in force (YYYY-MM-DD).
+  // The page warns visitors once GOOD_THROUGH passes. Change both when make.py is rerun with a new year's files.
+  const RATE_YEAR = 2026, GOOD_THROUGH = '2026-12-31';
   const STATUS = {
     B: 'Medicare bundles this into another service and pays nothing extra for it. A separate charge is worth asking about.',
     C: 'Medicare lets the local contractor set this price case by case, so there is no fixed rate to compare.',
@@ -347,6 +356,8 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     lastLines = [];
     tb.innerHTML = rows.map(r => {
       const L = lookup(r);
+      const svcYear = r.date ? parseInt(r.date.slice(0, 4), 10) : NaN;
+      if (L.rate !== null && svcYear >= 2000 && svcYear <= 2100 && svcYear !== RATE_YEAR) L.note = (L.note ? L.note.trim() + ' ' : '') + 'This line is dated ' + svcYear + '. The rate shown is Medicare\'s ' + RATE_YEAR + ' rate, so it may be a little off. ';
       const b = isFinite(r.billed) ? r.billed : null;
       if (b !== null) tBilled += b;
       if (L.rate !== null && b !== null) { tRate += L.rate; tBilledCompared += b; if (b / L.rate >= 5) high++; }
@@ -452,6 +463,27 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     const fallback = () => { ta.focus(); ta.select(); msg.textContent = 'Selected. Press Ctrl+C or Cmd+C to copy.'; };
     try { navigator.clipboard.writeText(ta.value).then(done, fallback); } catch (e) { fallback(); }
   });
+
+  // Good-through check: compares today's date in Michigan with GOOD_THROUGH and warns when the rates have aged out.
+  (function () {
+    const pad = x => String(x).padStart(2, '0');
+    let today;
+    try {
+      const p = {};
+      new Intl.DateTimeFormat('en-US', { timeZone: 'America/Detroit', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date()).forEach(x => { p[x.type] = x.value; });
+      today = p.year + '-' + p.month + '-' + p.day;
+    } catch (e) { const t = new Date(); today = t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate()); }
+    const g = GOOD_THROUGH.split('-').map(Number);
+    const long = new Date(g[0], g[1] - 1, g[2]).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    const good = document.getElementById('good'), stale = document.getElementById('stale');
+    if (today <= GOOD_THROUGH) {
+      good.innerHTML = '<strong>Rates good through ' + long + '.</strong> Medicare sets new rates each January 1. For care you got in ' + RATE_YEAR + ', these stay the right yardstick after that.';
+      good.hidden = false;
+    } else {
+      stale.innerHTML = '<strong>These are ' + RATE_YEAR + ' Medicare rates.</strong><span>Medicare sets new rates each January 1, and this page hasn\'t been updated yet. For care you got in ' + RATE_YEAR + ', the rates here are still the right yardstick. For care after that, look up the current rate in <a href="https://www.cms.gov/medicare/physician-fee-schedule/search" target="_blank" rel="noopener">CMS\'s fee schedule lookup</a>.</span>';
+      stale.hidden = false;
+    }
+  })();
 
   SAMPLE.forEach(addRow);
   render();

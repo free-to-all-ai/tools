@@ -1,0 +1,29 @@
+name: Report a mistake
+description: A number, date, rule, phone number, or link on one of the tools is wrong or out of date.
+title: "Mistake: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for checking our work. **This page is public.** Please leave out personal details like your name, address, income, or case numbers.
+  - type: input
+    id: tool
+    attributes:
+      label: Which tool?
+      placeholder: "Example: Michigan Renter Rights Check"
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What looks wrong?
+      description: Say where on the page you saw it and what it said.
+    validations:
+      required: true
+  - type: textarea
+    id: right
+    attributes:
+      label: What should it say, and where can we check that?
+      description: A link to the law, agency page, or document helps us fix it fast. Skip this if you're not sure.
+    validations:
+      required: false

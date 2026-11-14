@@ -78,6 +78,13 @@ header { display: grid; gap: 12px; }
   background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
   display: grid; gap: 4px;
 }
+.good { font-size: 14px; color: var(--muted); }
+.stale {
+  background: var(--facts-bg); border-left: 4px solid var(--facts); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.stale.old { background: var(--help-bg); border-left-color: var(--help); }
+.stale[hidden], .good[hidden] { display: none; }
 section { display: grid; gap: 12px; min-width: 0; grid-template-columns: minmax(0, 1fr); }
 section > *, .wrap > * { min-width: 0; }
 .box {
@@ -200,10 +207,12 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     <span class="eyebrow">Michigan · Medicare · free</span>
     <h1>Michigan Medicare Savings Program Check</h1>
     <p class="lede">Michigan's Medicare Savings Programs pay the Medicare Part B premium, which is $202.90 a month in 2026, for people with lower incomes. The fullest one, QMB, also pays your Medicare deductibles and copays. Answer a few questions to see which program your income fits under Michigan's 2026 limits, what it would pay, and how to apply.</p>
+    <div class="stale" id="stale" role="status" hidden></div>
     <div class="notice">
       <strong>This is information, not legal or financial advice.</strong>
       <span>Only the Michigan Department of Health and Human Services (MDHHS) can approve you, after you apply. Limits come from MDHHS's own policy manuals, checked on October 31, 2026. Nothing you type here leaves this page or gets saved.</span>
     </div>
+    <p class="good" id="good" hidden></p>
   </header>
 
   <section aria-labelledby="you-h">
@@ -344,10 +353,12 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
 
   <footer>
     <p><strong>How this works.</strong> The tool adds up your monthly income the way Michigan's manual says to for these programs. It takes $20 off money you don't work for (or off your pay, if that's all you have). From pay for work it takes $65 and then half of the rest. If you're raising your own children under 18 at home, it first sets aside up to $498 a month for each one. The result is your countable income. Michigan's published limits already add that $20 back, so the tool compares your countable income to each limit minus $20. Savings are compared to the asset limit in MDHHS's Bridges Eligibility Manual (BEM 400).</p>
-    <p>In January, February, and March, MDHHS ignores the cost-of-living raise in your Social Security check and uses the December limits. Michigan updates the income limits each April 1 and the savings limits each January 1. Close to a limit? Apply anyway. MDHHS decides from your proof, and what it counts can differ from what you entered here.</p>
+    <p>In January, February, and March, MDHHS ignores the cost-of-living raise in your Social Security check and uses the December limits. Michigan updates the income limits each April 1 and the savings limits each January 1. This page shows a warning at the top once its numbers pass their good-through dates. Close to a limit? Apply anyway. MDHHS decides from your proof, and what it counts can differ from what you entered here.</p>
     <p>Sources, all checked on October 31, 2026, on the official site unless noted.</p>
     <ul id="srcs"></ul>
     <p>Not covered: Medicaid for nursing home care, home and community waivers, and PACE, which have their own rules. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+    <p class="report"><strong>See a mistake?</strong> <a href="https://github.com/free-to-all-ai/tools/issues/new?template=mistake.yml&amp;title=Mistake%3A+Michigan+Medicare+Savings+Program+Check&amp;tool=Michigan+Medicare+Savings+Program+Check" target="_blank" rel="noopener">Report it on GitHub</a>. You'll need a free GitHub account, and what you write there is public, so leave out personal details.</p>
+    <p><a href="https://free-to-all-ai.github.io/tools/">More free tools from Free to All AI</a></p>
   </footer>
 </div>
 
@@ -359,6 +370,10 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
   const D = {
     checked: "Oct 31, 2026",
     limitsFrom: "April 1, 2026",
+    // Good-through dates (YYYY-MM-DD). The page warns visitors once each one passes.
+    // Move them forward only after the numbers in this block have been updated.
+    goodThrough: "2026-12-31",         // savings limits, child allocation, and Medicare amounts: new ones start each January 1
+    incomeGoodThrough: "2027-03-31",   // RFT 242 income limits: new ones start each April 1
     // RFT 242 (RFB 2026-004, effective 4-1-2026): monthly limits for [1 person, married couple]. They include the $20 disregard.
     qmb: [1350, 1824], slmb: [1616, 2184], almb: [1816, 2455],
     // QDWI: 200% of the poverty guideline (RFT 246) on countable income. HHS 2026 guideline: $15,960 plus $5,680 per added person.
@@ -723,6 +738,33 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     `QMB billing protection: ${a("qmbBill")} fact sheet MLN7936176 (September 2025) and ${a("usc1396a")}. Estate recovery: ${a("usc1396p")}(1)(B)(ii).`,
     `Plain-language summary: ${a("mlh")}. MMAP phone number and free counseling from the State of Michigan's MMAP page and AgeWays (ageways.org).`
   ].map(x => `<li>${x}</li>`).join("");
+
+  /* ---------- Good-through check ---------- */
+  // Compares today's date in Michigan with the good-through dates in the D block and warns when the numbers have aged out.
+  (() => {
+    const pad = x => String(x).padStart(2, "0");
+    let today;
+    try {
+      const p = {};
+      new Intl.DateTimeFormat("en-US", { timeZone: "America/Detroit", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date()).forEach(x => { p[x.type] = x.value; });
+      today = `${p.year}-${p.month}-${p.day}`;
+    } catch (e) { const t = new Date(); today = `${t.getFullYear()}-${pad(t.getMonth() + 1)}-${pad(t.getDate())}`; }
+    const long = iso => { const [y, m, d] = iso.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }); };
+    const yr = D.goodThrough.slice(0, 4);
+    const check = `To check today's numbers, see ${a("mgov")} or call MMAP, free, at <span class="phone">1-800-803-7174</span>.`;
+    const good = $("good"), stale = $("stale");
+    if (today <= D.goodThrough) {
+      good.innerHTML = `<strong>Good through ${long(D.goodThrough)}.</strong> Michigan sets new savings limits and Medicare sets new premiums and deductibles each January 1. The income limits here stay in use through ${long(D.incomeGoodThrough)}.`;
+      good.hidden = false;
+    } else if (today <= D.incomeGoodThrough) {
+      stale.innerHTML = `<strong>Some numbers on this page are from ${yr}.</strong><span>The income limits are still the ones Michigan uses, through ${long(D.incomeGoodThrough)}. The savings limits, the Part B premium, and the Medicare deductibles are reset each January 1, and this page still shows the ${yr} ones, so they may be a little off. Close to a limit? Apply anyway. ${check}</span>`;
+      stale.hidden = false;
+    } else {
+      stale.innerHTML = `<strong>This page is out of date.</strong><span>Its income limits were good through ${long(D.incomeGoodThrough)}. Michigan sets new ones each April 1, and they usually go up, so you may qualify even if this page says you don't. ${check}</span>`;
+      stale.classList.add("old");
+      stale.hidden = false;
+    }
+  })();
 
   /* ---------- Wire up ---------- */
   $("f").addEventListener("input", run);
