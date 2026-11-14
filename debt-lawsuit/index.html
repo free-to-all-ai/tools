@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sued for a Debt in Michigan? Deadline to Answer the Summons</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Served with a summons for a debt in Michigan? See your last day to answer the complaint, whether the debt may be too old to sue on, and how to respond. Free.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/debt-lawsuit/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Sued for a Debt in Michigan? Deadline to Answer the Summons">
+<meta property="og:description" content="Served with a summons for a debt in Michigan? See your last day to answer the complaint, whether the debt may be too old to sue on, and how to respond. Free.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/debt-lawsuit/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/debt-lawsuit.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. Questions about the court papers and the debt on top, then a stack of cards, each with its court rule or law source chip, then a summary to bring to legal help. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.panel { display: grid; gap: 18px; }
+form.q {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 16px;
+}
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="date"], input[type="number"], select {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px;
+}
+input[type="text"], textarea {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%;
+}
+textarea { min-height: 96px; resize: vertical; }
+.opts { display: grid; gap: 6px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.opts input { margin-top: 5px; accent-color: var(--accent); }
+.opts small { display: block; color: var(--muted); font-size: 14px; }
+.hint { font-size: 14px; color: var(--muted); }
+.results { display: grid; gap: 12px; }
+.results-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line);
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.small { font-size: 15px; color: var(--muted); }
+.addr { font-family: var(--f-mono); font-size: 14px; white-space: pre-line; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; overflow-wrap: anywhere; }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.gethelp { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.letter {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px;
+  font-family: var(--f-body); white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; font-size: 16px;
+}
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 10px 16px;
+  background: var(--accent); color: var(--bg); border: 0;
+}
+.btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.btn:hover { filter: brightness(1.08); }
+.copied { font-size: 14px; color: var(--law); }
+.fill { background: var(--facts-bg); color: var(--facts); border-radius: 4px; padding: 0 3px; }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+@media print {
+  body.printing .wrap > :not(#s-letter), body.printing #s-letter > :not(.letter) { display: none !important; }
+  body.printing { background: #fff; color: #000; }
+  body.printing .letter { border: 0; padding: 0; color: #000; background: #fff; }
+  body.printing .fill { background: none; color: #000; }
+}
+[hidden] { display: none !important; }
+.pts { margin: 0; padding-left: 22px; display: grid; gap: 6px; font-size: 15px; color: var(--muted); }
+.panel > h2 { margin-top: 6px; }
+select { max-width: 100%; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Michigan · Debt lawsuits · free</span>
+    <h1>Sued for a Debt? Answer Deadline</h1>
+    <p class="lede">A debt collector, debt buyer, bank, or hospital sued you in a Michigan court and you got a summons and complaint. If you don't answer in writing on time, you lose automatically. Enter the date you were served to see your last day to answer, what happens if you miss it, whether the debt may be too old to sue on, and the steps to respond.</p>
+    <div class="notice">
+      <strong>This is information, not legal advice.</strong>
+      <span>An answer is a court filing. Use this page to see your dates and options, then use Michigan Legal Help or a legal aid office to prepare what you file. If the court gave you a different date in writing, go by the court's date. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section class="panel" aria-labelledby="h-papers">
+    <h2 id="h-papers">1. Your court papers</h2>
+    <form class="q" id="f-plan" novalidate>
+      <p class="sample">A sample date is filled in so you can see how it works. Change it to yours.</p>
+      <div class="field"><span class="lbl" id="l-stage">What did you get?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-stage">
+          <label><input type="radio" name="stage" value="summons" checked><span>A Summons and Complaint<small>The summons (form MC 01) says "You are being sued" and "You have 21 days." This is the usual debt lawsuit.</small></span></label>
+          <label><input type="radio" name="stage" value="small"><span>A small claims notice with a hearing date<small>The paper is an "Affidavit and Claim, Small Claims" and tells you when to come to court.</small></span></label>
+          <label><input type="radio" name="stage" value="default"><span>A notice that a default or default judgment was entered<small>You didn't answer in time, or never knew about the case, and now the court has acted.</small></span></label>
+        </div></div>
+      <div class="field"><label for="n-date" id="l-date">Date you were served</label><input id="n-date" type="date">
+        <span class="hint" id="h-date">The day the papers were handed to you, or the day you signed for the mail. Not the date printed on the summons.</span></div>
+      <div class="field" id="how-wrap"><span class="lbl" id="l-how">How did the papers reach you?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-how">
+          <label><input type="radio" name="how" value="personal" checked><span>Handed to me in person, in Michigan</span></label>
+          <label><input type="radio" name="how" value="mail"><span>By registered or certified mail that I signed for</span></label>
+          <label><input type="radio" name="how" value="outside"><span>I was served outside Michigan</span></label>
+          <label><input type="radio" name="how" value="other"><span>Another way<small>Regular mail, taped to my door, left with someone at my home, or a notice in a newspaper.</small></span></label>
+          <label><input type="radio" name="how" value="none"><span>I never got court papers<small>I found out some other way, like a letter, a garnishment, or the court's website.</small></span></label>
+        </div></div>
+      <div class="field" id="court-wrap"><label for="s-court">Which court is on the papers?</label>
+        <select id="s-court">
+          <option value="district">District court (most debt cases)</option>
+          <option value="circuit">Circuit court</option>
+          <option value="unsure">Not sure</option>
+        </select></div>
+    </form>
+
+    <h2 id="h-debt">2. The debt</h2>
+    <form class="q" id="f-debt" novalidate>
+      <div class="row2">
+        <div class="field"><label for="s-type">What kind of debt is it?</label>
+          <select id="s-type">
+            <option value="card">Credit card</option>
+            <option value="medical">Medical bill</option>
+            <option value="car">Car loan or balance after repossession</option>
+            <option value="store">Store card or goods bought on payments</option>
+            <option value="payday">Payday or personal loan</option>
+            <option value="other">Something else</option>
+          </select></div>
+        <div class="field"><span class="lbl" id="l-who">Who is suing you?</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-who">
+            <label><input type="radio" name="who" value="buyer" checked><span>A debt buyer, collector, or a company I don't recognize</span></label>
+            <label><input type="radio" name="who" value="orig"><span>The company I originally owed</span></label>
+            <label><input type="radio" name="who" value="unsure"><span>Not sure</span></label>
+          </div></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="l-last">Date of your last payment or use of the account</label><input id="l-last" type="date">
+          <span class="hint">Your best guess is fine. Leave it blank if you don't know. Old statements or your bank records can show it.</span></div>
+        <div class="field"><label for="l-filed">Date the case was filed (optional)</label><input id="l-filed" type="date">
+          <span class="hint">The "issue date" on the summons is close. Leave it blank and this page uses the date you were served.</span></div>
+      </div>
+      <div class="field" id="aff-wrap"><span class="lbl" id="l-aff">Sworn statement with the complaint</span>
+        <div class="opts" aria-labelledby="l-aff">
+          <label><input type="checkbox" id="c-aff"> <span>The papers include a notarized "affidavit" that says how much I owe</span></label>
+        </div></div>
+    </form>
+    <div class="results" id="r-plan" aria-live="polite"></div>
+    <div class="btns" id="ics-wrap"><button class="btn ghost" type="button" id="ics">Save the deadline to my calendar</button><span class="hint">Downloads a calendar file. Nothing is sent anywhere.</span></div>
+  </section>
+
+  <section class="panel" id="s-letter" aria-labelledby="h-letter">
+    <div class="bar">
+      <h2 id="h-letter">3. Summary to bring to legal help</h2>
+      <span class="btns"><span class="copied" id="copied" role="status"></span><button class="btn ghost" type="button" id="print">Print</button><button class="btn" type="button" id="copy">Copy summary</button></span>
+    </div>
+    <div class="letter" id="letter" tabindex="0" aria-label="Summary of your case dates"></div>
+    <p class="hint">Bring this with your summons, complaint, and anything you have about the debt. Fill in anything highlighted. This is a worksheet for you and your helper. It is not an answer and can't be filed with the court.</p>
+  </section>
+
+  <section class="gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Free help</h2>
+    <ul>
+      <li><a href="https://michiganlegalhelp.org/resources/money-debt-and-consumer-issues/do-it-yourself-civil-answer" target="_blank" rel="noopener">Michigan Legal Help: Do-It-Yourself Civil Answer</a>. A free guided tool that prepares the forms to respond when you're sued for a debt.</li>
+      <li><a href="https://michiganlegalhelp.org/resources/money-debt-and-consumer-issues/i-have-been-sued-collect-debt" target="_blank" rel="noopener">Michigan Legal Help: I Have Been Sued to Collect a Debt</a>. Articles on answering, defenses, default, garnishment, and payment plans.</li>
+      <li><a href="https://michiganlegalhelp.org/guide-to-legal-help" target="_blank" rel="noopener">Guide to Legal Help</a>. Answer a few questions to find free legal aid or a lawyer near you.</li>
+      <li><a href="https://www.michbar.org/public_resources/legalaid" target="_blank" rel="noopener">State Bar of Michigan legal aid directory</a>.</li>
+      <li>The court clerk can tell you whether a default has been entered, the court's hours, and how it takes filings. The clerk can't give legal advice. The phone number is at the top of your summons.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> Deadlines come from the Michigan Court Rules: MCR 2.108 (time to answer), MCR 1.108 (counting days), MCR 2.105 and 2.106 (how papers are served), MCR 2.107 (serving your answer), MCR 2.111 and 2.112 (what goes in an answer and in a debt complaint), MCR 2.603 and 2.612 (default), MCR 2.614 and 3.101 (garnishment), MCR 3.104 (installment payments), MCR 2.002 (fee waivers), MCR 4.301 to 4.306 (small claims), and MCR 8.110 (court holidays). Time limits on old debts come from MCL 600.5807, 440.2725, and 600.5866. Collector conduct rules come from MCL 445.252 and 339.915, the federal Fair Debt Collection Practices Act (15 U.S.C. 1692 and following), and Regulation F (12 CFR 1006.26). Garnishment limits come from 15 U.S.C. 1673, 42 U.S.C. 407, and 31 CFR Part 212. Court forms are MC 01, MC 03, MC 20, MC 99, MC 13, MC 15, and MC 49.</p>
+    <p>Sources checked <span id="checked"></span>, against the court rules as updated <span id="rules-upd"></span>. Days are calendar days. The day you were served is not counted. If the last day is a Saturday, Sunday, legal holiday, or a day the court is closed, the deadline moves to the next day that isn't. Green cards are what the rule says directly. Amber cards depend on your facts. Red cards mean act now.</p>
+    <p>This page is for people sued over a consumer debt in a Michigan state court. It doesn't cover eviction cases, child support, taxes, student loans owed to the government, federal court, or bankruptcy. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+    <p class="report"><strong>See a mistake?</strong> <a href="https://github.com/free-to-all-ai/tools/issues/new?template=mistake.yml&amp;title=Mistake%3A+Sued+for+a+Debt+in+Michigan%3F+Answer+Deadline+Check&amp;tool=Sued+for+a+Debt+in+Michigan%3F+Answer+Deadline+Check" target="_blank" rel="noopener">Report it on GitHub</a>. You'll need a free GitHub account, and what you write there is public, so leave out personal details.</p>
+    <p><a href="https://free-to-all-ai.github.io/tools/">More free tools from Free to All AI</a></p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  // ---------------------------------------------------------------------------------------------
+  // DATA: every number, date, and phone number this page uses, with its source and the day it was
+  // checked. To update the page, change this block and the "checked" date.
+  // ---------------------------------------------------------------------------------------------
+  const RULES_PDF = "https://www.courts.michigan.gov/siteassets/rules-instructions-administrative-orders/michigan-court-rules/michigan-court-rules.pdf";
+  const DATA = {
+    checked: "November 14, 2026",
+    // Michigan Court Rules of 1985, full PDF from courts.michigan.gov. Its cover says "Updated September 2, 2026".
+    rulesUpdated: "September 2, 2026",
+    // MCR 2.108(A)(1): 21 days after personal service in Michigan. (A)(2): 28 days if served outside Michigan
+    // or by registered mail. (A)(3): at least 28 days after publication or posting ends. Checked Nov 14, 2026.
+    answerDays: { personal: 21, mail: 28, outside: 28, other: 21 },
+    publicationMinDays: 28,
+    // MCR 2.603(D)(2)(b): motion to set aside within 21 days after the default judgment was entered,
+    // when personal service was made. Checked Nov 14, 2026.
+    setAsideDays: 21,
+    // MCR 2.614(A)(1): no enforcement until 21 days after a final judgment. MCR 4.305(C) says the same
+    // for small claims garnishment. Checked Nov 14, 2026.
+    enforceWaitDays: 21,
+    // MCR 3.101(K)(1): objections within 14 days of service of the writ. Checked Nov 14, 2026.
+    objectDays: 14,
+    // MCL 600.5807(9): 6 years for contracts. MCL 440.2725(1): 4 years for a sale of goods. Form MC 03
+    // (Rev. 12/22) counts both from "the last activity on the alleged account". Checked Nov 14, 2026.
+    sol: { contract: 6, goods: 4 },
+    // MCL 600.5809(3): 10 years to sue on a judgment of a court of record, and it can be renewed. Checked Nov 14, 2026.
+    judgmentYears: 10,
+    // 15 U.S.C. 1673(a): 25% of disposable earnings, or the amount over 30 times the federal minimum wage,
+    // whichever is less. Federal minimum wage: $7.25 since July 24, 2009 (dol.gov/agencies/whd/minimum-wage).
+    // Checked Nov 14, 2026.
+    wage: { pct: 25, fedMin: 7.25, multiple: 30 },
+    // 31 CFR 212.3 and 212.6: bank must protect two months of direct-deposited federal benefits. Checked Nov 14, 2026.
+    benefitMonths: 2,
+    // MCL 600.8371(10) (district) and MCL 600.2529(1)(e) (circuit): $20 motion fee. Checked Nov 14, 2026.
+    motionFee: 20,
+    // MCR 2.002(F): fees must be waived under 125% of the federal poverty guidelines. Checked Nov 14, 2026.
+    waiverPct: 125,
+    // MCL 445.257 and 339.916: actual damages or $50, whichever is greater. Checked Nov 14, 2026.
+    minDamages: 50,
+    // consumerfinance.gov/complaint. Checked Nov 14, 2026.
+    cfpbPhone: "(855) 411-2372",
+    // michigan.gov/ag/complaints. Checked Nov 14, 2026.
+    agPhones: "517-335-7599, or 877-765-8388 from inside Michigan"
+  };
+  // PDF page numbers in the court rules file, so a source chip opens at the rule. They shift a page or
+  // two when the court updates the file. Recheck them when you update DATA.rulesUpdated.
+  const RULE_PAGE = {
+    "MCR 1.108": 21, "MCR 1.109": 34, "MCR 2.002": 43, "MCR 2.105": 53, "MCR 2.105(J)": 56, "MCR 2.106": 57,
+    "MCR 2.107": 60, "MCR 2.108": 63, "MCR 2.111": 66, "MCR 2.112": 71, "MCR 2.603": 188, "MCR 2.603(D)": 190,
+    "MCR 2.612": 194, "MCR 2.614": 195, "MCR 3.101": 220, "MCR 3.104": 229, "MCR 4.303": 517, "MCR 4.304": 518,
+    "MCR 4.305": 518, "MCR 4.306": 518, "MCR 8.110": 783
+  };
+
+  const DAY = 86400000;
+  const parse = v => { if (!v) return null; const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); };
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const add = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+  // MCR 1.108(3): a period in years ends on the same day of the month, or the last day of the month if there isn't one.
+  const addYears = (d, n) => { const x = new Date(d.getFullYear() + n, d.getMonth(), d.getDate()); return x.getMonth() === d.getMonth() ? x : new Date(x.getFullYear(), x.getMonth(), 0); };
+  const fmt = d => d.toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" });
+  const plain = d => d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  const weekday = d => d.toLocaleDateString("en-US", { weekday: "long" });
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const diff = (a, b) => Math.round((b - a) / DAY);
+  const same = (a, b) => a && b && a.getTime() === b.getTime();
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const money = n => "$" + n.toLocaleString("en-US", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
+  const LABEL = { law: "The rule says", facts: "Depends on your facts", help: "Act now" };
+  const MCL = s => `https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-${s}`;
+  const FORM = n => `https://www.courts.michigan.gov/siteassets/forms/scao-approved/${n}.pdf`;
+  const LII = "https://www.law.cornell.edu/";
+  const MLH = "https://michiganlegalhelp.org/resources/money-debt-and-consumer-issues/";
+  const SRC = {
+    "MCL 600.5807": MCL("600-5807"), "MCL 440.2725": MCL("440-2725"), "MCL 600.5866": MCL("600-5866"),
+    "MCL 600.5809": MCL("600-5809"), "MCL 600.2145": MCL("600-2145"), "MCL 600.6215": MCL("600-6215"),
+    "MCL 600.8404": MCL("600-8404"), "MCL 600.8408": MCL("600-8408"), "MCL 600.8371": MCL("600-8371"),
+    "MCL 445.252": MCL("445-252"), "MCL 445.257": MCL("445-257"), "MCL 339.915": MCL("339-915"), "MCL 435.101": MCL("435-101"),
+    "15 U.S.C. 1673": LII + "uscode/text/15/1673", "15 U.S.C. 1692a": LII + "uscode/text/15/1692a",
+    "15 U.S.C. 1692i": LII + "uscode/text/15/1692i", "42 U.S.C. 407": LII + "uscode/text/42/407",
+    "12 CFR 1006.26": LII + "cfr/text/12/1006.26", "31 CFR 212.6": LII + "cfr/text/31/212.6",
+    "Form MC 01": FORM("mc01"), "Form MC 03": FORM("mc03"), "Form MC 20": FORM("mc20"), "Form MC 99": FORM("mc99"),
+    "Form MC 13": FORM("mc13"), "Form MC 15": FORM("mc15"), "Form MC 49": FORM("mc49"), "Form MC 304": FORM("mc304"),
+    "Yeiter (Mich. 2000)": "https://caselaw.findlaw.com/mi-supreme-court/1060900.html",
+    "MLH Answer Tool": MLH + "do-it-yourself-civil-answer",
+    "MLH Going to Court": MLH + "going-court-defend-debt-collection-case",
+    "MLH Defenses": MLH + "defenses-debt-collection-case",
+    "MLH Default": MLH + "setting-aside-default-or-default-judgment-collection-cases",
+    "MLH Set Aside Tool": MLH + "do-it-yourself-motion-set-aside-default-consumer-debt",
+    "MLH Garnishment": MLH + "overview-of-garnishment",
+    "MLH Protected Income": MLH + "income-protected-from-garnishment",
+    "MLH Payment Plan": MLH + "getting-installment-payment-plan",
+    "CFPB: If You're Sued": "https://www.consumerfinance.gov/ask-cfpb/what-should-i-do-if-im-sued-by-a-debt-collector-or-creditor-en-334/",
+    "CFPB Complaint": "https://www.consumerfinance.gov/complaint/",
+    "Michigan AG": "https://www.michigan.gov/ag/complaints",
+    "U.S. Dept. of Labor": "https://www.dol.gov/agencies/whd/minimum-wage"
+  };
+  const srcUrl = k => SRC[k] || (RULE_PAGE[k] ? `${RULES_PDF}#page=${RULE_PAGE[k]}` : "#");
+
+  // Court holidays, MCR 8.110(D)(2)(a) and (b). These are the days state courts close. A court can change
+  // its own list by local order, which is why the page tells people to check with the clerk.
+  const nthDow = (y, m, dow, n) => { const f = new Date(y, m, 1); return new Date(y, m, 1 + (dow - f.getDay() + 7) % 7 + 7 * (n - 1)); };
+  const lastDow = (y, m, dow) => { const l = new Date(y, m + 1, 0); return add(l, -((l.getDay() - dow + 7) % 7)); };
+  function courtIn(y) {
+    const out = [];
+    // New Year's Day, Juneteenth, Independence Day, Veterans' Day, Christmas: Saturday moves to Friday, Sunday to Monday.
+    const fixed = (d, name) => { const w = d.getDay(); out.push(w === 6 ? [add(d, -1), name + " (observed)"] : w === 0 ? [add(d, 1), name + " (observed)"] : [d, name]); };
+    // Christmas Eve and New Year's Eve: Friday moves to Thursday, Saturday or Sunday to the Friday before.
+    const eve = (d, name) => { const w = d.getDay(); out.push(w === 5 ? [add(d, -1), name + " (observed)"] : w === 6 ? [add(d, -1), name + " (observed)"] : w === 0 ? [add(d, -2), name + " (observed)"] : [d, name]); };
+    fixed(new Date(y, 0, 1), "New Year's Day");
+    out.push([nthDow(y, 0, 1, 3), "Martin Luther King, Jr. Day"]);
+    out.push([nthDow(y, 1, 1, 3), "Presidents' Day"]);
+    out.push([lastDow(y, 4, 1), "Memorial Day"]);
+    fixed(new Date(y, 5, 19), "Juneteenth");
+    fixed(new Date(y, 6, 4), "Independence Day");
+    out.push([nthDow(y, 8, 1, 1), "Labor Day"]);
+    fixed(new Date(y, 10, 11), "Veterans' Day");
+    const thanks = nthDow(y, 10, 4, 4);
+    out.push([thanks, "Thanksgiving Day"], [add(thanks, 1), "the Friday after Thanksgiving"]);
+    eve(new Date(y, 11, 24), "Christmas Eve");
+    fixed(new Date(y, 11, 25), "Christmas Day");
+    eve(new Date(y, 11, 31), "New Year's Eve");
+    return out;
+  }
+  const CH = new Map();
+  function courtHoliday(d) {
+    for (const y of [d.getFullYear() - 1, d.getFullYear(), d.getFullYear() + 1]) {
+      if (!CH.has(y)) CH.set(y, new Map(courtIn(y).map(([x, n]) => [iso(x), n])));
+      const n = CH.get(y).get(iso(d));
+      if (n) return n;
+    }
+    return null;
+  }
+  // Two days are legal holidays in MCL 435.101 but are not court holidays: MCR 8.110(D)(2)(e) says court
+  // action on them is valid. The page counts them as regular days, the safer reading, and says so.
+  function openHoliday(d) {
+    if (d.getMonth() === 1 && d.getDate() === 12) return "Lincoln's Birthday";
+    if (same(d, nthDow(d.getFullYear(), 9, 1, 2))) return "Columbus Day";
+    return null;
+  }
+  const weekend = d => d.getDay() === 0 || d.getDay() === 6;
+  const closed = d => weekend(d) || !!courtHoliday(d);
+  // MCR 1.108(1): don't count the day of service. Count the last day unless the court is closed, then roll forward.
+  function count(start, n) {
+    const raw = add(start, n);
+    let due = raw; const skipped = [];
+    while (closed(due)) { skipped.push(due); due = add(due, 1); }
+    let before = add(raw, -1);
+    while (closed(before)) before = add(before, -1);
+    return { raw, due, rolled: skipped.length > 0, holiday: skipped.map(courtHoliday).find(Boolean) || null, before };
+  }
+  const whatDay = d => courtHoliday(d) && !weekend(d) ? `${courtHoliday(d)}, a court holiday` : `a ${weekday(d)}`;
+
+  function when(d) {
+    const n = diff(today, d);
+    if (n > 0) return `${fmt(d)} (${n} day${n === 1 ? "" : "s"} from today)`;
+    if (n === 0) return `${fmt(d)} (today)`;
+    return `${fmt(d)} (${-n} day${n === -1 ? "" : "s"} ago)`;
+  }
+  function card(level, title, paras, cites = [], next = "") {
+    const c = cites.map(([k, p]) => `<a class="cite" href="${srcUrl(k)}" target="_blank" rel="noopener">${esc(k + (p ? p : ""))}</a>`).join("");
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${LABEL[level]}</span></div>
+      ${[].concat(paras).filter(Boolean).map((t, i) => t.startsWith("<") ? t : `<p${i ? ' class="small"' : ""}>${t}</p>`).join("")}
+      ${next ? `<p class="next"><strong>What you can do:</strong> ${next}</p>` : ""}
+      ${c ? `<div class="cites">${c}</div>` : ""}
+    </article>`;
+  }
+  const list = items => `<ul class="pts">${items.filter(Boolean).map(t => `<li>${t}</li>`).join("")}</ul>`;
+  const steps = items => `<ol class="pts">${items.filter(Boolean).map(t => `<li>${t}</li>`).join("")}</ol>`;
+
+  const $ = id => document.getElementById(id);
+  const fp = $("f-plan"), fd = $("f-debt");
+  const val = name => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; };
+  const nIn = $("n-date");
+  // Sample dates, replaced as soon as the person types their own.
+  const SAMPLE = { summons: () => iso(add(today, -5)), small: () => iso(add(today, 10)), default: () => iso(add(today, -5)) };
+  let dateTouched = false;
+  nIn.value = SAMPLE.summons();
+  nIn.addEventListener("input", () => { dateTouched = true; });
+  document.querySelectorAll('input[name="stage"]').forEach(r => r.addEventListener("change", () => { if (!dateTouched) nIn.value = SAMPLE[r.value](); }));
+  $("checked").textContent = DATA.checked;
+  $("rules-upd").textContent = DATA.rulesUpdated;
+
+  const TYPE = {
+    card: { label: "credit card", goods: false }, medical: { label: "medical bill", goods: false },
+    car: { label: "car loan or repossession balance", goods: true }, store: { label: "store card or goods bought on payments", goods: true },
+    payday: { label: "payday or personal loan", goods: false }, other: { label: "other debt", goods: false }
+  };
+  const HOW = {
+    personal: "handed to me in person in Michigan", mail: "by registered or certified mail", outside: "outside Michigan",
+    other: "another way", none: "not served"
+  };
+  const WHO = { buyer: "a debt buyer or collector", orig: "the original creditor", unsure: "not sure who" };
+  const COURT = { district: "District court", circuit: "Circuit court", unsure: "Not sure" };
+  const weekCap = DATA.wage.fedMin * DATA.wage.multiple;
+
+  let state = {};
+  function plan() {
+    const stage = val("stage"), how = val("how"), who = val("who");
+    const type = $("s-type").value, T = TYPE[type];
+    const N = parse(nIn.value), L = parse($("l-last").value), filed = parse($("l-filed").value);
+    const aff = $("c-aff").checked;
+    const c = [];
+    state = { stage, how, who, type, N, L, filed, aff, due: null, title: "" };
+
+    // Labels that change with the kind of paper
+    $("l-date").textContent = { summons: "Date you were served", small: "Hearing date on the notice", default: "Date the default judgment was entered" }[stage];
+    $("h-date").textContent = {
+      summons: "The day the papers were handed to you, or the day you signed for the mail. Not the date printed on the summons.",
+      small: "The notice tells you when and where to appear.",
+      default: "It's on the judgment. Leave it blank if you only have a notice of default, with no judgment yet."
+    }[stage];
+    $("how-wrap").hidden = stage === "small";
+    $("court-wrap").hidden = stage === "small";
+    $("aff-wrap").hidden = stage !== "summons";
+    $("l-how").textContent = stage === "default" ? "How did the first court papers (the summons and complaint) reach you?" : "How did the papers reach you?";
+
+    if (stage === "summons") answerCards(c);
+    else if (stage === "small") smallCards(c);
+    else defaultCards(c);
+
+    oldDebt(c);
+    defenses(c);
+    if (stage !== "small") feeWaiver(c);
+    garnish(c);
+    conduct(c);
+    $("ics-wrap").hidden = !state.due || diff(today, state.due) < 0;
+    show(c);
+  }
+
+  // ---- A summons and complaint ---------------------------------------------------------------
+  function answerCards(c) {
+    const { how, N } = state;
+    if (how === "none") {
+      c.push(card("help", "Find out what the court's file says, today", [
+        "This page counts your deadline from the day you were served, so it can't give you a date. But a case can move forward without you if the plaintiff files a paper saying you were served.",
+        "Call the clerk of the court where the case was filed. Ask whether a proof of service was filed, what date and method it shows, and whether a default has been entered.",
+        `If the file says you were served on a date ${DATA.answerDays.personal} or more days ago, treat your answer as overdue: pick "A notice that a default or default judgment was entered" above, and get legal help now. Not being served the way the rules require is a reason a court can undo a default.`
+      ], [["MCR 2.105", "(A)"], ["MCR 2.603", "(D)"], ["MLH Default", ""]], "Write down the case number, the plaintiff's name, and what the clerk tells you."));
+      missCard(c);
+      return;
+    }
+    if (!N) {
+      c.push(card("facts", "Enter the date you were served", "The answer deadline counts from the day the summons and complaint reached you."));
+      missCard(c);
+      return;
+    }
+    if (diff(today, N) > 0) c.push(card("facts", "That date is in the future", "Check the date. The deadline below counts from the day you were served."));
+    const days = DATA.answerDays[how];
+    const k = count(N, days);
+    const left = diff(today, k.due);
+    state.due = k.due; state.days = days;
+    state.title = "Last day to file and serve answer";
+    const sub = how === "personal" ? "(A)(1)" : "(A)(2)";
+    const cites = [["MCR 2.108", how === "other" ? "(A)" : sub], ["MCR 1.108", "(1)"], ["Form MC 01", ""]];
+    if (k.rolled && k.holiday) cites.push(["MCR 8.110", "(D)(2)"]);
+    const openH = openHoliday(k.due);
+    if (openH) cites.push(["MCR 8.110", "(D)(2)"], ["MCL 435.101", ""]);
+    const why = {
+      personal: `You were handed the papers in person in Michigan on ${plain(N)}. The court rule gives you ${days} days.`,
+      mail: `You signed for the papers on ${plain(N)}. When the summons and complaint come by registered or certified mail, the court rule gives you ${days} days, and service counts from the day you signed.`,
+      outside: `You were served outside Michigan on ${plain(N)}. The court rule gives you ${days} days.`,
+      other: `You got the papers on ${plain(N)}. This page is counting ${days} days, the shortest time the rule allows. See the next card.`
+    }[how];
+    const detail = [
+      `${why} Day 1 is the day after you were served. Your written answer must be filed with the court, and a copy sent to the plaintiff's lawyer, by ${when(k.due)}.`,
+      k.rolled ? `Day ${days} is ${plain(k.raw)}, which is ${whatDay(k.raw)}. The rule moves the deadline to the next day that is not a Saturday, Sunday, legal holiday, or day the court is closed.${k.holiday ? ` A court can set its own holiday schedule by local order, so filing by ${plain(k.before)} takes away any doubt.` : ""}` : "",
+      openH ? `${plain(k.due)} is ${openH}. State law lists it as a legal holiday, but the court holiday rule keeps courts open. This page counts it as a regular day, which is the safer reading.` : "",
+      "The summons says the same thing in item 2 of its notice. Filing has to happen while the clerk's office is open, so call for its hours and don't leave it for the last afternoon."
+    ];
+    if (left < 0) {
+      c.push(card("help", "Your answer deadline has passed", [
+        `The last day to answer was ${when(k.due)}. You may still be able to act, but every day counts now.`,
+        "Call the court clerk today and ask whether a default has been entered. The clerk enters one when the plaintiff asks for it. If none has been entered yet, a late answer may still be accepted, so file and serve it right away.",
+        `If a default has been entered, you can't take part in the case until the court sets it aside. You ask with a motion (form MC 99). You have to show good cause for missing the deadline and give a signed statement of facts showing you have a defense. If you were handed the papers in person, the motion must be filed before a default judgment is entered or within ${DATA.setAsideDays} days after it is entered.`,
+        `The motion fee is ${money(DATA.motionFee)}, unless you qualify for a fee waiver. Michigan Legal Help has a free tool that prepares this motion for consumer debt cases.`
+      ], [["MCR 2.603", "(A)"], ["MCR 2.603(D)", ""], ["Form MC 99", ""], ["MLH Set Aside Tool", ""], ["MLH Default", ""]],
+        "If you already have a default judgment, pick the third choice at the top of this page to see that deadline."));
+    } else {
+      const urgent = left <= 7;
+      const title = urgent
+        ? `${left === 0 ? "Today is the last day" : left === 1 ? "1 day left" : left + " days left"}: file your answer by ${plain(k.due)}`
+        : `File and serve your answer by ${plain(k.due)}`;
+      c.push(card(urgent ? "help" : "law", title, detail, cites,
+        urgent ? "Start the Michigan Legal Help answer tool today, or call legal aid and say your answer is due this week. A short, on-time answer protects you. A perfect answer that is late does not." : ""));
+    }
+    if (how === "other") c.push(card("facts", "Served another way? Read the judge's order", [
+      `The ${DATA.answerDays.personal}-day count is written for papers handed to you in person in Michigan. A plaintiff who can't do that can ask a judge to allow another method, like first-class mail, taping the papers to your door, or leaving them with someone at your home. If that happened, a signed order (form MC 304) should come with the papers.`,
+      `If the notice ran in a newspaper or was posted, the court sets your deadline, and it can't be less than ${DATA.publicationMinDays} days after the notice finished running. That date is in the order.`,
+      "If there is no order with your papers, service may not have been done the way the rules require. That is something to raise with legal help. It is not a reason to skip the deadline."
+    ], [["MCR 2.105(J)", ""], ["MCR 2.106", ""], ["MCR 2.108", "(A)(3)"], ["Form MC 304", ""]]));
+    howToAnswer(c);
+    affidavit(c);
+    missCard(c);
+  }
+  function howToAnswer(c) {
+    c.push(card("law", "How to answer", [
+      "An answer is your written response to each numbered paragraph of the complaint. A phone call or letter to the plaintiff's lawyer is not an answer, and neither is a payment.",
+      steps([
+        "Get the forms. The court's form is MC 03, Answer, Civil. Michigan Legal Help's free Do-It-Yourself Civil Answer tool asks you questions and prepares the forms for a debt case.",
+        "Go paragraph by paragraph: you agree, you disagree and say why, or you don't know if it's true. Under the court rules, anything you don't deny counts as admitted. Saying you don't know counts as a denial.",
+        "List your defenses on the last page of the form. A defense left out of the answer is usually lost.",
+        "Sign it and file it with the clerk of the court named on your summons. Ask the clerk how that court takes filings. Where a court uses e-filing (MiFILE), an answer sent by 11:59 PM on a business day counts as filed that day.",
+        "By the same deadline, give a copy to the plaintiff's lawyer, or to the plaintiff if there is no lawyer, by first-class mail or by hand. Mailing counts on the day you mail it. Fill in the certificate of service at the bottom of the form.",
+        "Keep a copy of everything, stamped by the clerk if you file in person."
+      ]),
+      `Michigan's court fee laws don't list a fee for filing an answer. A motion costs ${money(DATA.motionFee)}.`
+    ], [["Form MC 03", ""], ["MLH Answer Tool", ""], ["MCR 2.111", "(C) to (F)"], ["MCR 2.107", "(C)"], ["MCR 1.109", "(G)(5)(b)"], ["MCL 600.8371", ""]]));
+  }
+  function affidavit(c) {
+    c.push(card("facts", state.aff ? "Your papers have a sworn statement of what you owe" : "Check for a sworn statement of what you owe", [
+      `Debt complaints often come with an "affidavit of account": a notarized statement of the amount the plaintiff says you owe, with a copy of the account.`,
+      "Michigan law treats that affidavit as proof of the debt unless you file your own sworn statement denying it together with your answer. Michigan Legal Help calls this a Defendant's Counter Affidavit, and its answer tool can prepare one. Only swear to what is true.",
+      state.aff ? "" : "Look through every page you were given. If there is no affidavit, this doesn't apply."
+    ], [["MCL 600.2145", ""], ["MLH Going to Court", ""]]));
+  }
+  function missCard(c) {
+    c.push(card("law", "What happens if you don't answer", [
+      "The court won't make the plaintiff prove anything. The plaintiff asks the clerk to enter a default. For a debt with a set dollar amount, the clerk can then sign a default judgment for the amount in the complaint plus costs, with no hearing.",
+      `${DATA.enforceWaitDays} days after the judgment is entered, the plaintiff can start garnishment: money taken from your paycheck, your bank account, or your state tax refund.`,
+      `A judgment from a Michigan district or circuit court can be collected for ${DATA.judgmentYears} years, and it can be renewed. This is true even for a debt that was too old to sue on, if nobody raised that in an answer.`
+    ], [["MCR 2.603", "(A) and (B)"], ["MCR 2.614", "(A)(1)"], ["MCL 600.5809", "(3)"], ["MLH Garnishment", ""], ["CFPB: If You're Sued", ""]]));
+  }
+
+  // ---- A small claims notice -----------------------------------------------------------------
+  function smallCards(c) {
+    const N = state.N;
+    const left = N ? diff(today, N) : null;
+    if (!N) c.push(card("facts", "Enter the hearing date on your notice", "Small claims cases run on the hearing date, not on an answer deadline."));
+    else if (left < 0) c.push(card("help", "That hearing date has passed", [
+      `The hearing was ${when(N)}. If you weren't there, the court may have entered a judgment against you by default.`,
+      `Call the clerk today and ask what happened in your case. A small claims judgment can be changed or set aside the same way as other civil judgments, and garnishment can't start until ${DATA.enforceWaitDays} days after the judgment.`
+    ], [["MCR 4.304", "(B)"], ["MCR 4.305", ""], ["MLH Default", ""]], "Get legal help now. Bring the notice and anything the court mailed you."));
+    else {
+      state.due = N; state.title = "Small claims hearing";
+      c.push(card(left <= 7 ? "help" : "law", `${left <= 7 ? (left === 0 ? "Your hearing is today" : left === 1 ? "Your hearing is tomorrow" : "Your hearing is in " + left + " days") + ": " : ""}Go to your hearing on ${plain(N)}`, [
+        `A small claims case has no written answer. The notice tells you when and where to appear, and your hearing is ${when(N)}. If you don't appear, the court can enter a judgment against you by default.`,
+        "Bring every paper, record, and witness that backs up your side: statements, receipts, letters, and proof of payments.",
+        "Even if you owe the money, you can go and ask the judge to let you pay in installments."
+      ], [["MCL 600.8404", ""], ["MCR 4.304", ""]]));
+    }
+    c.push(card("facts", "Small claims works differently", [
+      "Lawyers and collection agencies can't take part in small claims, and the judge's decision can't be appealed.",
+      "At or before the time set for the hearing, either side can file a signed written demand to move the case to the regular district court. There, lawyers are allowed and the written answer rules apply. Talk to legal help first if you can, because moving the case changes the deadlines.",
+      `If the plaintiff wins, a garnishment can't be issued until ${DATA.enforceWaitDays} days after the judgment.`,
+      `Our <a href="../small-claims/">Michigan Small Claims Court Helper</a> has more for people sued in small claims: the hearing, late or bad service, and the deadlines after a judgment.`
+    ], [["MCL 600.8408", ""], ["MCR 4.305", ""], ["MCR 4.306", "(A)"]]));
+  }
+
+  // ---- A default or default judgment ---------------------------------------------------------
+  function defaultCards(c) {
+    const { N, how } = state;
+    const showing = "The court sets aside a default only if you show good cause, meaning a real reason you didn't respond or a serious flaw in how the case was handled, and you file a signed statement of facts showing you have a defense. A motion based on never being properly served is handled differently under the rule, so say so if that is what happened.";
+    const cites = [["MCR 2.603(D)", ""], ["Form MC 99", ""], ["MLH Set Aside Tool", ""], ["MLH Default", ""]];
+    const fee = `You ask with a motion, form MC 99. The motion fee is ${money(DATA.motionFee)}, unless you qualify for a fee waiver. Michigan Legal Help's free tool prepares the motion and the statement for consumer debt cases.`;
+    if (!N) {
+      c.push(card("help", "A default with no judgment yet: move now", [
+        "A default means the clerk recorded that you didn't answer. You can't take part in the case until the court sets it aside. A motion to set it aside can be filed any time before a default judgment is entered, and the plaintiff can ask for that judgment soon.",
+        showing, fee
+      ], cites, "Call the clerk and ask whether a default judgment has been entered or requested. If a judgment has been entered, put its date above."));
+    } else {
+      if (diff(today, N) > 0) c.push(card("facts", "That date is in the future", "Check the date the default judgment was entered. It's on the judgment."));
+      const k = count(N, DATA.setAsideDays);
+      const left = diff(today, k.due);
+      const personal = how === "personal";
+      if (left >= 0) {
+        state.due = k.due; state.title = "Last day to file motion to set aside default judgment";
+        c.push(card("help", `Ask the court to set aside the judgment by ${plain(k.due)}`, [
+          `The default judgment was entered ${plain(N)}. A motion to set it aside must be filed within ${DATA.setAsideDays} days after that when the summons and complaint were handed to you in person. That makes the last day ${when(k.due)}.`,
+          k.rolled ? `Day ${DATA.setAsideDays} is ${plain(k.raw)}, which is ${whatDay(k.raw)}, so the deadline moves to the next day the court is open.` : "",
+          personal ? "" : `You said the papers ${how === "none" ? "never reached you" : "weren't handed to you in person"}. The ${DATA.setAsideDays}-day limit in the rule is tied to personal service, so you may have more time. Don't count on it. File by this date if you can.`,
+          showing, fee
+        ], cites.concat([["MCR 1.108", "(1)"]])));
+      } else {
+        c.push(card("help", `The ${DATA.setAsideDays}-day window has passed`, [
+          `The default judgment was entered ${plain(N)}, and ${DATA.setAsideDays} days after that was ${when(k.due)}.`,
+          personal
+            ? "That limit applies because you were handed the papers in person. There is still a separate rule, MCR 2.612, that lets a court undo a judgment for reasons like mistake, fraud, or a judgment that is void. Some of those reasons must be raised within one year after the judgment, and there is no simple form."
+            : `The ${DATA.setAsideDays}-day limit is tied to personal service. You said the papers ${how === "none" ? "never reached you" : "weren't handed to you in person"}, so you may still be able to file a motion to set aside. A separate rule, MCR 2.612, also lets a defendant who never knew about the case come in within 1 year after the judgment and ask for relief.`,
+          showing, fee
+        ], cites.concat([["MCR 2.612", ""]]), "Get legal help now. Bring the judgment and anything about how you first learned of the case."));
+      }
+    }
+    c.push(card("law", "What the plaintiff can do with a judgment", [
+      `Starting ${DATA.enforceWaitDays} days after a judgment is entered, the plaintiff can garnish your paycheck, bank account, or state tax refund. See the card below on what can't be taken.`,
+      "You can also ask the court to let you pay the judgment in installments. See the garnishment card below."
+    ], [["MCR 2.614", "(A)(1)"], ["MLH Garnishment", ""]]));
+  }
+
+  // ---- Is the debt too old ---------------------------------------------------------------------
+  function oldDebt(c) {
+    const { L, N, filed, type, who, stage } = state, T = TYPE[type];
+    const six = DATA.sol.contract, four = DATA.sol.goods;
+    const ref = filed || (stage !== "small" ? N : null) || today;
+    const refText = filed ? `The case was filed ${plain(filed)}`
+      : stage === "summons" && N ? `You were served ${plain(N)}, and the case was filed a little before that. The exact filing date is in the court's file`
+      : stage === "default" && N ? `The default judgment was entered ${plain(N)}, and the case was filed before that. The exact filing date is in the court's file`
+      : `Today is ${plain(today)}. The date that counts is the day the case was filed, which is in the court's file`;
+    const closer = filed ? "" : "This check used a date later than the filing date. Enter the filing date above for a closer answer.";
+    const rule = `Michigan gives a creditor ${six} years to sue on most contracts, including credit cards, medical bills, and loans. The court's own answer form counts it from the last activity on the account.${T.goods ? ` A shorter limit of ${four} years applies to a car bought on an installment contract and to other goods bought on credit.` : ""}`;
+    const restart = "What can restart the clock: the Michigan Supreme Court has held that a partial payment starts the time limit over, unless something about the payment shows you weren't admitting you owe the rest. A signed written promise or acknowledgment can bring back a debt that had already expired. Talk to legal aid before you pay or sign anything on an old debt.";
+    const cites = [["MCL 600.5807", "(9)"]];
+    if (T.goods) cites.push(["MCL 440.2725", "(1)"]);
+    cites.push(["Form MC 03", " (last page)"], ["Yeiter (Mich. 2000)", ""], ["MCL 600.5866", ""], ["MLH Defenses", ""]);
+    const raise = stage === "small"
+      ? "A debt being too old doesn't end the case by itself. You have to bring it up at your hearing."
+      : "A debt being too old doesn't end the case by itself. It is a defense you must write in your answer (item 2 on the last page of form MC 03). If you don't answer, the plaintiff can still get a default judgment on an old debt.";
+    const other = "Other facts can move these dates. Have legal help check before you rely on this.";
+    if (!L || diff(today, L) > 0) {
+      c.push(card("facts", "Is the debt too old to sue on?", [rule,
+        "Enter the date of your last payment or use of the account above to see the dates for your debt.", raise, restart], cites));
+      return;
+    }
+    const end6 = addYears(L, six), end4 = addYears(L, four);
+    state.end6 = end6; state.end4 = T.goods ? end4 : null;
+    const past6 = ref > end6, past4 = T.goods && ref > end4;
+    const feds = who !== "orig" ? "A debt collector, which includes most debt buyers and collection law firms, is barred by a federal rule from suing or threatening to sue on a debt that is past the time limit. That rule doesn't cover a company collecting its own debt in its own name." : "";
+    const fedCites = who !== "orig" ? [["12 CFR 1006.26", "(b)"], ["15 U.S.C. 1692a", "(6)"]] : [];
+    const dates = `Your last payment or account activity was ${plain(L)}. ${six === 6 ? "Six" : six} years from then is ${plain(end6)}${T.goods ? `, and ${four === 4 ? "four" : four} years is ${plain(end4)}` : ""}. ${refText}.`;
+    if (past6) {
+      state.sol = "may be too old (past 6 years)";
+      c.push(card("facts", "This debt may be too old to sue on", [
+        `${dates} That is more than ${six} years after the last activity.`, closer, rule, raise, feds, restart, other
+      ], cites.concat(fedCites), "Tell your legal helper the date of your last payment and bring anything that shows it."));
+    } else if (past4) {
+      state.sol = "may be too old if the 4-year sale of goods limit applies";
+      c.push(card("facts", `This debt may be too old if the ${four}-year limit applies`, [
+        `${dates} That is more than ${four} years but less than ${six} years after the last activity.`, closer, rule,
+        `Whether the ${four}-year limit fits depends on your contract: for example, whether you financed a car through the dealer on an installment sales contract or borrowed from a bank. Legal help can tell from the paperwork.`,
+        raise, feds, restart
+      ], cites.concat(fedCites)));
+    } else {
+      state.sol = "probably within the time limit";
+      c.push(card("facts", "The debt is probably not too old", [
+        `${dates} That is inside the time limit, going by the date you entered.`, rule,
+        "If your real last payment was earlier than you remember, the answer could change. Old statements, your bank records, or your credit report can show it.", other
+      ], cites));
+    }
+  }
+
+  // ---- Things people raise ---------------------------------------------------------------------
+  function defenses(c) {
+    const { who, type, stage } = state;
+    const where = stage === "small" ? "at a small claims hearing" : stage === "default" ? "as the defense in a motion to set aside" : "in an answer";
+    c.push(card("facts", `Things people raise ${where}`, [
+      "These come from the court's answer form and the laws below. They are listed as information, not as a suggestion about what fits your case. Raise only what is true. You will have to back it up in court.",
+      list([
+        "It isn't my debt, or I don't recognize the account.",
+        "The amount is wrong, or payments I made weren't credited.",
+        "I paid it, or the creditor accepted a smaller amount as payment in full.",
+        "The debt is too old (statute of limitations).",
+        "The debt was wiped out in a bankruptcy case.",
+        type === "car" ? "My car was repossessed and then sold in a commercially unreasonable way, such as for far too little." : "",
+        type === "car" || type === "store" ? "What I bought was defective." : "",
+        who !== "orig" ? "The plaintiff hasn't shown that it owns my account. When you respond, the plaintiff has to prove the debt is valid. The court rules say a consumer debt complaint must name the creditor, give the account number or enough to identify the debt, and state the balance due." : "",
+        who !== "orig" ? "A debt collector sued me in the wrong place. Federal law says a debt collector must sue where you live when the case starts, or where you signed the contract." : ""
+      ]),
+      stage === "summons" ? `If you don't know whether a statement in the complaint is true, such as who owns the debt now or how the balance was figured, the answer form lets you say so. That counts as a denial, and the plaintiff has to prove it.` : ""
+    ], [["Form MC 03", " (last page)"], ["MLH Defenses", ""], ["MCR 2.112", "(N)"], ["MCR 2.111", "(C)"]].concat(who !== "orig" ? [["15 U.S.C. 1692i", ""], ["CFPB: If You're Sued", ""]] : [])));
+  }
+
+  function feeWaiver(c) {
+    c.push(card("law", "If you can't afford court fees", [
+      "Form MC 20, Fee Waiver Request, asks the court to drop its fees for your case. File it with the paper that has the fee.",
+      `The clerk must waive fees if you get food assistance, Medicaid, FIP cash assistance, WIC, SSI, or another benefit based on income, or if a legal aid office represents you. A judge must waive them if your household's gross income is under ${DATA.waiverPct}% of the federal poverty guidelines, or if paying would be a hardship.`
+    ], [["MCR 2.002", ""], ["Form MC 20", ""]]));
+  }
+
+  function garnish(c) {
+    c.push(card("law", "What can't be taken if there's a judgment", [
+      "A judgment lets the plaintiff garnish, but the law protects some money.",
+      list([
+        `From a paycheck, the most that can be taken for an ordinary debt is the smaller of ${DATA.wage.pct}% of your pay after required deductions, or the amount over ${money(weekCap)} a week (${DATA.wage.multiple} times the ${money(DATA.wage.fedMin)} federal minimum wage). If you take home ${money(weekCap)} a week or less, nothing can be taken for this kind of debt.`,
+        "The court's garnishment form lists income that is exempt, including Social Security, SSI, veterans benefits, unemployment, workers' compensation, and state cash assistance.",
+        `If federal benefits like Social Security are direct deposited, your bank has to protect what was deposited in the ${DATA.benefitMonths} months before it reviews the account, without you asking.`,
+        `You have ${DATA.objectDays} days after a garnishment notice reaches you to file an objection, form MC 49. A later objection doesn't pause the payments unless the court orders it.`,
+        "You can ask the court to let you pay in installments, form MC 15. While you keep up the payments, your wages can't be garnished. A payment order doesn't stop a bank account or tax refund garnishment."
+      ])
+    ], [["15 U.S.C. 1673", ""], ["U.S. Dept. of Labor", ""], ["Form MC 13", ""], ["42 U.S.C. 407", ""], ["31 CFR 212.6", ""], ["MCR 3.101", "(K)"], ["Form MC 49", ""], ["MCL 600.6215", ""], ["MCR 3.104", ""], ["Form MC 15", ""], ["MLH Protected Income", ""], ["MLH Payment Plan", ""]]));
+  }
+
+  function conduct(c) {
+    c.push(card("law", "What collectors may not do", [
+      "Michigan law bars collection agencies, and creditors collecting their own debts, from:",
+      list([
+        "Making misleading or untrue statements to collect a debt.",
+        "Misstating the status of a lawsuit or your legal rights, or saying that not paying will get you arrested.",
+        "Calling between 9 PM and 8 AM without your written OK, or calling again and again to harass you.",
+        "Using profane language, or threatening violence.",
+        "Telling your employer about the debt, with narrow exceptions.",
+        "Sending a postcard about the debt."
+      ]),
+      `You can sue over a violation for your actual losses or ${money(DATA.minDamages)}, whichever is more, and for more if it was willful.`,
+      `To complain: the federal Consumer Financial Protection Bureau takes complaints online and at ${DATA.cfpbPhone}. The Michigan Attorney General's Consumer Protection team takes them online and at ${DATA.agPhones}.`,
+      "A complaint does not pause the lawsuit or move your deadline."
+    ], [["MCL 445.252", ""], ["MCL 339.915", ""], ["MCL 445.257", ""], ["CFPB Complaint", ""], ["Michigan AG", ""]]));
+  }
+
+  function show(c) {
+    $("r-plan").innerHTML =
+      `<div class="results-head"><h2>Your results</h2>
+        <div class="legend"><span class="tag law">The rule says</span><span class="tag facts">Depends on your facts</span><span class="tag help">Act now</span></div></div>` + c.join("");
+    summary();
+  }
+
+  // ---- Summary to bring to legal help ----------------------------------------------------------
+  const F = ph => `<span class="fill">[${ph}]</span>`;
+  function summary() {
+    const s = state, T = TYPE[s.type], L = [];
+    L.push(`Debt lawsuit summary, made ${plain(today)}`, "");
+    L.push(`Case number: ${F("on the summons")}`, `Court: ${s.stage === "small" ? "District court, small claims division" : COURT[$("s-court").value]} ${F("court name and city")}`, `Plaintiff (who is suing): ${F("name on the papers")}`, `Plaintiff's lawyer: ${F("name and address on the papers")}`, "");
+    if (s.stage === "summons") {
+      L.push("Papers: Summons and Complaint");
+      L.push(`Served: ${s.how === "none" ? "I never got court papers" : (s.N ? plain(s.N) : F("date")) + ", " + HOW[s.how]}`);
+      if (s.due) L.push(`Answer deadline as counted by this page: ${fmt(s.due)} (${s.days} days, MCR 2.108(A) and MCR 1.108)`);
+      L.push(`Sworn affidavit of account with the complaint: ${s.aff ? "yes" : "no, or not sure"}`);
+    } else if (s.stage === "small") {
+      L.push("Papers: small claims Affidavit and Claim", `Hearing date: ${s.N ? fmt(s.N) : F("date")}`);
+    } else {
+      L.push("Papers: notice of default or default judgment");
+      L.push(`Default judgment entered: ${s.N ? plain(s.N) : "none yet that I know of"}`);
+      L.push(`How the summons and complaint reached me: ${s.how === "none" ? "they never did" : HOW[s.how]}`);
+      if (s.due) L.push(`Last day to file a motion to set aside, as counted by this page: ${fmt(s.due)} (${DATA.setAsideDays} days, MCR 2.603(D))`);
+    }
+    L.push("", `Kind of debt: ${T.label}`, `Suing me: ${WHO[s.who]}`, `Original creditor: ${F("who I first owed, if I know")}`, `Amount they say I owe: ${F("amount in the complaint")}`);
+    L.push(`Last payment or use of the account: ${s.L ? plain(s.L) : "not sure"}`);
+    if (s.end6) L.push(`${DATA.sol.contract} years after that: ${plain(s.end6)}${s.end4 ? `. ${DATA.sol.goods} years after that: ${plain(s.end4)}` : ""}`);
+    if (s.filed) L.push(`Case filed: ${plain(s.filed)}`);
+    if (s.sol) L.push(`Time limit check from this page: ${s.sol}. Needs a second look.`);
+    L.push("", "What I want to ask:", `- ${F("for example: Is this my debt? Is the amount right? Is it too old?")}`, "", "What I'm bringing: the summons and complaint, every page that came with them, and any statements, letters, or proof of payments I have.");
+    $("letter").innerHTML = L.join("\n");
+  }
+
+  [fp, fd].forEach(f => { f.addEventListener("input", plan); f.addEventListener("change", plan); f.addEventListener("submit", e => e.preventDefault()); });
+  plan();
+
+  $("copy").addEventListener("click", () => {
+    const el = $("letter"), text = el.innerText, msg = $("copied");
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = "Selected. Press Ctrl+C or Cmd+C to copy."; };
+    try {
+      navigator.clipboard.writeText(text).then(() => { msg.textContent = "Copied"; }, fallback);
+    } catch (e) { fallback(); }
+  });
+  $("print").addEventListener("click", () => {
+    document.body.classList.add("printing");
+    window.print();
+    setTimeout(() => document.body.classList.remove("printing"), 500);
+  });
+
+  // Calendar file with the deadline, built on this device
+  $("ics").addEventListener("click", () => {
+    if (!state.due || diff(today, state.due) < 0) return;
+    const d8 = d => iso(d).replace(/-/g, "");
+    const stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d+Z$/, "Z");
+    const d = state.due, title = state.title;
+    const note = "Counted by a free information page from the date you entered. Check your court papers. Information\\, not legal advice.";
+    const ev = ["BEGIN:VEVENT", `UID:${d8(d)}-debt-lawsuit`, `DTSTAMP:${stamp}`,
+      `DTSTART;VALUE=DATE:${d8(d)}`, `DTEND;VALUE=DATE:${d8(add(d, 1))}`, `SUMMARY:${title}`, `DESCRIPTION:${note}`,
+      "BEGIN:VALARM", "TRIGGER:-P3D", "ACTION:DISPLAY", `DESCRIPTION:${title}`, "END:VALARM",
+      "BEGIN:VALARM", "TRIGGER:-P7D", "ACTION:DISPLAY", `DESCRIPTION:${title}`, "END:VALARM", "END:VEVENT"].join("\r\n");
+    const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Free to All AI//Debt Lawsuit Deadline//EN", ev, "END:VCALENDAR", ""].join("\r\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
+    a.download = "court-deadline.ics";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+})();
+</script>
+</body>
+</html>
