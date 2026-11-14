@@ -290,7 +290,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
 
   <section aria-labelledby="glance-h">
     <h2 id="glance-h">Every plan at a glance</h2>
-    <p class="hint">Plans in A to Z order by name. "Business days" means Monday to Friday. Plans may not count holidays either, so call a day early around a holiday.</p>
+    <p class="hint">Plans in A to Z order by name. "Business days" means Monday to Friday. We also skip New Year's Day, Memorial Day, Independence Day, Labor Day, Thanksgiving, and Christmas when we count. Plans may close on other holidays too, so call a day early around one.</p>
     <div class="scroll">
       <table>
         <thead><tr><th scope="col">Plan</th><th scope="col">Call for a ride</th><th scope="col">Book at least</th><th scope="col">Ride company</th><th scope="col">Checked</th></tr></thead>
@@ -312,7 +312,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
   </section>
 
   <footer>
-    <p><strong>How this works.</strong> Each plan's ride number, ride company, and booking notice come from the plan's own member page or member handbook, checked against the Michigan Department of Health and Human Services list of health plan ride contacts (revised October 1, 2026). Where the two differ, we show the plan's own words first and say what the state's list adds. The call-by date counts back from your appointment: business days skip Saturdays and Sundays, and "72 hours" counts back three calendar days.</p>
+    <p><strong>How this works.</strong> Each plan's ride number, ride company, and booking notice come from the plan's own member page or member handbook, checked against the Michigan Department of Health and Human Services list of health plan ride contacts (revised October 1, 2026). Where the two differ, we show the plan's own words first and say what the state's list adds. The call-by date counts back from your appointment: business days skip Saturdays, Sundays, and six major holidays, and "72 hours" counts back three calendar days.</p>
     <p>Not covered by these rides: people with Emergency Services Only Medicaid or Plan First, people who haven't met a spend-down yet, and nursing home residents, whose home arranges routine rides. Trips that aren't for a covered service, like the grocery store, aren't covered either, though HAP CareSource adds some food pantry trips.</p>
     <p>Sources, all checked on October 31, 2026:</p>
     <ul id="srcs"></ul>
@@ -442,7 +442,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     {
       id: "priority", name: "Priority Health Choice (Priority Health Medicaid)", company: "SafeRide Health",
       ride: { n: "(833) 944-0535", label: "SafeRide Health, Priority Health's ride company", note: "24 hours a day, 7 days a week. Also to cancel or reschedule.", src: "Priority Health's ride page" },
-      alt: [{ n: "(888) 975-8102", label: "Priority Health Customer Service", note: "TTY 711. Urgent rides, mileage questions, and rescheduling if a ride never came.", src: "Priority Health's page and the state's list" }],
+      alt: [{ n: "(888) 975-8102", label: "Priority Health Customer Service", note: "TTY 711. Urgent rides, mileage questions, and rescheduling if a ride never came. Open Monday to Thursday 7:30 AM to 7 PM, Friday 9 AM to 5 PM, and Saturday 8:30 AM to noon.", src: "Priority Health's page and the state's list" }],
       lead: { n: 3, unit: "biz", text: "3 business days", earliest: 14, extra: "Priority's page says rides can be booked up to two weeks ahead, but the state contract says plans must let you book at least 30 days ahead." },
       rows: [
         ["Shorter notice", "Call Customer Service or SafeRide for urgent care. Priority tries for same-day or within 24 hours if drivers are available.", "State's list"],
@@ -510,7 +510,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
   };
   const MICH = {
     id: "mich", name: "MI Coordinated Health plan (Medicare and Medicaid together)", company: "",
-    ride: null, alt: [], lead: { unit: "none", text: "Ask your plan" },
+    ride: null, alt: [], lead: { unit: "none", text: "Ask your plan", say: "Ask your plan how far ahead to book." },
     rows: [
       ["Who to call", "The member services number on your plan card. Ask for transportation.", "Medicaid Provider Manual"],
       ["What's covered", "Your plan has to give rides to both Medicare and Medicaid services.", "Medicaid Provider Manual"]
@@ -545,8 +545,32 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     const x = new Date(date);
     if (lead.unit === "cal") { x.setDate(x.getDate() - lead.n); return x; }
     let k = lead.n;
-    while (k > 0) { x.setDate(x.getDate() - 1); const w = x.getDay(); if (w !== 0 && w !== 6) k--; }
+    while (k > 0) { x.setDate(x.getDate() - 1); const w = x.getDay(); if (w !== 0 && w !== 6 && !holidayName(x)) k--; }
     return x;
+  }
+  // Six holidays most offices close for. A holiday on a Saturday is taken Friday, and one on a Sunday is taken Monday.
+  // Plans don't publish their holiday lists, so skipping these only ever makes the call-by date earlier.
+  function holidaysIn(y) {
+    const nth = (m, dow, n) => { const d = new Date(y, m, 1); d.setDate(1 + ((dow - d.getDay() + 7) % 7) + 7 * (n - 1)); return d; };
+    const last = (m, dow) => { const d = new Date(y, m + 1, 0); d.setDate(d.getDate() - ((d.getDay() - dow + 7) % 7)); return d; };
+    const obs = d => { const w = d.getDay(); const o = new Date(d); if (w === 6) o.setDate(o.getDate() - 1); if (w === 0) o.setDate(o.getDate() + 1); return o; };
+    return [
+      [obs(new Date(y, 0, 1)), "New Year's Day"], [last(4, 1), "Memorial Day"], [obs(new Date(y, 6, 4)), "Independence Day"],
+      [nth(8, 1, 1), "Labor Day"], [nth(10, 4, 4), "Thanksgiving"], [obs(new Date(y, 11, 25)), "Christmas Day"]
+    ];
+  }
+  function holidayName(d) {
+    for (const y of [d.getFullYear(), d.getFullYear() + 1]) {
+      const hit = holidaysIn(y).find(([h]) => h.getFullYear() === d.getFullYear() && h.getMonth() === d.getMonth() && h.getDate() === d.getDate());
+      if (hit) return hit[1];
+    }
+    return "";
+  }
+  function skippedHolidays(date, lead) {
+    if (lead.unit !== "biz") return [];
+    const from = back(date, lead), out = [];
+    for (const x = new Date(from); x < date; x.setDate(x.getDate() + 1)) { const n = holidayName(x); if (n && x.getDay() !== 0 && x.getDay() !== 6) out.push(n); }
+    return out;
   }
   function today() { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); }
   const dayDiff = (a, b) => Math.round((b - a) / 86400000);
@@ -569,7 +593,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
   /* ---------- Result ---------- */
   function whenBox(u) {
     const p = u.p, L = p.lead;
-    if (L.unit === "none") return L.text ? `<div class="when"><span class="d">Call ${esc(L.text.toLowerCase())}.</span></div>` : "";
+    if (L.unit === "none") return L.text ? `<div class="when"><span class="d">${esc(L.say || "Call " + L.text.toLowerCase() + ".")}</span></div>` : "";
     const rule = `<span>Book at least <strong>${esc(L.text)}</strong> ahead.${L.extra ? " " + esc(L.extra) : ""}</span>`;
     if (!u.date) return `<div class="when">${rule}<span class="hint">Add your appointment date above to get the last day to call.</span></div>`;
     const by = back(u.date, L), t = today(), left = dayDiff(t, by);
@@ -587,7 +611,11 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
       early = `<span class="hint">Two weeks before your appointment is ${fmt(from)}. If they say it's too early, point to the 30-day rule below.</span>`;
     }
     const late = left < 0 && dayDiff(t, u.date) >= 0;
-    return `<div class="when${late ? " late" : ""}"><span class="d">${head}</span><span>${status}</span>${rule}${early}<span class="hint">Around a holiday, call one more business day early.</span></div>`;
+    const skipped = skippedHolidays(u.date, L);
+    const hol = skipped.length
+      ? `<span class="hint">We didn't count ${esc(skipped.join(" and "))} as a business day, because most offices are closed then. Your plan may count it, but calling by this date is safe either way.</span>`
+      : `<span class="hint">Around any other holiday your plan closes for, call one more business day early.</span>`;
+    return `<div class="when${late ? " late" : ""}"><span class="d">${head}</span><span>${status}</span>${rule}${early}${hol}</div>`;
   }
 
   function phoneLine(ph) {
