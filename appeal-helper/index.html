@@ -259,7 +259,8 @@ textarea { min-height: 96px; resize: vertical; }
   const parse = v => { if (!v) return null; const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); };
   const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
   const add = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
-  const addMonths = (d, n) => new Date(d.getFullYear(), d.getMonth() + n, d.getDate());
+  // Federal rule: if the month n months later has no matching day (Oct 31 to Feb), the deadline is the 1st of the next month.
+  const addMonths = (d, n) => { const t = new Date(d.getFullYear(), d.getMonth() + n, d.getDate()); return t.getDate() === d.getDate() ? t : new Date(d.getFullYear(), d.getMonth() + n + 1, 1); };
   const fmt = d => d.toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" });
   const today = (() => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); })();
   const diff = (a, b) => Math.round((b - a) / DAY);
