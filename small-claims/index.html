@@ -1,0 +1,957 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Michigan Small Claims Court: Limit, Filing Fees, Forms, and How to File</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Owed money in Michigan, or sued in small claims court? Check the $7,000 limit, your filing fee, which court, the form, your time limit to sue, and get ready for the hearing. Free.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/small-claims/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Michigan Small Claims Court Helper">
+<meta property="og:description" content="Owed money in Michigan, or sued in small claims court? Check the $7,000 limit, your filing fee, which court, the form, your time limit to sue, and get ready for the hearing. Free.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/small-claims/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/small-claims.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. A few questions on top, then a stack of answer cards, each with its law or court form source chip, then a worksheet that turns your dates and proof into hearing notes. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.panel { display: grid; gap: 18px; min-width: 0; }
+form.q {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 16px; min-width: 0;
+}
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="date"], input[type="number"], select {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 360px;
+}
+input[type="text"], textarea {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%;
+}
+textarea { min-height: 72px; resize: vertical; }
+.money { display: flex; align-items: center; gap: 6px; max-width: 360px; }
+.money span { font-weight: 700; }
+.opts { display: grid; gap: 8px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; padding: 2px 0; }
+.opts input { margin-top: 5px; accent-color: var(--accent); flex: none; width: 18px; height: 18px; }
+.opts small { display: block; color: var(--muted); font-size: 14px; }
+.hint { font-size: 14px; color: var(--muted); }
+.results { display: grid; gap: 12px; min-width: 0; }
+.results-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line); min-width: 0;
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.card ul, .card ol { margin: 0; padding-left: 22px; display: grid; gap: 6px; font-size: 15px; color: var(--muted); }
+.card li strong { color: var(--fg); }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.small { font-size: 15px; color: var(--muted); }
+.math { font-family: var(--f-mono); font-size: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; overflow-wrap: anywhere; white-space: pre-wrap; }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.gethelp { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.letter {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px;
+  font-family: var(--f-body); white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; font-size: 16px;
+}
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 10px 16px; min-height: 44px;
+  background: var(--accent); color: var(--bg); border: 0;
+}
+.btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.btn.sm { padding: 6px 12px; font-size: 15px; }
+.btn:hover { filter: brightness(1.08); }
+.copied { font-size: 14px; color: var(--law); }
+.fill { background: var(--facts-bg); color: var(--facts); border-radius: 4px; padding: 0 3px; }
+.tl { display: grid; gap: 10px; }
+.tl-row { display: grid; grid-template-columns: minmax(140px, 170px) 1fr auto; gap: 8px; align-items: start; }
+.tl-row input[type="date"] { max-width: none; }
+.tl-row .btn { min-height: 42px; }
+@media (max-width: 560px) { .tl-row { grid-template-columns: 1fr auto; } .tl-row input[type="text"] { grid-column: 1 / -1; grid-row: 2; } }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+@media print {
+  body.printing .wrap > :not(#s-sheet), body.printing #s-sheet > :not(#notes) { display: none !important; }
+  body.printing { background: #fff; color: #000; }
+  body.printing .letter { border: 0; padding: 0; color: #000; background: #fff; }
+  body.printing .fill { background: none; color: #000; }
+}
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Michigan · Small claims court · free</span>
+    <h1>Michigan Small Claims Court Helper</h1>
+    <p class="lede">Someone owes you money, like a deposit that never came back, a repair gone wrong, or a loan to a friend. Or you just got small claims papers yourself. Answer a few questions to see whether small claims court fits, the dollar limit, your filing fee, which court, the form, and how long you have. Then build your notes for the hearing.</p>
+    <div class="notice">
+      <strong>This is information, not legal advice.</strong>
+      <span>It shows what Michigan's law and court forms say. It can't tell you whether you'll win. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section class="panel" aria-labelledby="h-q">
+    <h2 id="h-q">1. Your situation</h2>
+    <form class="q" id="f-plan" novalidate>
+      <p class="sample">A sample is filled in so you can see how it works. Change it to yours.</p>
+      <div class="field"><span class="lbl" id="l-role">Which one are you?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-role">
+          <label><input type="radio" name="role" value="p" checked><span>Someone owes me money<small>You'd be the plaintiff, the one who files the case.</small></span></label>
+          <label><input type="radio" name="role" value="d"><span>I got small claims papers<small>You're the defendant, the one being sued.</small></span></label>
+        </div></div>
+      <div class="row2">
+        <div class="field"><label for="amt" id="l-amt">How much are you owed?</label>
+          <div class="money"><span>$</span><input id="amt" type="number" inputmode="decimal" min="0" step="0.01" value="1450"></div>
+          <span class="hint" id="h-amt">Just the money you're owed. Leave out the filing fee.</span></div>
+        <div class="field"><label for="type">What is it about?</label>
+          <select id="type">
+            <option value="deposit">Security deposit not returned</option>
+            <option value="service">Bad repair or work that wasn't done</option>
+            <option value="loan">Loan or money owed that wasn't paid back</option>
+            <option value="goods">Something bought that was broken or never came</option>
+            <option value="property">Damage to property (not a car crash)</option>
+            <option value="car">Car crash damage to a vehicle</option>
+            <option value="check">Bounced check</option>
+            <option value="wages">Unpaid wages</option>
+            <option value="other">Something else</option>
+          </select></div>
+      </div>
+      <div class="field"><label for="when" id="l-when">When did it happen?</label><input id="when" type="date">
+        <span class="hint" id="h-when"></span></div>
+
+      <div id="g-p" style="display:grid;gap:16px">
+        <div class="row2">
+          <div class="field"><label for="who">Who owes you?</label>
+            <select id="who">
+              <option value="person">A person</option>
+              <option value="biz">A business</option>
+              <option value="local">A city, village, township, county, or school district</option>
+              <option value="state">The State of Michigan or a state agency</option>
+            </select></div>
+          <div class="field"><label for="as">Who is filing?</label>
+            <select id="as">
+              <option value="self">Me, for myself</option>
+              <option value="sole">My business, and I'm the only owner (sole proprietorship)</option>
+              <option value="partner">A partnership</option>
+              <option value="corp">A corporation</option>
+              <option value="llc">An LLC</option>
+            </select></div>
+        </div>
+        <div class="field"><span class="lbl" id="l-where">Where is the other side?</span>
+          <div class="opts" role="radiogroup" aria-labelledby="l-where">
+            <label><input type="radio" name="where" value="mi" checked><span>They live, work, or do business in Michigan</span></label>
+            <label><input type="radio" name="where" value="arose"><span>They're outside Michigan, but it happened in Michigan</span></label>
+            <label><input type="radio" name="where" value="none"><span>They're outside Michigan and it happened outside Michigan</span></label>
+          </div></div>
+        <div class="field"><span class="lbl" id="l-flags">Check any that fit</span>
+          <div class="opts" aria-labelledby="l-flags">
+            <label><input type="checkbox" id="c-notmoney"><span>I want something other than money<small>Like getting an item back, or making someone do or stop doing something.</small></span></label>
+            <label><input type="checkbox" id="c-intent"><span>It's about fraud, lies that hurt my name, or being hit or hurt on purpose<small>Fraud, libel, slander, assault, battery, or other harm done on purpose.</small></span></label>
+            <label><input type="checkbox" id="c-assign"><span>The debt was first owed to someone else<small>You bought it or it was signed over to you, or you collect debts for others.</small></span></label>
+          </div></div>
+      </div>
+
+      <div id="g-d" style="display:grid;gap:16px" hidden>
+        <div class="row2">
+          <div class="field"><label for="hear">Hearing date on your notice</label><input id="hear" type="date">
+            <span class="hint">It's on the Small Claims Notice of Hearing that came with the claim.</span></div>
+          <div class="field"><label for="served">Date you got the papers</label><input id="served" type="date"></div>
+        </div>
+        <div class="field"><label for="how">How did the papers reach you?</label>
+          <select id="how">
+            <option value="mail">Certified mail that I signed for</option>
+            <option value="hand">Someone handed them to me</option>
+            <option value="othermail">Mail that someone else signed for, or regular mail</option>
+            <option value="none">I never got them. I found out another way.</option>
+          </select></div>
+        <div class="field"><span class="lbl" id="l-dflags">Check any that fit</span>
+          <div class="opts" aria-labelledby="l-dflags">
+            <label><input type="checkbox" id="c-dbiz"><span>The papers name my business, not me personally</span></label>
+            <label><input type="checkbox" id="c-collector"><span>The one suing me is a collection agency, or bought the debt from someone else</span></label>
+            <label><input type="checkbox" id="c-counter"><span>I think the other side owes me money over the same thing</span></label>
+          </div></div>
+        <div class="field"><label for="jstat">Has the court already decided?</label>
+          <select id="jstat">
+            <option value="no">No, the hearing hasn't happened yet</option>
+            <option value="default">Yes. I missed the hearing and there's a judgment against me</option>
+            <option value="mag">Yes. A magistrate decided it at a hearing</option>
+            <option value="judge">Yes. A judge decided it at a hearing</option>
+          </select></div>
+        <div class="field" id="jdate-wrap" hidden><label for="jdate">Date on the judgment</label><input id="jdate" type="date">
+          <span class="hint">The date it was signed, on the Small Claims Dismissal or Judgment (Form DC 85).</span></div>
+      </div>
+    </form>
+    <div class="results" id="r-plan" aria-live="polite"></div>
+  </section>
+
+  <section class="panel" id="s-sheet" aria-labelledby="h-sheet">
+    <h2 id="h-sheet">2. Get ready for the hearing</h2>
+    <p class="lede">The court's own form tells both sides to bring all their evidence: papers, witnesses, photos, emails. The judge wants the story in the order it happened. Fill this in and it becomes notes you can copy or print and take with you.</p>
+    <form class="q" id="f-sheet" novalidate>
+      <div class="row2">
+        <div class="field"><label for="w-me">Your name</label><input id="w-me" type="text" value="Jordan Example" autocomplete="off"></div>
+        <div class="field"><label for="w-them">The other side's name</label><input id="w-them" type="text" value="Lakeview Rentals LLC" autocomplete="off">
+          <span class="hint" id="h-them">Use the full, correct name. For a business, the name on its sign, invoice, or receipt works.</span></div>
+      </div>
+      <div class="field"><span class="lbl" id="l-tl">What happened, in order</span>
+        <div class="tl" id="tl" aria-labelledby="l-tl"></div>
+        <div class="btns"><button class="btn ghost sm" type="button" id="tl-add">Add a line</button><span class="hint">One line per event. Dates and dollar amounts help most.</span></div></div>
+      <div class="field"><span class="lbl" id="l-ev">Proof you have</span>
+        <div class="opts" id="ev" aria-labelledby="l-ev"></div>
+        <label for="w-ev" class="hint">Other proof, one item per line</label>
+        <textarea id="w-ev"></textarea></div>
+      <div class="field"><label for="w-wit">Witnesses</label>
+        <textarea id="w-wit" placeholder="Name, and what they saw or know. One per line."></textarea>
+        <span class="hint">It's best if a witness comes to the hearing. A signed letter is weaker.</span></div>
+    </form>
+    <div class="bar">
+      <h3>Your hearing notes</h3>
+      <span class="btns"><span class="copied" id="copied" role="status"></span><button class="btn ghost" type="button" id="print">Print</button><button class="btn" type="button" id="copy">Copy notes</button></span>
+    </div>
+    <div class="letter" id="notes" tabindex="0" aria-label="Hearing notes"></div>
+    <div id="claim-wrap" style="display:grid;gap:18px">
+      <div class="bar">
+        <h3>Words for the form</h3>
+        <span class="btns"><span class="copied" id="copied2" role="status"></span><button class="btn" type="button" id="copy2">Copy</button></span>
+      </div>
+      <div class="letter" id="claim" tabindex="0" aria-label="Reasons for the claim"></div>
+      <p class="hint">Item 5 on the Small Claims Affidavit (Form DC 84) asks you to describe the reasons for the claim with dates, amounts, and what happened. The court rule asks for short, plain language. This draft comes from your lines above. Edit it so every word is true, because you swear to it when you sign.</p>
+    </div>
+  </section>
+
+  <section class="gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Free help</h2>
+    <ul>
+      <li><a href="https://michiganlegalhelp.org/resources/money-debt-and-consumer-issues/small-claims" target="_blank" rel="noopener">Michigan Legal Help: Small Claims</a>. Plain guides for both sides, plus a free <a href="https://michiganlegalhelp.org/resources/money-debt-and-consumer-issues/do-it-yourself-small-claims-suit" target="_blank" rel="noopener">Do-It-Yourself Small Claims Suit</a> tool that fills in the court form for you.</li>
+      <li><strong>The district court clerk.</strong> The law says the clerk has the small claims forms and must prepare the affidavit for you if you ask. Clerks can explain steps and fees. They can't give legal advice. Find your court in the <a href="https://www.courts.michigan.gov/trial-court-directory" target="_blank" rel="noopener">Michigan trial court directory</a>.</li>
+      <li><a href="https://michiganlegalhelp.org/guide-to-legal-help" target="_blank" rel="noopener">Michigan Legal Help: Guide to Legal Help</a> to find free legal aid near you, and the <a href="https://www.michbar.org/public_resources/legalaid" target="_blank" rel="noopener">State Bar of Michigan legal aid directory</a>. A lawyer can't speak for you in small claims, but one can still talk with you before you file or before your hearing.</li>
+      <li><strong>Mediation.</strong> A trained neutral person helps both sides reach a deal, often for little or no cost. Ask the court clerk, or see Michigan Legal Help's <a href="https://michiganlegalhelp.org/resources/family/mediation-and-other-forms-of-settlement" target="_blank" rel="noopener">Mediation and Other Forms of Settlement</a>.</li>
+      <li>Can't pay the filing fee? <a href="https://michiganlegalhelp.org/resources/going-court/fee-waivers-court-cases" target="_blank" rel="noopener">Michigan Legal Help: Fee Waivers in Court Cases</a>.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> The rules come from Chapter 84 of Michigan's Revised Judicature Act (MCL 600.8401 to 600.8427), which sets the $7,000 limit, who can file, where, the fees, and what each side gives up. Court rules MCR 4.301 to 4.306 cover the claim, the hearing, judgments, and removal, with MCR 1.108 for counting days and MCR 2.603 for setting aside a default. The electronic filing fee is MCL 600.1986. Time limits to sue are MCL 600.5805, 600.5807, 600.5813, 440.2725, and 440.3118. A small claims judgment lasts 6 years under MCL 600.5809. The steps and form names come from the State Court Administrative Office's forms, revised June 2026: DC 84 (Small Claims Affidavit), DC 84info, DC 85, DC 85info, and DC 86, and from its District Court Fee and Assessments Table (April 2025). Practical tips marked as such come from Michigan Legal Help. Sources checked November 14, 2026.</p>
+    <p>Green cards are what the rule says directly. Amber cards depend on your facts. Red cards mean act now. Dollar limits and fees change, so each one sits in a list at the top of this page's code with its source and the date it was checked.</p>
+    <p>This page doesn't cover landlord cases to evict, cases in the regular (general civil) side of district court, or claims against the State of Michigan. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+    <p class="report"><strong>See a mistake?</strong> <a href="https://github.com/free-to-all-ai/tools/issues/new?template=mistake.yml&amp;title=Mistake%3A+Michigan+Small+Claims+Court+Helper&amp;tool=Michigan+Small+Claims+Court+Helper" target="_blank" rel="noopener">Report it on GitHub</a>. You'll need a free GitHub account, and what you write there is public, so leave out personal details.</p>
+    <p><a href="https://free-to-all-ai.github.io/tools/">More free tools from Free to All AI</a></p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  /* ---------- Every number, limit, and time period, with its source. All checked November 14, 2026. ---------- */
+  const CHECKED = "November 14, 2026";
+  const MCL = s => `https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-${s}`;
+  const FORM = f => `https://www.courts.michigan.gov/siteassets/forms/scao-approved/${f}.pdf`;
+  const DATA = {
+    // Most a small claims court can award. MCL 600.8401(e): $7,000 "beginning January 1, 2024". The statute lists no later step.
+    limit: 7000,
+    // Top of the regular (general civil) side of district court. MCL 600.8301(1).
+    generalCivil: 25000,
+    // Filing fee by claim amount. MCL 600.8420(1)(a)-(c). SCAO fee table (April 2025) and Form DC 84info (rev. 6/26) show the same.
+    fees: [{ upTo: 600, court: 25 }, { upTo: 1750, court: 45 }, { upTo: Infinity, court: 65 }],
+    // Electronic filing system fee, charged on every small claims case whether or not it's filed online.
+    // MCL 600.1986(1)(d) and (2). MCL 600.1993 stops it after February 28, 2031.
+    efile: 5,
+    // Personal service by a process server or officer, per defendant, plus mileage. MCL 600.8420(6) and 600.2559(1)(a).
+    personalService: 26,
+    // Certified mail by the clerk costs "the prevailing postal rate" (MCL 600.8420(2)). Michigan Legal Help says it can be as little as $15.
+    mailFrom: 15,
+    // Fee for each writ of garnishment, execution, or judgment debtor discovery subpoena. MCL 600.8420(2).
+    writFee: 15,
+    // Paid to the garnishee with a periodic (wage) garnishment. MCL 600.4012(12). Form MC 13 lists $1 for a one-time garnishment.
+    garnisheePeriodic: 35, garnisheeOnce: 1,
+    // Hearing is set 15 to 45 days after the notice. Defendant must be served at least 7 days before. MCL 600.8406.
+    hearMin: 15, hearMax: 45, serveBefore: 7,
+    // Claims one person may file per week in one district court. MCL 600.8407(2)(a).
+    weeklyClaims: 5,
+    // Days to appeal a magistrate's decision to the judge. MCL 600.8427.
+    magAppeal: 7,
+    // Days for the defendant to file a written answer after a case is removed to general civil. MCR 4.306(B)(1).
+    removalAnswer: 14,
+    // Days to move to set aside a default judgment when the defendant was personally served. MCR 2.603(D)(2)(b), through MCR 4.305(B).
+    setAside: 21,
+    // Motion fee in district court. MCL 600.8371(10), SCAO fee table (April 2025).
+    motionFee: 20,
+    // No garnishment until 21 days after the judgment. MCR 4.305(C).
+    garnishWait: 21,
+    // Pay in full or disclose job and bank accounts within 30 days. MCL 600.8410(5).
+    payOrDisclose: 30,
+    // A small claims judgment is from a court "not of record": 6 years. MCL 600.5809(3).
+    judgmentYears: 6,
+    // Vehicle damage after a crash ("mini-tort"). MCL 500.3135(3)(e): $3,000 for crashes after July 1, 2020, $1,000 before.
+    miniTort: { max: 3000, oldMax: 1000, after: "2020-07-01" },
+    // Bounced check. MCL 600.2952(3)-(4).
+    check: { fee7: 25, fee30: 35, times: 2, minDamages: 100, costs: 250 }
+  };
+  const SRC = {
+    "MCL 600.8401": MCL("600-8401"), "MCL 600.8402": MCL("600-8402"), "MCL 600.8403": MCL("600-8403"), "MCL 600.8404": MCL("600-8404"),
+    "MCL 600.8405": MCL("600-8405"), "MCL 600.8406": MCL("600-8406"), "MCL 600.8407": MCL("600-8407"), "MCL 600.8408": MCL("600-8408"),
+    "MCL 600.8409": MCL("600-8409"), "MCL 600.8410": MCL("600-8410"), "MCL 600.8411": MCL("600-8411"), "MCL 600.8412": MCL("600-8412"),
+    "MCL 600.8415": MCL("600-8415"), "MCL 600.8420": MCL("600-8420"), "MCL 600.8421": MCL("600-8421"), "MCL 600.8422": MCL("600-8422"),
+    "MCL 600.8423": MCL("600-8423"), "MCL 600.8424": MCL("600-8424"), "MCL 600.8425": MCL("600-8425"), "MCL 600.8426": MCL("600-8426"),
+    "MCL 600.8427": MCL("600-8427"), "MCL 600.8301": MCL("600-8301"), "MCL 600.1986": MCL("600-1986"), "MCL 600.2559": MCL("600-2559"),
+    "MCL 600.2952": MCL("600-2952"), "MCL 600.4012": MCL("600-4012"), "MCL 600.5805": MCL("600-5805"), "MCL 600.5807": MCL("600-5807"),
+    "MCL 600.5809": MCL("600-5809"), "MCL 600.5813": MCL("600-5813"), "MCL 600.5827": MCL("600-5827"), "MCL 600.5853": MCL("600-5853"),
+    "MCL 600.5866": MCL("600-5866"), "MCL 440.2725": MCL("440-2725"), "MCL 440.3118": MCL("440-3118"), "MCL 500.3135": MCL("500-3135"),
+    "MCL 554.613": MCL("554-613"),
+    "MCR 4.302": "https://www.courts.michigan.gov/siteassets/rules-instructions-administrative-orders/michigan-court-rules/court-rules-book-ch-4-responsive-html5.zip/Court_Rules_Book_Ch_4/Court_Rules_Chapter_4/Court_Rules_Chapter_4.htm",
+    "MCR 1.108": "https://www.courts.michigan.gov/siteassets/rules-instructions-administrative-orders/michigan-court-rules/court-rules-book-ch-1-responsive-html5.zip/Court_Rules_Book_Ch_1/Court_Rules_Chapter_1/Court_Rules_Chapter_1.htm",
+    "MCR 2.612": "", "MCR 2.603": "https://www.courts.michigan.gov/siteassets/rules-instructions-administrative-orders/michigan-court-rules/court-rules-book-ch-2-responsive-html5.zip/Court_Rules_Book_Ch_2/Court_Rules_Chapter_2/Court_Rules_Chapter_2.htm",
+    "Form DC 84": FORM("dc84_84n"), "Form DC 84a": FORM("dc84a"), "Form DC 84info": FORM("dc84info"), "Form DC 85": FORM("dc85"),
+    "Form DC 85info": FORM("dc85info"), "Form DC 86": FORM("dc86"), "Form MC 20": FORM("mc20"), "Form MC 11": FORM("mc11"),
+    "Form MC 12": FORM("mc12"), "Form MC 13": FORM("mc13"), "Form MC 52": FORM("mc52"), "Form MC 19": FORM("mc19"),
+    "Court fee table": "https://www.courts.michigan.gov/siteassets/court-administration/resources/dfee.pdf",
+    "Court directory": "https://www.courts.michigan.gov/trial-court-directory",
+    "MiFile courts": "https://mifile.courts.michigan.gov/availablecourts",
+    "State business search": "https://www.michigan.gov/lara/bureau-list/cscl/corps",
+    "MLH: Taking a case to court": "https://michiganlegalhelp.org/resources/money-debt-and-consumer-issues/taking-small-claims-case-court",
+    "MLH: Overview": "https://michiganlegalhelp.org/resources/money-debt-and-consumer-issues/overview-of-small-claims-court",
+    "MLH: Being a defendant": "https://michiganlegalhelp.org/resources/money-debt-and-consumer-issues/being-defendant-small-claims-case",
+    "MLH: Collecting": "https://michiganlegalhelp.org/resources/money-debt-and-consumer-issues/collecting-your-judgment",
+    "MLH: DIY small claims": "https://michiganlegalhelp.org/resources/money-debt-and-consumer-issues/do-it-yourself-small-claims-suit",
+    "Renter Rights Check": "../renter-rights/",
+    "Back Pay Check": "../back-pay/"
+  };
+  MCR("4.301"); MCR("4.303"); MCR("4.304"); MCR("4.305"); MCR("4.306"); SRC["MCR 2.612"] = SRC["MCR 2.603"];
+  function MCR(n) { SRC["MCR " + n] = SRC["MCR 4.302"]; }
+
+  // Time limits to sue, by kind of claim. years = the limit this page counts. safe = a shorter limit a court could apply instead.
+  const TYPES = {
+    deposit: { name: "a security deposit", years: 6, cites: [["MCL 600.5813", ""], ["MCL 600.5807", "(9)"]], whenLabel: "When did you move out?",
+      whenHint: "The day you gave up the keys or the lease ended.",
+      why: "Michigan's deposit law has no time limit of its own. The general limits for contract claims and for other personal claims are both 6 years." },
+    service: { name: "a repair or services deal", years: 6, safe: 3, cites: [["MCL 600.5807", "(9)"], ["MCL 600.5805", "(2)"]], whenLabel: "When was the work done, or due?",
+      whenHint: "The day the bad work was done, or the day the work was supposed to be finished.",
+      why: "A deal for work is a contract, and the limit for breaking a contract is 6 years. If your claim is really that careless work damaged your property, a court could use the 3 year limit for property damage." },
+    loan: { name: "a loan or money owed", years: 6, cites: [["MCL 600.5807", "(9)"], ["MCL 440.3118", "(1)-(2)"]], whenLabel: "When was the payment missed?",
+      whenHint: "The day the money was due and didn't come. For a loan paid over time, use the first payment that was missed.",
+      why: "The limit for breaking a contract, written or spoken, is 6 years. With payments due over time, each missed payment can have its own clock." },
+    goods: { name: "a sale of goods", years: 4, cites: [["MCL 440.2725", ""]], whenLabel: "When did you get the item, or when was it due?",
+      whenHint: "The delivery date, or the date it should have arrived.",
+      why: "For a sale of goods the limit is 4 years from the breach, even if you didn't know about the problem yet. A warranty claim usually starts at delivery. The sales contract can shorten this to as little as 1 year, so read it." },
+    property: { name: "damage to property", years: 3, cites: [["MCL 600.5805", "(2)"]], whenLabel: "When was the damage done?",
+      whenHint: "The day the damage happened.",
+      why: "The limit for injury to property is 3 years from the injury." },
+    car: { name: "vehicle damage from a crash", years: 3, cites: [["MCL 600.5805", "(2)"]], whenLabel: "When was the crash?",
+      whenHint: "The date of the crash.",
+      why: "The limit for injury to property is 3 years from the injury." },
+    check: { name: "a bounced check", years: 3, cites: [["MCL 440.3118", "(3)"]], whenLabel: "When did the bank return the check?",
+      whenHint: "The date on the bank's notice that the check wasn't paid.",
+      why: "A claim on a check that the bank refused must be started within 3 years after the bank refused it, or 10 years after the date on the check, whichever comes first. The debt the check was meant to pay may have its own, longer limit." },
+    wages: { name: "unpaid wages", years: null, whenLabel: "When was the pay due?", whenHint: "The payday you were shorted." },
+    other: { name: "this claim", years: null, whenLabel: "When did it happen?", whenHint: "The day the deal was broken or the harm was done." }
+  };
+
+  // Ideas for proof, by kind of claim. These are practical suggestions, not a rule.
+  const EVID = {
+    deposit: ["The lease", "Proof you paid the deposit, like a receipt or bank record", "Move-in and move-out checklists", "Photos or video from the day you moved out", "Your forwarding address letter and proof of when you sent it", "The landlord's list of damages, if you got one, and your written reply", "Texts, emails, and letters with the landlord"],
+    service: ["The written estimate, contract, or work order", "Proof of what you paid", "Photos of the work, before and after", "A second shop's written estimate to fix it", "Texts, emails, and letters asking them to make it right", "Any warranty or guarantee"],
+    loan: ["The IOU, note, or anything in writing about the loan", "Texts or emails where they say they owe it", "Bank or payment app records showing the money you sent", "A list of any payments they made", "Your written request to be paid back"],
+    goods: ["The receipt or order confirmation", "The ad or listing", "The warranty", "Photos of the problem", "Messages with the seller", "A repair estimate, or proof of what a replacement cost"],
+    property: ["Photos of the damage", "Repair bills or two written estimates", "Proof of what the item was worth", "A police or incident report", "Messages with the other side", "Names of people who saw it happen"],
+    car: ["The police crash report", "Photos of both vehicles and the scene", "The repair bill or written estimates", "Your insurance page showing your deductible and whether you had collision coverage", "Proof your vehicle was insured on the day of the crash", "A letter from your insurer showing what it did not pay"],
+    check: ["The returned check or the bank's notice", "Your written demand for payment and proof of the day you mailed it", "What the check was for, like an invoice or receipt", "Bank fees you were charged because it bounced"],
+    wages: ["Pay stubs", "Your own record of hours worked", "The schedule, offer letter, or anything showing your pay rate", "Texts or emails with your boss about the pay"],
+    other: ["Any contract, receipt, or other paper about the deal", "Photos or video", "Texts, emails, and letters with the other side", "Proof of what it cost you, like bills or estimates", "Your written request that they pay"]
+  };
+  const D_EVID = ["The papers you were served", "Proof you already paid, like receipts or bank records", "The contract, lease, or receipt, if you have a copy", "Photos or video that show your side", "Texts, emails, and letters with the other side", "Anything showing the amount is wrong"];
+
+  /* ---------- Helpers ---------- */
+  const DAY = 86400000;
+  const $ = id => document.getElementById(id);
+  const parse = v => { if (!v) return null; const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); };
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const add = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+  // MCR 1.108(3): a period in years ends on the same day of the month, or the last day of that month if there is no such day.
+  const addYears = (d, n) => { const x = new Date(d.getFullYear() + n, d.getMonth(), d.getDate()); return x.getMonth() === d.getMonth() ? x : new Date(x.getFullYear(), x.getMonth(), 0); };
+  const fmt = d => d.toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" });
+  const plain = d => d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const diff = (a, b) => Math.round((b - a) / DAY);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const usd = n => "$" + (Math.round(n * 100) % 100 ? n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : Math.round(n).toLocaleString("en-US"));
+  const fp = $("f-plan");
+  const val = name => { const el = fp.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; };
+  const on = id => $(id).checked;
+  const weekend = d => d.getDay() === 0 || d.getDay() === 6;
+  // MCR 1.108(1): a last day on a weekend runs to the next day. Court holidays move it too, but they vary, so this page only moves weekends.
+  const roll = d => { let x = d; while (weekend(x)) x = add(x, 1); return x; };
+  const LABEL = { law: "The rule says", facts: "Depends on your facts", help: "Act now" };
+  function when(d) {
+    const n = diff(today, d);
+    if (n > 0) return `${fmt(d)} (${n} day${n === 1 ? "" : "s"} from today)`;
+    if (n === 0) return `${fmt(d)} (today)`;
+    return `${fmt(d)} (${-n} day${n === -1 ? "" : "s"} ago)`;
+  }
+  function card(level, title, paras, cites = [], next = "") {
+    const c = cites.map(([k, p]) => `<a class="cite" href="${SRC[k]}"${SRC[k].startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>${esc(k + (p ? " " + p : ""))}</a>`).join("");
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${LABEL[level]}</span></div>
+      ${[].concat(paras).filter(Boolean).map((t, i) => /^<(div|ul|ol)/.test(t) ? t : `<p${i ? ' class="small"' : ""}>${t}</p>`).join("")}
+      ${next ? `<p class="next"><strong>What you can do:</strong> ${next}</p>` : ""}
+      ${c ? `<div class="cites">${c}</div>` : ""}
+    </article>`;
+  }
+  const list = items => `<ul>${items.filter(Boolean).map(t => `<li>${t}</li>`).join("")}</ul>`;
+  const steps = items => `<ol>${items.filter(Boolean).map(t => `<li>${t}</li>`).join("")}</ol>`;
+  function fee(amount) {
+    const a = Math.min(amount, DATA.limit);
+    const row = DATA.fees.find(f => a <= f.upTo);
+    return { court: row.court, total: row.court + DATA.efile };
+  }
+
+  /* ---------- Shared cards ---------- */
+  function giveUpCard(role) {
+    return card("law", "What both sides give up in small claims", [
+      "Small claims is the quick, low-cost side of district court. In exchange, both sides give up some rights:",
+      list([
+        "<strong>No lawyers.</strong> You speak for yourself. A lawyer can only appear for his or her own claim.",
+        "<strong>No jury.</strong> A judge, or a magistrate who is a lawyer, decides.",
+        `<strong>No appeal of a judge's decision.</strong> If a magistrate decides, either side can appeal to the judge within ${DATA.magAppeal} days. Before the hearing starts you can ask for the judge to hear it instead.`,
+        `<strong>No more than ${usd(DATA.limit)}.</strong> That's the most the court can award, plus costs.`,
+        "<strong>No formal rules of evidence and no word-for-word record.</strong> The judge keeps it informal and aims to do what's fair under the law."
+      ]),
+      `<strong>Either side can move the case out.</strong> Before the hearing starts, you or the other side can have it moved ("removed") to the regular side of district court, where lawyers, a jury, and appeals are allowed and things take longer. There's no fee to remove. ${role === "p" ? "If the other side does this, your case goes on there, and you may want a lawyer." : `After removal, the defendant must file a written answer within ${DATA.removalAnswer} days of the court's order.`}`
+    ], [["MCL 600.8412", ""], ["MCL 600.8408", "(1), (4)"], ["MCL 600.8411", ""], ["MCL 600.8427", ""], ["MCR 4.306", ""], ["Form DC 86", ""]]);
+  }
+
+  function limitCards(type, W, role) {
+    const T = TYPES[type], out = [];
+    if (type === "wages" && role === "d") return out;
+    if (type === "wages") {
+      out.push(card("facts", "Unpaid wages have their own, faster path", [
+        "You can sue for unpaid wages in small claims, but Michigan also has a free wage claim through the state labor department, with its own shorter deadlines.",
+        "The Back Pay Check on this site works out what you're owed and those deadlines."
+      ], [["Back Pay Check", ""]]));
+      return out;
+    }
+    if (!T.years) {
+      out.push(card("facts", "Time limits to sue, by kind of claim", [
+        "Every claim has a deadline to file, called the statute of limitations. Which one applies depends on what the claim really is:",
+        list([
+          "<strong>6 years:</strong> breaking a contract, written or spoken, and most other money claims not listed elsewhere.",
+          "<strong>4 years:</strong> a sale of goods.",
+          "<strong>3 years:</strong> injury to a person or damage to property, and a check the bank refused.",
+          "<strong>1 year:</strong> libel or slander (which can't be filed in small claims anyway)."
+        ]),
+        "The clock usually starts when the deal was broken or the harm was done, not when you found out."
+      ], [["MCL 600.5807", "(9)"], ["MCL 600.5813", ""], ["MCL 440.2725", ""], ["MCL 600.5805", "(2)"], ["MCL 600.5827", ""]],
+        "If you're near one of these limits, talk to free legal help before you rely on a date."));
+      return out;
+    }
+    if (!W) {
+      out.push(card("facts", `Time limit: ${T.safe || T.years} ${T.safe ? "to " + T.years + " " : ""}years for ${T.name}`, [
+        T.why, "Enter the date above to see when that runs out."
+      ], T.cites.concat([["MCL 600.5827", ""]])));
+      return out;
+    }
+    if (diff(today, W) > 0) { out.push(card("facts", "That date is in the future", "Check the date above. Time limits count from the day the deal was broken or the harm was done.")); return out; }
+    const full = addYears(W, T.years), safe = T.safe ? addYears(W, T.safe) : null;
+    const key = safe || full, left = diff(today, key), leftFull = diff(today, full);
+    const cites = T.cites.concat([["MCL 600.5827", ""], ["MCR 1.108", ""]]);
+    const pause = "A few things can pause or restart a clock, like the other side living outside Michigan where they couldn't be served, or a signed, written promise to pay an old contract debt.";
+    if (role === "d") {
+      out.push(card("facts", leftFull < 0 ? "The claim may be too old" : "Check whether the claim was filed in time", [
+        `For ${T.name}, Michigan's time limit to sue is ${T.years} years${T.safe ? ` (or ${T.safe} years if the court treats it as property damage)` : ""}. ${T.why}`,
+        `Counting from ${plain(W)}, ${T.years} years ends ${plain(full)}. What matters is the day the case was filed, which is on your papers. If it was filed after that date, the time limit may be a full defense. The court won't raise it for you, so say it at the hearing.`,
+        pause
+      ], cites.concat([["MCL 600.5853", ""], ["MCL 600.5866", ""]])));
+      return out;
+    }
+    if (leftFull < 0) {
+      out.push(card("facts", "The time limit may have passed", [
+        `For ${T.name}, Michigan's time limit to sue is ${T.years} years. Counting from ${plain(W)}, that ended ${when(full)}.`,
+        T.why,
+        `${pause} If none of that fits, the other side can ask the judge to throw the case out, and you won't get your filing fee back.`
+      ], cites.concat([["MCL 600.5853", ""], ["MCL 600.5866", ""]]), "Talk to free legal help before you pay to file."));
+    } else if (safe && left < 0) {
+      out.push(card("facts", `File soon: one time limit has passed, the other ends ${plain(full)}`, [
+        `If this is a broken contract, you have ${T.years} years, until ${when(full)}. If a court treats it as damage to your property, the ${T.safe} year limit ended ${plain(safe)}.`,
+        T.why
+      ], cites, "Write your claim around the deal that was broken: what was promised, what you paid, and what you got. Free legal help can tell you which limit fits."));
+    } else {
+      const urgent = left <= 90;
+      out.push(card(urgent ? "help" : "facts", `${safe ? "Safest to file" : "Likely last day to file"}: ${plain(key)}`, [
+        `For ${T.name}, Michigan's time limit to sue is ${safe ? T.safe + " to " + T.years : T.years} years. Counting from ${plain(W)}, ${safe ? `the shorter limit ends ${when(safe)} and the longer one ends ${plain(full)}` : `that ends ${when(full)}`}.`,
+        T.why,
+        `The clock usually starts when the deal was broken or the harm was done, not when you found out. Your case starts the day you file the affidavit with the court. If the last day lands on a weekend or a day the court is closed, the court rule gives you the next open day. Don't cut it close.`
+      ], cites, urgent ? "File now. If you file even one day late, the other side can have the case thrown out." : ""));
+    }
+    return out;
+  }
+
+  /* ---------- Plaintiff ---------- */
+  function planP() {
+    const amt = parseFloat($("amt").value), type = $("type").value, W = parse($("when").value);
+    const who = $("who").value, as = $("as").value, where = val("where");
+    const c = [], stop = [];
+    if (!(amt > 0)) c.push(card("facts", "Enter the amount you're owed", "The fee and the limit both depend on it."));
+
+    // Things that keep a claim out of small claims
+    if (on("c-notmoney")) stop.push(card("law", "Small claims can only award money", [
+      "The court can order the other side to pay you. It can't order them to give something back, do something, or stop doing something.",
+      "You can still use small claims if money would settle it, like the value of the item. Getting the item itself back takes a different kind of case, called claim and delivery."
+    ], [["MCL 600.8401", ""], ["Form DC 84info", ""], ["MLH: Overview", ""]]));
+    if (on("c-intent")) stop.push(card("law", "This kind of claim can't be filed in small claims", [
+      "The law keeps fraud, libel, slander, assault, battery, and other harm done on purpose out of small claims.",
+      "Two exceptions: a bounced check claim, and a claim under the Michigan Consumer Protection Act (a business used unfair or deceptive practices). A plain broken promise or careless damage is not on the list either, so it can be filed."
+    ], [["MCL 600.8424", "(1)"]], "These cases go on the regular side of district court if they're worth $25,000 or less. Talk to legal help."));
+    if (on("c-assign")) stop.push(card("law", "Only the one who was first owed can use small claims", [
+      "A claim can't be filed in small claims by someone it was assigned (signed over or sold) to. Collection agencies and their workers can't take part in a small claims case at all."
+    ], [["MCL 600.8407", "(1)"], ["MCL 600.8408", "(1)"]]));
+    if (who === "state") stop.push(card("law", "You can't sue the State of Michigan in small claims", [
+      "The state and its agencies can't be a party to a small claims case. The exceptions are counties, cities, villages, townships, and school districts."
+    ], [["MCL 600.8424", "(2)-(3)"]], "Claims against the state follow different rules and can have short deadlines. Talk to legal help quickly."));
+    if (where === "none") stop.push(card("facts", "A Michigan small claims court probably isn't the place", [
+      "A case is filed where the claim happened, or where the defendant lives, is set up in business, or works. If none of those is in Michigan, no Michigan district court fits.",
+      "Look at small claims court in the state where the other side lives or where it happened."
+    ], [["MCL 600.8415", ""]]));
+
+    const lim = limitCards(type, W, "p");
+    const urgentLim = lim.filter(x => x.includes('class="card help"')), otherLim = lim.filter(x => !x.includes('class="card help"'));
+    c.push(...urgentLim, ...stop);
+
+    // Does the amount fit?
+    if (amt > 0) {
+      if (amt <= DATA.limit) {
+        if (!stop.length) c.push(card("law", `A ${usd(amt)} claim fits in small claims`, [
+          `Small claims court hears cases for money up to ${usd(DATA.limit)}. That limit has been in place since January 1, 2024, and the law doesn't schedule another increase.`,
+          "Fitting under the limit only means you're allowed to file here. Whether you win depends on your proof."
+        ], [["MCL 600.8401", ""], ["Form DC 84info", ""]]));
+      } else {
+        c.push(card("facts", `Over the limit: you'd give up ${usd(amt - DATA.limit)}`, [
+          `Small claims can't award more than ${usd(DATA.limit)}. You're allowed to file a bigger claim here, but you must state the full amount and you give up everything over ${usd(DATA.limit)} for good. A judgment blocks a later case for the rest.`,
+          `The other choice is the regular (general civil) side of district court, which hears claims up to ${usd(DATA.generalCivil)}. It costs more, takes longer, follows formal rules, and both sides can have lawyers.`
+        ], [["MCL 600.8425", "(1)"], ["MCR 4.302", "(D)"], ["MCL 600.8301", "(1)"]],
+          `Weigh the ${usd(amt - DATA.limit)} against the time and cost of the regular court. A lawyer or legal aid can help you decide.`));
+      }
+    }
+
+    // Kind-specific rules
+    if (type === "deposit") c.push(card("facts", "Security deposits have their own steps", [
+      "Michigan's deposit law sets deadlines for both sides: your forwarding address, the landlord's list of damages, your reply, and the landlord's 45 days to sue or pay you back. A landlord who doesn't follow them can owe you double the deposit kept.",
+      "The Renter Rights Check on this site works those dates out from yours. Run it first, so you know what to ask for."
+    ], [["Renter Rights Check", ""], ["MCL 554.613", ""]]));
+    if (type === "car") {
+      const old = W && iso(W) <= DATA.miniTort.after, cap = old ? DATA.miniTort.oldMax : DATA.miniTort.max;
+      c.push(card(amt > cap ? "facts" : "law", `Car crash damage: up to ${usd(cap)} from the other driver`, [
+        `Michigan's no-fault law blocks most claims against the other driver. One exception lets you recover up to ${usd(DATA.miniTort.max)} for damage to your vehicle that your own insurance didn't cover, like your deductible (${usd(DATA.miniTort.oldMax)} for crashes on or before July 1, 2020). The law says to file it in small claims whenever possible.`,
+        list([
+          "You can't recover if you were more than 50% at fault. If you were partly at fault, the amount is cut by your share.",
+          "You can't recover if your own vehicle wasn't insured as the law requires on the day of the crash.",
+          "It covers damage to the vehicle only, and only the part insurance didn't pay."
+        ]),
+        amt > cap ? `You entered ${usd(amt)}. For this kind of claim the most the law allows is ${usd(cap)}.` : ""
+      ], [["MCL 500.3135", "(3)(e), (4)"]]));
+    }
+    if (type === "check" && amt > 0) {
+      const k = DATA.check, dmg = Math.max(k.times * amt, k.minDamages), tot = amt + dmg + k.costs;
+      c.push(card("law", "A bounced check can be worth more than its face amount", [
+        `If ${usd(amt)} is the amount of the check: Michigan law lets you mail the check writer a written demand with wording the law spells out. If they pay the check plus a ${usd(k.fee7)} fee within 7 days (not counting weekends and holidays), or the check plus ${usd(k.fee30)} within 30 days, that ends it.`,
+        `If they don't pay and the court finds them responsible, they owe the check, plus damages of ${k.times} times the check or ${usd(k.minDamages)}, whichever is more, plus ${usd(k.costs)} in costs:`,
+        `<div class="math">Check                 ${usd(amt)}
+Damages               ${usd(dmg)}
+Costs                 ${usd(k.costs)}
+Total                 ${usd(tot)}${tot > DATA.limit ? `\nSmall claims limit    ${usd(DATA.limit)}` : ""}</div>`,
+        tot > DATA.limit ? `Small claims can't award more than ${usd(DATA.limit)} in damages, even on a check claim.` : "",
+        "The extra amounts only apply if you mailed the written demand first, in the law's exact words. Copy the wording from the statute, linked below."
+      ], [["MCL 600.2952", ""]], "Mail the demand by first-class mail and keep a copy and proof of the mailing date."));
+    }
+
+    if (stop.length) {
+      c.push(...otherLim);
+      show(c, "Your answers");
+      return;
+    }
+
+    // Who signs for a business
+    if (as !== "self") {
+      const whoCan = {
+        sole: "For a sole proprietorship, the claim must be filed by the owner or by a full-time, salaried employee who knows the facts.",
+        partner: "For a partnership, the claim must be filed by a partner or by a full-time, salaried employee who knows the facts.",
+        corp: "For a corporation, the claim must be filed by a full-time, salaried employee who knows the facts.",
+        llc: "The law names sole proprietorships, partnerships, and corporations. It doesn't name LLCs, and the court form has an \"other\" box. Ask the court clerk who must sign for an LLC in that court before you file."
+      }[as];
+      c.push(card(as === "llc" ? "facts" : "law", "Who can file and speak for a business", [
+        whoCan,
+        "At the hearing, a business is represented by an officer or employee with direct, personal knowledge of the facts. Not a lawyer, and not a collection agency.",
+        `One person can file no more than ${DATA.weeklyClaims} small claims a week in the same district court. Give the business's full, correct name, and any assumed name it was using when the claim arose.`
+      ], [["MCL 600.8407", "(2)-(3)"], ["MCL 600.8408", "(2)"], ["MCL 600.8402", "(2)"]]));
+    }
+
+    // Which court
+    c.push(card(where === "arose" ? "facts" : "law", "Which court to file in", [
+      "Small claims is part of district court. File in the district court for the place where the claim happened, or where the defendant lives, is set up in business, or works. With more than one defendant, any one of them will do.",
+      "Some counties have one district court. Others, like Wayne, Oakland, and Macomb, have many, each covering certain cities and townships. Pick the one that covers the right city.",
+      who === "local" ? "Suing a city, village, or township: file where it is located. Suing a county: file in that county (in the district with the county seat, where there's more than one). Suing a school district: file where its main office is. You can't bring a claim the government is immune from, and claims against governments can have short notice deadlines, so get legal help first." : "",
+      where === "arose" ? "Because the other side is outside Michigan, file where it happened. Winning is one thing and collecting is another: a Michigan judgment against someone with no job, bank account, or property here can be hard to collect." : ""
+    ], [["MCL 600.8415", ""], ["Court directory", ""], ["Form DC 84info", ""]].concat(who === "local" ? [["MCL 600.8424", "(3)"]] : []),
+      "Look up the court in the state's trial court directory, then call the clerk to confirm it's the right one and how they take filings."));
+
+    // Fee
+    if (amt > 0) {
+      const f = fee(amt);
+      c.push(card("law", `Filing fee: ${usd(f.total)}`, [
+        `For a claim of ${usd(Math.min(amt, DATA.limit))}, the court's filing fee is ${usd(f.court)}, plus a ${usd(DATA.efile)} electronic filing system fee that is charged on every case, even if you file on paper.`,
+        `<div class="math">Up to $600            $30
+Over $600 to $1,750   $50
+Over $1,750           $70</div>`,
+        `<strong>Service costs extra.</strong> The court has the papers delivered to the other side. Certified mail costs the going postal rate (Michigan Legal Help says it can be as little as ${usd(DATA.mailFrom)}). Personal service by a process server or officer is ${usd(DATA.personalService)} plus mileage for each defendant. Some courts also charge for copies.`,
+        "<strong>If you win,</strong> you're entitled to your costs, including the cost of service, on top of the judgment. If you lose, you don't get them back.",
+        "<strong>Can't afford it?</strong> File a Fee Waiver Request (Form MC 20) with your claim. It covers people who get food assistance, Medicaid, cash assistance, WIC, or SSI, people helped by legal aid, and others who can't pay. If the filing fee is waived, the electronic filing fee is too."
+      ], [["MCL 600.8420", "(1)-(2), (6)"], ["MCL 600.1986", ""], ["MCL 600.2559", "(1)(a)"], ["MCL 600.8421", ""], ["Court fee table", ""], ["Form MC 20", ""], ["MLH: Taking a case to court", ""]]));
+    }
+
+    // The form and steps
+    c.push(card("law", "The form and how to file it", [
+      "The form is the <strong>Small Claims Affidavit, Form DC 84</strong>. The state rewrote it in June 2026. Older guides call it the \"Affidavit and Claim.\"",
+      steps([
+        "Fill out Form DC 84. With more than one defendant, add the Small Claims Affidavit Addendum, Form DC 84a. Michigan Legal Help's free Do-It-Yourself tool will fill it in from your answers, or the court clerk must prepare it for you if you ask.",
+        `Name the other side correctly. ${who === "biz" ? "A business can be sued under any name it uses on its signs, ads, invoices, or receipts, as long as you give an address where it does business. The state's Corporations Division search shows a company's legal name and resident agent." : "Use the person's full legal name and a current address where mail will reach them."}`,
+        "<strong>Don't sign it yet.</strong> Sign in front of a notary or a deputy court clerk, who checks your ID and has you swear it's true.",
+        "File it with the district court and pay the fee. Courts differ on filing in person, by mail, or online through MiFile, so ask the clerk.",
+        `The clerk sets a hearing ${DATA.hearMin} to ${DATA.hearMax} days out and has the papers served on the other side by certified mail or in person. The other side must get them at least ${DATA.serveBefore} days before the hearing. If they don't, ask the clerk for a new date. There's no extra charge for the new notice.`,
+        "Go to the hearing with all your proof and witnesses. If you don't show up, the court can dismiss your case."
+      ])
+    ], [["Form DC 84", ""], ["Form DC 84a", ""], ["Form DC 84info", ""], ["MCL 600.8402", ""], ["MCL 600.8403", ""], ["MCL 600.8405", ""], ["MCL 600.8406", ""], ["MCL 600.8426", ""], ["MCR 4.303", "(C)"], ["MLH: DIY small claims", ""], ["MiFile courts", ""]].concat(who === "biz" ? [["State business search", ""]] : [])));
+
+    c.push(...otherLim);
+    c.push(giveUpCard("p"));
+
+    c.push(card("facts", "Before you file", [
+      "Think about your chances and whether you can settle first. A short, dated letter asking for a set amount by a set day costs nothing, and it becomes proof that you asked. Mediation is another option.",
+      "If you settle after filing, put the deal in writing and have both sides sign it. The judge can enter it as the judgment, which lets you use the court to collect if they stop paying."
+    ], [["MLH: Overview", ""], ["MCL 600.8410", "(1)"]]));
+
+    // Collecting
+    c.push(card("law", "If you win: collecting is up to you", [
+      "The court doesn't collect the money for you. Here is what the law gives you:",
+      list([
+        `<strong>${DATA.payOrDisclose} days.</strong> If the other side doesn't pay in full right away, the judge orders them to pay within ${DATA.payOrDisclose} days or tell you and the court, in writing, where they work and where they bank.`,
+        "<strong>Payment plan.</strong> The judge can order payments over time. While the other side keeps up, you can't use other collection steps.",
+        `<strong>${DATA.garnishWait} days.</strong> No garnishment can issue until ${DATA.garnishWait} days after the judgment.`,
+        `<strong>Garnishment.</strong> A court order to take money from wages (Form MC 12), a bank account (Form MC 13), or a state income tax refund (Form MC 52). Each writ costs ${usd(DATA.writFee)} at the court, plus service, plus a fee paid to the employer or bank (${usd(DATA.garnisheePeriodic)} for wages, ${usd(DATA.garnisheeOnce)} for a one-time garnishment).`,
+        `<strong>Don't know where they work or bank?</strong> Ask the court to order them in to answer questions under oath (Form MC 11, ${usd(DATA.writFee)}).`,
+        "<strong>Seizing property.</strong> A court officer takes and sells property (Form MC 19). The officer's fee comes out of the sale.",
+        `<strong>${DATA.judgmentYears} years.</strong> A small claims judgment lasts ${DATA.judgmentYears} years, not the 10 years of most Michigan judgments. You can ask the court to renew it before it runs out.`
+      ]),
+      "Costs of collecting are added to what they owe. When you're paid in full, file a Certificate of Satisfied Judgment (Form MC 17)."
+    ], [["MCL 600.8410", "(2), (5)"], ["MCR 4.305", "(C)"], ["MCL 600.8420", "(2)"], ["MCL 600.4012", "(12)"], ["MCL 600.5809", "(3)"], ["MCL 600.8421", ""], ["Form DC 85info", ""], ["Form MC 12", ""], ["Form MC 13", ""], ["Form MC 52", ""], ["Form MC 11", ""], ["Form MC 19", ""], ["MLH: Collecting", ""]]));
+
+    show(c, "Your answers");
+  }
+
+  /* ---------- Defendant ---------- */
+  function planD() {
+    const amt = parseFloat($("amt").value), type = $("type").value, W = parse($("when").value);
+    const H = parse($("hear").value), S = parse($("served").value), how = $("how").value, jstat = $("jstat").value, J = parse($("jdate").value);
+    const biz = on("c-dbiz");
+    const c = [];
+
+    if (jstat !== "no") {
+      // After a judgment
+      if (!J) c.push(card("facts", "Enter the date on the judgment", "The deadlines below count from the day the judgment was signed."));
+      if (J && diff(today, J) > 0) c.push(card("facts", "That date is in the future", "Check the date on the judgment."));
+      if (jstat === "mag") {
+        if (J) {
+          const due = roll(add(J, DATA.magAppeal)), left = diff(today, due);
+          if (left >= 0) c.push(card("help", `Appeal to the judge by ${plain(due)}`, [
+            `A magistrate's small claims decision can be appealed to the district court judge within ${DATA.magAppeal} days after it's signed. That's ${when(due)}. Either side can appeal. The judge hears the whole case fresh.`,
+            "After that, the decision is final. The judge's decision can't be appealed again.",
+            "If the last day is one the court is closed, the rule gives you the next open day. Don't count on that. File at the clerk's office before then."
+          ], [["MCL 600.8427", ""], ["Form DC 85", ""], ["MCR 1.108", "(1)"]], "Call or visit the court clerk today and ask how to file a small claims appeal to the judge."));
+          else c.push(card("law", "The time to appeal has passed", [
+            `A magistrate's decision can be appealed to the judge within ${DATA.magAppeal} days. That ended ${when(due)}, so the judgment is final.`
+          ], [["MCL 600.8427", ""], ["Form DC 85", ""]]));
+        } else c.push(card("law", `A magistrate's decision can be appealed for ${DATA.magAppeal} days`, [
+          `Either side can appeal a magistrate's small claims decision to the district court judge within ${DATA.magAppeal} days after it's signed. The judge hears the whole case fresh.`
+        ], [["MCL 600.8427", ""]]));
+      }
+      if (jstat === "judge") c.push(card("law", "A judge's small claims decision is final", [
+        "Both sides gave up the right to appeal by staying in small claims. A judge's decision can't be appealed.",
+        "The court rules still let a court change or cancel a small claims judgment the same way as in other civil cases, for limited reasons like a clerical mistake, new evidence that couldn't have been found in time, fraud by the other side, or a judgment that is void. That's rare. Talk to legal help if you think one fits."
+      ], [["MCL 600.8412", ""], ["MCL 600.8427", ""], ["MCR 4.305", "(B)"], ["MCR 2.612", ""]]));
+      if (jstat === "default") {
+        const due = J ? roll(add(J, DATA.setAside)) : null, left = due ? diff(today, due) : null;
+        const notServed = how === "none" || how === "othermail";
+        c.push(card(due && left >= 0 ? "help" : "facts", due && left >= 0 ? `Ask the court to set aside the default by ${plain(due)}` : "You can ask the court to set aside the default", [
+          "A judgment entered because you missed the hearing is a default judgment. A small claims judgment can be changed or cancelled the same way as in other civil cases, so you can file a motion asking the court to set it aside.",
+          `The rule asks for two things: good cause (a real reason you missed it), and a sworn statement of facts showing you have a real defense. For someone served in person, the motion must be filed within ${DATA.setAside} days after the default judgment was entered${due ? `, which is ${when(due)}` : ""}. Treat that as your deadline however the papers reached you. The court's motion fee is ${usd(DATA.motionFee)}, and you can ask to have it waived.`,
+          notServed ? `You said the papers didn't reach you properly${biz ? "" : ", by certified mail you signed for or by hand"}. The law says the court has no power to enter a small claims judgment against someone who wasn't served at least ${DATA.serveBefore} days before the hearing, unless that person showed up. That is its own reason to set a judgment aside, and the rule doesn't ask for good cause when the court never had power over you. Say plainly in your motion when and how you found out about the case, and still file fast.` : "",
+          due && left < 0 ? `The ${DATA.setAside} days ended ${plain(due)}. Another rule still allows relief from a judgment for limited reasons, some of them only within 1 year. Get legal help right away.` : ""
+        ], [["MCR 4.305", "(B)"], ["MCR 2.603", "(D)"], ["MCR 2.612", ""], ["MCL 600.8406", "(2)"], ["Court fee table", ""], ["Form MC 20", ""]],
+          "Call the court clerk today and ask which form your court uses for a motion to set aside a default judgment. Michigan Legal Help can point you to free legal aid."));
+      }
+      if (J) {
+        const pay = add(J, DATA.payOrDisclose), gar = add(J, DATA.garnishWait);
+        c.push(card("law", "What a judgment means for you", [
+          "The judgment (Form DC 85) says how much and how it must be paid. Unless you paid in full on the spot:",
+          list([
+            `<strong>By ${plain(pay)}</strong> (${DATA.payOrDisclose} days after the judgment), pay it in full, or tell the court and the other side in writing where you work and where you have bank, savings, or credit union accounts.`,
+            `<strong>After ${plain(gar)}</strong> (${DATA.garnishWait} days), the other side can ask the court to garnish your wages, bank account, or state tax refund, or to seize property.`,
+            "<strong>A payment plan stops that.</strong> The judge can order installment payments in amounts that are fair for you. While you keep up, no other collection is allowed. If your judgment has no plan, you can file a motion to ask for one.",
+            `<strong>It lasts ${DATA.judgmentYears} years</strong> and can be renewed, and it earns interest until it's paid.`
+          ]),
+          "When it's paid in full, the other side should file a Certificate of Satisfied Judgment (Form MC 17). If they don't, you can ask the court to mark it paid."
+        ], [["MCL 600.8410", "(2)-(5)"], ["MCR 4.305", "(C)"], ["MCL 600.5809", "(3)"], ["Form DC 85", ""], ["MLH: Being a defendant", ""]],
+          "Can't pay it all at once? Ask the court clerk how to request installment payments."));
+      }
+      show(c, "Where you stand");
+      return;
+    }
+
+    // Before the hearing
+    if (!H) c.push(card("facts", "Find your hearing date", [
+      "The claim came with a Small Claims Notice of Hearing (Form DC 84n) that gives the day, time, and place. Enter the date above. If you didn't get one, call the court on the claim right away."
+    ], [["Form DC 84", "p. 4"]]));
+    else {
+      const left = diff(today, H);
+      if (left < 0) c.push(card("help", "Your hearing date has passed", [
+        `The date you entered was ${when(H)}. If you weren't there, the court may have entered a default judgment for up to ${usd(DATA.limit)} plus costs.`
+      ], [["MCR 4.304", "(B)"], ["Form DC 84", ""]], "Call the court clerk today and ask what happened in your case. If there's a judgment, change the last question above to see your options."));
+      else c.push(card(left <= 7 ? "help" : "law", `Go to your hearing on ${plain(H)}`, [
+        `Your hearing is ${when(H)}. You don't file a written answer in small claims. You answer in person, at the hearing, with your proof and witnesses.`,
+        `<strong>If you don't go,</strong> the court can enter a default judgment against you for the amount claimed, up to ${usd(DATA.limit)}, plus the other side's costs. Ignoring the papers doesn't make the case go away.`,
+        "Check your notice for whether the hearing is in person, by video, or your choice. If you need an interpreter or a disability accommodation, contact the court's ADA coordinator right away (Forms MC 81 and MC 70). Evening or Saturday hours can be made available if you ask in writing and show the need."
+      ], [["MCL 600.8404", ""], ["MCR 4.304", ""], ["Form DC 84", ""]]));
+    }
+
+    // Service
+    if (how === "none" || how === "othermail" || (H && S && diff(S, H) < DATA.serveBefore)) {
+      const late = H && S && diff(S, H) < DATA.serveBefore;
+      c.push(card("law", late ? `You got the papers fewer than ${DATA.serveBefore} days before the hearing` : "The papers may not have been served the right way", [
+        `Small claims papers must be served by certified mail that only the defendant can sign for, or handed over in person, unless a judge ordered another way. ${biz ? "For a corporation or partnership, an agent may sign for the certified mail." : ""}`,
+        `If you weren't served in person, or didn't sign for the certified mail, at least ${DATA.serveBefore} days before the hearing, the court has no power to enter a judgment, <strong>unless you show up and don't ask for more time</strong>. Either side can ask to have the hearing moved back at least 7 days.`,
+        late && S ? `You got them ${plain(S)} and the hearing is ${plain(H)}, which is ${diff(S, H)} day${diff(S, H) === 1 ? "" : "s"}.` : ""
+      ], [["MCL 600.8405", ""], ["MCL 600.8406", "(2)"], ["MCR 4.303", "(B)"]],
+        "Don't skip the hearing over this. Go, and before anything else tell the judge when and how you got the papers and ask for a continuance (a later date) if you need time to get ready."));
+    }
+
+    // The claim itself
+    if (on("c-collector")) c.push(card("law", "A collection agency or debt buyer can't use small claims", [
+      "The law bars collection agencies and their workers from taking part in a small claims case, and bars a claim from being filed by someone it was assigned (sold or signed over) to. Only the one you first dealt with can sue you here."
+    ], [["MCL 600.8408", "(1)"], ["MCL 600.8407", "(1)"]], "Bring any letter that shows who owns the debt now, and tell the judge at the start of the hearing."));
+    if (amt > DATA.limit) c.push(card("law", `The court can't award more than ${usd(DATA.limit)}`, [
+      `The claim is for ${usd(amt)}. By filing in small claims, the other side gave up anything over ${usd(DATA.limit)}, plus costs, and can't sue again for the rest.`
+    ], [["MCL 600.8425", "(1)"], ["MCR 4.302", "(D)"]]));
+    c.push(...limitCards(type, W, "d"));
+    if (type === "car") c.push(card("law", "Car crash claims have built-in limits", [
+      `A claim against you for damage to the other driver's vehicle is capped at ${usd(DATA.miniTort.max)}, and only for damage their insurance didn't cover. They get nothing if they were more than 50% at fault or their vehicle wasn't insured, and less if they were partly at fault. The no-fault law doesn't require your insurance to cover this kind of claim, so ask your insurer whether your policy does.`
+    ], [["MCL 500.3135", "(3)(e), (4)"]]));
+
+    // Options
+    c.push(card("law", "Your choices before the hearing starts", [
+      list([
+        "<strong>Settle.</strong> You can make a deal before or at the hearing. Put it in writing and have both sides sign. The judge reviews it and can enter it as the judgment. Even after a settlement you can be charged the other side's filing costs.",
+        "<strong>Go and tell your side.</strong> Bring every paper, photo, message, and witness that backs you up.",
+        "<strong>Ask for payments.</strong> Even if you owe the money, you can go and ask the judge for installment payments you can afford. While you keep up, the other side can't garnish you.",
+        "<strong>Ask for a judge.</strong> If a magistrate is set to hear it, you can ask, in writing or at court before it starts, for a judge instead.",
+        `<strong>Move the case out of small claims.</strong> File the Small Claims Demand for Removal (Form DC 86) before the hearing, or ask at the hearing before it starts. There's no fee. Then lawyers, a jury, and appeals are allowed, but you must file a written answer within ${DATA.removalAnswer} days of the court's order or lose by default, and it takes longer.`
+      ])
+    ], [["MCL 600.8410", "(1)-(2)"], ["MCL 600.8404", "(1)(d)-(e)"], ["MCL 600.8408", "(4)"], ["MCR 4.306", ""], ["Form DC 86", ""], ["MLH: Being a defendant", ""]]));
+
+    if (on("c-counter")) c.push(card("facts", "If the other side owes you", [
+      "You can make your own claim against the plaintiff over the same dispute (a counterclaim). Put it in writing with the dates, the reasons, and the amount, swear to it, file it with the court, and send the other side a copy before the hearing. The court may move the hearing date if either side asks.",
+      `If your claim is worth more than ${usd(DATA.limit)}, small claims can't hear it. You can file your own case in the right court and give the small claims clerk a sworn statement with a copy of your complaint, and a $1 fee, at or before the hearing. The judge then sends the small claims case to that court so both are tried together.`
+    ], [["MCL 600.8422", ""], ["MCL 600.8423", ""], ["MLH: Being a defendant", ""]]));
+
+    c.push(giveUpCard("d"));
+    show(c, "Where you stand");
+  }
+
+  function show(c, head) {
+    $("r-plan").innerHTML =
+      `<div class="results-head"><h2>${head}</h2>
+        <div class="legend"><span class="tag law">The rule says</span><span class="tag facts">Depends on your facts</span><span class="tag help">Act now</span></div></div>` + c.join("");
+  }
+
+  /* ---------- The form ---------- */
+  let lastRole = null, lastType = null;
+  function plan() {
+    const role = val("role"), type = $("type").value, T = TYPES[type];
+    $("g-p").hidden = role !== "p"; $("g-p").style.display = role === "p" ? "grid" : "none";
+    $("g-d").hidden = role !== "d"; $("g-d").style.display = role === "d" ? "grid" : "none";
+    $("jdate-wrap").hidden = $("jstat").value === "no";
+    $("l-amt").textContent = role === "p" ? "How much are you owed?" : "How much does the claim ask for?";
+    $("h-amt").textContent = role === "p" ? "Just the money you're owed. Leave out the filing fee." : "Item 4 on the Small Claims Affidavit.";
+    $("l-when").textContent = role === "p" ? T.whenLabel : "When does the claim say it happened?";
+    $("h-when").textContent = role === "p" ? T.whenHint : "Item 3 on the Small Claims Affidavit. Leave blank if you're not sure.";
+    $("h-them").hidden = role !== "p";
+    $("claim-wrap").style.display = role === "p" ? "grid" : "none";
+    if (role !== lastRole || type !== lastType) { evidence(role, type); lastRole = role; lastType = type; }
+    (role === "p" ? planP : planD)();
+    notes();
+  }
+
+  /* ---------- Worksheet ---------- */
+  const tl = $("tl");
+  function row(date, text) {
+    const r = document.createElement("div"); r.className = "tl-row";
+    r.innerHTML = `<input type="date" aria-label="Date" value="${date || ""}"><input type="text" aria-label="What happened" value="${esc(text || "")}" placeholder="What happened" autocomplete="off"><button class="btn ghost sm" type="button" aria-label="Remove this line">Remove</button>`;
+    r.querySelector("button").addEventListener("click", () => { r.remove(); notes(); });
+    tl.appendChild(r);
+  }
+  $("tl-add").addEventListener("click", () => { row("", ""); tl.lastChild.querySelector("input").focus(); notes(); });
+  function evidence(role, type) {
+    const items = role === "d" ? D_EVID : EVID[type];
+    $("ev").innerHTML = items.map((t, i) => `<label><input type="checkbox" data-ev="${esc(t)}"${role === "p" && type === "deposit" && lastRole === null && i < 4 ? " checked" : ""}><span>${esc(t)}</span></label>`).join("");
+  }
+  const F = (v, ph) => v ? esc(v) : `<span class="fill">[${ph}]</span>`;
+  const lines = id => $(id).value.split("\n").map(s => s.trim()).filter(Boolean);
+  function notes() {
+    const role = val("role"), type = $("type").value, T = TYPES[type];
+    const amt = parseFloat($("amt").value), me = $("w-me").value.trim(), them = $("w-them").value.trim();
+    const H = role === "d" ? parse($("hear").value) : null;
+    const rows = [...tl.querySelectorAll(".tl-row")].map(r => ({ d: parse(r.children[0].value), t: r.children[1].value.trim() })).filter(r => r.d || r.t)
+      .sort((a, b) => (a.d ? a.d.getTime() : Infinity) - (b.d ? b.d.getTime() : Infinity));
+    const ev = [...document.querySelectorAll("#ev input:checked")].map(i => i.dataset.ev).concat(lines("w-ev"));
+    const wit = lines("w-wit");
+    const money = amt > 0 ? usd(Math.min(amt, role === "p" ? DATA.limit : amt)) : null;
+    const L = [];
+    L.push("SMALL CLAIMS HEARING NOTES", "");
+    L.push(role === "p" ? `${F(me, "Your name")} (plaintiff) v. ${F(them, "Other side's name")} (defendant)` : `${F(them, "Other side's name")} (plaintiff) v. ${F(me, "Your name")} (defendant)`);
+    L.push(`Case number: ${F("", "From your court papers")}`, `Hearing: ${H ? esc(fmt(H)) : F("", "Date, time, and courtroom from the Notice of Hearing")}`, "");
+    if (role === "p") {
+      L.push("1. WHAT I'M ASKING FOR", `${money ? esc(money) : F("", "Amount")} for ${esc(T.name)}, plus my costs: the filing fee${amt > 0 ? " (" + usd(fee(amt).total) + ")" : ""} and what I paid for service.`);
+      if (amt > DATA.limit) L.push(`My full claim is ${esc(usd(amt))}. I understand small claims can award no more than ${usd(DATA.limit)}.`);
+    } else {
+      L.push("1. WHAT I'M ASKING FOR", `The claim asks for ${money ? esc(money) : F("", "Amount")}. I ask the court to ${F("", "dismiss it / lower it to $___ / order payments of $___ a month")}.`);
+      L.push("", "WHY THE CLAIM IS WRONG, IN ONE OR TWO SENTENCES", F("", "For example: I already paid it. The amount is wrong. The work was never finished. It wasn't me."));
+    }
+    L.push("", "2. WHAT HAPPENED, IN ORDER");
+    if (rows.length) rows.forEach(r => L.push(`- ${r.d ? esc(plain(r.d)) : F("", "Date")}: ${F(r.t, "What happened")}`));
+    else L.push(F("", "Add your dates above"));
+    L.push("", "3. MY PROOF (bring each one, with a copy for the judge and a copy for the other side)");
+    if (ev.length) ev.forEach(e => L.push(`[ ] ${esc(e)}`)); else L.push(F("", "Check off or list your proof above"));
+    L.push("", "4. WITNESSES");
+    if (wit.length) wit.forEach(w => L.push(`- ${esc(w)}`)); else L.push("None listed.");
+    L.push("", "5. AT THE HEARING");
+    L.push("- Get there early. Tell the clerk or court officer you're there.");
+    L.push("- Tell it in the order it happened. Hand up each paper as you get to it.");
+    L.push("- Speak to the judge, not the other side. Don't interrupt. Answer what's asked.");
+    L.push(role === "p" ? "- End by saying the exact amount you're asking for and how you got to that number." : "- If you owe some or all of it, ask for installment payments you can afford.");
+    $("notes").innerHTML = L.join("\n");
+
+    if (role === "p") {
+      const parts = rows.filter(r => r.t).map(r => `${r.d ? "On " + esc(plain(r.d)) + ", " : ""}${esc(r.t.replace(/\.$/, ""))}.`);
+      const body = parts.length ? parts.join(" ") : F("", "What happened, with dates and amounts");
+      $("claim").innerHTML = `${body} ${F(them, "Other side's name")} owes me ${money ? esc(amt > DATA.limit ? usd(amt) : money) : F("", "Amount")} and has not paid.${amt > DATA.limit ? ` I understand that by filing in small claims I give up any amount over ${usd(DATA.limit)}.` : ""}`;
+    }
+  }
+
+  // Sample, so the page shows how it works
+  $("when").value = iso(add(today, -75));
+  row(iso(add(today, -440)), "I signed a one-year lease and paid a $1,450 security deposit");
+  row(iso(add(today, -75)), "I moved out, returned the keys, and took photos of every room");
+  row(iso(add(today, -73)), "I mailed the landlord my new address");
+  row(iso(add(today, -20)), "I sent a letter asking for the deposit back. No answer and no list of damages");
+
+  [fp, $("f-sheet")].forEach(f => { f.addEventListener("input", plan); f.addEventListener("change", plan); f.addEventListener("submit", e => e.preventDefault()); });
+  plan();
+
+  function copier(btn, src, msgId) {
+    $(btn).addEventListener("click", () => {
+      const el = $(src), text = el.innerText, msg = $(msgId);
+      const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = "Selected. Press Ctrl+C or Cmd+C to copy."; };
+      try { navigator.clipboard.writeText(text).then(() => { msg.textContent = "Copied"; }, fallback); } catch (e) { fallback(); }
+    });
+  }
+  copier("copy", "notes", "copied"); copier("copy2", "claim", "copied2");
+  $("print").addEventListener("click", () => {
+    document.body.classList.add("printing");
+    window.print();
+    setTimeout(() => document.body.classList.remove("printing"), 500);
+  });
+})();
+</script>
+</body>
+</html>
