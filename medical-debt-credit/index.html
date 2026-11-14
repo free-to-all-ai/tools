@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Medical Debt on Your Credit Report: Check and Dispute Letters</title>
+<meta name="description" content="Medical bills on your credit report? See which ones the bureaus say shouldn't show (paid, under $500, under a year old) and draft dispute letters. Free.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/medical-debt-credit/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Medical Debt on Your Credit Report: Check and Dispute Letters">
+<meta property="og:description" content="Medical bills on your credit report? See which ones the bureaus say shouldn't show (paid, under $500, under a year old) and draft dispute letters. Free.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/medical-debt-credit/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/medical-debt-credit.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. A list of medical debts on top (add as many as you have), then a result block per debt with source chips, then the rules that apply to everyone, the dispute letters, free help, and sources. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr);
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); overflow-wrap: anywhere; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+section { display: grid; gap: 12px; min-width: 0; grid-template-columns: minmax(0, 1fr); }
+section > *, .wrap > * { min-width: 0; }
+.box {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 18px; min-width: 0; grid-template-columns: minmax(0, 1fr);
+}
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.debt-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="text"], input[type="number"], input[type="date"], textarea {
+  font: inherit; font-size: 16px; padding: 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; min-width: 0;
+}
+input[type="number"], input[type="date"] { max-width: 320px; }
+input[type="number"] { font-variant-numeric: tabular-nums; }
+textarea { font-size: 15px; line-height: 1.5; min-height: 340px; resize: vertical; }
+textarea.short { min-height: 76px; }
+.money { display: flex; align-items: center; gap: 6px; }
+.money span { font-weight: 700; color: var(--muted); }
+.money input { max-width: 220px; }
+.opts { display: grid; gap: 2px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; padding: 7px 0; cursor: pointer; }
+.opts input { margin-top: 5px; accent-color: var(--accent); width: 18px; height: 18px; flex: none; }
+.opts small { display: block; color: var(--muted); font-size: 14px; }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pills label {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  border: 1.5px solid var(--line); border-radius: 999px; padding: 9px 14px; background: var(--bg);
+}
+.pills input { accent-color: var(--accent); width: 18px; height: 18px; margin: 0; }
+.pills label:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.hint { font-size: 14px; color: var(--muted); }
+details.more > summary { cursor: pointer; font-weight: 700; color: var(--accent); padding: 6px 0; }
+details.more[open] > summary { margin-bottom: 8px; }
+details.more > .inner { display: grid; gap: 16px; }
+button.btn {
+  font: inherit; font-size: 15px; font-weight: 700; cursor: pointer;
+  border-radius: 8px; padding: 10px 16px; border: 1.5px solid var(--accent);
+  background: var(--accent); color: var(--surface);
+}
+button.btn.ghost { background: transparent; color: var(--accent); }
+button.btn.quiet { background: transparent; color: var(--muted); border-color: var(--line); font-weight: 400; padding: 7px 12px; }
+button.btn:hover { filter: brightness(1.08); }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* Summary */
+.total {
+  background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--accent);
+  border-radius: 12px; padding: 18px; display: grid; gap: 8px;
+}
+.big { font-family: var(--f-display); font-weight: 800; font-size: clamp(24px, 5.5vw, 32px); line-height: 1.1; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+
+/* Cards */
+.results { display: grid; gap: 12px; }
+.group { display: grid; gap: 10px; }
+.group > h3 { padding-top: 6px; overflow-wrap: anywhere; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line); min-width: 0;
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.card .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.card ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.tag.kind { color: var(--accent); background: var(--accent-soft); }
+.small { font-size: 15px; color: var(--muted); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.addr { font-family: var(--f-mono); font-size: 14px; white-space: pre-line; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; overflow-wrap: anywhere; }
+.letter-block { display: grid; gap: 8px; }
+.letter-block .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.copied { font-size: 14px; color: var(--law); }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+ol.steps { margin: 0; padding-left: 22px; display: grid; gap: 8px; }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+#printout { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+@media print {
+  body.printing .wrap { display: none !important; }
+  body.printing #printout { display: block; white-space: pre-wrap; font-family: Georgia, "Times New Roman", serif; font-size: 12pt; line-height: 1.5; color: #000; background: #fff; padding: 0; }
+  body.printing { background: #fff; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Medical debt · Credit reports · free</span>
+    <h1>Medical Debt on Your Credit Report Check</h1>
+    <p class="lede">Medical bills in collections can show up on your credit report. But Equifax, Experian, and TransUnion say they leave some of them off: ones you paid, ones that started under $500, and ones less than a year old. Federal law adds a 7-year limit and a right to dispute. List your medical debts to see which ones shouldn't be there, then draft the dispute letters.</p>
+    <div class="notice">
+      <strong>This is information, not legal or financial advice.</strong>
+      <span>The bureaus' medical debt rules are their own voluntary policy, not a law, and they can change. Every rule here was checked against its source on <span data-d="checked"></span>. Nothing you type here leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="h-debts">
+    <h2 id="h-debts">1. Your medical debts</h2>
+    <p class="hint">Have your credit reports in front of you. They're free every week at <a href="https://www.annualcreditreport.com/" target="_blank" rel="noopener">AnnualCreditReport.com</a>. Medical collections are usually listed under "Collections," with a collection agency's name.</p>
+    <p class="sample">A sample debt is filled in so you can see how it works. Change it to yours.</p>
+    <form id="f-debts" novalidate>
+      <div id="debts" class="results"></div>
+    </form>
+    <div class="btns"><button class="btn ghost" type="button" id="add">Add another debt</button></div>
+  </section>
+
+  <section aria-labelledby="h-res">
+    <h2 id="h-res">2. What the rules say about each one</h2>
+    <div id="summary" aria-live="polite"></div>
+    <div class="results" id="res"></div>
+  </section>
+
+  <section aria-labelledby="h-letters" id="s-letters">
+    <h2 id="h-letters">3. Your letters</h2>
+    <p class="hint">One dispute letter for each credit bureau that shows a debt with something to dispute, and one letter asking each collector to prove the debt. They fill in from your answers above. You can edit them right in the box.</p>
+    <form class="box" id="f-you" novalidate>
+      <div class="row2">
+        <div class="field"><label for="y-name">Your name</label><input id="y-name" type="text" autocomplete="off" value="Jordan Example"></div>
+        <div class="field"><label for="y-dob">Date of birth (optional)</label><input id="y-dob" type="text" autocomplete="off" placeholder="Month, day, year">
+          <span class="hint">The bureaus use it to find your file.</span></div>
+      </div>
+      <div class="field"><label for="y-addr">Your mailing address</label><textarea id="y-addr" class="short" autocomplete="off" placeholder="Street&#10;City, State ZIP"></textarea></div>
+    </form>
+    <div id="letters" class="results"></div>
+    <div class="card facts" id="send-tips">
+      <div class="top"><h3>Before you send them</h3></div>
+      <ol class="steps">
+        <li>Fill in anything in [brackets], then sign each letter. The bureaus also ask for your Social Security number to find your file. Write it in by hand.</li>
+        <li>Add copies, never originals: the page of your credit report with the item circled, proof you paid, your insurance Explanation of Benefits, or anything else that backs you up. Equifax's form also asks for a copy of an ID and a bill that shows your address.</li>
+        <li>The CFPB suggests certified mail with a return receipt, so you can show when it arrived. Keep a copy of everything.</li>
+        <li>You can also dispute online or by phone with each bureau. A mailed letter leaves a paper record.</li>
+      </ol>
+      <div class="cites" id="send-cites"></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-rights">
+    <h2 id="h-rights">The rules for everyone</h2>
+    <p class="hint">Green cards are what the rule says. Amber cards depend on your facts. Each card links its source.</p>
+    <div class="results" id="rights"></div>
+  </section>
+
+  <section class="box gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Free help</h2>
+    <ul>
+      <li><strong>Can't pay the bill itself?</strong> See the <a href="../hospital-aid/">Detroit Hospital Financial Assistance Check</a>. Check the charges with the <a href="../bill-checker/">Detroit Medical Bill Check</a>. If insurance denied the claim, see the <a href="../appeal-helper/">Insurance Denial Appeal Helper</a>.</li>
+      <li><a href="https://michiganlegalhelp.org/guide-to-legal-help" target="_blank" rel="noopener">Michigan Legal Help: Guide to Legal Help</a> finds free legal aid near you. Its page <a href="https://michiganlegalhelp.org/resources/money-debt-and-consumer-issues/how-deal-debt-collectors" target="_blank" rel="noopener">How to Deal with Debt Collectors</a> covers your rights in Michigan.</li>
+      <li><strong>Consumer Financial Protection Bureau (CFPB).</strong> If a bureau or collector doesn't fix the problem, <a href="https://www.consumerfinance.gov/complaint/" target="_blank" rel="noopener">submit a complaint</a> online or call <span data-d="cfpbPhone"></span>, Monday to Friday, 9 AM to 6 PM Eastern. The CFPB says most companies respond within 15 days.</li>
+      <li><strong>Michigan Attorney General, Consumer Protection.</strong> <a href="https://secure.ag.state.mi.us/complaints/consumer.aspx" target="_blank" rel="noopener">Online complaint form</a>, or call <span data-d="agPhone"></span> (in Michigan) or <span data-d="agLocal"></span>.</li>
+      <li><strong>Sued over a medical debt?</strong> A court case has its own short deadline to answer. Get legal help right away through the Guide to Legal Help above.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> For each debt, the page checks your answers against two things. First, the three credit bureaus' own announced policy on medical collection debt: paid in full, an initial reported balance under $500, or less than one year past due means it isn't included. That is voluntary policy, not law. Second, federal law: the Fair Credit Reporting Act's 7-year limit and dispute rights, the Fair Debt Collection Practices Act and Regulation F on collectors, and the IRS rules that nonprofit hospitals must follow before reporting a patient to a credit bureau. Green cards are what the rule says directly. Amber cards depend on your facts. Red cards mean act now. The page can't see your credit report, so the result is only as good as the dates and amounts you enter.</p>
+    <p>Dates: the one-year wait is counted from the date the bill first went past due. The 7-year limit is counted the way 15 U.S.C. 1681c(c)(1) says, starting 180 days after that date. The 30 days to dispute with a collector is counted from the day you got its first notice.</p>
+    <p>Sources, all checked <span data-d="checked"></span>:</p>
+    <ul id="src-list"></ul>
+    <p>This page doesn't cover medical bills you put on a credit card, lawsuits, or bankruptcy. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+    <p class="report"><strong>See a mistake?</strong> <a href="https://github.com/free-to-all-ai/tools/issues/new?template=mistake.yml&amp;title=Mistake%3A+Medical+Debt+on+Your+Credit+Report+Check&amp;tool=Medical+Debt+on+Your+Credit+Report+Check" target="_blank" rel="noopener">Report it on GitHub</a>. You'll need a free GitHub account, and what you write there is public, so leave out personal details.</p>
+    <p><a href="https://free-to-all-ai.github.io/tools/">More free tools from Free to All AI</a></p>
+  </footer>
+</div>
+<div id="printout" aria-hidden="true"></div>
+
+<script>
+(() => {
+  /* ---------- Numbers, dates, addresses, and phone numbers. Update only this block. ---------- */
+  // The bureaus can change their medical debt policy at any time. Recheck each bureau's page (SRC below)
+  // every few months, and recheck the Michigan bills and the CFPB rule page for any new law.
+  const D = {
+    checked: "November 14, 2026",
+
+    // Equifax, Experian, and TransUnion policy on medical collection debt. Voluntary, not law.
+    // Joint release July 1, 2022 (equifax.com newsroom) and joint release April 11, 2023 (newsroom.transunion.com),
+    // confirmed on each bureau's current help page on Nov 14, 2026.
+    paidSince: "July 1, 2022",   // paid-in-full medical collections no longer included
+    floor: 500,                  // initial reported balance under this is not included
+    floorSince: "April 2023",
+    waitYears: 1,                // unpaid medical collections wait this long after the first delinquency
+    waitSince: "July 2022",
+
+    // Fair Credit Reporting Act, 15 U.S.C. 1681c, 1681i, 1681j (law.cornell.edu, checked Nov 14, 2026)
+    reportYears: 7,              // 1681c(a)(4)
+    reportLagDays: 180,          // 1681c(c)(1): the 7 years start this many days after the delinquency began
+    exemptCredit: 150000,        // 1681c(b): limit doesn't apply to credit or life insurance of this much or more
+    exemptSalary: 75000,         // 1681c(b): or a job paying this much or more a year
+    disputeDays: 30,             // 1681i(a)(1)(A)
+    disputeExtraDays: 15,        // 1681i(a)(1)(B)
+    disputeAnnualDays: 45,       // 1681j(a)(3): dispute made after a free annual report
+    furnisherBizDays: 5,         // 1681i(a)(2)
+    resultsBizDays: 5,           // 1681i(a)(6)
+    statementWords: 100,         // 1681i(b)
+
+    // Fair Debt Collection Practices Act, 15 U.S.C. 1692g, and Regulation F, 12 CFR 1006.34 (checked Nov 14, 2026)
+    validationDays: 30,
+    validationNoticeDays: 5,
+
+    // Nonprofit hospitals, 26 CFR 1.501(r)-6 and 1.501(r)-1(b)(3) (checked Nov 14, 2026)
+    hospitalWaitDays: 120, hospitalNoticeDays: 30, hospitalApplyDays: 240,
+
+    // Where to send a mailed dispute. Each address is from the bureau's own site or form, checked Nov 14, 2026.
+    bureaus: {
+      eq: { name: "Equifax", addr: "Equifax Information Services LLC\nP.O. Box 740256\nAtlanta, GA 30374", phone: "1-888-378-4329",
+            online: "https://www.equifax.com/personal/credit-report-services/credit-dispute/", form: "https://assets.equifax.com/assets/personal/Dispute.pdf" },
+      ex: { name: "Experian", addr: "Experian\nP.O. Box 4500\nAllen, TX 75013", phone: "1-888-397-3742",
+            online: "https://www.experian.com/disputes/main.html" },
+      tu: { name: "TransUnion", addr: "TransUnion Consumer Solutions\nP.O. Box 2000\nChester, PA 19016-2000", phone: "1-800-916-8800",
+            online: "https://dispute.transunion.com/" }
+    },
+
+    // Free credit reports (CFPB page reviewed Oct 15, 2026)
+    acrPhone: "1-877-322-8228",
+    acrAddr: "Annual Credit Report Request Service\nP.O. Box 105281\nAtlanta, GA 30348-5281",
+
+    // Complaints
+    cfpbPhone: "(855) 411-2372",        // consumerfinance.gov/complaint
+    agPhone: "877-765-8388", agLocal: "517-335-7599",   // michigan.gov/ag/complaints
+
+    // No law bans medical debt from credit reports as of the check date.
+    cfpbRule: { vacated: "July 11, 2025", caseName: "Cornerstone Credit Union League v. CFPB", court: "U.S. District Court for the Eastern District of Texas", no: "No. 4:25-cv-16" },
+    preempt: { date: "October 28, 2025", cite: "90 FR 48710" },
+    miBills: { senate: "Senate Bill 451", senateDate: "March 11, 2026", house: "House Bill 6073", houseDate: "June 23, 2026" },
+    vantage: "August 10, 2022"
+  };
+
+  const USC = n => `https://www.law.cornell.edu/uscode/text/15/${n}`;
+  const SRC = {
+    eqHelp: ["Equifax: medical collections", "https://www.equifax.com/personal/help/article-list/-/h/a/medical-debt-collections-on-credit-report-not-removed/"],
+    eqChange: ["Equifax: what changed", "https://www.equifax.com/personal/help/article-list/-/h/a/what-are-nationwide-credit-reporting-agencies-ncra-changing-on-consumer-credit-files/"],
+    exHelp: ["Experian: medical collections", "https://www.experian.com/blogs/ask-experian/what-happens-when-medical-bills-go-collections/"],
+    tuHelp: ["TransUnion: collections", "https://www.transunion.com/blog/credit-advice/how-long-do-collections-stay-on-your-credit-report"],
+    rel2022: ["Bureaus' July 2022 release", "https://www.equifax.com/newsroom/all-news/-/story/first-changes-to-reporting-of-medical-collection-debt-roll-out-july-1-2022/"],
+    rel2023: ["Bureaus' April 2023 release", "https://newsroom.transunion.com/equifax-experian-and-transunion-remove-medical-collections-debt-under-500-from-us-credit-reports/"],
+    cfpbBlog: ["CFPB (2023, archived)", "https://www.consumerfinance.gov/about-us/blog/medical-debt-anything-already-paid-or-under-500-should-no-longer-be-on-your-credit-report/"],
+    c1681c: ["15 U.S.C. 1681c", USC("1681c")],
+    c1681i: ["15 U.S.C. 1681i", USC("1681i")],
+    c1681j: ["15 U.S.C. 1681j", USC("1681j")],
+    c1681a: ["15 U.S.C. 1681a", USC("1681a")],
+    c1692a: ["15 U.S.C. 1692a(6)", USC("1692a")],
+    c1692g: ["15 U.S.C. 1692g", USC("1692g")],
+    c1692e: ["15 U.S.C. 1692e(8)", USC("1692e")],
+    regF34: ["12 CFR 1006.34", "https://www.law.cornell.edu/cfr/text/12/1006.34"],
+    regF30: ["12 CFR 1006.30(a)", "https://www.law.cornell.edu/cfr/text/12/1006.30"],
+    r501: ["26 CFR 1.501(r)-6", "https://www.law.cornell.edu/cfr/text/26/1.501(r)-6"],
+    r501a: ["26 CFR 1.501(r)-1", "https://www.law.cornell.edu/cfr/text/26/1.501(r)-1"],
+    cfpbDispute: ["CFPB: dispute an error", "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/"],
+    cfpbFree: ["CFPB: free credit reports", "https://www.consumerfinance.gov/ask-cfpb/how-do-i-get-a-free-copy-of-my-credit-reports-en-5/"],
+    cfpbCollector: ["CFPB: reply to a collector", "https://www.consumerfinance.gov/ask-cfpb/what-should-i-do-when-a-debt-collector-contacts-me-en-1695/"],
+    cfpbRule: ["CFPB: medical debt rule page", "https://www.consumerfinance.gov/rules-policy/final-rules/prohibition-on-creditors-and-consumer-reporting-agencies-concerning-medical-information-regulation-v/"],
+    preempt: ["CFPB preemption guidance", "https://www.federalregister.gov/documents/2025/10/28/2025-19671/fair-credit-reporting-act-preemption-of-state-laws"],
+    sb451: ["Michigan SB 451", "https://www.legislature.mi.gov/Bills/Bill?ObjectName=2025-SB-0451"],
+    hb6073: ["Michigan HB 6073", "https://www.legislature.mi.gov/Bills/Bill?ObjectName=2026-HB-6073"],
+    vantage: ["VantageScore release", "https://www.vantagescore.com/resources/knowledge-center/press_releases/vantagescore-takes-steps-to-further-support-consumers-affected-by-medical-debt-collections"],
+    eqForm: ["Equifax dispute form", "https://assets.equifax.com/assets/personal/Dispute.pdf"],
+    exMail: ["Experian: how to dispute", "https://www.experian.com/blogs/ask-experian/credit-education/faqs/how-to-dispute-credit-report-information/"],
+    tuMail: ["TransUnion: dispute by mail", "https://www.transunion.com/credit-disputes/dispute-your-credit/mail-or-phone"],
+    hospitalAid: ["Hospital Financial Assistance Check", "../hospital-aid/"],
+    appeal: ["Insurance Denial Appeal Helper", "../appeal-helper/"]
+  };
+
+  /* ---------- Helpers ---------- */
+  const DAY = 86400000;
+  const $ = id => document.getElementById(id);
+  const parse = v => { if (!v) return null; const [y, m, d] = v.split("-").map(Number); if (!y || !m || !d) return null; return new Date(y, m - 1, d); };
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const add = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+  const addYears = (d, n) => { const x = new Date(d.getFullYear() + n, d.getMonth(), d.getDate()); return x.getMonth() === d.getMonth() ? x : new Date(x.getFullYear(), x.getMonth(), 0); };
+  const plain = d => d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const diff = (a, b) => Math.round((b - a) / DAY);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const money = x => "$" + (Math.round(x * 100) % 100 ? x.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : Math.round(x).toLocaleString("en-US"));
+  const numOrNull = v => { if (v === "" || v == null) return null; const x = parseFloat(v); return isFinite(x) && x >= 0 ? x : null; };
+  const LABEL = { law: "The rule says", facts: "Depends on your facts", help: "Act now" };
+  const KIND = { policy: "Bureau policy", fed: "Federal law", state: "Michigan" };
+  const cite = k => { const [t, u] = SRC[k]; return `<a class="cite" href="${u}"${u.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>${esc(t)}</a>`; };
+  function card(level, kind, title, paras, cites = [], next = "") {
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tags">${kind ? `<span class="tag kind">${KIND[kind]}</span>` : ""}<span class="tag ${level}">${LABEL[level]}</span></span></div>
+      ${[].concat(paras).filter(Boolean).map((t, i) => /^<(div|ul|ol)/.test(t) ? t : `<p${i ? ' class="small"' : ""}>${t}</p>`).join("")}
+      ${next ? `<p class="next"><strong>What you can do:</strong> ${next}</p>` : ""}
+      ${cites.length ? `<div class="cites">${cites.map(cite).join("")}</div>` : ""}
+    </article>`;
+  }
+  document.querySelectorAll("[data-d]").forEach(el => { el.textContent = D[el.dataset.d]; });
+  const BK = ["eq", "ex", "tu"];
+  const POLICY_CITES = ["eqHelp", "exHelp", "tuHelp"];
+
+  /* ---------- The list of debts ---------- */
+  const blank = () => ({ name: "", amount: "", paid: "no", dofd: "", type: "coll", eq: false, ex: false, tu: false,
+    ins: false, fap: false, plan: false, wrong: false, dup: false, cold: false, vet: false, first: "" });
+  let debts = [Object.assign(blank(), { name: "Sample Collections Inc.", amount: "380", dofd: iso(add(today, -240)), eq: true, tu: true })];
+
+  const radio = (i, k, v, cur, text, small) =>
+    `<label><input type="radio" name="${k}-${i}" data-k="${k}" value="${v}"${cur === v ? " checked" : ""}><span>${text}${small ? `<small>${small}</small>` : ""}</span></label>`;
+  const check = (k, on, text, small) =>
+    `<label><input type="checkbox" data-k="${k}"${on ? " checked" : ""}><span>${text}${small ? `<small>${small}</small>` : ""}</span></label>`;
+
+  function debtForm(d, i) {
+    const n = i + 1;
+    return `<div class="box debt" data-i="${i}" role="group" aria-labelledby="dh-${i}">
+      <div class="debt-head"><h3 id="dh-${i}">Debt ${n}</h3>${debts.length > 1 ? `<button class="btn quiet" type="button" data-remove="${i}">Remove debt ${n}</button>` : ""}</div>
+      <div class="row2">
+        <div class="field"><label for="name-${i}">Name on your credit report</label>
+          <input id="name-${i}" type="text" data-k="name" value="${esc(d.name)}" autocomplete="off">
+          <span class="hint">Usually a collection agency. Sometimes the doctor or hospital.</span></div>
+        <div class="field"><label for="amount-${i}">Amount when it first showed up</label>
+          <div class="money"><span>$</span><input id="amount-${i}" type="number" inputmode="decimal" min="0" step="any" data-k="amount" value="${esc(d.amount)}"></div>
+          <span class="hint">The bureaus go by the starting balance, even if you've paid some since.</span></div>
+      </div>
+      <div class="field"><span class="lbl" id="lp-${i}">Is it paid?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="lp-${i}">
+          ${radio(i, "paid", "no", d.paid, "No, it's unpaid or partly paid")}
+          ${radio(i, "paid", "full", d.paid, "Yes, paid in full", "By you, your insurance, or both.")}
+          ${radio(i, "paid", "settled", d.paid, "Settled for less than the full amount")}
+        </div></div>
+      <div class="field"><label for="dofd-${i}">Date the bill first went past due</label>
+        <input id="dofd-${i}" type="date" data-k="dofd" value="${esc(d.dofd)}">
+        <span class="hint">Your credit report lists it as "date of first delinquency" or "original delinquency date." If you can't find it, use the date the doctor's or hospital's bill was first due and not paid. Leave it blank if you don't know.</span></div>
+      <div class="field"><span class="lbl" id="lb-${i}">Which credit reports show it?</span>
+        <div class="pills" role="group" aria-labelledby="lb-${i}">
+          ${BK.map(b => `<label><input type="checkbox" data-k="${b}"${d[b] ? " checked" : ""}>${D.bureaus[b].name}</label>`).join("")}
+        </div></div>
+      <div class="field"><span class="lbl" id="lt-${i}">How is it listed?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="lt-${i}">
+          ${radio(i, "type", "coll", d.type, "As a collection account, from a collection agency or debt buyer", "The most common way medical debt shows up.")}
+          ${radio(i, "type", "prov", d.type, "As an account from the doctor, hospital, or clinic itself")}
+          ${radio(i, "type", "card", d.type, "On a credit card, medical credit card (like CareCredit), or loan I used to pay the bill")}
+        </div></div>
+      <details class="more"${(d.ins || d.fap || d.plan || d.wrong || d.dup || d.cold || d.vet || d.first) ? " open" : ""}>
+        <summary>More about this debt (check any that fit)</summary>
+        <div class="inner">
+          <div class="opts">
+            ${check("wrong", d.wrong, "It isn't mine, or the amount is wrong")}
+            ${check("dup", d.dup, "It's listed more than once")}
+            ${check("ins", d.ins, "Insurance is still working on it, or should have paid it")}
+            ${check("fap", d.fap, "I applied for the hospital's financial assistance (charity care), or I plan to")}
+            ${check("plan", d.plan, "I'm on a payment plan and paying on time")}
+            ${check("cold", d.cold, "The first I heard of this debt was seeing it on my credit report")}
+            ${check("vet", d.vet, "I'm a veteran and this was care the VA approved or should have paid for")}
+          </div>
+          <div class="field"><label for="first-${i}">Date you got the collector's first letter or message about it (optional)</label>
+            <input id="first-${i}" type="date" data-k="first" value="${esc(d.first)}">
+            <span class="hint">You have 30 days from that day to make the collector stop and prove the debt.</span></div>
+        </div>
+      </details>
+    </div>`;
+  }
+  function drawForm() { $("debts").innerHTML = debts.map(debtForm).join(""); }
+
+  /* ---------- Check one debt ---------- */
+  // Returns what the bureaus' policy and federal law say about it, plus the reasons to put in a dispute letter.
+  function judge(d) {
+    const amount = numOrNull(d.amount), dofd = parse(d.dofd), first = parse(d.first);
+    const r = { status: "", why: [], reasons: [], cards: [], amount, dofd, first };
+    const futureDofd = dofd && diff(today, dofd) > 0;
+    const yearMark = dofd ? addYears(dofd, D.waitYears) : null;                         // bureau policy: one year after first delinquency
+    const sevenBureau = dofd ? addYears(dofd, D.reportYears) : null;                    // what the bureaus say they do
+    const sevenLaw = dofd ? addYears(add(dofd, D.reportLagDays), D.reportYears) : null; // 15 U.S.C. 1681c(c)(1)
+    r.sevenLaw = sevenLaw; r.yearMark = yearMark;
+    const tooOld = sevenLaw && diff(sevenLaw, today) > 0;
+    const shown = BK.filter(b => d[b]).map(b => D.bureaus[b].name);
+    const disputeNext = shown.length
+      ? `Dispute it with ${shown.length === 3 ? "Equifax, Experian, and TransUnion" : shown.join(" and ")}. ${shown.length > 1 ? "Letters are" : "A letter is"} drafted below.`
+      : "Check which bureaus show it above, and this page drafts a dispute letter for each.";
+
+    if (futureDofd) r.cards.push(card("facts", null, "That past-due date is in the future", "Check the date. The one-year wait and the 7-year limit both count from the day the bill first went past due."));
+
+    // 1. Federal 7-year limit beats everything else.
+    if (tooOld) {
+      r.status = "off";
+      r.reasons.push(`The delinquency on this account began on ${plain(dofd)}. Under 15 U.S.C. 1681c(a)(4) and (c)(1), an account placed for collection can be reported for 7 years, counted from 180 days after the delinquency began. That period ended on ${plain(sevenLaw)}.`);
+      r.cards.push(card("help", "fed", "Too old to be on your report", [
+        `Federal law lets a collection stay on a credit report for ${D.reportYears} years, counted from ${D.reportLagDays} days after the bill first went past due. For this debt that ended on ${plain(sevenLaw)}. The law counts from the original past-due date, not from when a collector got the debt or when you last paid.`,
+        `One exception: the limit doesn't apply to reports pulled for a loan or life insurance of ${money(D.exemptCredit)} or more, or for a job that pays ${money(D.exemptSalary)} or more a year.`
+      ], ["c1681c"], disputeNext));
+    } else if (d.type === "card") {
+      r.status = "nocover";
+      r.cards.push(card("facts", "policy", "The bureaus' medical debt rules don't cover this", [
+        "The bureaus' rules are for medical collection debt: unpaid medical bills reported by a collector. Once a bill is paid with a credit card, a medical credit card, or a loan, the bureaus treat what you owe as ordinary card or loan debt. The CFPB said so when the rules came out.",
+        "You still have every dispute right in federal law if something about the account is wrong."
+      ], ["cfpbBlog", "rel2023"]));
+    } else {
+      // 2. The bureaus' three medical collection rules.
+      if (d.paid === "full") r.why.push(["paid", `It's paid in full. Since ${D.paidSince}, the bureaus say paid medical collection debt is no longer included on credit reports.`]);
+      if (amount != null && amount < D.floor) r.why.push(["floor", `It started at ${money(amount)}. Since ${D.floorSince}, the bureaus say medical collection debt with an initial reported balance under ${money(D.floor)} is no longer included.`]);
+      if (d.paid !== "full" && dofd && !futureDofd && diff(today, yearMark) > 0) r.why.push(["new", `It first went past due on ${plain(dofd)}, less than a year ago. Since ${D.waitSince}, the bureaus say unpaid medical collection debt doesn't appear until one year has passed. For this debt that is ${plain(yearMark)}.`]);
+
+      if (d.type === "prov") {
+        r.status = "unsure";
+        r.cards.push(card("facts", "policy", "Listed by the provider, not a collector", [
+          "The bureaus wrote their rules for medical collection debt. Most doctors and hospitals don't report to credit bureaus themselves, so an account in the provider's own name is unusual. The bureaus' pages don't say how the rules apply to it.",
+          r.why.length ? "Your answers would fit the bureaus' rules if this were a collection account: " + r.why.map(w => w[1]).join(" ") : "",
+          "Check the report again. If it's really a collection account, change the answer above."
+        ], POLICY_CITES, "You can still dispute it and point to the bureaus' policy. A bureau has to look into any dispute about whether an item is accurate and complete."));
+        if (r.why.length) r.reasons.push(...policyReasons(r.why, amount, dofd, yearMark));
+      } else if (r.why.length) {
+        const onlyNew = r.why.length === 1 && r.why[0][0] === "new";
+        r.status = "off";
+        r.reasons.push(...policyReasons(r.why, amount, dofd, yearMark));
+        r.cards.push(card("law", "policy", onlyNew ? `Too new to be on your report until ${plain(yearMark)}` : "The bureaus say this shouldn't be on your report", [
+          r.why.length > 1 ? "<ul>" + r.why.map(w => `<li>${w[1]}</li>`).join("") + "</ul>" : r.why[0][1],
+          `This is the bureaus' own policy, not a law, and they can change it. All three bureaus' pages still said this on ${D.checked}.`,
+          onlyNew ? `If it's still unpaid and ${money(D.floor)} or more on ${plain(yearMark)}, the bureaus' rules let it show from then on.` : ""
+        ], POLICY_CITES.concat(r.why.some(w => w[0] === "floor") ? ["rel2023"] : ["rel2022"]), disputeNext));
+      } else if (d.paid === "settled") {
+        r.status = "unsure";
+        r.cards.push(card("facts", "policy", "Settled for less: it may still show", [
+          `The bureaus' rule covers medical collection debt "paid by the consumer in full." Their pages don't say a debt settled for less than the full amount comes off, so it depends on how the collector reported it.`,
+          "If your settlement paperwork says the collector will report it as paid in full or delete it, that's something you can send with a dispute."
+        ], ["rel2022"].concat(POLICY_CITES)));
+      } else if (amount == null || !dofd || futureDofd) {
+        r.status = "need";
+        const need = [amount == null ? "the starting amount" : "", (!dofd || futureDofd) ? "the date it first went past due" : ""].filter(Boolean).join(" and ");
+        r.cards.push(card("facts", "policy", `Add ${need} to check this one`, [
+          `For an unpaid medical collection, the bureaus' rules turn on two facts: whether it started under ${money(D.floor)}, and whether a year has passed since the bill first went past due. Both are on your credit report.`
+        ], POLICY_CITES));
+      } else {
+        r.status = "on";
+        r.cards.push(card("law", "policy", "The bureaus' rules allow this one to show", [
+          `It's unpaid, it started at ${money(amount)} (not under ${money(D.floor)}), and it first went past due on ${plain(dofd)}, more than a year ago. None of the bureaus' three medical debt rules takes it off.`,
+          "If it's paid in full, the bureaus say a paid medical collection is no longer included on your report. The tools under Free help check the bill itself and whether the hospital's financial assistance would cover it."
+        ], POLICY_CITES));
+      }
+    }
+
+    // 3. The 7-year date for anything that can stay for now.
+    if (!tooOld && dofd && !futureDofd && r.status !== "off") {
+      r.cards.push(card("law", "fed", `By law it has to come off by ${plain(sevenLaw)}`, [
+        `A collection can stay on a credit report for ${D.reportYears} years, counted from ${D.reportLagDays} days after the bill first went past due (${plain(dofd)}). The bureaus say they take collections off ${D.reportYears} years from the original delinquency date, which would be ${plain(sevenBureau)}. The law counts from the original past-due date, not from when a collector got the debt or when you last paid.`
+      ], ["c1681c", "exHelp"]));
+    }
+
+    // 4. Cards that depend on what else is going on.
+    if (d.wrong || d.dup) {
+      if (d.wrong) r.reasons.push("This account is not mine, or the amount shown is wrong: [explain what is wrong].");
+      if (d.dup) r.reasons.push("This debt is listed more than once on my report. Please delete the duplicate entries.");
+      r.cards.push(card("law", "fed", "You can dispute anything that's wrong", [
+        `If you tell a bureau that an item is inaccurate or incomplete, it has to look into it for free, usually within ${D.disputeDays} days. It has to send your dispute to the company that reported the item within ${D.furnisherBizDays} business days. If the item turns out to be wrong or can't be verified, the bureau has to delete or fix it.`
+      ], ["c1681i"], disputeNext));
+    }
+    if (d.cold && d.type !== "card") {
+      r.cards.push(card("facts", "fed", "A collector has to try to reach you before it reports", [
+        "A debt collector can't report a debt to a credit bureau until it has talked with you about the debt in person or by phone, or sent you a letter or electronic message about it and waited a reasonable time to see if it bounced back.",
+        "This depends on what the collector sent. A letter that went to an old address may still count for the collector."
+      ], ["regF30"], "Say so in your letters, which add it for you, and you can report it to the CFPB. See Free help."));
+    }
+    if (d.ins) {
+      r.reasons.push("My health insurance has paid, should have paid, or is still processing this bill: [explain, and attach your Explanation of Benefits]. The balance shown is not accurate.");
+      r.cards.push(card("facts", "policy", "Insurance is still working on it", [
+        "The bureaus said they stretched the wait from six months to one year to give people more time to deal with a medical debt before it's reported. If the year isn't up, the card above says so.",
+        "If insurance paid or should have paid some of it, the amount on your report may be wrong. A wrong amount is something you can dispute. Your Explanation of Benefits from the insurer is the proof to send."
+      ], ["rel2022", "c1681i", "appeal"], "If the insurer denied the claim, the Insurance Denial Appeal Helper works out your appeal deadline."));
+    }
+    if (d.fap) {
+      r.cards.push(card("facts", "fed", "A nonprofit hospital has to pause while it decides on financial assistance", [
+        `Federal tax rules for nonprofit hospitals count reporting you to a credit bureau as an "extraordinary collection action." The hospital can't do it until at least ${D.hospitalWaitDays} days after the first bill it sent you after the visit, and it has to send a written notice at least ${D.hospitalNoticeDays} days ahead that explains its financial assistance.`,
+        `You can apply for at least ${D.hospitalApplyDays} days after that first bill. If you apply in that time, the hospital has to stop those actions while it decides, and collectors working for it are supposed to stop too. If you qualify, the hospital has to take reasonable steps to undo them, including getting the item off your credit report.`,
+        "These rules cover nonprofit hospitals. They don't cover doctors' offices or for-profit hospitals like the Detroit Medical Center."
+      ], ["r501", "r501a", "hospitalAid"], "Apply in writing, keep a dated copy, and tell the collector you applied. The collector letter below adds that."));
+    }
+    if (d.plan) {
+      r.cards.push(card("facts", null, "A payment plan alone doesn't keep it off", [
+        "We found no bureau policy and no federal law that keeps a medical debt off your report only because you're on a payment plan.",
+        "If the provider sent the bill to collections while you were paying on time under a plan it agreed to, you can dispute the collection and send proof of the plan and your payments."
+      ], POLICY_CITES.slice(0, 1).concat(["c1681i"])));
+      r.reasons.push("I have a payment plan with the provider for this bill and I am paying on time: [attach the plan and proof of payments]. It should not have been sent to collections.");
+    }
+    if (d.vet) {
+      r.reasons.push("This is a veteran's medical debt: care that the Department of Veterans Affairs authorized or should have paid for. Under 15 U.S.C. 1681c(a)(7) and (8), it may not be reported if the care was less than one year ago or the debt has been fully paid or settled.");
+      r.cards.push(card("facts", "fed", "Veterans have two extra protections in the law", [
+        "For a veteran's medical debt, federal law itself bars the big bureaus from reporting it when the care was less than one year ago, or once it has been fully paid or settled.",
+        "It covers medical collection debt owed to a non-VA provider for care the VA authorized, and debt the VA wrongly charged a veteran. The bureau has to know it's a veteran's medical debt, so say so in your dispute."
+      ], ["c1681c", "c1681a"]));
+    }
+    if (d.type === "coll" && first) {
+      const last = add(first, D.validationDays), left = diff(today, last);
+      if (diff(today, first) > 0) {
+        r.cards.push(card("facts", null, "That letter date is in the future", "Check the date you got the collector's first letter or message."));
+      } else if (left >= 0) {
+        r.inWindow = true; r.lastDay = last;
+        r.cards.push(card("help", "fed", `Dispute it with the collector in writing by ${plain(last)}`, [
+          `You got the collector's first notice on ${plain(first)}. If you dispute the debt in writing within ${D.validationDays} days of getting that notice, the collector has to stop collecting until it mails you proof of the debt. That leaves ${left === 0 ? "today only" : left + (left === 1 ? " day" : " days")}.`,
+          "The notice itself prints the last day to dispute. If it shows an earlier date, go by the notice."
+        ], ["c1692g", "regF34"], "Send the collector letter below so it arrives in time, and keep proof of the date."));
+      } else {
+        r.cards.push(card("facts", "fed", `The ${D.validationDays}-day window to make the collector stop has likely passed`, [
+          `It ran ${D.validationDays} days from the day you got the collector's first notice, so until about ${plain(last)}. You can still dispute the debt and ask for proof at any time. The collector just isn't required to stop collecting while it answers.`,
+          "Even now, a collector that knows you dispute a debt has to say it's disputed when it reports the debt to a credit bureau."
+        ], ["c1692g", "c1692e", "cfpbCollector"]));
+      }
+    }
+    return r;
+  }
+  function policyReasons(why, amount, dofd, yearMark) {
+    return why.map(([k]) => ({
+      paid: `This is a medical collection account that has been paid in full. Equifax, Experian, and TransUnion announced that as of ${D.paidSince}, paid medical collection debt is no longer included on consumer credit reports.`,
+      floor: `This is a medical collection account with an initial reported balance of ${amount != null ? money(amount) : "[amount]"}, which is under ${money(D.floor)}. Equifax, Experian, and TransUnion announced in ${D.floorSince} that medical collection debt with an initial reported balance under ${money(D.floor)} is no longer included on consumer credit reports.`,
+      new: `This medical bill first went past due on ${dofd ? plain(dofd) : "[date]"}, less than one year ago. Equifax, Experian, and TransUnion announced that unpaid medical collection debt does not appear on consumer credit reports until one year has passed, which would be ${yearMark ? plain(yearMark) : "[date]"}.`
+    }[k]));
+  }
+
+  /* ---------- Results ---------- */
+  let judged = [];
+  const label = (d, i) => `Debt ${i + 1}${d.name.trim() ? ": " + d.name.trim() : ""}`;
+  function drawResults() {
+    judged = debts.map(judge);
+    const off = judged.filter(r => r.status === "off").length, n = debts.length;
+    const act = judged.filter(r => r.inWindow).length;
+    $("summary").innerHTML = `<div class="total">
+      <p class="big">${off === 0 ? "Nothing here is clearly barred" : `${off} of ${n} ${n === 1 ? "debt" : "debts"} shouldn't be on your report`}</p>
+      <p>${off === 0
+        ? "From your answers, the bureaus' medical debt rules and the federal 7-year limit don't clearly take any of these off. Read each card. Some depend on facts this page can't see."
+        : "That's under the credit bureaus' own medical debt rules or the federal 7-year limit, going by the dates and amounts you entered."}${act ? ` ${act === 1 ? "One debt has" : act + " debts have"} a collector deadline coming up.` : ""}</p>
+      <div class="legend"><span class="tag law">The rule says</span><span class="tag facts">Depends on your facts</span><span class="tag help">Act now</span><span class="tag kind">Bureau policy</span><span class="tag kind">Federal law</span></div>
+    </div>`;
+    $("res").innerHTML = debts.map((d, i) => {
+      const amt = numOrNull(d.amount);
+      return `<div class="group"><h3>${esc(label(d, i))}${amt != null ? ", " + money(amt) : ""}</h3>${judged[i].cards.join("")}</div>`;
+    }).join("");
+    drawLetters();
+  }
+
+  /* ---------- Letters ---------- */
+  const edited = new Map();    // letters the person has changed by hand, by key
+  let made = new Map();        // the latest generated text, by key
+  const you = () => ({ name: $("y-name").value.trim(), dob: $("y-dob").value.trim(), addr: $("y-addr").value.trim() });
+  const B = (v, ph) => v ? v : `[${ph}]`;
+  function sigBlock(y) {
+    return ["Sincerely,", "", "", "______________________________", B(y.name, "Your name"), B(y.addr, "Your mailing address"), "[Phone number]"];
+  }
+  function bureauLetter(b) {
+    const bu = D.bureaus[b], y = you();
+    const items = debts.map((d, i) => ({ d, i, r: judged[i] })).filter(x => x.d[b] && x.r.reasons.length);
+    if (!items.length) return null;
+    const L = [plain(today), "", bu.addr, "", `Re: Dispute of medical collection ${items.length > 1 ? "accounts" : "account"} on my credit report`, "",
+      `Name: ${B(y.name, "Your name")}`, `Date of birth: ${B(y.dob, "Date of birth")}`, "Social Security number: [write it in by hand]",
+      `Address: ${B(y.addr.replace(/\s*\n\s*/g, ", "), "Your mailing address")}`, "[Report or confirmation number, if your report shows one]", "",
+      `To ${bu.name}:`, "",
+      `I am disputing the ${items.length > 1 ? "items" : "item"} below on my ${bu.name} credit report. I have enclosed a copy of the report with ${items.length > 1 ? "each item" : "the item"} circled.`, ""];
+    items.forEach((x, k) => {
+      const amt = numOrNull(x.d.amount);
+      L.push(`${items.length > 1 ? (k + 1) + ". " : ""}Account: ${B(x.d.name.trim(), "Name of the collector as shown on the report")}`,
+        "Account number shown on the report: [account number]", `Amount shown: ${amt != null ? money(amt) : "[amount]"}`, "Why I am disputing it:");
+      x.r.reasons.forEach(t => L.push("- " + t));
+      L.push("");
+    });
+    L.push(`Please investigate under the Fair Credit Reporting Act, 15 U.S.C. 1681i, and delete or correct ${items.length > 1 ? "these items" : "this item"}. Please send me the written results of your investigation and an updated copy of my credit report.`, "",
+      "Enclosed: a copy of my credit report with the disputed item circled; [proof of payment, insurance Explanation of Benefits, or other papers]; a copy of my ID and of a bill that shows my address.", "",
+      ...sigBlock(y));
+    return L.join("\n");
+  }
+  function collectorLetter(d, i) {
+    const r = judged[i], y = you(), amt = numOrNull(d.amount);
+    if (d.type !== "coll") return null;
+    const L = [plain(today), "", B(d.name.trim(), "Name of the collection agency"), "[Collector's mailing address, from its letter or your credit report]", "",
+      "Re: Account number [account number]", `Original doctor, hospital, or clinic: [name]`, `Amount you say is owed: ${amt != null ? money(amt) : "[amount]"}`, "",
+      "To whom it may concern:", ""];
+    if (r.inWindow) L.push(`I dispute this debt. I received your first notice about it on ${plain(r.first)}, and I am sending this letter within 30 days of that date. Under 15 U.S.C. 1692g(b), please stop collecting this debt until you mail me verification of it.`, "");
+    else L.push("I dispute this debt and I am asking you to verify it.", "");
+    L.push("Please send me:", "- The name and address of the original creditor.", "- An itemized statement that shows the dates of service, each charge, every insurance payment and adjustment, and how you reached the amount above.",
+      "- Proof that you own this debt or have the right to collect it.", "");
+    if (d.paid === "full") L.push("This debt has been paid in full: [date paid and how]. Please update your records and ask every credit bureau you reported it to to delete it. Equifax, Experian, and TransUnion do not include paid medical collection debt on credit reports.", "");
+    if (d.paid === "settled") L.push("This debt was settled on [date]. Please update your records and report it to the credit bureaus the way our settlement agreement says.", "");
+    if (d.wrong) L.push("This debt is not mine, or the amount is wrong: [explain what is wrong].", "");
+    if (d.ins) L.push("My health insurance has paid, should have paid, or is still processing this bill: [explain]. I have attached my Explanation of Benefits.", "");
+    if (d.fap) L.push("I applied for the hospital's financial assistance program for this bill on [date], or I am applying now. Please pause collection and credit reporting on this account while the hospital decides, and send this letter on to the hospital.", "");
+    if (d.plan) L.push("I have a payment plan with the provider for this bill and I am paying on time. I have attached the plan and proof of my payments.", "");
+    if (d.cold) L.push("The first notice I had of this debt was seeing it on my credit report. Under 12 CFR 1006.30(a), a debt collector must communicate with the consumer about a debt before it furnishes the debt to a consumer reporting agency. Please send me a copy of any notice you sent me before you reported it, with the date and the address it went to.", "");
+    if (r.why.some(w => w[0] === "floor")) L.push(`This medical debt started under ${money(D.floor)}. Equifax, Experian, and TransUnion do not include medical collection debt with an initial reported balance under ${money(D.floor)} on credit reports. Please ask every credit bureau you reported it to to delete it.`, "");
+    if (r.why.some(w => w[0] === "new")) L.push(`This medical bill first went past due on ${plain(r.dofd)}. Equifax, Experian, and TransUnion do not show unpaid medical collection debt until one year has passed. Please ask every credit bureau you reported it to to delete it.`, "");
+    L.push("While this debt is disputed, please tell every credit bureau you report it to that it is disputed (15 U.S.C. 1692e(8)).", "",
+      "Please answer in writing at the address below.", "", ...sigBlock(y));
+    return L.join("\n");
+  }
+  function drawLetters() {
+    made = new Map();
+    const blocks = [];
+    BK.forEach(b => {
+      const t = bureauLetter(b);
+      if (t) blocks.push({ key: "b-" + b, title: `Dispute letter to ${D.bureaus[b].name}`, text: t,
+        note: `Mail to the address in the letter. ${D.bureaus[b].name} also takes disputes <a href="${D.bureaus[b].online}" target="_blank" rel="noopener">online</a> and by phone at ${D.bureaus[b].phone}.${D.bureaus[b].form ? ` Equifax asks for its <a href="${D.bureaus[b].form}" target="_blank" rel="noopener">dispute form</a> with a mailed dispute, so print that and attach this letter.` : ""}` });
+    });
+    debts.forEach((d, i) => {
+      const t = collectorLetter(d, i);
+      if (t) blocks.push({ key: "c-" + i, title: `Letter to the collector for debt ${i + 1}${d.name.trim() ? " (" + esc(d.name.trim()) + ")" : ""}`, text: t,
+        note: `Use the collector's address from its letter to you or from your credit report. The CFPB also has <a href="${SRC.cfpbCollector[1]}" target="_blank" rel="noopener">sample letters</a> for collectors.` });
+    });
+    const shownAny = debts.some(d => BK.some(b => d[b]));
+    const noBureau = !blocks.some(x => x.key.startsWith("b-"));
+    let html = "";
+    if (noBureau) html += card("facts", null, "No bureau dispute letter yet", [
+      !shownAny ? "Check which credit reports show each debt in step 1, and a letter appears here for each bureau."
+        : "From your answers, none of the debts has something to dispute with a bureau. If an item is wrong in a way the checkboxes don't cover, check \"It isn't mine, or the amount is wrong\" under More about this debt."
+    ]);
+    html += blocks.map(x => {
+      made.set(x.key, x.text);
+      const cur = edited.has(x.key) ? edited.get(x.key) : x.text;
+      return `<div class="letter-block" data-key="${x.key}">
+        <div class="bar"><h3>${x.title}</h3></div>
+        <textarea aria-label="${x.title.replace(/"/g, "&quot;")}" spellcheck="true">${esc(cur)}</textarea>
+        <div class="btns">
+          <button class="btn" type="button" data-act="copy">Copy letter</button>
+          <button class="btn ghost" type="button" data-act="print">Print</button>
+          <button class="btn quiet" type="button" data-act="reset"${edited.has(x.key) ? "" : " hidden"}>Start over from my answers</button>
+          <span class="copied" role="status"></span>
+        </div>
+        <p class="hint">${x.note}</p>
+      </div>`;
+    }).join("");
+    $("letters").innerHTML = html;
+  }
+
+  /* ---------- The rules for everyone ---------- */
+  function drawRights() {
+    const c = [];
+    c.push(card("law", "policy", "The bureaus' three medical debt rules", [
+      "Equifax, Experian, and TransUnion say they don't include medical collection debt on a credit report when:",
+      `<ul><li>it has been paid in full (since ${D.paidSince}),</li><li>it's unpaid but less than one year has passed since the bill first went past due (since ${D.waitSince}), or</li><li>its initial reported balance was under ${money(D.floor)} (since ${D.floorSince}).</li></ul>`,
+      `These are voluntary. No law makes the bureaus keep them, and they could change. All three bureaus' own pages still listed them on ${D.checked}. They don't cover medical bills you paid with a credit card or loan.`
+    ], POLICY_CITES.concat(["eqChange", "rel2022", "rel2023"])));
+    c.push(card("law", "fed", "No law bans medical debt from credit reports right now", [
+      `A federal rule that would have taken medical bills off credit reports was finished in January 2025. A federal court threw it out on ${D.cfpbRule.vacated} (${D.cfpbRule.caseName}, ${D.cfpbRule.court}, ${D.cfpbRule.no}). The CFPB's page for the rule shows nothing replacing it.`,
+      `Michigan has no medical debt credit reporting law. Two bills would create one: ${D.miBills.senate} passed the state Senate on ${D.miBills.senateDate}, and ${D.miBills.house} passed the state House on ${D.miBills.houseDate}. Neither had passed both chambers or been signed as of ${D.checked}.`,
+      `On ${D.preempt.date}, the CFPB also published guidance saying federal law overrides state laws that limit what goes on a credit report. That guidance isn't binding, and courts would decide.`
+    ], ["cfpbRule", "sb451", "hb6073", "preempt"]));
+    c.push(card("law", "fed", "You can get your credit reports free", [
+      `Federal law gives you a free report from each bureau once every 12 months. The bureaus now let you check each report once a week for free at AnnualCreditReport.com. You can also call ${D.acrPhone} or write to:`,
+      `<div class="addr">${esc(D.acrAddr)}</div>`,
+      "Check all three. A collection can be on one report and not the others."
+    ], ["c1681j", "cfpbFree"]));
+    c.push(card("law", "fed", "A bureau has to investigate your dispute", [
+      `When you dispute an item, the bureau has to look into it for free and finish within ${D.disputeDays} days of getting your dispute. It can take up to ${D.disputeExtraDays} more days if you send more information during that time, and it has ${D.disputeAnnualDays} days when the dispute follows your free yearly report.`,
+      `It has to pass your dispute to the company that reported the item within ${D.furnisherBizDays} business days. If the item is wrong, incomplete, or can't be verified, the bureau has to delete or fix it. It has to send you the results in writing within ${D.resultsBizDays} business days after it finishes.`,
+      `If the dispute doesn't settle it, you can add a short statement to your file, and the bureau can limit it to ${D.statementWords} words. You can also dispute directly with the collector that reported it.`
+    ], ["c1681i", "c1681j", "cfpbDispute"]));
+    c.push(card("law", "fed", `Collections come off after ${D.reportYears} years`, [
+      `An account placed for collection can't stay on your report more than ${D.reportYears} years. The clock starts ${D.reportLagDays} days after the bill first went past due. The law counts from that original date, not from when a collector got the debt or when you last paid.`,
+      `The limit doesn't apply to reports pulled for a loan or life insurance of ${money(D.exemptCredit)} or more, or a job paying ${money(D.exemptSalary)} or more a year.`
+    ], ["c1681c"]));
+    c.push(card("law", "fed", "A collector has to prove the debt if you ask in time", [
+      `A debt collector has to send you a notice with the amount and who it's owed to, either in its first message or within ${D.validationNoticeDays} days after. If you dispute the debt in writing within ${D.validationDays} days of getting that notice, the collector has to stop collecting until it mails you proof.`,
+      "Not disputing isn't an admission that you owe the debt. These rules cover debt collectors: companies whose business is collecting debts, or that collect debts owed to someone else. A hospital or doctor's office collecting its own bills in its own name isn't covered.",
+      "A collector also can't report a debt to a credit bureau before it has tried to reach you about it."
+    ], ["c1692g", "c1692a", "regF34", "regF30", "cfpbCollector"]));
+    c.push(card("facts", "fed", "Nonprofit hospitals have to offer financial help first", [
+      `A nonprofit hospital can't report you to a credit bureau or sell your debt to most buyers until at least ${D.hospitalWaitDays} days after its first bill following your visit, and only after a written notice about its financial assistance at least ${D.hospitalNoticeDays} days ahead. You have at least ${D.hospitalApplyDays} days from that first bill to apply.`,
+      "Applying in that window pauses those actions. If you qualify, the hospital has to take reasonable steps to undo them, which includes getting the item off your credit report.",
+      "Whether your hospital is a nonprofit, and whether your income fits its policy, depends on your facts."
+    ], ["r501", "r501a", "hospitalAid"], "See which Detroit-area hospitals would likely give you free or discounted care with the Hospital Financial Assistance Check."));
+    c.push(card("facts", null, "Some credit scores ignore medical collections", [
+      `VantageScore announced on ${D.vantage} that its 3.0 and 4.0 scores no longer use medical collections at all, whatever the amount or age.`,
+      "Lenders choose which score to use, and other scores can still count a medical collection that's on your report. So getting an item off the report matters more than which score ignores it."
+    ], ["vantage"]));
+    $("rights").innerHTML = c.join("");
+    $("send-cites").innerHTML = ["cfpbDispute", "eqForm", "exMail", "tuMail"].map(cite).join("");
+    $("src-list").innerHTML = [
+      ["Credit bureau policy", ["eqHelp", "eqChange", "exHelp", "tuHelp", "rel2022", "rel2023", "cfpbBlog"]],
+      ["Fair Credit Reporting Act", ["c1681a", "c1681c", "c1681i", "c1681j"]],
+      ["Debt collectors", ["c1692a", "c1692g", "c1692e", "regF34", "regF30", "cfpbCollector"]],
+      ["Nonprofit hospitals", ["r501", "r501a"]],
+      ["Status of the law", ["cfpbRule", "preempt", "sb451", "hb6073"]],
+      ["Disputes and free reports", ["cfpbDispute", "cfpbFree", "eqForm", "exMail", "tuMail"]],
+      ["Credit scores", ["vantage"]]
+    ].map(([t, ks]) => `<li>${t}: ${ks.map(k => `<a href="${SRC[k][1]}" target="_blank" rel="noopener">${esc(SRC[k][0])}</a>`).join(", ")}</li>`).join("");
+  }
+
+  /* ---------- Events ---------- */
+  const fd = $("f-debts");
+  function onDebtInput(e) {
+    const t = e.target, box = t.closest("[data-i]");
+    if (!box || !t.dataset.k) return;
+    const d = debts[+box.dataset.i];
+    if (t.type === "checkbox") d[t.dataset.k] = t.checked;
+    else if (t.type === "radio") { if (t.checked) d[t.dataset.k] = t.value; }
+    else d[t.dataset.k] = t.value;
+    drawResults();
+  }
+  fd.addEventListener("input", onDebtInput);
+  fd.addEventListener("change", onDebtInput);
+  fd.addEventListener("submit", e => e.preventDefault());
+  fd.addEventListener("click", e => {
+    const b = e.target.closest("[data-remove]");
+    if (!b) return;
+    const i = +b.dataset.remove;
+    debts.splice(i, 1);
+    // Collector letters are keyed by position, so hand edits can't follow a removed debt.
+    [...edited.keys()].filter(k => k.startsWith("c-")).forEach(k => edited.delete(k));
+    drawForm(); drawResults();
+    const h = $("dh-" + Math.min(i, debts.length - 1)); if (h) h.scrollIntoView({ block: "nearest" });
+  });
+  $("add").addEventListener("click", () => {
+    debts.push(blank());
+    drawForm(); drawResults();
+    const el = $("name-" + (debts.length - 1)); if (el) el.focus();
+  });
+  const fy = $("f-you");
+  fy.addEventListener("input", drawLetters);
+  fy.addEventListener("submit", e => e.preventDefault());
+
+  const lt = $("letters");
+  lt.addEventListener("input", e => {
+    const blk = e.target.closest("[data-key]");
+    if (!blk || e.target.tagName !== "TEXTAREA") return;
+    edited.set(blk.dataset.key, e.target.value);
+    blk.querySelector('[data-act="reset"]').hidden = false;
+  });
+  lt.addEventListener("click", e => {
+    const btn = e.target.closest("[data-act]");
+    if (!btn) return;
+    const blk = btn.closest("[data-key]"), ta = blk.querySelector("textarea"), msg = blk.querySelector(".copied");
+    if (btn.dataset.act === "copy") {
+      const fallback = () => { ta.focus(); ta.select(); msg.textContent = "Selected. Press Ctrl+C or Cmd+C to copy."; };
+      try { navigator.clipboard.writeText(ta.value).then(() => { msg.textContent = "Copied"; }, fallback); } catch (err) { fallback(); }
+    } else if (btn.dataset.act === "print") {
+      $("printout").textContent = ta.value;
+      document.body.classList.add("printing");
+      window.print();
+      setTimeout(() => document.body.classList.remove("printing"), 500);
+    } else if (btn.dataset.act === "reset") {
+      edited.delete(blk.dataset.key);
+      ta.value = made.get(blk.dataset.key) || "";
+      btn.hidden = true; msg.textContent = "";
+    }
+  });
+
+  drawForm();
+  drawRights();
+  drawResults();
+})();
+</script>
+</body>
+</html>
