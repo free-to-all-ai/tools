@@ -272,7 +272,9 @@ textarea { min-height: 96px; resize: vertical; }
     "45 CFR 147.136": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-B/part-147/section-147.136",
     "MCL 550.1911": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-550-1911",
     "MCL 550.1913": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-550-1913",
-    "DIFS": "https://www.michigan.gov/difs/consumers/insurance/health-insurance/individual/appealing"
+    "DIFS": "https://www.michigan.gov/difs/consumers/insurance/health-insurance/individual/appealing",
+    "CareSource's Medicaid page": "https://www.caresource.com/mi/members/tools-resources/grievance-appeal/state-hearing-external-review/medicaid/",
+    "Molina's Medicaid page": "https://www.molinahealthcare.com/members/mi/mem/medicaid/overvw/quality/cna/review"
   };
   function when(d) {
     const n = diff(today, d);
@@ -300,8 +302,11 @@ textarea { min-height: 96px; resize: vertical; }
     const c = [];
     if (type === "medicare" || type === "medicaid") {
       c.push(card("facts", type === "medicare" ? "Medicare has its own appeal process" : "Medicaid has its own appeal process",
-        "The deadlines and steps on this page are for private insurance and don't apply to you. Your denial notice lists your appeal rights and deadline. Follow those, and appeal quickly.",
-        [], "Call the member services number on your insurance card and ask how to appeal. You can still use the letter below as a starting point."));
+        type === "medicare"
+          ? "The deadlines and steps on this page are for private insurance and don't apply to you. Your denial notice lists your appeal rights and deadline. Follow those, and appeal quickly."
+          : ["The deadlines and steps on this page are for private insurance and don't apply to you. Your denial notice lists your appeal rights and deadline. Follow those, and appeal quickly.",
+             "If you're in a Medicaid health plan and it turns down your appeal, you have two more choices: a State Fair Hearing, and an external review by DIFS, the state insurance department. Medicaid plans' own pages give 127 days after the plan's final answer to ask DIFS. Go by the dates on your notice."].join("</p><p>"),
+        type === "medicare" ? [] : [["CareSource's Medicaid page", ""], ["Molina's Medicaid page", ""], ["DIFS", ""]], "Call the member services number on your insurance card and ask how to appeal. You can still use the letter below as a starting point."));
       show(c); return;
     }
     const urgent = w === "urgent";
@@ -331,7 +336,7 @@ textarea { min-height: 96px; resize: vertical; }
       if (state) {
         if (d && stage === "final") c.push(card("law", "Ask Michigan for an independent review",
           `If the insurer says no again, DIFS can have an independent reviewer decide. The law gives you 120 days after the final denial, which is ${when(add(d, 120))}. DIFS's own guidance says 127 days, but filing by the 120-day date is safest. It's free.`,
-          [["MCL 550.1911", ""], ["DIFS", ""]], `File online with the <a href="https://difs.state.mi.us/Complaints/ExternalReview.aspx" target="_blank" rel="noopener">DIFS external review form</a> and attach the final denial.`));
+          [["MCL 550.1911", ""], ["DIFS", ""]], `File online with the <a href="https://difs.state.mi.us/Complaints/ExternalReview.aspx" target="_blank" rel="noopener">DIFS external review form</a> and attach the final denial. Or fill out the <a href="https://www.michigan.gov/difs/-/media/Project/Websites/difs/Form/Complaint/FIS_0018.pdf" target="_blank" rel="noopener">paper form (FIS 0018)</a> and fax it to 517-284-8838 or mail it to the address on the form.`));
         if (urgent) c.push(card("help", "Expedited review with Michigan",
           "For care you still need, if waiting would seriously harm your health and your doctor backs that up, you can ask DIFS for an expedited review within 10 days. You must have asked the insurer for an urgent appeal first. DIFS says it decides these within 72 hours.",
           [["MCL 550.1913", ""], ["DIFS", ""]], "Call DIFS at 877-999-6442."));
