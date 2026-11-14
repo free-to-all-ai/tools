@@ -411,7 +411,7 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
           ["554.609", "554.610"], "Send a written demand for the full deposit, citing MCL 554.610."));
       } else {
         out_.push(card("law", "The damage list must be itemized",
-          "It has to list each damage, with estimated repair costs and the basis for each charge, and come with a check for any amount not claimed. It must also warn you, in large bold type, that you have 7 days to respond by mail.",
+          "It has to list each damage, with estimated repair costs and the basis for each charge, and come with a check or money order for any amount not claimed. Since September 21, 2026, the landlord can send that amount by direct deposit or electronic payment instead, within 10 days after mailing the list. The list must also warn you, in large bold type, that you have 7 days to respond by mail.",
           ["554.609"], "If the list doesn't have those things, point that out in your response."));
       }
       if (resp === "yes") {
@@ -528,7 +528,7 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
       "For each illegal act, you can get your actual damages or $200, whichever is more, and you can get back in. If you were forcibly put out, it's three times your actual damages or $200, whichever is more. A lease can't take these rights away.",
       ["600.2918(1)", "600.2918(2)", "600.2918(7)"]));
     if (d) c.push(card("law", "Deadlines to act",
-      `You have 90 days to ask a court to put you back in, until ${when(add(d, 90))}, and 1 year to sue for damages. These count from when it happened or when you found out.`,
+      `You have 90 days to ask a court to put you back in, until ${when(add(d, 90))}. That counts from when it happened or when you found out. You have 1 year from when it happened to sue for damages.`,
       ["600.2918(6)", "600.2918(8)"], "Ask district court for an order to get back in, or ask circuit court for an emergency order. Legal aid can help."));
     c.push(card("facts", "Exceptions the landlord may claim",
       "The landlord may act without a court only for temporary repairs or inspections allowed by law, or if they believe in good faith, after looking into it, that you abandoned the place and rent is unpaid.",
