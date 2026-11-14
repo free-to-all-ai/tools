@@ -505,7 +505,7 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
     }
 
     c.push(card("law", "Only the Board of Review decides",
-      [`This page can't approve you. Detroit's Board of Review looks at each application under the city's guidelines, and it may ask for more papers or do a random home inspection. Applications filed now go to ${HOPE.board}.`,
+      [`This page can't approve you. Detroit's Board of Review looks at each application under the city's guidelines, and it may ask for more papers or do a random home inspection. ${open() ? `Applications filed now go to ${HOPE.board}.` : `Applications filed by the ${HOPE.year} deadline go to ${HOPE.board}. The city says it doesn't accept applications after the deadline.`}`,
        `Decisions come in writing. If you're turned down, the letter says why and how to appeal. A July or December Board decision can be appealed to the Michigan Tax Tribunal within 30 days. Most people apply again every year, and the city sends a statement after the March Board to anyone who doesn't need to.`],
       [["MCL 211.7u", "(5)"], ["Detroit HOPE page"], [APP]]));
 
