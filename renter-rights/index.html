@@ -415,7 +415,11 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
           "It has to list each damage, with estimated repair costs and the basis for each charge, and come with a check or money order for any amount not claimed. Since September 21, 2026, the landlord can send that amount by direct deposit or electronic payment instead, within 10 days after mailing the list. The list must also warn you, in large bold type, that you have 7 days to respond by mail.",
           ["554.609"], "If the list doesn't have those things, point that out in your response."));
       }
-      if (resp === "yes") {
+      if (resp === "yes" && fwd === "no" && !relieved) {
+        out_.push(card("facts", "The double-deposit rule may not cover you",
+          `You disputed the list, and a landlord normally has to sue by ${when(d45)} or give the money back. But the law lets a landlord keep a claimed amount without suing when the tenant didn't give a forwarding address in writing within 4 days of moving out. So the rule that makes a landlord owe double may not apply to you. You can still dispute charges that aren't real damage, and a judge decides.`,
+          ["554.613(1)(a)", "554.611"], "Michigan Legal Help has the small claims forms, and legal aid can tell you where you stand."));
+      } else if (resp === "yes") {
         if (today > d45) {
           out_.push(card("facts", "The landlord may owe you double",
             `You disputed the list in time. The landlord then had until ${when(d45)} to either return the money or sue you for it. If the landlord did neither, the law says they give up the damages they claimed and owe double the amount they kept${kept !== null ? `, which would be ${money(kept * 2)}` : ""}. A judge decides whether every condition was met.`,
@@ -428,7 +432,7 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
       } else {
         out_.push(card("facts", "Not answering within 7 days can cost you",
           "If you don't respond by mail within 7 days of getting the list, you may lose the right to dispute the damages it claims. If you're past 7 days, a lawyer can tell you whether anything can still be done.",
-          ["554.609"]));
+          ["554.612", "554.613(1)(b)"]));
       }
     }
     show("r-deposit", out_);
@@ -451,7 +455,7 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
         "If the court rules against you only for unpaid rent, the eviction order can't issue for 10 days. If you pay the amount in the judgment plus court costs in that time, the eviction is stopped.",
         ["600.5744(5)", "600.5744(7)"]));
       c.push(card("facts", "You may have a defense",
-        "A judge can't evict you for unpaid rent if the landlord broke the lease in a way that excuses rent, like failing to make serious repairs, or if you paid the rent into a court-approved escrow account.",
+        "A judge can't evict you for unpaid rent if the landlord broke the lease in a way that excuses rent, like failing to make serious repairs, or if you paid the rent into an escrow account set up under the housing code, under a court order, or to a court-appointed receiver.",
         ["600.5720(1)(f)", "600.5720(1)(g)"], "Talk to a lawyer before you stop paying rent for any reason."));
     } else if (t === "end30") {
       c.push(card("law", "How much notice you get",
@@ -501,7 +505,7 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
       ["600.5720(1)(b)"],
       det ? "In Detroit, call BSEED at <span class=\"date-big\">(313) 628-2451</span> to report property conditions." : "Call your city or township's code enforcement or building department."));
     c.push(card("facts", "Holding back rent is risky",
-      "In an eviction for unpaid rent, a judge can rule for you if the landlord's breach excuses rent or if you paid rent into a court-approved escrow. Holding rent without the right steps can still get you evicted.",
+      "In an eviction for unpaid rent, a judge can rule for you if the landlord's breach excuses rent or if you paid rent into an escrow account set up under the housing code, under a court order, or to a court-appointed receiver. Holding rent without the right steps can still get you evicted.",
       ["600.5720(1)(f)", "600.5720(1)(g)"], "Talk to legal aid before you hold back any rent."));
     show("r-repairs", c);
   }

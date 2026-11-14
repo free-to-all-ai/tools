@@ -430,6 +430,7 @@ footer ul { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
     spot:    ["FTC Data Spotlight (Aug. 7, 2025)", "https://www.ftc.gov/news-events/data-visualizations/data-spotlight/2025/08/false-alarm-real-scam-how-scammers-are-stealing-older-adults-life-savings"],
     rf:      ["ReportFraud.ftc.gov", "https://reportfraud.ftc.gov/"],
     ic3elder:["FBI IC3: Elder Fraud", "https://www.ic3.gov/CrimeInfo/ElderFraud"],
+    equifax:["Equifax: Fraud Alerts", "https://www.equifax.com/personal/credit-report-services/credit-fraud-alerts/"],
     ic3cry:  ["FBI IC3: Cryptocurrency", "https://www.ic3.gov/CrimeInfo/Cryptocurrency"],
     ic3rpt:  ["FBI 2025 IC3 Report", "https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf"],
     psaGov:  ["FBI alert: Government impersonation (Sept. 17, 2026)", "https://www.ic3.gov/PSA/2026/PSA260917"],
@@ -677,8 +678,8 @@ footer ul { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
     { id: "d-ssn", label: "Gave my Social Security number",
       title: "You gave your Social Security number", steps: [
         `If someone used it, report it at <a href="https://www.identitytheft.gov/" target="_blank" rel="noopener">IdentityTheft.gov</a> and follow the recovery plan. If you're not sure, go to <a href="https://www.identitytheft.gov/databreach" target="_blank" rel="noopener">IdentityTheft.gov/databreach</a> for steps to protect yourself.`,
-        `The FBI says to contact the three credit bureaus to protect your credit: Equifax ${tel("800-685-1111")}, Experian ${tel("888-397-3742")}, TransUnion ${tel("888-909-8872")}.`
-      ], cites: [S.scammed, S.ic3elder] },
+        `The FBI says to contact the three credit bureaus to protect your credit: Equifax ${tel("800-685-1111")} (Equifax's own site gives an automated line for fraud alerts, ${tel("888-836-6351")}), Experian ${tel("888-397-3742")}, TransUnion ${tel("888-909-8872")}.`
+      ], cites: [S.scammed, S.ic3elder, S.equifax] },
     { id: "d-acct", label: "Gave a bank account number or a password",
       title: "You gave a bank account number or a password", steps: [
         `Call your bank and tell them. The FBI says to contact your bank to protect your accounts.`,
