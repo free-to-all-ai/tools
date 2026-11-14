@@ -325,7 +325,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     <p>Green cards mean your answers meet every rule the official pages list. Amber cards mean something depends on facts this page can't check. Grey cards mean at least one requirement isn't met right now, and the card says which one. Red cards mean a time limit is close.</p>
     <p>Things the official pages don't settle, and how this page handles them:</p>
     <ul>
-      <li>Michigan's Reconnect law still says 25. The 2026-27 budget lowered the age to 21, and the governor called the $25 million "ongoing." Bridge Michigan reported in August 2026 that advocates expect the lower age to last one year unless lawmakers change the law. This page uses 21 and flags it.</li>
+      <li>Michigan's Reconnect law still says 25. The 2026-27 budget lowered the age to 21, and the governor called the $25 million "ongoing." Bridge Michigan reported in July 2026 that advocates expect the lower age to last one year unless lawmakers change the law. This page uses 21 and flags it.</li>
       <li>The Achievement Scholarship's 15-month start window comes with a chart for spring graduates (finish in spring, start by the fall of the next year). For other months, the state says to ask your financial aid office, so this page counts 15 months and labels it "maybe."</li>
       <li>The Detroit Promise site says its application closed on July 1, 2026 while the program is updated, and doesn't say when it reopens. Its pages list the Path Back years as both 2013 to 2025 and 2013 to 2024. Its university GPA list and table disagree for the University of Olivet (2.5 or 3.0), and Siena Heights shows up on the eligibility page only.</li>
       <li>TIP needs a diploma or GED before age 20. This page only knows your age now and the year you finished, so it estimates.</li>
@@ -388,7 +388,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     "Governor, Aug 26, 2026": "https://www.michigan.gov/whitmer/news/press-releases/2026/08/26/whitmer-announces-eligibility-for-michigan-reconnect-opens-application-for-21-years",
     "MCL 390.1715": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-390-1715",
     "MCL 390.1717": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-390-1717",
-    "Bridge Michigan, Aug 2026": "https://bridgemi.com/michigan-education-watch/michigan-fills-free-college-gap-lowers-eligibility-to-21-for-now/",
+    "Bridge Michigan, July 2026": "https://bridgemi.com/michigan-education-watch/michigan-fills-free-college-gap-lowers-eligibility-to-21-for-now/",
     "2026-27 budget summary": "https://content.govdelivery.com/accounts/MILEAP/bulletins/4216740",
     "Achievement Scholarship": "https://www.michigan.gov/mistudentaid/programs/michigan-achievement-scholarship",
     "Community College Guarantee": "https://www.michigan.gov/mistudentaid/programs/michigan-achievement-scholarship/community-college-guarantee",
@@ -524,7 +524,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       paras.push(`Everything else fits. You can apply once you turn ${R.minAge}, if the age stays at ${R.minAge} in future budgets.`);
     }
     const next = st === "no" ? "" : `Apply online in about five minutes, then apply to the college. Use the state's <a href="${SRC["Reconnect: find your college"]}" target="_blank" rel="noopener">college finder</a> to see which college you're in-district for.`;
-    return { key: "reconnect", name: "Michigan Reconnect", st, line: st === "no" ? firstBad(checks) : "Tuition-free at your in-district community college", html: card(st, "Michigan Reconnect (adults 21 and older)", { checks, paras, next, cites: ["Reconnect: about", "Reconnect: costs", "Reconnect: keeping it", "MCL 390.1715", "MCL 390.1717", "Governor, Aug 26, 2026", "Bridge Michigan, Aug 2026"] }) };
+    return { key: "reconnect", name: "Michigan Reconnect", st, line: st === "no" ? firstBad(checks) : "Tuition-free at your in-district community college", html: card(st, "Michigan Reconnect (adults 21 and older)", { checks, paras, next, cites: ["Reconnect: about", "Reconnect: costs", "Reconnect: keeping it", "MCL 390.1715", "MCL 390.1717", "Governor, Aug 26, 2026", "Bridge Michigan, July 2026"] }) };
   }
   // The first unmet rule, cut to its first sentence, for the summary list.
   const firstBad = checks => { const b = checks.find(c => c[0] === "bad"); return b ? b[1].replace(/<[^>]+>/g, "").replace(/\.\s.*$/, ".") : ""; };
