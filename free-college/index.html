@@ -303,7 +303,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       <li><label><input type="checkbox"> <span><strong>Reconnect only:</strong> fill out the <a href="https://missg.guarantorsolutions.com/StudentPortal/reconnect" target="_blank" rel="noopener">Reconnect application</a>. The state says it takes under five minutes and works on a phone.</span></label></li>
       <li><label><input type="checkbox"> <span><strong>Check your state aid</strong> in the <a href="https://missg.guarantorsolutions.com/StudentPortal" target="_blank" rel="noopener">MiSSG Student Portal</a> after your FAFSA goes through.</span></label></li>
       <li><label><input type="checkbox"> <span><strong>Ask the financial aid office two things:</strong> are you "in-district" (that's what makes tuition fully free), and what will you still owe after aid? Books, parking, and fees not charged to every student usually aren't covered.</span></label></li>
-      <li><label><input type="checkbox"> <span><strong>Detroit:</strong> use the Detroit Promise <a href="https://detroitpromise.com/ns-pathback-application/" target="_blank" rel="noopener">Path Back form</a> if you finished high school between 2013 and 2025, or the <a href="https://forms.monday.com/forms/40febe7204e2587167d33534457b2694?r=use1" target="_blank" rel="noopener">contact form</a> for anything else. It only talks about your account with you, not your parents.</span></label></li>
+      <li><label><input type="checkbox"> <span><strong>Detroit:</strong> use the Detroit Promise <a href="https://detroitpromise.com/ns-pathback-application/" target="_blank" rel="noopener">Path Back form</a> if you finished high school between 2013 and 2025 (on November 14, 2026 it said it's closed and will reopen soon), or the <a href="https://forms.monday.com/forms/40febe7204e2587167d33534457b2694?r=use1" target="_blank" rel="noopener">contact form</a> for anything else, including class of 2026 graduates headed to a partner community college. It only talks about your account with you, not your parents.</span></label></li>
       <li><label><input type="checkbox"> <span><strong>Keep it:</strong> file the FAFSA again every year, keep your grades up (most programs use your college's "satisfactory academic progress" rule or a 2.0 GPA), and keep taking enough credits.</span></label></li>
     </ul>
   </section>
@@ -327,7 +327,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     <ul>
       <li>Michigan's Reconnect law still says 25. The 2026-27 budget lowered the age to 21, and the governor called the $25 million "ongoing." Bridge Michigan reported in July 2026 that advocates expect the lower age to last one year unless lawmakers change the law. This page uses 21 and flags it.</li>
       <li>The Achievement Scholarship's 15-month start window comes with a chart for spring graduates (finish in spring, start by the fall of the next year). For other months, the state says to ask your financial aid office, so this page counts 15 months and labels it "maybe."</li>
-      <li>The Detroit Promise site says its application closed on July 1, 2026 while the program is updated, and doesn't say when it reopens. Its pages list the Path Back years as both 2013 to 2025 and 2013 to 2024. Its university GPA list and table disagree for the University of Olivet (2.5 or 3.0), and Siena Heights shows up on the eligibility page only.</li>
+      <li>The Detroit Promise site says its application closed on July 1, 2026 while the program is updated, and doesn't say when it reopens. Its home page says it is still taking class of 2026 students headed to a partner community college through a contact form, and its Path Back form says it is closed and will reopen soon (both read November 14, 2026). Its pages list the Path Back years as both 2013 to 2025 and 2013 to 2024. Its university GPA list and table disagree for the University of Olivet (2.5 or 3.0), and Siena Heights shows up on the eligibility page only.</li>
       <li>TIP needs a diploma or GED before age 20. This page only knows your age now and the year you finished, so it estimates.</li>
     </ul>
     <p>Sources:</p>
@@ -362,6 +362,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       latestClass: 2026,                 // the newest class with posted rules
       verifyBy: "June 1, 2026",
       pathBack: [2013, 2025], pathBackAlt: 2024,
+      contactForm: "https://forms.monday.com/forms/40febe7204e2587167d33534457b2694?r=use1",   // where the home page notice's contact form link (wkf.ms/3Rx8vGG) lands, Nov. 14, 2026
       ccYears: 3, stipend: 50,
       cc: ["Henry Ford College", "Jackson College", "Macomb Community College", "Oakland Community College", "Schoolcraft College", "St. Clair County Community College", "Wayne County Community College District"],
       // [school, GPA needed by early March of senior year, seats]
@@ -682,7 +683,8 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
         checks.push(["unk", `The Detroit Promise application closed on ${P.closedOn} while the program is updated. The site doesn't say when it reopens or whether the rules for the class of ${a.hsy} will change.`]);
       } else if (a.hsy === P.latestClass) {
         mode = "current";
-        checks.push(["unk", `Class of ${P.latestClass}: you had to sign up and finish verification by ${P.verifyBy}. If you did, log in to finish any steps. If not, contact Detroit Promise.`]);
+        if (univ) checks.push(["unk", `Class of ${P.latestClass}: if you already applied, you can still log in to finish verification. If you never applied, Detroit Promise says the deadline for four-year colleges and universities has passed. It is still taking class of ${P.latestClass} students headed to a partner community college.`]);
+        else checks.push(["unk", `Class of ${P.latestClass}: if you already applied, log in to finish verification. If you never applied, Detroit Promise says it's still taking eligible class of ${P.latestClass} students who plan to go to a partner community college, through its contact form.`]);
       } else if (a.hsy >= P.pathBack[0] && a.hsy <= P.pathBack[1]) {
         mode = "pathback";
         if (univ) checks.push(["bad", "University funding has to be used right after high school. Graduates from earlier years can use Path Back at a partner community college, then transfer."]);
@@ -715,7 +717,8 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     if (a.det !== "no" && (a.sch === "cc" || a.sch === "unsure")) paras.push(`If you live in Detroit, Wayne County Community College District (WCCCD) is your in-district college, because its district is all of Wayne County except Dearborn, Garden City, Highland Park, Livonia, Northville, Plymouth, and part of Canton. You'd likely be out-of-district at the other six, where the Detroit Promise says it covers any remaining balance up to the full cost of tuition and mandatory fees.`);
     let next = "";
     if (st !== "no") {
-      next = mode === "pathback" ? `Fill out the <a href="https://detroitpromise.com/ns-pathback-application/" target="_blank" rel="noopener">Path Back form</a> (or the <a href="https://detroitpromise.com/pathback-application-current/" target="_blank" rel="noopener">returning student form</a> if you signed up before). Detroit Promise checks your record and sends your name to the college.`
+      next = mode === "pathback" ? `The <a href="https://detroitpromise.com/ns-pathback-application/" target="_blank" rel="noopener">Path Back form</a> said on November 14, 2026 that it's closed and will reopen soon. Check it again, and until it reopens ask through the <a href="${P.contactForm}" target="_blank" rel="noopener">contact form</a>. Once you're in, Detroit Promise checks your record and sends your name to the college.`
+        : mode === "current" ? `If you already applied, log in and finish verification. If you didn't and you're headed to a partner community college, fill out the Detroit Promise <a href="${P.contactForm}" target="_blank" rel="noopener">contact form</a> and ask for next steps.`
         : mode === "future" ? `Watch <a href="${SRC["Detroit Promise"]}" target="_blank" rel="noopener">detroitpromise.com</a> for the new application, and ask your school counselor. File the FAFSA either way.`
         : `Email <a href="mailto:info@detroitpromise.com">info@detroitpromise.com</a> from your own email with your name, birth date, and high school, and ask where your scholarship stands.`;
     }
