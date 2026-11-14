@@ -1,0 +1,1098 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Michigan Eviction Notice and Court Papers Check</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Got a 7-day eviction notice, notice to quit, summons, judgment, or order of eviction in Michigan? See what it means, your next dates, and what to check. Free.">
+<link rel="canonical" href="https://free-to-all-ai.github.io/tools/eviction-papers/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Free to All AI">
+<meta property="og:title" content="Michigan Eviction Notice and Court Papers Check">
+<meta property="og:description" content="Got a 7-day eviction notice, notice to quit, summons, judgment, or order of eviction in Michigan? See what it means, your next dates, and what to check. Free.">
+<meta property="og:url" content="https://free-to-all-ai.github.io/tools/eviction-papers/">
+<meta property="og:image" content="https://free-to-all-ai.github.io/tools/og/eviction-papers.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column. Pick the paper, answer questions from it, then a stack of cards, each with its law, court rule, or court form chip, then notes to bring to legal help. */
+:root {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #4d5d6b;
+  --line: #d5dde4;
+  --accent: #0b5d8f;      /* Great Lakes blue */
+  --accent-soft: #e2eef6;
+  --law: #1b6b3a;  --law-bg: #e3f2e8;
+  --facts: #8a5a00; --facts-bg: #fbf0d9;
+  --help: #a32222; --help-bg: #fae4e4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+    --accent: #6cb8e6; --accent-soft: #1b3344;
+    --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171e; --surface: #16212a; --fg: #e6edf2; --muted: #a3b2bf; --line: #2b3a46;
+  --accent: #6cb8e6; --accent-soft: #1b3344;
+  --law: #7fd39c; --law-bg: #173323; --facts: #f0c063; --facts-bg: #3a2e14; --help: #f19a9a; --help-bg: #3d1d1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 22px; font-weight: 600; }
+h3 { font-size: 18px; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.notice {
+  background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; font-size: 15px;
+  display: grid; gap: 4px;
+}
+.panel { display: grid; gap: 18px; }
+form.q {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+  display: grid; gap: 16px;
+}
+.sample { font-size: 14px; color: var(--muted); font-style: italic; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field > .lbl { font-weight: 700; }
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+input[type="date"], input[type="number"], select {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%; max-width: 320px;
+}
+input[type="text"], textarea {
+  font: inherit; font-size: 16px; padding: 9px 10px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--bg); color: var(--fg); width: 100%;
+}
+textarea { min-height: 96px; resize: vertical; }
+.opts { display: grid; gap: 6px; }
+.opts label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+.opts input { margin-top: 5px; accent-color: var(--accent); }
+.opts small { display: block; color: var(--muted); font-size: 14px; }
+.hint { font-size: 14px; color: var(--muted); }
+.results { display: grid; gap: 12px; }
+.results-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; display: grid; gap: 8px; border-left: 5px solid var(--line);
+}
+.card.law { border-left-color: var(--law); }
+.card.facts { border-left-color: var(--facts); }
+.card.help { border-left-color: var(--help); }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.law { color: var(--law); background: var(--law-bg); }
+.tag.facts { color: var(--facts); background: var(--facts-bg); }
+.tag.help { color: var(--help); background: var(--help-bg); }
+.small { font-size: 15px; color: var(--muted); }
+.addr { font-family: var(--f-mono); font-size: 14px; white-space: pre-line; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; overflow-wrap: anywhere; }
+.cites { display: flex; flex-wrap: wrap; gap: 6px; }
+.cite {
+  font-family: var(--f-mono); font-size: 13px; text-decoration: none;
+  border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--accent);
+}
+.cite:hover { border-color: var(--accent); }
+.next { font-size: 15px; color: var(--muted); }
+.next strong { color: var(--fg); }
+.gethelp { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; }
+.gethelp ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.letter {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px;
+  font-family: var(--f-body); white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; font-size: 16px;
+}
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 10px 16px;
+  background: var(--accent); color: var(--bg); border: 0;
+}
+.btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.btn:hover { filter: brightness(1.08); }
+.copied { font-size: 14px; color: var(--law); }
+.fill { background: var(--facts-bg); color: var(--facts); border-radius: 4px; padding: 0 3px; }
+footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: rise .25s ease-out both; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+@media print {
+  body.printing .wrap > :not(#s-sum), body.printing #s-sum > :not(.letter) { display: none !important; }
+  body.printing { background: #fff; color: #000; }
+  body.printing .letter { border: 0; padding: 0; color: #000; background: #fff; }
+  body.printing .fill { background: none; color: #000; }
+}
+ul.tick { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: 15px; }
+ul.tick li { padding-left: 26px; position: relative; }
+ul.tick li::before { position: absolute; left: 0; top: 0; font-family: var(--f-mono); }
+ul.tick li.yes::before { content: "\2713"; color: var(--law); }
+ul.tick li.no::before { content: "\25CB"; color: var(--facts); }
+ul.tick li.no { color: var(--fg); font-weight: 700; }
+.opts label[hidden] { display: none; }
+form.q + form.q { margin-top: -6px; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Michigan · Eviction papers · free</span>
+    <h1>Michigan Eviction Papers Check</h1>
+    <p class="lede">Got an eviction notice, a 7-day Demand for Possession, a Notice to Quit, a summons, a judgment, or an Order of Eviction in Michigan? Pick the paper you're holding and answer a few questions from it. You'll see what the paper means, the dates that come with it, what to look for on it, and what you can do next.</p>
+    <div class="notice">
+      <strong>This is legal information, not legal advice.</strong>
+      <span>You read the paper and type in what it says. This page doesn't read documents, and it can't know every fact of your case. If a date on your court papers is different from a date here, go by your court papers. Nothing you type leaves this page or gets saved.</span>
+    </div>
+  </header>
+
+  <section class="panel" aria-labelledby="h-paper">
+    <h2 id="h-paper">1. Which paper do you have?</h2>
+    <form class="q" id="f-paper" novalidate>
+      <p class="sample">Sample answers are filled in so you can see how it works. Change them to yours. The form number is printed in the bottom left corner of most court forms.</p>
+      <div class="field"><span class="lbl" id="l-paper">The paper in your hand</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-paper">
+          <label><input type="radio" name="paper" value="notice" checked><span>A notice from my landlord<small>Titled "Demand for Possession" or "Notice to Quit" (forms DC 100a to DC 100e), or a letter telling you to pay or move out. No court name or case number on it yet.</small></span></label>
+          <label><input type="radio" name="paper" value="summons"><span>A Summons and Complaint from a court<small>Form DC 104 on top, with a case number and a date to be in district court.</small></span></label>
+          <label><input type="radio" name="paper" value="judgment"><span>A Judgment<small>Form DC 105, "Judgment, Landlord-Tenant." The court's decision after a hearing, a missed hearing, or an agreement.</small></span></label>
+          <label><input type="radio" name="paper" value="order"><span>An Order of Eviction<small>Form DC 107, "Application and Order of Eviction." Also called a writ. It tells a court officer to remove you.</small></span></label>
+        </div></div>
+    </form>
+  </section>
+
+  <section class="panel" aria-labelledby="h-q">
+    <h2 id="h-q">2. What your paper says</h2>
+
+    <!-- NOTICE -->
+    <form class="q" id="f-notice" novalidate>
+      <div class="field"><span class="lbl" id="l-nreason">What reason does the notice give?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-nreason">
+          <label><input type="radio" name="n-reason" value="nonpay" checked><span>I owe rent<small>"Demand for Possession, Nonpayment of Rent" (DC 100a). Often called a 7-day notice.</small></span></label>
+          <label><input type="radio" name="n-reason" value="end"><span>The landlord is ending my rental and gives no other reason<small>"Notice to Quit to Recover Possession of Property" (DC 100c). Often called a 30-day notice.</small></span></label>
+          <label><input type="radio" name="n-reason" value="violation"><span>I broke the lease or the rules<small>Usually a Notice to Quit (DC 100c) with "other" checked and a reason written in.</small></span></label>
+          <label><input type="radio" name="n-reason" value="hazard"><span>Damage to the home or a health hazard<small>"Demand for Possession, Damage/Health Hazard to Property" (DC 100b).</small></span></label>
+          <label><input type="radio" name="n-reason" value="injury"><span>Someone was hurt or threatened<small>A 7-day Notice to Quit saying you, someone in your household, or a guest hurt or threatened a person on the landlord's property.</small></span></label>
+          <label><input type="radio" name="n-reason" value="drugs"><span>Illegal drugs<small>"Demand for Possession, Termination of Tenancy Due to Unlawful Drug Activity" (DC 100e). A 24-hour notice.</small></span></label>
+        </div></div>
+      <div class="field" id="n-period-wrap" hidden><span class="lbl" id="l-nperiod">How do you rent?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-nperiod">
+          <label><input type="radio" name="n-period" value="month" checked><span>Month to month<small>You pay monthly, and you have no written lease or the lease's end date has passed.</small></span></label>
+          <label><input type="radio" name="n-period" value="week"><span>Week to week</span></label>
+          <label><input type="radio" name="n-period" value="twoweek"><span>Every two weeks</span></label>
+          <label><input type="radio" name="n-period" value="year"><span>Year to year<small>Rare for homes. No end date, and rent is figured by the year.</small></span></label>
+          <label><input type="radio" name="n-period" value="lease"><span>I have a written lease with an end date that hasn't come yet</span></label>
+        </div></div>
+      <div class="field"><span class="lbl" id="l-nhow">How did you get it?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-nhow">
+          <label><input type="radio" name="n-how" value="hand" checked> Handed to me</label>
+          <label><input type="radio" name="n-how" value="household"> Handed to someone in my home, or to my employee, to give to me</label>
+          <label><input type="radio" name="n-how" value="mail"> In the regular mail</label>
+          <label><input type="radio" name="n-how" value="email"> By email or text</label>
+          <label><input type="radio" name="n-how" value="door"> Taped to the door, slid under it, or left outside</label>
+        </div></div>
+      <div class="row2">
+        <div class="field"><label for="n-got">Date you got it</label><input id="n-got" type="date"></div>
+        <div class="field" id="n-mailed-wrap" hidden><label for="n-mailed">Date it was mailed</label><input id="n-mailed" type="date">
+          <span class="hint">The postmark on the envelope. Leave it blank if you don't know.</span></div>
+        <div class="field" id="n-moveby-wrap" hidden><label for="n-moveby">"You must move by" date on the notice</label><input id="n-moveby" type="date">
+          <span class="hint">Item 2 on form DC 100c. Leave it blank if there isn't one.</span></div>
+      </div>
+      <div class="field"><span class="lbl" id="l-nparts">Look for these on the notice. Check off each one you find.</span>
+        <div class="opts" role="group" aria-labelledby="l-nparts" id="n-parts"></div></div>
+    </form>
+
+    <!-- SUMMONS -->
+    <form class="q" id="f-summons" novalidate hidden>
+      <div class="field"><span class="lbl" id="l-skind">What is the complaint for?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-skind">
+          <label><input type="radio" name="s-kind" value="nonpay" checked><span>Unpaid rent<small>"Complaint, Nonpayment of Rent" (DC 102a).</small></span></label>
+          <label><input type="radio" name="s-kind" value="term"><span>The rental ended, or a lease violation<small>"Complaint to Recover Possession of Property" (DC 102c).</small></span></label>
+          <label><input type="radio" name="s-kind" value="fast"><span>Damage, a health hazard, drugs, an injury or threat, or trespassing<small>For example "Complaint, Damage/Health Hazard to Property" (DC 102b).</small></span></label>
+        </div></div>
+      <div class="row2">
+        <div class="field"><label for="s-hearing">Court date on the summons</label><input id="s-hearing" type="date">
+          <span class="hint">Item 2 on form DC 104: "You are summoned to be in the district court on..."</span></div>
+        <div class="field"><label for="s-got">Date you got the papers</label><input id="s-got" type="date"></div>
+      </div>
+      <div class="field"><span class="lbl" id="l-show">How did the court papers reach you?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-show">
+          <label><input type="radio" name="s-how" value="hand" checked> Handed to me</label>
+          <label><input type="radio" name="s-how" value="household"> Handed to someone in my home to give to me</label>
+          <label><input type="radio" name="s-how" value="door"> Attached to my door</label>
+          <label><input type="radio" name="s-how" value="mailonly"> Only in the mail. Nobody brought a copy.</label>
+        </div></div>
+      <div class="field"><span class="lbl" id="l-snotice">Before the court papers, did you get a notice or demand from the landlord?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-snotice">
+          <label><input type="radio" name="s-notice" value="yes" checked> Yes</label>
+          <label><input type="radio" name="s-notice" value="no"> No, the court papers were the first thing I got</label>
+        </div></div>
+      <div class="row2" id="s-ndates">
+        <div class="field"><label for="s-ndate">Date you got that notice</label><input id="s-ndate" type="date"></div>
+        <div class="field"><label for="s-issued">Date the clerk signed the summons</label><input id="s-issued" type="date">
+          <span class="hint">Next to the court seal on the summons. Leave it blank if you can't find it.</span></div>
+      </div>
+      <div class="field"><span class="lbl" id="l-sparts">What came with the summons? Check off each one you find.</span>
+        <div class="opts" role="group" aria-labelledby="l-sparts" id="s-parts"></div></div>
+    </form>
+
+    <!-- JUDGMENT -->
+    <form class="q" id="f-judgment" novalidate hidden>
+      <div class="row2">
+        <div class="field"><label for="j-date">Date the judge signed the judgment</label><input id="j-date" type="date">
+          <span class="hint">Next to the judge's signature on form DC 105.</span></div>
+        <div class="field"><label for="j-mailed">Date it was mailed or handed to you</label><input id="j-mailed" type="date">
+          <span class="hint">The clerk's "Certificate of Mailing" date on page 2. Leave it blank if you got it in court that day.</span></div>
+      </div>
+      <div class="field"><span class="lbl" id="l-jhow">How was it decided? Look at the boxes after "The court finds: by..."</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-jhow">
+          <label><input type="radio" name="j-how" value="hearing" checked><span>Hearing<small>You were there and the judge decided.</small></span></label>
+          <label><input type="radio" name="j-how" value="default"><span>Default<small>You weren't at the hearing.</small></span></label>
+          <label><input type="radio" name="j-how" value="consent"><span>Consent<small>You and the landlord signed an agreement.</small></span></label>
+        </div></div>
+      <div class="field" id="j-lawyer-wrap" hidden><span class="lbl" id="l-jlawyer">Did you have a lawyer when you agreed?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-jlawyer">
+          <label><input type="radio" name="j-lawyer" value="no" checked> No</label>
+          <label><input type="radio" name="j-lawyer" value="yes"> Yes</label>
+        </div></div>
+      <div class="field"><span class="lbl" id="l-jbox">Which box is checked in items 3 and 4?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-jbox">
+          <label><input type="radio" name="j-box" value="pay" checked><span>4a. Pay the amount due or move out by a date<small>The usual judgment in an unpaid rent case.</small></span></label>
+          <label><input type="radio" name="j-box" value="move"><span>4b. Move out by a date<small>No choice to pay and stay.</small></span></label>
+          <label><input type="radio" name="j-box" value="now"><span>4c. An immediate order of eviction</span></label>
+          <label><input type="radio" name="j-box" value="keep"><span>3. The defendant has a right to retain possession<small>You won the right to stay.</small></span></label>
+          <label><input type="radio" name="j-box" value="unsure"><span>I can't tell</span></label>
+        </div></div>
+      <div class="row2" id="j-by-row">
+        <div class="field"><label for="j-by">The "on or before" date written in item 4</label><input id="j-by" type="date"></div>
+        <div class="field" id="j-amount-wrap"><label for="j-amount">Total in item 2d ($)</label><input id="j-amount" type="number" min="0" step="0.01" inputmode="decimal"></div>
+      </div>
+      <div class="field" id="j-partial-wrap"><span class="lbl" id="l-jpartial">Item 6 says accepting a partial payment...</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-jpartial">
+          <label><input type="radio" name="j-partial" value="wont" checked> "will not" prevent an order of eviction</label>
+          <label><input type="radio" name="j-partial" value="will"> "will" prevent an order of eviction</label>
+          <label><input type="radio" name="j-partial" value="blank"> Neither box is checked</label>
+        </div></div>
+    </form>
+
+    <!-- ORDER -->
+    <form class="q" id="f-order" novalidate hidden>
+      <div class="row2">
+        <div class="field"><label for="o-date">Date the judge signed the Order of Eviction</label><input id="o-date" type="date">
+          <span class="hint">Under "Order of Eviction" on form DC 107.</span></div>
+        <div class="field"><label for="o-jdate">Date of the judgment</label><input id="o-jdate" type="date">
+          <span class="hint">Item 1 of the application at the top of DC 107.</span></div>
+      </div>
+      <div class="field"><span class="lbl" id="l-opaid">Since the judgment, have you paid the landlord or the court anything?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-opaid">
+          <label><input type="radio" name="o-paid" value="no" checked> No</label>
+          <label><input type="radio" name="o-paid" value="yes"> Yes</label>
+        </div></div>
+      <div class="field"><span class="lbl" id="l-owho">Who is telling you to leave?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-owho">
+          <label><input type="radio" name="o-who" value="none" checked> Nobody yet. I just have the paper.</label>
+          <label><input type="radio" name="o-who" value="officer"> A court officer, bailiff, sheriff's deputy, or police officer</label>
+          <label><input type="radio" name="o-who" value="landlord"> The landlord or the landlord's workers, with no officer</label>
+        </div></div>
+    </form>
+
+    <!-- ABOUT YOUR HOME -->
+    <form class="q" id="f-home" novalidate>
+      <div class="field"><span class="lbl" id="l-detroit">Is the home in Detroit?</span>
+        <div class="opts" role="radiogroup" aria-labelledby="l-detroit">
+          <label><input type="radio" name="h-detroit" value="no" checked> No</label>
+          <label><input type="radio" name="h-detroit" value="yes"> Yes</label>
+        </div></div>
+      <div class="field"><span class="lbl" id="l-htype">Does any of this fit your home? Check all that apply.</span>
+        <div class="opts" role="group" aria-labelledby="l-htype">
+          <label><input type="checkbox" id="h-pub"><span>Public housing<small>Run by a city, county, or township housing commission.</small></span></label>
+          <label><input type="checkbox" id="h-pbra"><span>A building where HUD pays part of the rent<small>Project-based Section 8 and similar programs. The help stays with the apartment.</small></span></label>
+          <label><input type="checkbox" id="h-fed"><span>A Housing Choice Voucher (Section 8), a tax credit (LIHTC) building, or a rural housing program</span></label>
+          <label><input type="checkbox" id="h-park"><span>I own a mobile home and rent the lot in a park</span></label>
+        </div></div>
+    </form>
+
+    <div class="results" id="results" aria-live="polite"></div>
+    <div class="btns"><button class="btn ghost" type="button" id="ics">Save these dates to my calendar</button><span class="hint">Downloads a calendar file. Nothing is sent anywhere.</span></div>
+  </section>
+
+  <section class="panel" id="s-sum" aria-labelledby="h-sum">
+    <div class="bar">
+      <h2 id="h-sum">3. Notes to bring to legal help</h2>
+      <span class="btns"><span class="copied" id="copied" role="status"></span><button class="btn ghost" type="button" id="print">Print</button><button class="btn" type="button" id="copy">Copy notes</button></span>
+    </div>
+    <div class="letter" id="summary" tabindex="0" aria-label="Notes about your eviction papers"></div>
+    <p class="hint">A lawyer or legal aid worker can move faster when they see the paper, the dates, and what you noticed. Bring the papers themselves too, with the envelopes.</p>
+  </section>
+
+  <section class="gethelp" aria-labelledby="h-help">
+    <h2 id="h-help">Free help</h2>
+    <ul>
+      <li><a href="https://michiganlegalhelp.org/guide-to-legal-help" target="_blank" rel="noopener">Michigan Legal Help: Guide to Legal Help</a> finds free legal aid near you, by county and problem. Court forms also list the State Bar's Lawyer Referral Service, 1-800-968-0738, if you can pay for a lawyer.</li>
+      <li><a href="https://michiganlegalhelp.org/resources/housing/do-it-yourself-answer-eviction-complaint" target="_blank" rel="noopener">Michigan Legal Help: Do-It-Yourself Answer to Eviction Complaint</a> asks you questions and fills in the court's answer form for free. Its guides walk through <a href="https://michiganlegalhelp.org/resources/housing/going-court-eviction-case" target="_blank" rel="noopener">going to court</a> and <a href="https://michiganlegalhelp.org/resources/housing/eviction-after-court-over" target="_blank" rel="noopener">what happens after court</a>.</li>
+      <li><strong>Detroit tenants:</strong> households with income up to twice the federal poverty level can get a free lawyer for an eviction case in 36th District Court. Go to your hearing and tell the judge you want a free lawyer. <a href="https://detroitmi.gov/departments/law-department/office-eviction-defense-right-counsel" target="_blank" rel="noopener">City of Detroit, Office of Eviction Defense</a>. Detroit Housing Resource helpline: (866) 313-2520.</li>
+      <li><strong>Help paying rent:</strong> <a href="https://www.michigan.gov/mdhhs/assistance-programs/emergency-relief/relocation" target="_blank" rel="noopener">State Emergency Relief</a> from MDHHS can pay back rent, and court costs in a judgment, to stop an eviction. It asks for a court summons, order, or judgment as proof. Your county's <a href="https://www.michigan.gov/mshda/homeless/homeless-and-special-housing-needs-programs/hara-contact-list" target="_blank" rel="noopener">Housing Assessment and Resource Agency (HARA)</a> is the other place the court rules name.</li>
+      <li><a href="../renter-rights/">Michigan Renter Rights Check</a> on this site covers lockouts, repairs, retaliation, security deposits, and lease clauses.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>How this works.</strong> The rules come from Michigan's summary proceedings law (MCL 600.5714, 600.5716, 600.5718, 600.5720, 600.5735, 600.5741, 600.5744, and 600.5775), the notice to quit law (MCL 554.134), the lockout law (MCL 600.2918), Michigan Court Rules 4.201, 1.108, and 8.110, and the State Court Administrative Office's landlord-tenant forms (DC 100a, 100b, 100c, 100d, 100e, 102a, 102c, 104, 105, 107, 111a, 111c, 508, 538, and 539). The cards on subsidized housing cite 15 U.S.C. 9058 and 24 CFR 966.4 and 247.4. The rental license card cites <em>Skidmore v Hayashi</em>, a Michigan Court of Appeals opinion from October 21, 2026. All were checked against the official sources on <span id="checked"></span>.</p>
+    <p>Days are calendar days. The day a paper is served or signed isn't counted. Where a court deadline lands on a Saturday, Sunday, or court holiday, the court rule runs it to the end of the next court day, and this page says so when that happens. Your local court can add holidays. Green cards are what the rule says directly. Amber cards depend on your facts. Red cards mean act now.</p>
+    <p>This page is for people renting a home. It doesn't cover land contracts, foreclosures, hotels, or business leases, and it doesn't read or judge an uploaded document. Free and open source. Nothing you enter is sent anywhere or stored.</p>
+    <p class="report"><strong>See a mistake?</strong> <a href="https://github.com/free-to-all-ai/tools/issues/new?template=mistake.yml&amp;title=Mistake%3A+Michigan+Eviction+Papers+Check&amp;tool=Michigan+Eviction+Papers+Check" target="_blank" rel="noopener">Report it on GitHub</a>. You'll need a free GitHub account, and what you write there is public, so leave out personal details.</p>
+    <p><a href="https://free-to-all-ai.github.io/tools/">More free tools from Free to All AI</a></p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  /* ------------------------------------------------------------------
+     DATA BLOCK. Every number, date, and rule this page uses, with its source.
+     All checked against the official source on the CHECKED date below.
+     To update: re-read each source, change the value here, change CHECKED.
+     ------------------------------------------------------------------ */
+  const CHECKED = "November 14, 2026";
+  const RULES = {
+    nonpayDays: 7,            // MCL 600.5714(1)(a); MCL 554.134(2); form DC 100a (Rev. 5/22)
+    hazardDays: 7,            // MCL 600.5714(1)(d); form DC 100b (Rev. 6/19)
+    hazardLookbackDays: 90,   // MCL 600.5714(1)(d): landlord discovered it not earlier than 90 days before filing
+    injuryDays: 7,            // MCL 600.5714(1)(e)
+    drugHours: 24,            // MCL 600.5714(1)(b); MCL 554.134(4); form DC 100e (Rev. 6/23)
+    lawsuitNoticeGuideDays: 30, // Michigan Legal Help guide figure for a lease violation. Not in the statute.
+    serveBeforeTrialDays: 3,  // MCL 600.5735(2)(b)
+    summonsWithinDays: 10,    // MCL 600.5735(2)(b)
+    adjournMinDays: 7,        // MCR 4.201(K)(1)(a)
+    adjournMaxDays: 14,       // MCR 4.201(K)(1)(a)
+    goodCauseAdjournDays: 56, // MCR 4.201(K)(1)(c)
+    juryDays: 5,              // MCR 4.201(G)(4)
+    juryFee: 50,              // form DC 538 (Rev. 11/23)
+    rentHelpProofDays: 5,     // MCR 4.201(I)(3)(a)
+    stayDays: 14,             // MCR 4.201(I)(3)(b)
+    stayMaxDays: 28,          // MCR 4.201(I)(3)(b)
+    consentHoldCourtDays: 3,  // MCR 4.201(J)(1)
+    writWaitDays: 10,         // MCL 600.5744(5)
+    postJudgmentDays: 10,     // MCR 4.201(N) and (O)(2)
+    writIssueLimitDays: 56,   // MCR 4.201(M)(4)(a)
+    writExecLimitDays: 56,    // MCR 4.201(M)(4)(b)
+    writDeliverDays: 7,       // MCR 4.201(M)(2)
+    retaliationDays: 90,      // MCL 600.5720(2)
+    federalNoticeDays: 30,    // 15 U.S.C. 9058(c); 24 CFR 966.4(l)(3)(i)(A) and (q); 24 CFR 247.4(c)
+    parkConferenceDays: 10,   // form DC 100d (Rev. 6/19)
+    lockoutMinDamages: 200,   // MCL 600.2918(2)
+    detroitFplMultiple: 2     // City of Detroit, Office of Eviction Defense page
+  };
+  // HUD's 30-day rule: an interim final rule to revoke it was published Feb. 26, 2026 (91 FR 9449) and its
+  // effective date was delayed indefinitely on Mar. 13, 2026 (91 FR 12301). Recheck federalregister.gov.
+  // Detroit right to counsel: confirmed running on the city's page on the CHECKED date. Funding is year to year.
+  // Skidmore v Hayashi, Mich. Court of Appeals No. 371345, published Oct. 21, 2026. Watch for a Supreme Court appeal.
+
+  const MCL = s => `https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-${s}`;
+  const FORM = f => `https://www.courts.michigan.gov/siteassets/forms/scao-approved/${f}.pdf`;
+  const MCR = n => `https://www.courts.michigan.gov/siteassets/rules-instructions-administrative-orders/michigan-court-rules/michigan-court-rules-responsive-html5.zip/Michigan_Court_Rules/Court_Rules_Chapter_${n}/Court_Rules_Chapter_${n}.htm`;
+  const MLH = "https://michiganlegalhelp.org/resources/housing/";
+  const SRC = {
+    "MCL 554.134": MCL("554-134"), "MCL 600.2918": MCL("600-2918"), "MCL 600.5706": MCL("600-5706"),
+    "MCL 600.5714": MCL("600-5714"), "MCL 600.5716": MCL("600-5716"), "MCL 600.5718": MCL("600-5718"),
+    "MCL 600.5720": MCL("600-5720"), "MCL 600.5735": MCL("600-5735"), "MCL 600.5741": MCL("600-5741"),
+    "MCL 600.5744": MCL("600-5744"), "MCL 600.5775": MCL("600-5775"), "MCL 600.5779": MCL("600-5779"),
+    "MCR 4.201": MCR(4), "MCR 1.108": MCR(1), "MCR 2.612": MCR(2), "MCR 8.110": MCR(8),
+    "Form DC 100a": FORM("dc100a"), "Form DC 100b": FORM("dc100b"), "Form DC 100c": FORM("dc100c"),
+    "Form DC 100d": FORM("dc100d"), "Form DC 100e": FORM("dc100e"), "DC 100c instructions": FORM("instdc100c"),
+    "Form DC 102a": FORM("dc102a"), "Form DC 102c": FORM("dc102c"), "Form DC 104": FORM("dc104"),
+    "Form DC 105": FORM("dc105"), "Form DC 107": FORM("dc107"), "Form DC 111a": FORM("dc111a_new"), "Form DC 111b": FORM("dc111b"),
+    "Form DC 111c": FORM("dc111c"), "Form DC 508": FORM("dc508"), "Form DC 538": FORM("dc538"),
+    "Form DC 539": FORM("dc539"), "Form MC 20": FORM("mc20"), "Form MC 22": FORM("mc22"),
+    "15 U.S.C. 9058": "https://www.law.cornell.edu/uscode/text/15/9058",
+    "24 CFR 966.4": "https://www.law.cornell.edu/cfr/text/24/966.4",
+    "24 CFR 247.4": "https://www.law.cornell.edu/cfr/text/24/247.4",
+    "HUD rule status": "https://www.federalregister.gov/documents/2026/03/13/2026-04990/revocation-of-the-30-day-notification-requirement-prior-to-termination-of-lease-for-nonpayment-of",
+    "Skidmore v Hayashi": "https://www.courts.michigan.gov/c/courts/coa/case/371345",
+    "Detroit Eviction Defense": "https://detroitmi.gov/departments/law-department/office-eviction-defense-right-counsel",
+    "Detroit rental rules": "https://detroitmi.gov/departments/buildings-safety-engineering-and-environmental-department/bseed-divisions/property-maintenance/rental-property",
+    "MDHHS Emergency Relief": "https://www.michigan.gov/mdhhs/assistance-programs/emergency-relief/relocation",
+    "MDHHS ERM 303": "https://mdhhs-pres-prod.michigan.gov/olmweb/ex/ER/Public/ERM/303.pdf",
+    "HARA list": "https://www.michigan.gov/mshda/homeless/homeless-and-special-housing-needs-programs/hara-contact-list",
+    "Michigan Legal Help": MLH + "eviction-what-it-and-how-does-it-start",
+    "MLH: Going to Court": MLH + "going-court-eviction-case",
+    "MLH: After Court": MLH + "eviction-after-court-over",
+    "MLH: Lease Violations": MLH + "eviction-recover-possession-of-property",
+    "MLH: Subsidized Housing": MLH + "eviction-from-subsidized-housing",
+    "MLH: Mobile Home Parks": "https://michiganlegalhelp.org/node/2495"
+  };
+  /* ---------------------------- end of data block ---------------------------- */
+
+  const DAY = 86400000;
+  const parse = v => { if (!v) return null; const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); };
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const add = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+  // MCR 1.108(3): a period in months or years ends on the same day of the month. If that month is too short, its last day.
+  const addMonths = (d, n) => { const x = new Date(d.getFullYear(), d.getMonth() + n, d.getDate()); return x.getDate() === d.getDate() ? x : new Date(x.getFullYear(), x.getMonth(), 0); };
+  const fmt = d => d.toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" });
+  const plain = d => d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  const weekday = d => d.toLocaleDateString("en-US", { weekday: "long" });
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const diff = (a, b) => Math.round((b - a) / DAY);
+  const same = (a, b) => a && b && a.getTime() === b.getTime();
+  const later = (a, b) => (a && b ? (a > b ? a : b) : a || b);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const money = n => "$" + Number(n).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const $ = id => document.getElementById(id);
+  const val = name => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; };
+  const LABEL = { law: "The rule says", facts: "Depends on your facts", help: "Act now" };
+
+  // Court holidays, MCR 8.110(D)(2). Local courts can change these by administrative order.
+  const nthDow = (y, m, dow, n) => { const f = new Date(y, m, 1); return new Date(y, m, 1 + (dow - f.getDay() + 7) % 7 + 7 * (n - 1)); };
+  const lastDow = (y, m, dow) => { const l = new Date(y, m + 1, 0); return add(l, -((l.getDay() - dow + 7) % 7)); };
+  function observed(d, eve) {
+    const w = d.getDay();
+    if (eve) return w === 5 || w === 6 ? add(d, -1) : w === 0 ? add(d, -2) : d;
+    return w === 6 ? add(d, -1) : w === 0 ? add(d, 1) : d;
+  }
+  function courtHolidaysIn(y) {
+    const thanks = nthDow(y, 10, 4, 4);
+    return [
+      [observed(new Date(y, 0, 1)), "New Year's Day"], [nthDow(y, 0, 1, 3), "Martin Luther King, Jr. Day"],
+      [nthDow(y, 1, 1, 3), "Presidents' Day"], [lastDow(y, 4, 1), "Memorial Day"],
+      [observed(new Date(y, 5, 19)), "Juneteenth"], [observed(new Date(y, 6, 4)), "Independence Day"],
+      [nthDow(y, 8, 1, 1), "Labor Day"], [observed(new Date(y, 10, 11)), "Veterans' Day"],
+      [thanks, "Thanksgiving Day"], [add(thanks, 1), "the Friday after Thanksgiving"],
+      [observed(new Date(y, 11, 24), true), "Christmas Eve"], [observed(new Date(y, 11, 25)), "Christmas Day"],
+      [observed(new Date(y, 11, 31), true), "New Year's Eve"]
+    ];
+  }
+  const CH = new Map();
+  function courtHoliday(d) {
+    for (const y of [d.getFullYear() - 1, d.getFullYear(), d.getFullYear() + 1]) {
+      if (!CH.has(y)) CH.set(y, new Map(courtHolidaysIn(y).map(([x, n]) => [iso(x), n])));
+      const n = CH.get(y).get(iso(d));
+      if (n) return n;
+    }
+    return null;
+  }
+  const weekend = d => d.getDay() === 0 || d.getDay() === 6;
+  const courtDay = d => !weekend(d) && !courtHoliday(d);
+  const roll = d => { let x = d; while (!courtDay(x)) x = add(x, 1); return x; };      // MCR 1.108(1)
+  const addCourtDays = (d, n) => { let x = d; while (n > 0) { x = add(x, 1); if (courtDay(x)) n--; } return x; };
+  const whatDay = d => courtHoliday(d) ? `${courtHoliday(d)}, a court holiday` : `a ${weekday(d)}`;
+
+  // "The next regular day for delivery of mail," MCL 600.5718(1)(c). No delivery on Sundays or federal holidays.
+  function mailHoliday(d) {
+    const y = d.getFullYear();
+    const fixed = [[0, 1], [5, 19], [6, 4], [10, 11], [11, 25]].some(([m, dd]) => {
+      const h = new Date(y, m, dd);
+      return same(h, d) || (h.getDay() === 0 && same(add(h, 1), d));
+    });
+    return fixed || [nthDow(y, 0, 1, 3), nthDow(y, 1, 1, 3), lastDow(y, 4, 1), nthDow(y, 8, 1, 1), nthDow(y, 9, 1, 2), nthDow(y, 10, 4, 4)].some(h => same(h, d));
+  }
+  const nextMailDay = d => { let x = add(d, 1); while (x.getDay() === 0 || mailHoliday(x)) x = add(x, 1); return x; };
+
+  function when(d) {
+    const n = diff(today, d);
+    if (n > 0) return `${fmt(d)} (${n} day${n === 1 ? "" : "s"} from today)`;
+    if (n === 0) return `${fmt(d)} (today)`;
+    return `${fmt(d)} (${-n} day${n === -1 ? "" : "s"} ago)`;
+  }
+  const soon = d => { const n = diff(today, d); return n >= 0 && n <= 7; };
+  // A note for when a counted period ends on a weekend or court holiday.
+  const rollNote = (d, what) => courtDay(d) ? "" : `${plain(d)} is ${whatDay(d)}. Under the court rule for counting days, a period that ends on a weekend or court holiday runs to the end of the next court day, ${fmt(roll(d))}. ${what}`;
+
+  let state = {};
+  function card(level, title, paras, cites = [], next = "") {
+    const c = cites.map(([k, p]) => `<a class="cite" href="${SRC[k]}" target="_blank" rel="noopener">${esc(k + (p ? " " + p : ""))}</a>`).join("");
+    if (level !== "law") state.flags.push(title.replace(/<[^>]+>/g, ""));
+    return `<article class="card ${level}">
+      <div class="top"><h3>${title}</h3><span class="tag ${level}">${LABEL[level]}</span></div>
+      ${[].concat(paras).filter(Boolean).map((t, i) => t.startsWith("<ul") ? t : `<p${i ? ' class="small"' : ""}>${t}</p>`).join("")}
+      ${next ? `<p class="next"><strong>What you can do:</strong> ${next}</p>` : ""}
+      ${c ? `<div class="cites">${c}</div>` : ""}
+    </article>`;
+  }
+  const list = items => `<ul class="tick">${items.map(([ok, t]) => `<li class="${ok ? "yes" : "no"}">${ok ? "Found" : "Not found yet"}: ${t}</li>`).join("")}</ul>`;
+  const mark = (d, title) => { if (d && diff(today, d) >= 0) state.dates.push([d, title]); };
+
+  /* ---------- Checklists built from the data ---------- */
+  const NOTICE_PARTS = [
+    ["writing", "It's in writing"],
+    ["to", "It's addressed to you"],
+    ["addr", "It gives the address or a short description of the home"],
+    ["reason", "It clearly states the reason"],
+    ["time", "It clearly states how long you have to pay, fix the problem, or move"],
+    ["amount", "It states the amount owed"],
+    ["dated", "It's dated"],
+    ["signed", "It's signed by the landlord, the landlord's lawyer, or an agent"]
+  ];
+  const SUMMONS_PARTS = [
+    ["complaint", "The complaint, which says what the landlord wants and why"],
+    ["notice", "A copy of the notice or demand, showing when and how it was served on you"],
+    ["lease", "A copy of your lease, if there's a written one"],
+    ["rights", "An \"Advice of Rights and Information\" sheet (form DC 538) and a list of local rental and housing help"]
+  ];
+  const boxes = (id, parts, prefix) => { $(id).innerHTML = parts.map(([k, t]) => `<label data-part="${k}"><input type="checkbox" id="${prefix}-${k}"> ${esc(t)}</label>`).join(""); };
+  boxes("n-parts", NOTICE_PARTS, "np");
+  boxes("s-parts", SUMMONS_PARTS, "sp");
+
+  // Sample dates, relative to today so the sample always reads sensibly.
+  $("n-got").value = iso(add(today, -2));
+  $("s-hearing").value = iso(roll(add(today, 6)));
+  $("s-got").value = iso(add(today, -1));
+  $("s-ndate").value = iso(add(today, -14));
+  $("j-date").value = iso(add(today, -3));
+  $("j-by").value = iso(add(today, 7));
+  $("j-amount").value = "1850.00";
+  $("o-date").value = iso(add(today, -1));
+  $("o-jdate").value = iso(add(today, -13));
+  ["writing", "to", "addr", "reason", "time", "amount", "dated"].forEach(k => { $("np-" + k).checked = true; });
+  ["complaint", "notice"].forEach(k => { $("sp-" + k).checked = true; });
+  $("checked").textContent = CHECKED;
+
+  const home = () => ({ detroit: val("h-detroit") === "yes", pub: $("h-pub").checked, pbra: $("h-pbra").checked, fed: $("h-fed").checked, park: $("h-park").checked });
+
+  /* ---------- Cards shared by more than one paper ---------- */
+  const notEviction = () => card("law", "This paper is not an eviction",
+    ["Only a court can order you out, and only a court officer, bailiff, sheriff's deputy, or police officer can carry that order out. Until then the landlord can't change the locks, take your things, shut off your utilities, or use force.",
+     `If the landlord does any of that, the law lets you sue to get back in and for your actual damages or ${money(RULES.lockoutMinDamages).replace(".00", "")}, whichever is more, each time.`],
+    [["MCL 600.2918", "(2)"], ["MCL 600.5744", "(1)"]],
+    `Stay in your home and keep paying attention to your mail. The <a href="../renter-rights/">Renter Rights Check</a> covers lockouts and shutoffs.`);
+
+  const detroitCard = () => card("help", "Detroit: ask for a free lawyer",
+    [`Detroit runs a right to counsel program for eviction cases in 36th District Court. The city says tenant households with gross income up to ${RULES.detroitFplMultiple === 2 ? "twice" : RULES.detroitFplMultiple + " times"} the federal poverty level qualify, and the lawyers check income before they help.`,
+     "The city's steps: go to your hearing on the date and time in your court papers and tell the judge you want a free lawyer. For an in-person hearing, go to room 417 at the courthouse. For a video hearing, you'll be moved to a breakout room to meet a lawyer.",
+     "The program's funding isn't permanent, so check the city's page for changes."],
+    [["Detroit Eviction Defense", ""]], "Detroit Housing Resource helpline: (866) 313-2520.");
+
+  const licenseCard = h => card("facts", "Does your city require a rental license?",
+    ["On October 21, 2026, the Michigan Court of Appeals decided <em>Skidmore v Hayashi</em>. The landlords there had rented a home without the certificate of compliance their township required. The court held the lease was void from the start, so the landlords couldn't collect unpaid rent under it.",
+     "The case was about money owed, not about who gets to stay in the home. How it applies in eviction court is still being worked out, and it could be appealed. It doesn't mean rent stops being owed: the court left open whether those tenants get any money back.",
+     h.detroit ? "Detroit requires rental homes to be registered and to have a certificate of compliance." : "Many Michigan cities and townships require rental homes to be registered or to have a certificate of compliance. Call your city or township hall to ask about your address."],
+    [["Skidmore v Hayashi", "No. 371345"]].concat(h.detroit ? [["Detroit rental rules", ""]] : []),
+    "If your home doesn't have a required license or certificate, tell a lawyer or legal aid before you sign or file anything.");
+
+  function housingCards(h, reason, served) {
+    const c = [];
+    const d30 = served ? add(served, RULES.federalNoticeDays) : null;
+    if ((h.pub || h.pbra) && reason === "nonpay") c.push(card("facts", `Subsidized housing: ${RULES.federalNoticeDays} days' notice for unpaid rent`,
+      [`HUD's rules for public housing and for buildings with project-based rental help call for a written notice at least ${RULES.federalNoticeDays} days before an eviction case for unpaid rent is filed.${d30 ? ` ${RULES.federalNoticeDays} days from the day you got the notice is ${fmt(d30)}.` : ""} Under the rule for HUD-assisted buildings, paying what's owed inside those ${RULES.federalNoticeDays} days stops the landlord from filing.`,
+       `HUD published a rule in February 2026 to drop this requirement, then put that change on hold on March 13, 2026 until it finishes a final rule. As of ${CHECKED} the ${RULES.federalNoticeDays}-day rule was still on the books. This can change, so ask legal aid.`],
+      [["24 CFR 966.4", "(l)(3), (q)"], ["24 CFR 247.4", "(c)"], ["HUD rule status", ""], ["MLH: Subsidized Housing", ""]]));
+    if (h.pub || h.pbra || h.fed) c.push(card("facts", `Federal law: ${RULES.federalNoticeDays} days in federally backed housing`,
+      [`A 2020 federal law says the landlord of a "covered" home may not require the tenant to leave until ${RULES.federalNoticeDays} days after giving a notice to vacate. Covered homes include public housing, voucher and HUD-assisted housing, tax credit buildings, rural housing programs, and buildings with a federally backed mortgage.`,
+       "Congress put no end date on that sentence, and people disagree about how it applies now. Raise it with a lawyer and with the judge."],
+      [["15 U.S.C. 9058", "(c)"]]));
+    if (h.pub && reason !== "nonpay") c.push(card("law", "Public housing: the landlord needs just cause",
+      ["If a city, village, township, or county housing commission runs your housing, it can't end your tenancy without just cause. A judge may not enter a judgment for possession if the tenancy was ended without cause."],
+      [["MCL 600.5714", "(2)"], ["MCL 600.5720", "(1)(d)"]]));
+    if (h.park) c.push(card("law", "Mobile home parks: the park needs just cause",
+      ["If you own your home and rent the lot, the park can end your tenancy only for just cause. The law lists the reasons, such as breaking park rules tied to health or safety, or paying late three or more times in 12 months after a written demand each time.",
+       `A just cause notice comes on form DC 100d. It says you have ${RULES.parkConferenceDays} days from the date of the notice to ask the park, by certified or registered mail, for an in-person meeting, and you can bring a lawyer. Keep paying lot rent while the case goes on. Missing it lets the park file a separate unpaid rent case.`],
+      [["MCL 600.5775", ""], ["MCL 600.5714", "(3)"], ["MCL 600.5779", ""], ["Form DC 100d", ""], ["MLH: Mobile Home Parks", ""]]));
+    return c;
+  }
+
+  /* ---------- 1. Notice from the landlord ---------- */
+  function notice(h) {
+    const reason = val("n-reason"), how = val("n-how"), period = val("n-period");
+    const got = parse($("n-got").value), mailed = how === "mail" ? parse($("n-mailed").value) : null;
+    const quit = reason === "end" || reason === "violation";
+    $("n-period-wrap").hidden = !quit;
+    $("n-mailed-wrap").hidden = how !== "mail";
+    $("n-moveby-wrap").hidden = !quit;
+    document.querySelector('#n-parts [data-part="amount"]').hidden = reason !== "nonpay";
+    const moveby = quit ? parse($("n-moveby").value) : null;
+    const c = [];
+    const name = { nonpay: "Demand for Possession for unpaid rent", end: "Notice to Quit", violation: "Notice to Quit", hazard: "Demand for Possession for damage or a health hazard", injury: "7-day Notice to Quit", drugs: "24-hour Demand for Possession" }[reason];
+    state.paper = `A notice from the landlord (${name})`;
+    if (!got) { c.push(card("facts", "Enter the date you got the notice", "Every date here counts from the day the notice was served on you.")); return c; }
+    if (diff(today, got) > 0) c.push(card("facts", "That date is in the future", "Check the date you got the notice. The dates below count from it."));
+
+    // Date of service. Mailed notices count as served the next regular mail delivery day after mailing.
+    let served = got, mailNote = "";
+    if (mailed) {
+      served = nextMailDay(mailed);
+      mailNote = `It was mailed ${plain(mailed)}. A mailed notice counts as served on the next regular mail delivery day after it was mailed, which is ${fmt(served)}, even if it reached you later.`;
+    }
+    state.facts.push(`Got it: ${plain(got)}${mailed ? `, postmarked ${plain(mailed)}` : ""}`, `How: ${{ hand: "handed to me", household: "handed to someone in my home", mail: "regular mail", email: "email or text", door: "left at the door" }[how]}`);
+
+    // The notice period
+    let end = null, unit = "";
+    if (reason === "nonpay") { end = add(served, RULES.nonpayDays); unit = `${RULES.nonpayDays} days`; }
+    else if (reason === "hazard") { end = add(served, RULES.hazardDays); unit = `${RULES.hazardDays} days`; }
+    else if (reason === "injury") { end = add(served, RULES.injuryDays); unit = `${RULES.injuryDays} days`; }
+    else if (reason === "drugs") { end = add(served, 1); unit = `${RULES.drugHours} hours`; }
+    else if (period === "month") { end = addMonths(served, 1); unit = "one month"; }
+    else if (period === "week") { end = add(served, 7); unit = "one week"; }
+    else if (period === "twoweek") { end = add(served, 14); unit = "two weeks"; }
+    else if (period === "year" && reason === "end") { end = addMonths(served, 12); unit = "one year"; }
+    const fileFrom = end ? add(end, 1) : null;
+    const level = end && diff(today, end) <= 7 ? "help" : "law";
+    const ran = end && diff(today, end) < 0;
+
+    if (reason === "nonpay") {
+      c.push(card(level, ran ? `The 7 days ran out on ${plain(end)}` : `You have until ${plain(end)} to pay or move`,
+        [`A Demand for Possession for unpaid rent gives you ${RULES.nonpayDays} days from the day it was served to pay the rent it says you owe, or move out. The day you were served doesn't count. Day ${RULES.nonpayDays} is ${when(end)}.`,
+         mailNote,
+         `The law lets a landlord file an unpaid rent case only if the rent due isn't paid within those ${RULES.nonpayDays} days. So the earliest the landlord can file in district court is ${fmt(fileFrom)}. If you pay, get a receipt that shows the date and the amount.`,
+         rollNote(end, "Don't count on the extra time to pay."),
+         "\"Rent due\" doesn't include future rent that the lease says comes due early because you fell behind."],
+        [["MCL 600.5714", "(1)(a)"], ["MCL 554.134", "(2)"], ["Form DC 100a", ""], ["MCR 1.108", "(1)"]],
+        ran ? "Watch your mail and your door for a summons from the court. If one comes, pick \"A Summons and Complaint\" at the top of this page." : "The notice by itself doesn't force you out on this date. If the landlord files a case, you get a chance to tell a judge your side, including that you don't owe the amount."));
+      mark(end, "Day 7 of the Demand for Possession: last day to pay the rent demanded");
+    } else if (reason === "hazard") {
+      c.push(card(level, ran ? `The 7 days ran out on ${plain(end)}` : `You have until ${plain(end)} to fix it or move`,
+        [`This demand gives you ${RULES.hazardDays} days from the day it was served to repair the damage or remove the health hazard, or to move out. Day ${RULES.hazardDays} is ${when(end)}. The landlord can file in district court starting ${fmt(fileFrom)}.`,
+         mailNote,
+         `The law sets a high bar. The damage must be "extensive and continuing" or the health hazard "serious and continuing," caused by you on purpose or through neglect. The landlord must also have found out about it no more than ${RULES.hazardLookbackDays} days before filing the case.`,
+         "In this kind of case the court can decide at the first hearing and can issue the eviction order right after the judgment. Don't wait to get help."],
+        [["MCL 600.5714", "(1)(d)"], ["MCL 600.5744", "(3)(e)"], ["Form DC 100b", ""]],
+        "Take dated photos now. If you fix the problem, keep receipts and tell the landlord in writing."));
+      mark(end, "Day 7 of the Demand for Possession (damage or health hazard)");
+    } else if (reason === "injury") {
+      c.push(card(level, ran ? `The 7 days ran out on ${plain(end)}` : `The notice runs through ${plain(end)}`,
+        [`This kind of notice gives ${RULES.injuryDays} days from the day it was served. Day ${RULES.injuryDays} is ${when(end)}. The landlord can file in district court starting ${fmt(fileFrom)}.`,
+         mailNote,
+         "It applies only when a tenant, a household member, or someone under the tenant's control caused or threatened physical injury to a person on the landlord's property, and only if the police were notified. It doesn't apply when the person hurt or threatened is the tenant or a member of the tenant's own household, or where it would break federal housing rules.",
+         "The court can decide this kind of case at the first hearing."],
+        [["MCL 600.5714", "(1)(e)"], ["MCR 4.201", "(K)(2)(e)(v)"]],
+        "Ask the landlord which police department was notified and when."));
+      mark(end, "Day 7 of the Notice to Quit");
+    } else if (reason === "drugs") {
+      c.push(card("help", `A 24-hour notice: the landlord can file as soon as ${plain(end)}`,
+        [`A drug notice gives ${RULES.drugHours} hours from when it was served. You were served ${plain(served)}, so the landlord can file in district court as early as ${when(end)}.`,
+         mailNote,
+         "The law allows a 24-hour notice only when both of these are true: your lease has a clause ending the lease for illegal drugs on the property, and a formal police report was filed saying you, a household member, or someone under your control made, sold, or had a controlled substance there. Without both, the regular notice periods apply.",
+         "These cases move fast. The court hears the case on the first court date and can issue the eviction order right after the judgment."],
+        [["MCL 600.5714", "(1)(b)"], ["MCL 554.134", "(4)"], ["MCL 600.5735", "(7)"], ["MCL 600.5744", "(3)(f)"], ["Form DC 100e", ""]],
+        "Call legal aid today. Ask the landlord for a copy of the police report and find the drug clause in your lease."));
+    } else if (period === "lease" || (reason === "violation" && period === "year")) {
+      c.push(card("facts", reason === "end" ? "Your lease hasn't ended yet" : "Your lease sets the notice for a violation",
+        reason === "end"
+          ? ["The notice to quit law lets a landlord end a rental that runs month to month, week to week, or with no set end. When a written lease has an end date that hasn't come, the landlord can go to court only if the lease or the law gives a way to end it early, or after the lease term is over.",
+             "Find the part of your lease about ending it early. If the notice doesn't point to a reason the lease allows, that is worth showing a lawyer."]
+          : ["The statute doesn't give a number of days for a lease violation. A landlord can go to court after the lease is ended \"pursuant to a power to terminate provided in the lease.\" So your lease's termination clause sets how much notice you get and whether you get a chance to fix the problem.",
+             `Michigan Legal Help's guides say the lease should state the notice required, and one of them lists ${RULES.lawsuitNoticeGuideDays} days for a lease violation. ${RULES.lawsuitNoticeGuideDays} days from the day you were served is ${fmt(add(served, RULES.lawsuitNoticeGuideDays))}.`],
+        [["MCL 600.5714", "(1)(c)"], ["MCL 554.134", ""], ["MLH: Lease Violations", ""]],
+        "Bring the whole lease, with any rules or addendums, to legal aid."));
+    } else {
+      const early = moveby && diff(moveby, end) > 0;
+      c.push(card(level, ran ? `The notice period ran out on ${plain(end)}` : `The notice period runs through ${plain(end)}`,
+        [reason === "end"
+          ? `To end a rental that has no set end date, the landlord has to give notice equal to the time between rent payments, which for you is ${unit}. The notice ends the tenancy ${unit} after it was served. You were served ${plain(served)}, so that is ${when(end)}.`
+          : `With no written lease, or a month-to-month one, the notice for breaking a rule is the time between rent payments, which for you is ${unit}. You were served ${plain(served)}, so that is ${when(end)}.`,
+         mailNote,
+         `The landlord can file in district court starting ${fmt(fileFrom)} if you're still there.`,
+         early ? `Your notice says to move by ${plain(moveby)}, which is sooner than ${unit} after it was served. The law says a notice isn't void for naming the wrong day. It still doesn't end the tenancy until the full period has passed, on ${plain(end)}.` : "",
+         reason === "end" && period !== "year" ? "A landlord of private housing doesn't have to give a reason to end a month-to-month rental. But a judge can't evict you if the real reason is that you complained to a government agency, asked for repairs, or joined a tenant group." : "",
+         rollNote(end, "")],
+        [["MCL 554.134", period === "year" ? "(3)" : "(1)"], ["MCL 600.5714", "(1)(c)"], ["Form DC 100c", ""], ["MCL 600.5720", "(1)"]],
+        early ? "Keep the notice and the envelope. A case filed before the full period runs may have been filed too early, which is something to raise with the judge." : ""));
+      mark(end, "Notice to Quit: the notice period ends");
+    }
+
+    // How it was served
+    if (how === "door") c.push(card("facts", "Leaving it at the door isn't one of the listed ways",
+      ["The law lists four ways to serve a notice: handing it to you, handing it to a family or household member or your employee at the home with a request to give it to you, first-class mail, or email if you agreed to that in writing.",
+       "The court's own instructions to landlords give slipping a notice under the door, leaving it outside the door, and attaching it to the property as examples of improper service."],
+      [["MCL 600.5718", "(1)"], ["DC 100c instructions", "p. 3"]],
+      "Write down how and when you found it, and take a photo of where it was. A judge decides whether the notice counts. Don't ignore it."));
+    else if (how === "email") c.push(card("facts", "Email counts only if you agreed to it in writing",
+      ["A landlord can serve a notice electronically only if you specifically agreed in writing to get notices that way, and that agreement or a confirmation of it was sent by email and answered by the other side. The agreement can be in your lease. A landlord can't refuse to rent to you for saying no to it.",
+       "The law doesn't list text messages or social media."],
+      [["MCL 600.5718", "(1)(d), (2)"]],
+      "Check your lease for a clause about electronic notices. Save the message."));
+    else if (how === "mail" && !mailed) c.push(card("law", "Mailed notices count from the mailing date",
+      ["A notice sent by first-class mail counts as served on the next regular mail delivery day after it was mailed, not the day you opened it. If you have the envelope, enter the postmark date above to see the dates counted that way. Keep the envelope."],
+      [["MCL 600.5718", "(1)(c)"]]));
+
+    // What has to be on it
+    const parts = NOTICE_PARTS.filter(([k]) => k !== "amount" || reason === "nonpay").map(([k, t]) => [$("np-" + k).checked, t]);
+    const missing = parts.filter(([ok]) => !ok).map(([, t]) => t);
+    const demand = reason === "nonpay" || reason === "hazard" || reason === "drugs";
+    if (missing.length) state.facts.push("Not found on the notice: " + missing.join("; "));
+    c.push(card(missing.length ? "facts" : "law", missing.length ? `${missing.length} required part${missing.length === 1 ? "" : "s"} not found on the notice yet` : "The notice has the parts the law lists",
+      [demand ? "The law says a demand for possession must be in writing, addressed to the person in possession, give the address or a brief description of the home, clearly state the reasons and the time to act, state the amount due when rent is claimed, and be dated and signed." : "The court's Notice to Quit form has a line for each of these, and a landlord who files a case has to attach a copy of the notice that shows when and how it was served. The statute spells these parts out for a \"demand for possession,\" so how strictly they apply to your notice is a question for a lawyer.",
+       list(parts),
+       missing.length ? "A missing part doesn't make the notice go away by itself. It's something to point out to a lawyer and to the judge, who decides whether the notice was good enough." : "This checks only that each part is there, not that what it says is true."],
+      demand ? [["MCL 600.5716", ""]] : [["Form DC 100c", ""], ["MCR 4.201", "(B)(1)(c)"], ["MCL 600.5716", ""]]));
+
+    c.push(...housingCards(h, reason, served));
+    if (reason === "nonpay") c.push(card("facts", "If you don't owe it, or the home needs repairs",
+      ["A judge can't enter a judgment for unpaid rent if the landlord broke the lease in a way that excuses the rent, and the judge must subtract any rent excused by the landlord's failure to keep the home fit and in reasonable repair.",
+       "That is decided in court, with proof. Stopping rent on your own is risky."],
+      [["MCL 600.5720", "(1)(f)"], ["MCL 600.5741", ""]],
+      `Gather rent receipts, photos, and copies of repair requests now. The <a href="../renter-rights/">Renter Rights Check</a> covers repairs and retaliation.`));
+    c.push(licenseCard(h));
+    c.push(notEviction());
+    c.push(card("law", "What comes next",
+      ["If the notice period passes and you're still there, the landlord's next step is to file a complaint in district court. The court then issues a summons with a court date. The complaint has to include a copy of this notice showing when and how it was served.",
+       "Keep the notice, the envelope, and anything you send or pay the landlord from here on."],
+      [["MCR 4.201", "(B)(1)(c)"], ["MCL 600.5735", ""], ["Michigan Legal Help", ""]]));
+    return c;
+  }
+
+  /* ---------- 2. Summons and complaint ---------- */
+  function summons(h) {
+    const kind = val("s-kind"), how = val("s-how"), hadNotice = val("s-notice") === "yes";
+    const H = parse($("s-hearing").value), G = parse($("s-got").value);
+    $("s-ndates").hidden = !hadNotice;
+    const N = hadNotice ? parse($("s-ndate").value) : null, I = hadNotice ? parse($("s-issued").value) : null;
+    const c = [];
+    state.paper = "A Summons and Complaint (" + { nonpay: "unpaid rent", term: "end of rental or lease violation", fast: "damage, health hazard, drugs, injury, or trespass" }[kind] + ")";
+    if (!H) { c.push(card("facts", "Enter the court date on your summons", "It's in item 2 of the summons, form DC 104.")); return c; }
+    state.facts.push(`Court date on the summons: ${plain(H)}`);
+    if (G) state.facts.push(`Got the court papers: ${plain(G)} (${{ hand: "handed to me", household: "handed to someone in my home", door: "attached to my door", mailonly: "mail only" }[how]})`);
+    const past = diff(today, H) < 0;
+
+    if (past) {
+      c.push(card("help", `The court date was ${plain(H)}`,
+        ["If you were there, the judge should have told you your rights and set the next date. If you missed it, the court may have entered a default judgment against you, which can lead to an eviction order.",
+         `Call the court clerk today, give the case number, and ask what happened and whether a judgment was entered. A motion to set aside a default judgment has to be filed within ${RULES.postJudgmentDays} days after the judgment.`],
+        [["MCR 4.201", "(G)(5), (N)"], ["Form DC 104", ""]],
+        "Get legal help now. If a judgment came in the mail, pick \"A Judgment\" at the top of this page."));
+    } else {
+      c.push(card(soon(H) ? "help" : "law", `Be in court on ${plain(H)}`,
+        [`Your court date is ${when(H)}. The summons says: if you're in court on time, you'll have a chance to say why you shouldn't be evicted. If you're not, you may be evicted without a trial and a money judgment may be entered against you.`,
+         "Courts have to allow video hearings in these cases, and many hold the first one by video. Read the summons and every page with it for the time, the courtroom, and any video link. If you can't tell, call the court at the phone number at the top of the summons.",
+         "The summons doesn't order you to move out before the court date."],
+        [["Form DC 104", "items 2, 7, 8"], ["MCR 4.201", "(F), (G)(5)"]],
+        "Put the date and time where you'll see them. Ask now for time off work, a ride, or child care."));
+      mark(H, "Eviction case: first court date (be there on time)");
+    }
+
+    // How and when the papers arrived
+    if (G && !past) {
+      const gap = diff(G, H);
+      if (gap < RULES.serveBeforeTrialDays) c.push(card("facts", `You got the papers ${gap <= 0 ? "the day of the hearing or later" : gap + " day" + (gap === 1 ? "" : "s") + " before the court date"}`,
+        [`The law says the summons has to be served at least ${RULES.serveBeforeTrialDays} days before the date set for trial.`,
+         "That doesn't cancel the hearing. It's something to tell the judge at the start."],
+        [["MCL 600.5735", "(2)(b)"]], "Go to court anyway. Tell the judge the date you got the papers and ask for more time to get ready."));
+    }
+    if (how === "mailonly") c.push(card("facts", "Mail alone isn't full service",
+      ["The court rule says the summons and complaint must be mailed to you and also served a second way: handed to you, handed to someone of suitable age in your household who is told what it is and asked to give it to you, or, after real attempts to hand it to you, attached securely to your main door.",
+       "A second copy may still be on its way, or may have been left where you didn't see it. The court can still hold the hearing."],
+      [["MCR 4.201", "(D)"]], "Go to court anyway. Tell the judge exactly how the papers reached you."));
+    else if (how === "door") c.push(card("law", "Papers attached to the door",
+      ["The court rule allows this only after diligent attempts to hand the papers to you, and the person who did it has to file a report listing those attempts. The papers must also be mailed to you."],
+      [["MCR 4.201", "(D)(3)"]]));
+
+    // Was the case filed too early?
+    if (!hadNotice && kind !== "fast") c.push(card("facts", "No notice before the court papers",
+      ["In most cases the landlord has to serve a notice or demand first and wait out the notice period before filing. The complaint must have a copy of that notice attached, showing when and how it was served. Trespass and forced entry cases are an exception.",
+       "Look through every page you got for a copy of a notice. If you never received one, say so to the judge and in your answer."],
+      [["MCR 4.201", "(B)(1)(c)"], ["MCL 600.5714", "(1)"], ["Michigan Legal Help", ""]]));
+    if (kind === "nonpay" && N && I) {
+      const day7 = add(N, RULES.nonpayDays);
+      if (diff(day7, I) <= 0) c.push(card("facts", "The case may have been filed before the 7 days ran out",
+        [`You got the demand on ${plain(N)}, so day ${RULES.nonpayDays} was ${plain(day7)}. The clerk signed the summons on ${plain(I)}. A landlord can file an unpaid rent case only after you've had ${RULES.nonpayDays} days from service to pay.`,
+         "The copy of the demand attached to the complaint shows the date and way the landlord says it was served. Compare it with what you remember."],
+        [["MCL 600.5714", "(1)(a)"], ["MCR 4.201", "(B)(1)(c)"]], "Point this out to a lawyer and to the judge. Bring the demand and its envelope."));
+    }
+
+    // What came with the summons
+    const parts = SUMMONS_PARTS.map(([k, t]) => [$("sp-" + k).checked, t]);
+    const missing = parts.filter(([ok]) => !ok).map(([, t]) => t);
+    if (missing.length) state.facts.push("Not found with the summons: " + missing.join("; "));
+    c.push(card(missing.length ? "facts" : "law", missing.length ? `${missing.length} thing${missing.length === 1 ? "" : "s"} not found with your summons yet` : "Your summons came with what the rule lists",
+      ["The court rule says the complaint must have attached a copy of any written lease and a copy of any notice to quit or demand for possession showing when and how it was served. The summons must come with written information about local rental and housing help and your rights.",
+       list(parts),
+       missing.length ? "If something is missing, tell the judge. It may matter, and you're entitled to see what the landlord filed." : ""],
+      [["MCR 4.201", "(B)(1), (C)(3)"], ["Form DC 538", ""]]));
+
+    // The first hearing
+    if (!past) {
+      const a = add(H, RULES.adjournMinDays), b = add(H, RULES.adjournMaxDays);
+      c.push(card("law", "What happens at the first court date",
+        [kind === "fast"
+          ? "The judge must tell you your rights first. In cases about a serious health hazard or damage, an injury or threat, or trespass, the court rule lets the judge decide the case that same day if the landlord proves it. A drug case is heard on the first court date by law. Come ready to tell your side."
+          : `The judge must first tell you your rights: to a lawyer, to a jury trial, to have the case heard in the right court, and about rental help, mediation, and conditional dismissal. In most cases the judge then sets the trial for ${RULES.adjournMinDays} to ${RULES.adjournMaxDays} days later, between ${plain(a)} and ${plain(b)}.`,
+         kind === "fast" ? "" : `The case can end that first day if the landlord drops it, if you don't show up, or if you and the landlord sign an agreement and you give up the extra time. For good cause the judge can also push the trial out up to ${RULES.goodCauseAdjournDays} days.`,
+         "You answer the complaint by going through each numbered item out loud at the hearing, or by filing a written answer before it. The court's answer forms are DC 111a for unpaid rent, DC 111b for damage or a health hazard, and DC 111c for other cases. Say what you agree with, what you disagree with, and what you don't know."],
+        [["MCR 4.201", "(G)(1), (K)(1), (K)(2)"], [kind === "nonpay" ? "Form DC 111a" : kind === "fast" ? "Form DC 111b" : "Form DC 111c", ""], ["MLH: Going to Court", ""]],
+        "Michigan Legal Help's free Do-It-Yourself Answer tool, linked under Free help, fills in the answer form from your answers."));
+      const jury = add(H, RULES.juryDays);
+      c.push(card("law", `A jury trial has to be asked for by about ${plain(roll(jury))}`,
+        [`You have a right to a jury trial, and you lose it if you don't ask. Ask out loud at your first appearance, or in writing within ${RULES.juryDays} days after the court tells you your rights. If that happens at your court date, ${RULES.juryDays} days later is ${fmt(jury)}.`,
+         rollNote(jury, ""),
+         `The court's rights sheet lists a ${money(RULES.juryFee).replace(".00", "")} jury fee, due with the demand or within the same ${RULES.juryDays} days. The fee is waived if the court approves a fee waiver, which you ask for on form MC 20.`],
+        [["MCR 4.201", "(G)(4)"], ["Form DC 538", "item 3"], ["Form MC 22", ""], ["Form MC 20", ""]]));
+      if (kind === "nonpay") {
+        const proof = add(H, RULES.rentHelpProofDays);
+        c.push(card("law", "Applying for rent help can pause the case",
+          [`In an unpaid rent case on a home, the court must not go on to a judgment if you've applied for rental help and give the court written proof of the application within ${RULES.rentHelpProofDays} days after it tells you your rights. If that happens at your court date, the proof is due by ${fmt(proof)}.`,
+           `The help can come from the Michigan Department of Health and Human Services (State Emergency Relief), a local Coordinated Entry Agency, a Housing Assessment and Resource Agency, or the federal Help for Homeless Veterans program. The pause lasts ${RULES.stayDays} days. It continues, up to ${RULES.stayMaxDays} days total, if you show the application is still pending or was approved.`,
+           "You don't need a judgment to apply. The summons and complaint are enough, and MDHHS policy accepts a court summons as proof you're at risk of losing your home."],
+          [["MCR 4.201", "(I)(3), (K)(2)(a)"], ["Form DC 539", ""], ["MDHHS Emergency Relief", ""], ["MDHHS ERM 303", "p. 3"], ["HARA list", ""]],
+          "Apply today, before the court date. Keep a screenshot or printout of the application and file it with form DC 539."));
+        mark(proof, "Eviction case: proof of rental help application due at court (5 days after first hearing)");
+      }
+    }
+
+    // Defenses, as information
+    c.push(card("facts", "Things tenants raise, and what to bring",
+      [kind === "nonpay"
+        ? "In an unpaid rent case: the rent was paid, or the amount is wrong. The landlord's notice was wrong or the case was filed too early. The landlord broke the lease in a way that excuses rent, or failed to keep the home fit and in reasonable repair, which makes the judge subtract the rent that's excused. The landlord is punishing you for complaining or using your rights."
+        : "In a case to end a rental: the notice was wrong or the case was filed too early. The landlord is ending it mainly to punish you for complaining to a government agency, trying to enforce your rights, or joining a tenant group.",
+       `If you complained to a court or government agency within ${RULES.retaliationDays} days before the case was filed and that complaint wasn't thrown out, the law presumes the eviction is retaliation unless the landlord proves otherwise.`,
+       "Bring the lease, rent receipts or bank records, the notice and its envelope, photos, repair requests, letters and texts with the landlord, and inspection reports. Bring copies for the judge and the landlord."],
+      [["MCL 600.5720", "(1), (2)"], ["MCL 600.5741", ""], ["MLH: Going to Court", ""]],
+      `The <a href="../renter-rights/">Renter Rights Check</a> explains repairs and retaliation. A judge decides these on the facts, so talk to a lawyer about yours.`));
+    c.push(card("facts", "Before you sign an agreement in the hallway",
+      ["Landlords and their lawyers often offer a deal before the hearing. A consent judgment is a judgment entered against you. A conditional dismissal (form DC 508) dismisses the case as long as you keep the terms, so no judgment is entered.",
+       `If either side has no lawyer, the judge has to go over a consent judgment with you in court, and it can't be enforced for ${RULES.consentHoldCourtDays} court business days. In that time you can file a motion to set it aside, and the court must set it aside if you show you misunderstood what you were agreeing to or giving up.`],
+      [["MCR 4.201", "(J), (K)(2)(a)(vii), (K)(2)(e)"], ["Form DC 508", ""], ["MLH: Going to Court", ""]],
+      "Read every line before you sign. Ask the judge what happens if you miss a payment under the deal."));
+    c.push(card("law", "Wrong court? You can ask to move the case",
+      ["Item 3 of the summons says whether the case was filed in the county or district where the home is. If the box says it is not, you have the right to have it moved there. Ask in writing before the court date or out loud at the first hearing, and the court will transfer it."],
+      [["Form DC 104", "items 3, 4"], ["MCR 4.201", "(C)(3)(e), (G)(3)"], ["MCL 600.5706", "(4)"]]));
+    if (h.detroit) c.push(detroitCard());
+    c.push(...housingCards(h, kind === "nonpay" ? "nonpay" : "other", null));
+    c.push(licenseCard(h));
+    c.push(notEviction());
+    return c;
+  }
+
+  /* ---------- 3. Judgment ---------- */
+  function judgment(h) {
+    const how = val("j-how"), box = val("j-box"), partial = val("j-partial");
+    const J = parse($("j-date").value), M = parse($("j-mailed").value), by = parse($("j-by").value);
+    const amt = parseFloat($("j-amount").value);
+    $("j-lawyer-wrap").hidden = how !== "consent";
+    const dated = box === "pay" || box === "move";
+    $("j-by-row").hidden = !dated;
+    $("j-amount-wrap").hidden = box !== "pay";
+    $("j-partial-wrap").hidden = box !== "pay";
+    const noLawyer = how === "consent" && val("j-lawyer") === "no";
+    const c = [];
+    state.paper = "A Judgment (" + { hearing: "after a hearing", default: "by default", consent: "by consent" }[how] + ")";
+    if (!J) { c.push(card("facts", "Enter the date the judge signed the judgment", "Every date here counts from it.")); return c; }
+    if (diff(today, J) > 0) c.push(card("facts", "That date is in the future", "Check the date next to the judge's signature."));
+    state.facts.push(`Judgment signed: ${plain(J)}${M ? `, mailed or delivered ${plain(M)}` : ""}`);
+    const start = later(J, M);                       // MCR 4.201(L)(5)
+    const day10 = add(start, RULES.writWaitDays);     // MCL 600.5744(5)
+    const wait = roll(day10);
+    const post = roll(add(J, RULES.postJudgmentDays)); // MCR 4.201(N), (O)(2)
+    const limit = add(J, RULES.writIssueLimitDays);
+
+    if (box === "keep") {
+      c.push(card("law", "The judgment says you keep your home",
+        ["Item 3 means the court found you have the right to stay. The landlord can't get an eviction order on this judgment.",
+         `The landlord can still file a motion or an appeal within ${RULES.postJudgmentDays} days, by about ${fmt(post)}, and can start a new case later for a new reason. Read item 10, \"The court further orders,\" for anything you have to do.`],
+        [["Form DC 105", "item 3"], ["MCR 4.201", "(N), (O)(2)"]]));
+    } else if (box === "now") {
+      c.push(card("help", "The judge ordered an immediate eviction",
+        ["Box 4c means the court can issue the Order of Eviction right away, with no 10-day wait. The law allows that only in certain cases: a serious and continuing health hazard or extensive damage, illegal drugs with a police report, forced entry or trespass, or a home ordered vacated for lack of a required certificate. The landlord had to ask for it with notice to you before the judgment.",
+         "A court officer could come at any time once the order is signed."],
+        [["MCL 600.5744", "(3)"], ["MCR 4.201", "(M)(3)"], ["Form DC 105", "item 4c"]],
+        "Call legal aid right now. Pack medicine, IDs, important papers, and what your kids and pets need."));
+    } else {
+      const use = dated && by ? by : null;
+      const tooSoon = use && diff(use, day10) > 0;
+      const head = box === "pay"
+        ? (use ? `Pay ${amt > 0 ? money(amt) : "the item 2d total"} or move by ${plain(use)}` : `About 10 days to pay or move: through ${plain(wait)}`)
+        : (use ? `The judgment says to move by ${plain(use)}` : `About 10 days before an order can issue: through ${plain(wait)}`);
+      const target = use || wait;
+      c.push(card(diff(today, target) <= 7 ? "help" : "law", head,
+        [box === "pay"
+          ? `Item 4a means the landlord can ask for an Order of Eviction if you don't pay the total in item 2d${amt > 0 ? `, ${money(amt)},` : ""} to the landlord or the court, or move out, on or before the date written there${use ? `, ${when(use)}` : ""}. The law says the order must not be issued if the amount in the judgment, with costs, is paid within that time.`
+          : box === "move"
+            ? `Item 4b means the landlord can ask for an Order of Eviction if you haven't moved on or before the date written there${use ? `, ${when(use)}` : ""}. This kind of judgment doesn't give a way to pay and stay.`
+            : "Look at item 4. Box 4a gives a date to pay the item 2d total or move. Box 4b gives a date to move with no way to pay and stay. The landlord can ask for an Order of Eviction after that date.",
+         `By law the order can't be issued until ${RULES.writWaitDays} days after the judgment is entered, and the time doesn't start until the court mails or hands you the judgment. Counting from ${plain(start)}, day ${RULES.writWaitDays} is ${fmt(day10)}.${courtDay(day10) ? "" : ` That is ${whatDay(day10)}, so the court rule runs it to ${fmt(wait)}.`}`,
+         tooSoon ? `The date written on your judgment, ${plain(use)}, comes before that. Fewer than ${RULES.writWaitDays} days is allowed only in the immediate-eviction cases the law lists. Ask the court clerk or a lawyer about it today.` : "",
+         use && !tooSoon ? "Go by the date written on your judgment." : "",
+         "The landlord still can't put you out. After the date passes, the landlord has to apply to the court for an Order of Eviction, a judge has to sign it, and a court officer carries it out."],
+        [["MCL 600.5744", "(5), (7)"], ["MCR 4.201", "(L)"], ["Form DC 105", "items 2, 4"], ["MCR 1.108", "(1)"]],
+        box === "pay" ? "If you pay, pay the full item 2d total and get a dated receipt. Ask the court clerk how to pay the court directly if the landlord won't take it." : "If you need more time to move, ask a lawyer or the court about a motion right away."));
+      mark(target, box === "pay" ? "Eviction judgment: last day to pay the full amount or move" : "Eviction judgment: move-out date in the judgment");
+      if (box === "pay") c.push(card(partial === "will" ? "law" : "facts", "Paying part of it",
+        [partial === "will"
+          ? "Item 6 on your judgment says accepting a partial payment will prevent an Order of Eviction. If the landlord takes part of the amount, an order can't be issued unless the court holds a hearing with notice to you."
+          : partial === "wont"
+            ? "Item 6 on your judgment says accepting a partial payment will not prevent an Order of Eviction. The landlord can take part of the money and still ask for the order. Only paying the full item 2d total in time stops it."
+            : "Item 6 says whether a partial payment stops the eviction. When the judgment doesn't say a partial payment won't prevent it, the court rule says an order can't be issued after any part of the amount is paid unless the court holds a hearing with notice to you.",
+         "State Emergency Relief can pay back rent, and court costs that are part of a judgment, to stop an eviction. A judgment counts as proof of need."],
+        [["MCR 4.201", "(L)(3), (M)(5)"], ["Form DC 105", "item 6"], ["MDHHS ERM 303", "p. 1, 3"], ["MDHHS Emergency Relief", ""]],
+        "Apply for rent help today and tell the worker the date on your judgment."));
+    }
+
+    if (how === "default" && box !== "keep") c.push(card("help", "This was a default judgment",
+      [`A default judgment is entered when the tenant isn't at the hearing. You can ask the court to set it aside with a motion. Except for a few special grounds, the motion has to be filed within ${RULES.postJudgmentDays} days after the judgment, by about ${when(post)}.`,
+       "A motion that challenges the possession part pauses the eviction only if you deposit one month's rent with the court, or the judge finds grounds and waives the deposit. To set aside a default money judgment you have to show good cause and file a sworn statement of facts showing a real defense.",
+       "If you were on active military duty, a default judgment has extra limits under federal law."],
+      [["MCR 4.201", "(N)"], ["Form DC 105", "p. 2"]],
+      "Call legal aid today. Tell them why you missed the hearing and how the court papers reached you."));
+    if (noLawyer) {
+      const hold = addCourtDays(J, RULES.consentHoldCourtDays);
+      c.push(card(diff(today, hold) >= 0 ? "help" : "facts", `A consent judgment without a lawyer: ${RULES.consentHoldCourtDays} court days to undo it`,
+        [`When either side has no lawyer, a consent judgment can't be enforced until ${RULES.consentHoldCourtDays} regular court business days have passed after it was entered. Counting from ${plain(J)}, the third court day is ${when(hold)}.`,
+         "Inside those days you can file a motion to set it aside, and filing it puts the judgment on hold until the judge decides. The court must set it aside if you show that you misunderstood the basis for it or the rights you were giving up."],
+        [["MCR 4.201", "(J)"]],
+        diff(today, hold) >= 0 ? "If you didn't understand what you signed, go to the court clerk's office or call legal aid before that day ends." : "That window has passed. Ask legal aid whether anything else applies."));
+      mark(hold, "Consent judgment: last court day to file a motion to set it aside");
+    }
+    if (box !== "keep") {
+      c.push(card(soon(post) ? "help" : "law", `A motion or appeal is due by about ${plain(post)}`,
+        [`Page 2 of the judgment has a line that says a motion for a new trial, a motion to set aside a default judgment, or an appeal "must be filed in court by" a date. The court rule gives ${RULES.postJudgmentDays} days after the judgment is entered, which from ${plain(J)} is ${when(post)}. If the date printed on your judgment is different, go by the judgment.`,
+         "Filing an appeal doesn't stop the eviction on its own. It takes an appeal filed with a bond or a court escrow order. If you can't afford a bond, the court must let you pay into escrow instead, and it will order you to keep paying rent to the court while the appeal is open."],
+        [["MCR 4.201", "(L)(1)(d), (N), (O)"], ["MCL 600.5744", "(6)"], ["Form DC 105", "p. 2"]],
+        "Talk to a lawyer before you file an appeal. The deadline is short and the papers are technical."));
+      mark(post, "Eviction judgment: last day to file a motion or appeal");
+      c.push(card("law", "Limits on the eviction order",
+        [`Unless the court holds a hearing with notice to you, an Order of Eviction can't be issued later than ${RULES.writIssueLimitDays} days after the judgment, which is ${plain(limit)}, and it can't be carried out later than ${RULES.writExecLimitDays} days after it's issued.`,
+         "Items 8 and 9 are the money judgment. That part is separate from who gets the home, and it earns interest. Item 5 warns that you may owe more after you move, for later rent or damage."],
+        [["MCR 4.201", "(M)(4)"], ["Form DC 105", "items 5, 8, 9"], ["MLH: After Court", ""]]));
+    }
+    if (h.detroit && box !== "keep") c.push(card("facts", "Detroit: call about a lawyer and help",
+      ["Detroit's right to counsel program is built around the court hearing, but the city's housing helpline can tell you what help is still open after a judgment."],
+      [["Detroit Eviction Defense", ""]], "Detroit Housing Resource helpline: (866) 313-2520."));
+    if (box !== "keep") c.push(notEviction());
+    return c;
+  }
+
+  /* ---------- 4. Order of eviction ---------- */
+  function order(h) {
+    const O = parse($("o-date").value), J = parse($("o-jdate").value);
+    const paid = val("o-paid") === "yes", who = val("o-who");
+    const c = [];
+    state.paper = "An Order of Eviction";
+    if (!O) { c.push(card("facts", "Enter the date the judge signed the order", "It's next to the judge's signature under \"Order of Eviction\" on form DC 107.")); return c; }
+    state.facts.push(`Order of Eviction signed: ${plain(O)}${J ? `; judgment dated ${plain(J)}` : ""}`);
+    const last = add(O, RULES.writExecLimitDays);
+    const expired = diff(today, last) < 0;
+
+    if (who === "landlord") c.push(card("help", "The landlord can't carry out the order",
+      ["An Order of Eviction is addressed to a court officer. Only a court officer or bailiff of that court, a sheriff or deputy, or a local police officer can remove you and your things. A landlord who changes the locks, removes your belongings, or uses force without one of them is breaking the lockout law, even with an order in hand.",
+       `You can sue to get back in and for your actual damages or ${money(RULES.lockoutMinDamages).replace(".00", "")}, whichever is more, for each time.`],
+      [["MCL 600.5744", "(1)"], ["MCL 600.2918", "(2), (3)"]],
+      `Call the police non-emergency line and the court clerk. The <a href="../renter-rights/">Renter Rights Check</a> has more on lockouts.`));
+
+    c.push(card("help", expired ? "This order looks too old to carry out" : "A court officer can carry this out any day now",
+      [expired
+        ? `In a rental case, an Order of Eviction has to be carried out within ${RULES.writExecLimitDays} days after it's issued unless the court holds a hearing with notice to you. From ${plain(O)}, that was ${plain(last)}. Call the court clerk to ask whether there was a hearing or a new order.`
+        : `The order tells a court officer to remove everyone from the home and put the landlord back in possession. The law lets the officer remove all your belongings and leave them in an area open to the public or the public right-of-way. The court has to hand the order to the officer within ${RULES.writDeliverDays} days after it's filed.`,
+       expired ? "" : `Neither the statute nor the court rule promises you any warning between the order and the eviction. Michigan Legal Help says tenants usually get about 24 hours' notice that an order was issued. Unless the court holds another hearing, the order must be carried out within ${RULES.writExecLimitDays} days, by ${plain(last)}.`],
+      [["MCL 600.5744", "(1)"], ["MCR 4.201", "(M)(2), (M)(4)"], ["Form DC 107", ""], ["MLH: After Court", ""]],
+      expired ? "" : "Today: call legal aid, and pack medicine, IDs, birth certificates, cash, chargers, and what your kids and pets need. Move what you can't lose to a safe place."));
+
+    if (J) {
+      const gap = diff(J, O);
+      if (gap <= RULES.writWaitDays) c.push(card("facts", `The order was signed ${gap} day${gap === 1 ? "" : "s"} after the judgment`,
+        [`In most cases an Order of Eviction can't be issued until ${RULES.writWaitDays} days after the judgment is entered, and that time doesn't start until the court mails or delivers the judgment. An earlier order is allowed only in the cases the law lists, like a serious health hazard, illegal drugs with a police report, or trespass, and only if the judgment itself says so in box 4c.`],
+        [["MCL 600.5744", "(3), (5)"], ["MCR 4.201", "(L)(5), (M)(3)"]],
+        "Check box 4 on your judgment. If it isn't 4c, call legal aid and the court clerk now."));
+      if (gap > RULES.writIssueLimitDays) c.push(card("facts", `The order was signed ${gap} days after the judgment`,
+        [`An Order of Eviction can't be issued later than ${RULES.writIssueLimitDays} days after the judgment unless the court first holds a hearing with notice to you and a chance to appear.`],
+        [["MCR 4.201", "(M)(4)(a)"]], "If you never got notice of a hearing, tell legal aid and the court clerk."));
+      const post = roll(add(J, RULES.postJudgmentDays));
+      c.push(card(diff(today, post) >= 0 ? "help" : "facts", "Can it still be stopped?",
+        [`A motion or an appeal, filed together with a bond or a court escrow order, stops everything, including an Order of Eviction that has been issued but not yet carried out. The deadline for most motions and for an appeal is ${RULES.postJudgmentDays} days after the judgment, which was ${when(post)}.`,
+         "After that, the court rules still allow a motion for relief from a judgment on limited grounds, such as a mistake, fraud, or a judgment that is void, and for a person who never actually knew about the case. Those are hard to win and don't pause the eviction on their own."],
+        [["MCR 4.201", "(N), (O)(3)"], ["MCR 2.612", "(B), (C)"]], "This needs a lawyer today. Tell them the date on the order and whether an officer has come."));
+    } else {
+      c.push(card("facts", "Can it still be stopped?",
+        [`A motion or an appeal, filed together with a bond or a court escrow order, stops everything, including an Order of Eviction that has been issued but not yet carried out. The deadline for most motions and for an appeal is ${RULES.postJudgmentDays} days after the judgment. Enter the judgment date above to see it.`],
+        [["MCR 4.201", "(N), (O)(3)"]], "This needs a lawyer today."));
+    }
+    if (paid) c.push(card("facts", "You paid something after the judgment",
+      ["The court rule says an Order of Eviction may not be issued if any part of the amount due under the judgment has been paid, unless the court held a hearing with notice to you, or the judgment says in item 6 that a partial payment will not prevent the order. The landlord's application has to list any payment received and the conditions it was accepted under.",
+       "If you paid the full amount in the judgment, with costs, inside the time the judgment gave you, the law says the order must not be issued at all."],
+      [["MCR 4.201", "(M)(1), (M)(5)"], ["MCL 600.5744", "(7)"], ["Form DC 107", "item 2"]],
+      "Find your receipts. Look at item 2 of the application on your order to see what the landlord told the court about payments, and show both to legal aid."));
+    c.push(card("facts", "Emergency help with a place to go",
+      ["State Emergency Relief can help with back rent, a first month's rent, a security deposit, or moving costs when a court order would leave you without a home. An eviction order counts as proof. Your county's Housing Assessment and Resource Agency (HARA) is the door to shelter and rehousing programs."],
+      [["MDHHS ERM 303", "p. 1, 3"], ["MDHHS Emergency Relief", ""], ["HARA list", ""]],
+      h.detroit ? "Detroit Housing Resource helpline: (866) 313-2520." : "Call the HARA for your county today. The list is linked on this card."));
+    return c;
+  }
+
+  /* ---------- Put it together ---------- */
+  const forms = { notice: $("f-notice"), summons: $("f-summons"), judgment: $("f-judgment"), order: $("f-order") };
+  const TITLES = { notice: "Your notice", summons: "Your court date", judgment: "Your judgment", order: "Your eviction order" };
+  function run() {
+    const paper = val("paper"), h = home();
+    Object.entries(forms).forEach(([k, f]) => { f.hidden = k !== paper; });
+    state = { flags: [], dates: [], facts: [], paper: "" };
+    const cards = { notice, summons, judgment, order }[paper](h);
+    $("results").innerHTML =
+      `<div class="results-head"><h2>${TITLES[paper]}</h2>
+        <div class="legend"><span class="tag law">The rule says</span><span class="tag facts">Depends on your facts</span><span class="tag help">Act now</span></div></div>` + cards.join("");
+    $("ics").hidden = !state.dates.length;
+    $("ics").nextElementSibling.hidden = !state.dates.length;
+    notes(h);
+  }
+
+  // Plain-text notes to bring to a lawyer or legal aid
+  function notes(h) {
+    const L = [];
+    L.push(`Eviction papers: my notes (${plain(today)})`, "");
+    L.push(`Paper I have: ${esc(state.paper)}`);
+    state.facts.forEach(f => L.push(esc(f)));
+    const ht = [h.detroit && "in Detroit", h.pub && "public housing", h.pbra && "HUD-assisted building", h.fed && "voucher, tax credit, or rural housing", h.park && "mobile home park (I own the home)"].filter(Boolean);
+    if (ht.length) L.push(`My home: ${ht.join(", ")}`);
+    if (state.dates.length) { L.push("", "Dates this check worked out:"); state.dates.forEach(([d, t]) => L.push(`- ${fmt(d)}: ${esc(t)}`)); }
+    if (state.flags.length) { L.push("", "Things to ask about:"); state.flags.forEach(f => L.push(`- ${esc(f)}`)); }
+    L.push("", "Case number: <span class=\"fill\">[from the court papers, if any]</span>", "Landlord's name: <span class=\"fill\">[name]</span>", "Monthly rent: <span class=\"fill\">[amount]</span>   Amount the landlord says I owe: <span class=\"fill\">[amount]</span>", "What I want to happen: <span class=\"fill\">[stay, more time to move, fix the amount]</span>");
+    L.push("", "From the Michigan Eviction Papers Check (free-to-all-ai.github.io/tools/eviction-papers). Information, not legal advice. Dates are counted from what I typed in.");
+    $("summary").innerHTML = L.join("\n");
+  }
+
+  document.querySelectorAll("form").forEach(f => { f.addEventListener("input", run); f.addEventListener("change", run); f.addEventListener("submit", e => e.preventDefault()); });
+  run();
+
+  $("copy").addEventListener("click", () => {
+    const el = $("summary"), text = el.innerText, msg = $("copied");
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = "Selected. Press Ctrl+C or Cmd+C to copy."; };
+    try { navigator.clipboard.writeText(text).then(() => { msg.textContent = "Copied"; }, fallback); } catch (e) { fallback(); }
+  });
+  $("print").addEventListener("click", () => {
+    document.body.classList.add("printing");
+    window.print();
+    setTimeout(() => document.body.classList.remove("printing"), 500);
+  });
+
+  // Calendar file with the dates, built on this device
+  $("ics").addEventListener("click", () => {
+    if (!state.dates.length) return;
+    const d8 = d => iso(d).replace(/-/g, "");
+    const stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d+Z$/, "Z");
+    const ev = state.dates.map(([d, title], i) => ["BEGIN:VEVENT", `UID:${d8(d)}-${i}-eviction-papers`, `DTSTAMP:${stamp}`,
+      `DTSTART;VALUE=DATE:${d8(d)}`, `DTEND;VALUE=DATE:${d8(add(d, 1))}`, `SUMMARY:${title.replace(/,/g, "\\,")}`,
+      "DESCRIPTION:Counted from the dates you typed in. Check your court papers. Information\\, not legal advice.",
+      "BEGIN:VALARM", "TRIGGER:-P2D", "ACTION:DISPLAY", `DESCRIPTION:${title.replace(/,/g, "\\,")}`, "END:VALARM", "END:VEVENT"].join("\r\n"));
+    const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Free to All AI//Eviction Papers Check//EN", ...ev, "END:VCALENDAR", ""].join("\r\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
+    a.download = "eviction-dates.ics";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+})();
+</script>
+</body>
+</html>
