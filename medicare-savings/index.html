@@ -378,7 +378,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     qmb: [1350, 1824], slmb: [1616, 2184], almb: [1816, 2455],
     // QDWI: 200% of the poverty guideline (RFT 246) on countable income. HHS 2026 guideline: $15,960 plus $5,680 per added person.
     fplYear: 2026, fplBase: 15960, fplStep: 5680, qdwiPct: 200,
-    // BEM 400 (BPB 2026-007): countable asset limits from Jan 1, 2026.
+    // BEM 400 (BPB 2026-032, 11-1-2026): countable asset limits from Jan 1, 2026.
     assets: [9950, 14910], qdwiAssets: [4000, 6000],
     // BEM 541 (BPB 2026-002): allocation for each child under 18 with no income of their own, 2026.
     childAlloc: 498,
@@ -731,7 +731,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
   $("srcs").innerHTML = [
     `Income limits: MDHHS Reference Tables Manual ${a("rft242")}, AD-Care and Medicare Savings Program Income Limits (RFB 2026-004, effective April 1, 2026). QDWI at 200% of poverty: ${a("rft246")}.`,
     `Program rules: Bridges Eligibility Manual ${a("bem165")}, Medicare Savings Programs (July 1, 2024), ${a("bem169")}, Qualified Disabled Working Individuals, and ${a("bem163")}, AD-Care.`,
-    `Savings: ${a("bem400")}, Assets (April 1, 2026), which sets ${money(D.assets[0])} for one person and ${money(D.assets[1])} for two from January 1, 2026, and ${money(D.qdwiAssets[0])} and ${money(D.qdwiAssets[1])} for QDWI.`,
+    `Savings: ${a("bem400")}, Assets (November 1, 2026), which sets ${money(D.assets[0])} for one person and ${money(D.assets[1])} for two from January 1, 2026, and ${money(D.qdwiAssets[0])} and ${money(D.qdwiAssets[1])} for QDWI.`,
     `Counting income: ${a("bem541")}, SSI-related income deductions (January 1, 2026), ${a("bem503")}, Unearned Income (October 1, 2026), and ${a("bem211")}, Group Composition (May 1, 2026).`,
     `Medicare buy-in, start dates, refunds, and hearings: ${a("bam810")} (June 1, 2024), ${a("bam115")} (October 1, 2026), and ${a("bam600")} (May 1, 2026).`,
     `2026 premiums and deductibles: ${a("cms")} fact sheet (November 14, 2025). Federal limits and Extra Help: ${a("mgov")} and ${a("xhelp")}.`,
