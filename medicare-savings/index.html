@@ -342,7 +342,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
   <section class="box gethelp" aria-labelledby="h-help">
     <h2 id="h-help">Free help</h2>
     <ul>
-      <li><strong>MMAP (Michigan Medicare/Medicaid Assistance Program):</strong> free, unbiased one-on-one Medicare counseling from trained counselors. They can help you apply. Call <span class="phone">1-800-803-7174</span>.</li>
+      <li><strong>Michigan's SHIP (State Health Insurance Assistance Program), long known as MMAP:</strong> free, unbiased one-on-one Medicare counseling from trained counselors. They can help you apply. The state also uses the name MI Options for this line. Call <span class="phone">1-800-803-7174</span>.</li>
       <li><strong>MDHHS Beneficiary Help Line:</strong> questions about Michigan Medicaid and the Medicare buy-in. Call <span class="phone">1-800-642-3195</span>.</li>
       <li><a href="https://michiganlegalhelp.org/node/11555" target="_blank" rel="noopener">Michigan Legal Help: Medicare Savings Programs</a> explains each program in plain language.</li>
       <li><a href="https://www.medicare.gov/medicare-savings-programs" target="_blank" rel="noopener">Medicare.gov: Medicare Savings Programs</a> has the federal limits and what each program covers.</li>
@@ -468,7 +468,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     const assetCond = lim => u.assets == null
       ? { s: "warn", t: `Your countable savings must be ${money(lim)} or less${n === 2 ? " for the two of you" : ""}. Enter your savings above to check.` }
       : u.assets <= lim
-        ? { s: "ok", t: `Savings of ${money(u.assets)} are under the ${money(lim)} limit.` }
+        ? { s: "ok", t: `Savings of ${money(u.assets)} are ${u.assets === lim ? "right at" : "under"} the ${money(lim)} limit.` }
         : { s: "no", t: `Savings of ${money(u.assets)} are over the ${money(lim)} limit. Check the list of what doesn't count before you rule this out.` };
     const buying1818A = u.age === "under" && u.parta === "paid";
     const noMedicareUnder65 = u.age === "under" && u.parta === "none";
@@ -513,7 +513,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
         line = `Your countable income of ${mAuto(inc)} is over ${name}'s ${money(hi)} limit${n === 2 ? " for a couple" : ""}.`;
       } else if (u.parta !== "free") {
         lvl = "none"; tag = "Needs free Part A";
-        line = `Your income fits ${name}, but ${name} only covers people who get Part A free. ${u.parta === "none" ? "If you'll get Part A free when you enroll, answer as if you have it." : "Ask MDHHS or MMAP whether you can get premium-free Part A."}`;
+        line = `Your income fits ${name}, but ${name} only covers people who get Part A free. ${u.parta === "none" ? "If you'll get Part A free when you enroll, answer as if you have it." : "Ask MDHHS or SHIP (the free counseling line below) whether you can get premium-free Part A."}`;
       } else if (key === "almb" && u.mcaid === "full") {
         lvl = "none"; tag = "Full Medicaid instead";
         line = "Your income fits QI, but QI is only for people who aren't getting full Medicaid. With full Medicaid, Michigan should already pay your Part B premium.";
@@ -736,7 +736,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     `Medicare buy-in, start dates, refunds, and hearings: ${a("bam810")} (June 1, 2024), ${a("bam115")} (October 1, 2026), and ${a("bam600")} (May 1, 2026).`,
     `2026 premiums and deductibles: ${a("cms")} fact sheet (November 14, 2025). Federal limits and Extra Help: ${a("mgov")} and ${a("xhelp")}.`,
     `QMB billing protection: ${a("qmbBill")} fact sheet MLN7936176 (September 2025) and ${a("usc1396a")}. Estate recovery: ${a("usc1396p")}(1)(B)(ii).`,
-    `Plain-language summary: ${a("mlh")}. MMAP phone number and free counseling from the State of Michigan's MMAP page and AgeWays (ageways.org).`
+    `Plain-language summary: ${a("mlh")}. The free counseling line, 1-800-803-7174, is on the state's <a href="https://www.michigan.gov/mdhhs/doing-business/providers/integrated/accordion/beneficiary-enrollee-resources/mi-options" target="_blank" rel="noopener">MI Options page</a>, which says the MMAP contract has ended, and on the national <a href="https://www.shiphelp.org/about-medicare/regional-ship-location/michigan" target="_blank" rel="noopener">SHIP directory</a> (checked November 14, 2026).`
   ].map(x => `<li>${x}</li>`).join("");
 
   /* ---------- Good-through check ---------- */
@@ -751,7 +751,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     } catch (e) { const t = new Date(); today = `${t.getFullYear()}-${pad(t.getMonth() + 1)}-${pad(t.getDate())}`; }
     const long = iso => { const [y, m, d] = iso.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }); };
     const yr = D.goodThrough.slice(0, 4);
-    const check = `To check today's numbers, see ${a("mgov")} or call MMAP, free, at <span class="phone">1-800-803-7174</span>.`;
+    const check = `To check today's numbers, see ${a("mgov")} or call Michigan's SHIP (long known as MMAP), free, at <span class="phone">1-800-803-7174</span>.`;
     const good = $("good"), stale = $("stale");
     if (today <= D.goodThrough) {
       good.innerHTML = `<strong>Good through ${long(D.goodThrough)}.</strong> Michigan sets new savings limits and Medicare sets new premiums and deductibles each January 1. The income limits here stay in use through ${long(D.incomeGoodThrough)}.`;
