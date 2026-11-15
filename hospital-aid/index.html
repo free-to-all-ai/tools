@@ -377,6 +377,10 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
   // Source: HHS ASPE, 2026 Poverty Guidelines. 1 person $15,960, each added person $5,680.
   const FPL_YEAR = 2026, FPL_BASE = 15960, FPL_STEP = 5680;
   const fpl = n => FPL_BASE + FPL_STEP * (n - 1);
+  // Nov 14, 2026: the sources PR #4 left unchecked were reopened and matched, except DMC's main aid page,
+  // which still would not load, so CHECKED stays at Oct 31. Two open questions: McLaren's aid page and
+  // application say "McLaren Corporate Services" while its policy says "Corporate Business Services", and the
+  // former Ascension policy gives the Chicago address for billing requests, not plainly for applications.
   const CHECKED = "Oct 31, 2026";
   // Good-through dates (YYYY-MM-DD). The page warns visitors once each one arrives.
   // FPL_NEXT: HHS posts new poverty guidelines in mid-January (2026's came out January 15, 2026), so from this day the page says newer ones are probably out.
