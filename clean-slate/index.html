@@ -245,7 +245,7 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
   </section>
 
   <footer>
-    <p><strong>How this works.</strong> The rules come from Michigan's set aside law, 1965 PA 213 (MCL 780.621 to 780.624), including the 2020 Clean Slate amendments and the first-OWI amendments that took effect in 2022. The text was checked on legislature.mi.gov, which shows the law complete through 2026 PA 114, on October 31, 2026. Definitions come from MCL 780.811 (serious misdemeanor) and MCL 770.9a and 791.236 (assaultive and violent crimes). Steps, fees, and contacts come from the Michigan State Police, the Attorney General, court form MC 227 (revised March 2025), and Michigan Legal Help, all checked the same day.</p>
+    <p><strong>How this works.</strong> The rules come from Michigan's set aside law, 1965 PA 213 (MCL 780.621 to 780.624), including the 2020 Clean Slate amendments and the first-OWI amendments that took effect in 2022. The text was checked on legislature.mi.gov, which shows the law complete through 2026 PA 114, on November 14, 2026. Definitions come from MCL 780.811 (serious misdemeanor) and MCL 770.9a and 791.236 (assaultive and violent crimes). Steps, fees, and contacts come from the Michigan State Police, the Attorney General, court form MC 227 (revised March 2025), and Michigan Legal Help, all checked the same day.</p>
     <p>Waiting periods are counted in whole years from the dates you enter. For new convictions, this page uses the sentencing date, which usually comes a few weeks after the conviction. Green cards are what the law says directly. Amber cards depend on facts this page can't check, or on a part of the law that people read in different ways. Red cards mean get free legal help before you go further.</p>
     <p>This page doesn't cover juvenile records, convictions from other states or federal court, pardons, or arrests and charges that never led to a conviction. A case dismissed under a deferral program like HYTA or MCL 333.7411 isn't a conviction, but it counts as a misdemeanor when a court checks whether you can apply, and it must be listed on your application. Free and open source. Nothing you enter is sent anywhere or stored.</p>
     <p class="report"><strong>See a mistake?</strong> <a href="https://github.com/free-to-all-ai/tools/issues/new?template=mistake.yml&amp;title=Mistake%3A+Michigan+Clean+Slate+Expungement+Check&amp;tool=Michigan+Clean+Slate+Expungement+Check" target="_blank" rel="noopener">Report it on GitHub</a>. You'll need a free GitHub account, and what you write there is public, so leave out personal details.</p>
@@ -754,7 +754,7 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
   function summary(R, G) {
     const L = [];
     L.push(`Michigan Clean Slate Expungement Check: my results (${plain(today)})`);
-    L.push("This is information, not legal advice. Rules checked against Michigan law on October 31, 2026.", "");
+    L.push("This is information, not legal advice. Rules checked against Michigan law on November 14, 2026.", "");
     R.rows.forEach(r => {
       const bits = [r.isF ? "Felony" : "Misdemeanor", KIND_SHORT[r.kind], r.isF ? MAXF_SHORT[r.maxf] : MAXM_SHORT[r.maxm]].filter(Boolean).join(", ");
       const dates = [r.sent ? "sentenced " + plain(r.sent) : "sentencing date not entered", r.prob ? "probation ended " + plain(r.prob) : "",
