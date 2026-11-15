@@ -382,6 +382,7 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
     "MPSC complaints": "https://www.michigan.gov/mpsc/consumer/complaints",
     "MPSC utility list": "https://www.michigan.gov/mpsc/consumer/electricity/electric-utility-addresses-contacts",
     "MPSC Case U-21939": "https://www.michigan.gov/mpsc/commission/news-releases/2026/05/14/mpsc-seeks-public-comment-on-shutoff-protections-report",
+    "MPSC May 14, 2026 minutes": "https://adms.apps.lara.state.mi.us/Mpsc/ViewMeetingMinutesDocument/364",
     "MPSC Case U-20140": "https://www.michigan.gov/mpsc/commission/news-releases/2026/07/16/commission-launches-investigation-into-utility-response-to-fourth-of-july-storms"
   };
   // A cite is "R 460.131(4)" style or a key in OTHER.
@@ -551,8 +552,9 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
           ], ["R 460.131(5)", "R 460.131(6)", "R 460.144"]));
         }
         if (util === "reg" && gas && elec) c.push(card("facts", "If one company sends both your gas and electric", [
-          "With a combination utility, an eligible low-income customer can choose which service to keep if facing a shutoff, say how partial payments get applied, and protect the kept service through the heating season while paying for current use. Ask whether your company counts as a combination utility."
-        ], ["R 460.123(7)", "R 460.140(2)(a)"]));
+          "With a combination utility, an eligible low-income customer can ask to choose which service to keep if facing a shutoff, say how partial payments get applied, and protect the kept service through the heating season while paying for current use. You have to let the utility reach the other service so it can shut that one off, and stay current on any payment plan you're on. This doesn't apply if service was used without permission. Ask whether your company counts as a combination utility.",
+          "Your shutoff notice should say you can keep one service with the right payment, and that you may be able to get a payment plan for both services or for just the one you keep."
+        ], ["R 460.123(7)", "R 460.123(8)", "R 460.140(2)(a)"]));
       } else {
         c.push(card("facts", "Low-income, with city-owned gas", [
           `${why} The state's winter payment plan for city utilities is written for electric service. Ask your gas utility whether it offers one, and ask for a payment plan on what you owe.`
@@ -590,9 +592,9 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
         if (cc) c.push(card("help", "Critical care: no shutoff for not paying", [
           "If someone in the home needs home medical equipment or life support, and losing service would be immediately life-threatening, the utility can't shut off service because you can't pay. It has to restore service if it's off. This lasts as long as the need and the inability to pay continue.",
           `The same MPSC form, signed by a doctor or medical facility, has to be renewed every year. You get 3 business days to turn it in after you tell the utility (about ${plain(g3)} from today). The utility can ask you to agree to a reasonable payment plan, and it can't shut you off remotely without first reaching you person to person.`,
-          "The MPSC is reviewing this rule (Case U-21939). As of October 31, 2026, the rule above was still the one in effect.",
+          "The MPSC is reviewing this rule (Case U-21939). Its May 14, 2026 order set a schedule for written comments on a staff report that proposes a change, with comments due June 11, 2026. As of November 14, 2026, we found no order adopting a new rule, so the rule above is still the one in effect.",
           coopNote
-        ], ["R 460.102(n)", "R 460.130a", "MPSC medical form", "MPSC Case U-21939"], "Ask your doctor or equipment supplier to fill out the form today. Ask the utility to confirm it got it."));
+        ], ["R 460.102(n)", "R 460.130a", "MPSC medical form", "MPSC Case U-21939", "MPSC May 14, 2026 minutes"], "Ask your doctor or equipment supplier to fill out the form today. Ask the utility to confirm it got it."));
       }
     }
 
