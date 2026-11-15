@@ -499,7 +499,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
       glance: ["250%", "None by income (large-bill review only)"], freePct: 250,
       dated: "Financial Assistance Eligibility Policy, version 11, effective Nov 1, 2022 (file updated Aug 2026)",
       links: [["Aid page", "https://corewellhealth.org/billing/financial-assistance"], ["Policy (PDF)", CW_DOCS + "blt501fe046b96bca94/faep-english.pdf"], ["Application (PDF)", CW_DOCS + "blt96841f74da7cff06/confidential-financial-assistance-application-english.pdf"]],
-      contact: `Financial counselors: <span class="phone">844-838-3115</span>, financialcounseling@corewellhealth.org, or apply in MyChart under Financial Assistance. In person at the Royal Oak hospital, 3601 W. 13 Mile Rd.`,
+      contact: `Southeast Michigan financial counselors: <span class="phone">(877) 687-7309</span>, EastFinancialCounseling@corewellhealth.org. Corewell's aid page also lists <span class="phone">844-838-3115</span>, which its policy names as the West Michigan line. You can also apply in MyChart under Financial Assistance.`,
       eval(u) {
         const r = { conds: [], pay: null };
         if (u.ins === "medicaid") Object.assign(r, { lvl: "free", tag: "Likely free", line: "Corewell treats people with Medicaid as qualifying for 100% help without the usual application.", pay: 0, est: "" });
@@ -526,7 +526,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
       glance: ["200% (uninsured)", "400%"], freePct: 200,
       dated: "Financial Assistance to Patients, effective Feb 20, 2024; Michigan discount table revised Jan 19, 2026",
       links: [["Aid page", "https://www.trinityhealthmichigan.org/tools-and-resources/billing-and-insurance/financial-assistance"], ["Policy (PDF)", "https://www.trinityhealthmichigan.org/sites/default/files/hg_features/mercury_standard_layout/542695c4f0a2fbda94507a303574a75a.pdf"], ["Application (PDF)", "https://www.trinityhealthmichigan.org/sites/default/files/2025-05/Financial-Assistance-Application-and-Instructions-5-25.pdf"], ["Discount table (PDF)", "https://www.trinityhealthmichigan.org/sites/default/files/2026-01/Discount-Percentages-for-Trinity-Health-Michigan-1-27-26.pdf"]],
-      contact: `Customer service: <span class="phone">800-494-5797</span>, option 2. Financial counselors: Livonia <span class="phone">734-655-1755</span>, Oakland <span class="phone">248-858-6196</span>, Ann Arbor, Chelsea, and Livingston <span class="phone">734-712-2009</span>. You can also apply in MyChart.`,
+      contact: `Patient Business Services Center: <span class="phone">800-494-5797</span>. Financial counselors: Livonia <span class="phone">734-655-1755</span>, Oakland <span class="phone">248-858-6196</span>, Ann Arbor, Chelsea, and Livingston <span class="phone">734-712-2009</span>. You can also apply in MyChart.`,
       eval(u) {
         const r = { conds: [], pay: null };
         if (!u.insured) {
@@ -566,7 +566,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
       glance: ["400%", "Free all the way to 400%"], freePct: 400,
       dated: "Financial Assistance Policy, effective Mar 16, 2026, with 2026 income table",
       links: [["Aid page", "https://www.mclaren.org/main/financial-assistance"], ["Policy (PDF)", "https://www.mclaren.org/Uploads/Public/Documents/corporate/financial-assistance/financial-assistance-policy-ENGLISH.pdf"], ["Application (PDF)", "https://www.mclaren.org/Uploads/Public/Documents/corporate/MHCC-542-A%20FINANCIAL%20ASSISTANCE%20APPLICATION.pdf"]],
-      contact: `Call <span class="phone">586-710-8300</span> or <span class="phone">1-844-321-1557</span>, or email FinancialAssistance@mclaren.org. Mail to McLaren Corporate Services, Attn: Revenue Cycle Operations, 50820 Schoenherr Rd., Shelby Township, MI 48315.`,
+      contact: `Call <span class="phone">586-710-8300</span> or <span class="phone">1-844-321-1557</span>, or email FinancialAssistance@mclaren.org. Mail to McLaren Corporate Business Services, Attn: Revenue Cycle Operations - Customer Service, 50820 Schoenherr Rd., Shelby Township, MI 48315.`,
       eval(u) {
         const r = { conds: [], pay: null };
         if (u.pct <= 400) Object.assign(r, { lvl: "free", tag: "Likely free", line: "Income at or under 400%: 100% off, with or without insurance. McLaren's 2026 table goes up to " + money(4 * fpl(u.n)) + " for a household of " + u.n + ".", pay: 0, est: u.bill ? `On your ${money(u.bill)} bill: about $0 left.` : "" });
