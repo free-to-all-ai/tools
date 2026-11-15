@@ -401,10 +401,12 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
 
   const PDF = "https://mdhhs-pres-prod.michigan.gov/olmweb/ex/";
   const SRC = {
-    rft242: ["RFT 242", PDF + "RF/Public/RFT/242.pdf?v=2026"],
+    // The ?v= value only gets past an old cached copy: on Nov 14, 2026 "?v=2026" and the bare address served the April 2025 table.
+    rft242: ["RFT 242", PDF + "RF/Public/RFT/242.pdf?v=rfb2026-004"],
     rft246: ["RFT 246", PDF + "RF/Public/RFT/246.pdf"],
     bem163: ["BEM 163", PDF + "BP/Public/BEM/163.pdf"],
     bem165: ["BEM 165", PDF + "BP/Public/BEM/165.pdf"],
+    bem105: ["BEM 105", PDF + "BP/Public/BEM/105.pdf"],
     bem169: ["BEM 169", PDF + "BP/Public/BEM/169.pdf"],
     bem211: ["BEM 211", PDF + "BP/Public/BEM/211.pdf"],
     bem400: ["BEM 400", PDF + "BP/Public/BEM/400.pdf"],
@@ -658,7 +660,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     if (u.mcaid === "full") extra.push(lawCard("law", "Michigan's rule", "You have full Medicaid, so Michigan should already pay Part B",
       "Michigan's Part B buy-in pays the premium for most people with full Medicaid, even when their income is over these limits (Michigan calls this NMB). MDHHS also checks people on full Medicaid for QMB and SLMB without a new application. If Social Security still takes the Part B premium out of your check, call the MDHHS Beneficiary Help Line at 1-800-642-3195 or your caseworker.", ["bem165", "bam810"]));
     if (u.mcaid === "deduct") extra.push(lawCard("facts", "Depends on facts", "With a Medicaid deductible (spend-down)",
-      "MDHHS has to check people on Medicaid with a deductible for these programs without a new application. While you're in deductible status, you can still get QI, and if MDHHS finds you QI-eligible when you report meeting your deductible, you stay QI-eligible.", ["bem165"]));
+      "Medicaid with a deductible is one of Michigan's \"Group 2\" categories. MDHHS has to check people on \"Group 2 MA\" for these programs, and such a person \"does not have to request a determination of MSP eligibility or re-apply for MA.\" While you're in active deductible status, you are \"not considered eligible for another MA category,\" so you can still get QI. If MDHHS finds you QI-eligible when you report meeting your deductible, you stay QI-eligible.", ["bem165", "bem105"]));
     if (best && best !== "qdwi" && u.mcaid !== "full") extra.push(lawCard("law", "Federal rule", "Extra Help with drug costs comes with it",
       `People in QMB, SLMB, or QI automatically qualify for Extra Help with Medicare drug coverage and don't need to apply for it. In 2026 you'd pay no more than ${m2(D.extraHelp)} for each covered drug. You still need a Medicare drug plan, and Medicare may enroll you in one.`, ["xhelp", "mgov"]));
     if (R.qmb.fit && u.mcaid !== "full" && !(u.age === "under" && u.parta === "none")) extra.push(lawCard("facts", "Depends on facts", "You may also qualify for full Medicaid",
@@ -730,7 +732,7 @@ footer ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
   const a = k => `<a href="${SRC[k][1]}" target="_blank" rel="noopener">${esc(SRC[k][0])}</a>`;
   $("srcs").innerHTML = [
     `Income limits: MDHHS Reference Tables Manual ${a("rft242")}, AD-Care and Medicare Savings Program Income Limits (RFB 2026-004, effective April 1, 2026). QDWI at 200% of poverty: ${a("rft246")}.`,
-    `Program rules: Bridges Eligibility Manual ${a("bem165")}, Medicare Savings Programs (July 1, 2024), ${a("bem169")}, Qualified Disabled Working Individuals, and ${a("bem163")}, AD-Care.`,
+    `Program rules: Bridges Eligibility Manual ${a("bem165")}, Medicare Savings Programs (July 1, 2024), ${a("bem169")}, Qualified Disabled Working Individuals, and ${a("bem163")}, AD-Care. What \"Group 2\" means: ${a("bem105")}, Medicaid Overview (January 1, 2024), checked on November 14, 2026.`,
     `Savings: ${a("bem400")}, Assets (November 1, 2026), which sets ${money(D.assets[0])} for one person and ${money(D.assets[1])} for two from January 1, 2026, and ${money(D.qdwiAssets[0])} and ${money(D.qdwiAssets[1])} for QDWI.`,
     `Counting income: ${a("bem541")}, SSI-related income deductions (January 1, 2026), ${a("bem503")}, Unearned Income (October 1, 2026), and ${a("bem211")}, Group Composition (May 1, 2026).`,
     `Medicare buy-in, start dates, refunds, and hearings: ${a("bam810")} (June 1, 2024), ${a("bam115")} (October 1, 2026), and ${a("bam600")} (May 1, 2026).`,
