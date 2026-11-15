@@ -284,7 +284,7 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
   const UIAC = { fax: "517-241-7326", email: "LEO-UIAC-Info@michigan.gov", mail: "Unemployment Insurance Appeals Commission\nP.O. Box 30475\nLansing, MI 48909-7975" };
   const STAGE = {
     det:   { doc: "Notice of Determination", noun: "protest", uia: true, to: PROTEST, law: [["MCL 421.32a", "(1)"]] },
-    mon:   { doc: "Monetary Determination", noun: "protest", uia: true, to: PROTEST, law: [["MCL 421.32", "(e)"], ["MCL 421.32a", "(1)"]] },
+    mon:   { doc: "Monetary Determination", noun: "protest", uia: true, to: PROTEST, law: [["MCL 421.32", "(b)"], ["MCL 421.32a", "(1)"]] },
     redet: { doc: "Notice of Redetermination", noun: "appeal", uia: true, to: APPEAL, law: [["MCL 421.32a", "(1)"]] },
     alj:   { doc: "administrative law judge's decision", noun: "appeal", uia: false, to: UIAC, law: [["MCL 421.33", "(1)-(2)"]] },
     uiac:  { doc: "Appeals Commission decision", noun: "circuit court appeal", uia: false, to: null, law: [["MCL 421.38", "(1)"], ["MCL 421.34", "(7)"]] }
@@ -443,7 +443,7 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
         else paras.push(`UIA can only reconsider within 1 year of the mail date, so by ${plain(year)}${fraud ? `. Because the notice found fraud, the limit is 3 years, so by ${plain(three)}` : " (3 years if the notice found fraud)"}.${diff(today, fraud ? three : year) < 0 ? " That has passed too, so talk to legal aid about what's left." : ""}`);
         lc.push(["MCL 421.32a", "(2)"], ["R 421.270", ""], ["Hearings Guide", "p. 7", 8]);
       } else if (stage === "alj") {
-        paras.push(`If you ask the judge for a rehearing late but within 1 year of the decision (by ${plain(year)}), it's treated as a request to reopen the case. The judge decides whether you had good cause for being late.${diff(today, year) < 0 ? " That year has passed too, so talk to legal aid." : ""}`);
+        paras.push(`After the 30 days, the law says the judge "may, for good cause, reopen and review a prior decision." You have to ask "within 1 year after the date of mailing of the prior decision" (by ${plain(year)}). The judge decides whether you had good cause for being late.${diff(today, year) < 0 ? " That year has passed too, so talk to legal aid." : ""}`);
         lc.push(["MCL 421.33", "(1)"], ["Hearings Guide", "p. 21", 22]);
       } else {
         paras.push(`The Commission can reopen its own decision for good cause if you ask within 1 year of the mail date (by ${plain(year)}).${diff(today, year) < 0 ? " That year has passed too." : ""} Talk to a lawyer or legal aid.`);
@@ -512,7 +512,7 @@ footer { font-size: 14px; color: var(--muted); display: grid; gap: 8px; border-t
         `A notice that says you were overpaid is a determination too, so you protest it by the same 30-day deadline.`,
         `In a 2024 court settlement, UIA agreed not to restart collecting an overpayment until your protest or appeal rights are used up. A protest or appeal filed on time keeps those rights alive.`,
         `You can also ask UIA to waive (cancel) the repayment for financial hardship, a UIA mistake, or wrong wages your employer reported. Since July 17, 2026 you can apply up to four times a year, and a waiver denial can be protested too.`
-      ], [["MCL 421.62", "(c)"], ["2024 Settlement Release", ""], ["UIA Law Changes", ""]]));
+      ], [["MCL 421.62", "(a), (h)"], ["2024 Settlement Release", ""], ["UIA Law Changes", ""]]));
       if (fraud) c.push(card("help", "A fraud finding is serious", [
         "On top of paying it back, a fraud finding can bring penalties (UIA's handbook says up to 1.5 times the amount). Talk to legal aid before you file if you can, but don't let the deadline pass.",
         "If an advocate helps you at a hearing and the judge finds fraud, you pay the advocate's cost."
